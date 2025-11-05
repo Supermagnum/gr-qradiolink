@@ -223,7 +223,7 @@ int mmdvm_source_impl::work(int noutput_items,
 void mmdvm_source_impl::add_time_tag(uint64_t nsec, int offset, int which)
 {
     uint64_t intpart = nsec / 1000000000L;
-    double fracpart = ((double)nsec / 1000000000.0d) - (double)intpart;
+    double fracpart = ((double)nsec / 1000000000.0) - (double)intpart;
 
     const pmt::pmt_t t_val = pmt::make_tuple(pmt::from_uint64(intpart), pmt::from_double(fracpart));
     this->add_item_tag(which, nitems_written(which) + (uint64_t)offset, TIME_TAG, t_val);

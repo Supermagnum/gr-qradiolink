@@ -104,6 +104,9 @@ if(ENABLE_GR_QRADIOLINK)
     if(ENABLE_TESTING)
         add_subdirectory(tests)
     endif(ENABLE_TESTING)
+    if(ENABLE_FUZZING)
+        add_subdirectory(fuzzing)
+    endif(ENABLE_FUZZING)
 
     ########################################################################
     # Create Pkg Config File

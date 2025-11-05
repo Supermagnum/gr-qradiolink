@@ -82,6 +82,15 @@ make
 ctest --output-on-failure
 ```
 
+### Fuzzing Results
+
+The module includes comprehensive fuzzing coverage using libFuzzer. See [fuzzing-results/results.md](fuzzing-results/results.md) for complete fuzzing campaign results including:
+
+- Coverage statistics (757 edges, 893 features discovered)
+- Execution metrics (104+ million executions)
+- Performance analysis
+- Security assessment (0 crashes, 0 memory leaks)
+
 ## License
 
 This project is licensed under the GNU General Public License v3.0 or later (GPL-3.0-or-later).
