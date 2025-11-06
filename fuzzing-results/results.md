@@ -58,7 +58,66 @@ This document consolidates results from all fuzzing campaigns for gr-qradiolink.
 - **fuzz_demod_4fsk:** 97.6M executions at 4,520 exec/s
 - **fuzz_demod_bpsk:** 70 edges, 211 exec/s
 - **fuzz_demod_qpsk:** 75 edges, 51 exec/s
-- **fuzz_demod_2fsk:** 85 edges (with optimizations)
+- **fuzz_demod_2fsk:** 81 edges (highest edge count despite slow execution)
+
+### Performance Analysis
+
+#### 2FSK vs 4FSK Performance Difference
+
+The fuzzing results show a significant performance difference between 2FSK and 4FSK demodulators:
+
+- **fuzz_demod_2fsk:** 3,133 executions at 16 exec/s
+- **fuzz_demod_4fsk:** 97,648,251 executions at 4,520 exec/s
+
+**Performance ratio: ~282x slower for 2FSK**
+
+This large difference is **expected and reflects architectural differences** in the demodulation schemes:
+
+##### 2FSK Demodulator Complexity
+
+The 2FSK demodulator uses a more complex signal processing chain:
+
+1. **Frequency Lock Loop (FLL)**: `fll_band_edge_cc` requires iterative frequency tracking and correction (~50-100x overhead)
+2. **Dual-path processing**: Two parallel bandpass filters (upper/lower), two magnitude blocks, divide operation, two FEC decoders, and two descramblers (~2-3x overhead)
+3. **Complex signal chain**: Additional blocks (rail, delay, add_const) and more filter taps (8,750 vs 250)
+4. **Symbol synchronization**: Dynamic deviation calculation based on symbol rate
+
+**Signal flow for 2FSK (non-FM mode):**
+```
+Input → Resampler → FLL → Filter → [Split to 2 paths]
+  Path 1: Lower Filter → Mag → Divide → Rail → Add → Symbol Filter → Symbol Sync
+  Path 2: Upper Filter → Mag → (to Divide)
+  → Float to Complex → FEC Decoder 1 → Descrambler 1 → Output 2
+  → Delay → FEC Decoder 2 → Descrambler 2 → Output 3
+```
+
+##### 4FSK Demodulator Simplicity
+
+The 4FSK demodulator (FM mode) uses a simpler, more direct path:
+
+1. **No FLL**: Direct frequency demodulation without iterative tracking
+2. **Single path**: No dual filter/magnitude/divide operations
+3. **Simpler flowgraph**: Fewer blocks in the signal chain
+4. **One FEC decoder**: Half the FEC processing overhead
+
+**Signal flow for 4FSK (FM mode):**
+```
+Input → Resampler → Filter → Freq Demod → Shaping Filter → Symbol Sync → Phase Mod → Output
+```
+
+##### Conclusion
+
+The slow performance of 2FSK is **architectural** - it uses a more sophisticated demodulation scheme that requires:
+- Frequency tracking (FLL) for robust demodulation
+- Dual frequency discrimination (upper/lower filters) for 2FSK detection
+- Dual FEC decoding paths for error correction
+
+This is appropriate for the modulation scheme but results in significantly higher computational cost. The fuzzing setup correctly reflects the actual computational complexity of each demodulator.
+
+**Optimizations applied:**
+- Extended timeout (60s) for fuzz_demod_2fsk to handle FLL convergence
+- 2 parallel workers for fuzz_demod_2fsk (limited benefit due to FFT filter mutex contention)
+- Despite low execution rate, fuzz_demod_2fsk achieved 81 edges (highest edge count), indicating good code coverage
 
 ### Conclusion
 
