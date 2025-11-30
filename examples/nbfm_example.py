@@ -8,29 +8,23 @@
 # Title: NBFM Example
 # Author: QRadioLink Contributors
 # Copyright: Copyright 2024 QRadioLink Contributors
-# Description: This example demonstrates NBFM modulation and demodulation using gr-qradiolink blocks.
+# Description: This example demonstrates NBFM modulation and demodulation
+# using gr-qradiolink blocks.
 # GNU Radio version: 3.10.12.0
 
-from PyQt5 import Qt
+from PyQt5 import Qt  # type: ignore
 from gnuradio import qtgui
 from gnuradio import analog
 from gnuradio import blocks
 from gnuradio import gr
-from gnuradio.filter import firdes
-from gnuradio.fft import window
 import sys
 import signal
-from PyQt5 import Qt
-from argparse import ArgumentParser
-from gnuradio.eng_arg import eng_float, intx
-from gnuradio import eng_notation
 from gnuradio import qradiolink
-import sip
+import sip  # type: ignore
 import threading
 
 
-
-class nbfm_example(gr.top_block, Qt.QWidget):
+class NbfmExample(gr.top_block, Qt.QWidget):
 
     def __init__(self):
         gr.top_block.__init__(self, "NBFM Example", catch_exceptions=True)
@@ -74,11 +68,11 @@ class nbfm_example(gr.top_block, Qt.QWidget):
         ##################################################
 
         self.qtgui_time_sink_f_0 = qtgui.time_sink_f(
-            1024, #size
-            samp_rate, #samp_rate
-            "Audio Output", #name
-            1, #number of inputs
-            None # parent
+            1024,  # size
+            samp_rate,  # samp_rate
+            "Audio Output",  # name
+            1,  # number of inputs
+            None  # parent
         )
         self.qtgui_time_sink_f_0.set_update_time(0.10)
         self.qtgui_time_sink_f_0.set_y_axis(-1, 1)
@@ -86,27 +80,26 @@ class nbfm_example(gr.top_block, Qt.QWidget):
         self.qtgui_time_sink_f_0.set_y_label("Amplitude", "")
 
         self.qtgui_time_sink_f_0.enable_tags(True)
-        self.qtgui_time_sink_f_0.set_trigger_mode(qtgui.TRIG_MODE_FREE, qtgui.TRIG_SLOPE_POS, 0.0, 0, 0, "")
+        self.qtgui_time_sink_f_0.set_trigger_mode(
+            qtgui.TRIG_MODE_FREE, qtgui.TRIG_SLOPE_POS, 0.0, 0, 0, "")
         self.qtgui_time_sink_f_0.enable_autoscale(False)
         self.qtgui_time_sink_f_0.enable_grid(False)
         self.qtgui_time_sink_f_0.enable_axis_labels(True)
         self.qtgui_time_sink_f_0.enable_control_panel(False)
         self.qtgui_time_sink_f_0.enable_stem_plot(False)
 
-
         labels = ["Demodulated Audio", "", 'Signal 3', 'Signal 4', 'Signal 5',
-            'Signal 6', 'Signal 7', 'Signal 8', 'Signal 9', 'Signal 10']
+                  'Signal 6', 'Signal 7', 'Signal 8', 'Signal 9', 'Signal 10']
         widths = [1, 1, 1, 1, 1,
-            1, 1, 1, 1, 1]
+                  1, 1, 1, 1, 1]
         colors = ['blue', 'red', 'green', 'black', 'cyan',
-            'magenta', 'yellow', 'dark red', 'dark green', 'dark blue']
+                  'magenta', 'yellow', 'dark red', 'dark green', 'dark blue']
         alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
-            1.0, 1.0, 1.0, 1.0, 1.0]
+                  1.0, 1.0, 1.0, 1.0, 1.0]
         styles = [1, 1, 1, 1, 1,
-            1, 1, 1, 1, 1]
+                  1, 1, 1, 1, 1]
         markers = [-1, -1, -1, -1, -1,
-            -1, -1, -1, -1, -1]
-
+                   -1, -1, -1, -1, -1]
 
         for i in range(1):
             if len(labels[i]) == 0:
@@ -119,21 +112,23 @@ class nbfm_example(gr.top_block, Qt.QWidget):
             self.qtgui_time_sink_f_0.set_line_marker(i, markers[i])
             self.qtgui_time_sink_f_0.set_line_alpha(i, alphas[i])
 
-        self._qtgui_time_sink_f_0_win = sip.wrapinstance(self.qtgui_time_sink_f_0.qwidget(), Qt.QWidget)
+        self._qtgui_time_sink_f_0_win = sip.wrapinstance(  # type: ignore
+            self.qtgui_time_sink_f_0.qwidget(), Qt.QWidget)
         self.top_layout.addWidget(self._qtgui_time_sink_f_0_win)
         self.qtgui_freq_sink_c_0 = qtgui.freq_sink_c(
-            1024, #size
-            window.WIN_BLACKMAN_hARRIS, #wintype
-            0, #fc
-            samp_rate, #bw
-            "Modulated Signal", #name
+            1024,  # size
+            qtgui.fft_window_f.WIN_BLACKMAN_HARRIS,  # wintype
+            0,  # fc
+            samp_rate,  # bw
+            "Modulated Signal",  # name
             1,
-            None # parent
+            None  # parent
         )
         self.qtgui_freq_sink_c_0.set_update_time(0.10)
-        self.qtgui_freq_sink_c_0.set_y_axis((-140), 0)
+        self.qtgui_freq_sink_c_0.set_y_axis(-140, 0)
         self.qtgui_freq_sink_c_0.set_y_label('Relative Gain', 'dB')
-        self.qtgui_freq_sink_c_0.set_trigger_mode(qtgui.TRIG_MODE_FREE, 0.0, 0, "")
+        self.qtgui_freq_sink_c_0.set_trigger_mode(
+            qtgui.TRIG_MODE_FREE, 0.0, 0, "")
         self.qtgui_freq_sink_c_0.enable_autoscale(False)
         self.qtgui_freq_sink_c_0.enable_grid(False)
         self.qtgui_freq_sink_c_0.set_fft_average(1.0)
@@ -141,16 +136,14 @@ class nbfm_example(gr.top_block, Qt.QWidget):
         self.qtgui_freq_sink_c_0.enable_control_panel(False)
         self.qtgui_freq_sink_c_0.set_fft_window_normalized(False)
 
-
-
         labels = ['', '', '', '', '',
-            '', '', '', '', '']
+                  '', '', '', '', '']
         widths = [1, 1, 1, 1, 1,
-            1, 1, 1, 1, 1]
+                  1, 1, 1, 1, 1]
         colors = ["blue", "red", "green", "black", "cyan",
-            "magenta", "yellow", "dark red", "dark green", "dark blue"]
+                  "magenta", "yellow", "dark red", "dark green", "dark blue"]
         alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
-            1.0, 1.0, 1.0, 1.0, 1.0]
+                  1.0, 1.0, 1.0, 1.0, 1.0]
 
         for i in range(1):
             if len(labels[i]) == 0:
@@ -161,14 +154,20 @@ class nbfm_example(gr.top_block, Qt.QWidget):
             self.qtgui_freq_sink_c_0.set_line_color(i, colors[i])
             self.qtgui_freq_sink_c_0.set_line_alpha(i, alphas[i])
 
-        self._qtgui_freq_sink_c_0_win = sip.wrapinstance(self.qtgui_freq_sink_c_0.qwidget(), Qt.QWidget)
+        self._qtgui_freq_sink_c_0_win = sip.wrapinstance(  # type: ignore
+            self.qtgui_freq_sink_c_0.qwidget(), Qt.QWidget)
         self.top_layout.addWidget(self._qtgui_freq_sink_c_0_win)
-        self.nbfm_mod = qradiolink.mod_nbfm(sps=125, samp_rate=samp_rate, carrier_freq=1700, filter_width=8000)
-        self.nbfm_demod = qradiolink.demod_nbfm(sps=125, samp_rate=samp_rate, carrier_freq=1700, filter_width=8000)
-        self.blocks_throttle2_0 = blocks.throttle( gr.sizeof_gr_complex*1, samp_rate, True, 0 if "auto" == "auto" else max( int(float(0.1) * samp_rate) if "auto" == "time" else int(0.1), 1) )
-        self.blocks_null_sink_0 = blocks.null_sink(gr.sizeof_gr_complex*1)
-        self.audio_source = analog.sig_source_f(audio_rate, analog.GR_SIN_WAVE, 1000, 1, 0, 0)
-
+        self.nbfm_mod = qradiolink.mod_nbfm(
+            sps=125, samp_rate=samp_rate, carrier_freq=1700, filter_width=8000)
+        self.nbfm_demod = qradiolink.demod_nbfm(
+            sps=125, samp_rate=samp_rate, carrier_freq=1700, filter_width=8000)
+        throttle_rate = (0 if "auto" == "auto" else max(
+            int(float(0.1) * samp_rate) if "auto" == "time" else int(0.1), 1))
+        self.blocks_throttle2_0 = blocks.throttle(
+            gr.sizeof_gr_complex * 1, samp_rate, True, throttle_rate)
+        self.blocks_null_sink_0 = blocks.null_sink(gr.sizeof_gr_complex * 1)
+        self.audio_source = analog.sig_source_f(
+            audio_rate, analog.GR_SIN_WAVE, 1000, 1, 0, 0)
 
         ##################################################
         # Connections
@@ -180,8 +179,7 @@ class nbfm_example(gr.top_block, Qt.QWidget):
         self.connect((self.nbfm_demod, 1), (self.qtgui_time_sink_f_0, 0))
         self.connect((self.nbfm_mod, 0), (self.blocks_throttle2_0, 0))
 
-
-    def closeEvent(self, event):
+    def closeEvent(self, event):  # noqa: N802
         self.settings = Qt.QSettings("gnuradio/flowgraphs", "nbfm_example")
         self.settings.setValue("geometry", self.saveGeometry())
         self.stop()
@@ -206,9 +204,7 @@ class nbfm_example(gr.top_block, Qt.QWidget):
         self.audio_source.set_sampling_freq(self.audio_rate)
 
 
-
-
-def main(top_block_cls=nbfm_example, options=None):
+def main(top_block_cls=NbfmExample, options=None):
 
     qapp = Qt.QApplication(sys.argv)
 
@@ -233,6 +229,7 @@ def main(top_block_cls=nbfm_example, options=None):
     timer.timeout.connect(lambda: None)
 
     qapp.exec_()
+
 
 if __name__ == '__main__':
     main()

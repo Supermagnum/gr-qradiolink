@@ -99,63 +99,63 @@ try:
 
     import gnuradio  # Import base module first
 
-    from gnuradio import gr
+    # Only import if not already imported
+    if gr is None:  # type: ignore
+        from gnuradio import gr  # type: ignore
 
-    from gnuradio import blocks
+    if blocks is None:  # type: ignore
+        from gnuradio import blocks  # type: ignore
 
     # Check if qradiolink is already loaded (might be from previous test runs)
 
-    qradiolink = None
-
     # Try to import it - even if it fails, it might be partially loaded
 
-    try:
+    if qradiolink is None:  # type: ignore
+        try:
+            import gnuradio.qradiolink as qradiolink  # type: ignore
+        except (ImportError, RuntimeError) as import_err:
+            # Handle pybind11 registration conflicts
 
-        import gnuradio.qradiolink as qradiolink
+            error_str = str(import_err)
 
-    except (ImportError, RuntimeError) as import_err:
+            if "already registered" in error_str or "generic_type" in error_str:
 
-        # Handle pybind11 registration conflicts
+                # Types already registered - check if module is accessible despite error
 
-        error_str = str(import_err)
+                # The module might have been partially loaded into sys.modules
 
-        if "already registered" in error_str or "generic_type" in error_str:
+                if "gnuradio.qradiolink" in sys.modules:
 
-            # Types already registered - check if module is accessible despite error
+                    qradiolink = sys.modules["gnuradio.qradiolink"]
 
-            # The module might have been partially loaded into sys.modules
+                elif hasattr(gnuradio, "qradiolink"):
 
-            if "gnuradio.qradiolink" in sys.modules:
+                    qradiolink = gnuradio.qradiolink
 
-                qradiolink = sys.modules["gnuradio.qradiolink"]
+                else:
 
-            elif hasattr(gnuradio, "qradiolink"):
+                    # Module not accessible - registration conflict prevents loading
 
-                qradiolink = gnuradio.qradiolink
-
-            else:
-
-                # Module not accessible - registration conflict prevents loading
-
-                raise ImportError(
-                    f"qradiolink module has registration conflict and is not accessible: {import_err}"
-                )
-
-        else:
-
-            # Other error - check if module was still loaded
-
-            if "gnuradio.qradiolink" in sys.modules:
-
-                qradiolink = sys.modules["gnuradio.qradiolink"]
-
-            elif hasattr(gnuradio, "qradiolink"):
-
-                qradiolink = gnuradio.qradiolink
+                    raise ImportError(
+                        f"qradiolink module has registration conflict "
+                        f"and is not accessible: {import_err}"
+                    )
 
             else:
 
-                raise
+                # Other error - check if module was still loaded
+
+                if "gnuradio.qradiolink" in sys.modules:
+
+                    qradiolink = sys.modules["gnuradio.qradiolink"]
+
+                elif hasattr(gnuradio, "qradiolink"):
+
+                    qradiolink = gnuradio.qradiolink
+
+                else:
+
+                    raise
 
     # Verify MMDVM blocks are available
 
@@ -521,8 +521,10 @@ class POCSAGValidator(unittest.TestCase):
         Handles both address codewords (20-bit data) and message codewords (20-bit data)
 
         POCSAG format:
-        - Address: [bit 0: 0][bits 1-19: addr][bits 20-21: func][bits 22-31: BCH parity][bit 31: even parity]
-        - Message: [bit 0: 1][bits 1-20: data][bits 21-30: BCH parity][bit 31: even parity]
+        - Address: [bit 0: 0][bits 1-19: addr][bits 20-21: func]
+          [bits 22-31: BCH parity][bit 31: even parity]
+        - Message: [bit 0: 1][bits 1-20: data][bits 21-30: BCH parity]
+          [bit 31: even parity]
 
         Note: Address uses bits 22-31 for parity, Message uses bits 21-30
 
@@ -550,9 +552,11 @@ class POCSAGValidator(unittest.TestCase):
 
         else:
 
-            # Address codeword: bits 1-21 are data (19 addr + 2 func), bits 22-31 are parity (bit 31 is even parity)
+            # Address codeword: bits 1-21 are data (19 addr + 2 func),
+            # bits 22-31 are parity (bit 31 is even parity)
 
-            # C++ code: data_for_bch = codeword >> 1 (21 bits: bits 0-20 of shifted codeword = bits 1-21 of original)
+            # C++ code: data_for_bch = codeword >> 1
+            # (21 bits: bits 0-20 of shifted codeword = bits 1-21 of original)
 
             # Extract 21 bits for BCH verification
 
@@ -818,7 +822,7 @@ class POCSAGValidator(unittest.TestCase):
 
         # Numeric encoding: 4 bits per digit, packed into 20-bit chunks
 
-        codewords = []
+        codewords: List[int] = []
 
         # Implementation would pack BCD digits
 
@@ -853,7 +857,7 @@ class POCSAGValidator(unittest.TestCase):
 
         for i in range(0, len(bits), 20):
 
-            chunk = bits[i : i + 20].ljust(20, "0")
+            chunk = bits[i:i + 20].ljust(20, "0")
 
             data_20 = int(chunk, 2)
 
@@ -1842,7 +1846,7 @@ else:
 
     # Create dummy test classes if GNU Radio is not available
 
-    class POCSAGBlockIntegrationTests(unittest.TestCase):
+    class POCSAGBlockIntegrationTests(unittest.TestCase):  # type: ignore
 
         def test_pocsag_encoder_block_creation(self):
 
@@ -1860,7 +1864,7 @@ else:
 
             self.skipTest("GNU Radio not available")
 
-    class DSTARBlockIntegrationTests(unittest.TestCase):
+    class DSTARBlockIntegrationTests(unittest.TestCase):  # type: ignore
 
         def test_dstar_encoder_block_creation(self):
 
@@ -1874,7 +1878,7 @@ else:
 
             self.skipTest("GNU Radio not available")
 
-    class YSFBlockIntegrationTests(unittest.TestCase):
+    class YSFBlockIntegrationTests(unittest.TestCase):  # type: ignore
 
         def test_ysf_encoder_block_creation(self):
 
@@ -1888,7 +1892,7 @@ else:
 
             self.skipTest("GNU Radio not available")
 
-    class P25BlockIntegrationTests(unittest.TestCase):
+    class P25BlockIntegrationTests(unittest.TestCase):  # type: ignore
 
         def test_p25_encoder_block_creation(self):
 
@@ -1904,7 +1908,5 @@ else:
 
 
 if __name__ == "__main__":
-
     # Run all validators
-
-    unittest.main(verbosity=2)
+    unittest.main()

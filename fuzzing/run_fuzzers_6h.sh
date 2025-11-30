@@ -10,7 +10,6 @@ set -e
 FUZZ_DURATION=21600  # 6 hours in seconds
 BUILD_DIR="${BUILD_DIR:-build-fuzz}"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-HARNESSES_DIR="${SCRIPT_DIR}/harnesses"
 CORPUS_BASE_DIR="${SCRIPT_DIR}/corpus"
 RESULTS_DIR="${SCRIPT_DIR}/results_$(date +%Y%m%d_%H%M%S)"
 FUZZER_BIN_DIR="${SCRIPT_DIR}/../${BUILD_DIR}/fuzzing/harnesses"
