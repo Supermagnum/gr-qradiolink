@@ -12,6 +12,7 @@ install(
     FILES api.h
           mod_2fsk.h
           mod_4fsk.h
+          mod_cpm_4fsk.h
           mod_am.h
           mod_gmsk.h
           mod_bpsk.h

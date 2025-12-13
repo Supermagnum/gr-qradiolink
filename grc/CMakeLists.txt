@@ -11,6 +11,7 @@
 install(FILES
     qradiolink_mod_2fsk.block.yml
     qradiolink_mod_4fsk.block.yml
+    qradiolink_mod_cpm_4fsk.block.yml
     qradiolink_mod_am.block.yml
     qradiolink_mod_gmsk.block.yml
     qradiolink_mod_bpsk.block.yml

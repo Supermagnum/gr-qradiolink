@@ -16,6 +16,7 @@ list(
     qradiolink_python_files
     mod_2fsk_python.cc
     mod_4fsk_python.cc
+    mod_cpm_4fsk_python.cc
     mod_am_python.cc
     mod_gmsk_python.cc
     mod_bpsk_python.cc

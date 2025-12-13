@@ -14,6 +14,7 @@ set(gr_qradiolink_sources
     # Modulators
     mod_2fsk_impl.cc
     mod_4fsk_impl.cc
+    mod_cpm_4fsk_impl.cc
     mod_am_impl.cc
     mod_gmsk_impl.cc
     mod_bpsk_impl.cc

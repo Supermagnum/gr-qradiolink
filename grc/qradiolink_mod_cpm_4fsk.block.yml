@@ -1,0 +1,57 @@
+id: qradiolink_mod_cpm_4fsk
+label: 4FSK CPM Mod
+category: '[QRadioLink]/Modulators'
+flags: [ python ]
+
+parameters:
+-   id: sps
+    label: Samples per Symbol
+    dtype: int
+    default: '2'
+-   id: samp_rate
+    label: Sample Rate
+    dtype: int
+    default: '96000'
+-   id: carrier_freq
+    label: Carrier Frequency (Hz)
+    dtype: int
+    default: '0'
+-   id: filter_width
+    label: Filter Width (Hz)
+    dtype: int
+    default: '5000'
+-   id: h
+    label: Modulation Index
+    dtype: float
+    default: '0.5'
+-   id: L
+    label: Pulse Length
+    dtype: int
+    default: '4'
+-   id: beta
+    label: Roll-off Factor
+    dtype: float
+    default: '0.3'
+
+inputs:
+-   domain: stream
+    dtype: byte
+
+outputs:
+-   domain: stream
+    dtype: complex
+
+templates:
+    imports: from gnuradio import qradiolink
+    make: |-
+        qradiolink.mod_cpm_4fsk(
+            sps=${sps},
+            samp_rate=${samp_rate},
+            carrier_freq=${carrier_freq},
+            filter_width=${filter_width},
+            h=${h},
+            L=${L},
+            beta=${beta})
+
+file_format: 1
+

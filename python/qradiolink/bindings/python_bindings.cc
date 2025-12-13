@@ -17,6 +17,7 @@ namespace py = pybind11;
 
 void bind_mod_2fsk(py::module&);
 void bind_mod_4fsk(py::module&);
+void bind_mod_cpm_4fsk(py::module&);
 void bind_mod_am(py::module&);
 void bind_mod_gmsk(py::module&);
 void bind_mod_bpsk(py::module&);
@@ -89,6 +90,7 @@ PYBIND11_MODULE(qradiolink_python, m)
     // versions are in the Python path.
     bind_mod_2fsk(m);
     bind_mod_4fsk(m);
+    bind_mod_cpm_4fsk(m);
     bind_mod_am(m);
     bind_mod_gmsk(m);
     bind_mod_bpsk(m);
