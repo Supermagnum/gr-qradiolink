@@ -20,7 +20,7 @@ The QRadioLink Codeberg page does not mention any crashes or other known issues.
 
 ### Modulation/Demodulation Blocks
 
-- **Digital Modulations**: 2FSK, 4FSK, GMSK, BPSK, QPSK, DSSS
+- **Digital Modulations**: 2FSK, 4FSK, GMSK, BPSK, QPSK, SOQPSK, DSSS
 - **Analog Modulations**: AM, SSB (USB/LSB), NBFM
 - **Digital Voice**: FreeDV, M17, DMR (Tier I/II/III), dPMR, NXDN, MMDVM
   - **dPMR**: Digital Private Mobile Radio (ETSI TS 102 658), 2400 baud, 6.25 kHz channel spacing
@@ -32,10 +32,45 @@ The QRadioLink Codeberg page does not mention any crashes or other known issues.
     - **P25**: Project 25 Phase 1 C4FM with BCH(63,16) and Trellis encoding
 - **Supporting Blocks**: Audio source/sink, RSSI, FFT, deframer, CESSB
 
+### SOQPSK (Shaped Offset Quadrature Phase Shift Keying)
+
+SOQPSK is a bandwidth-efficient modulation scheme that provides improved spectral efficiency compared to standard QPSK. The implementation supports two operational modes:
+
+**Mode 1: VHF/UHF Single Channel**
+- 1 carrier at 14,400 bps
+- Bandwidth: ~10 kHz
+- Fits in 12.5 kHz allocation
+
+**Mode 2: VHF/UHF Multi-Carrier (fading resistant)**
+- 3 carriers at 4,800 bps each
+- Spacing: 4 kHz apart
+- Total bandwidth: ~12 kHz
+- Better multipath resistance
+
+#### HF Maximum Capability
+
+Maximum bandwidth segments available:
+- **Most HF bands**: 2,700 Hz max (standard digital mode segments)
+- **10m band (above 29 MHz)**: 6,000 Hz max
+
+SOQPSK efficiency: ~1.5 bps/Hz
+
+**Per-Carrier Capacity:**
+- **Standard HF bands (2,700 Hz)**: 2,700 Hz × 1.5 bps/Hz = ~4,000 bps per carrier
+- **10m band (6,000 Hz)**: 6,000 Hz × 1.5 bps/Hz = ~9,000 bps per carrier
+
+#### VHF/UHF Specifications
+
+**Carrier specifications:**
+- Symbol rate: ~9,600 symbols/second (for 14,400 bps at 1.5 bps/Hz)
+- Occupied bandwidth: ~9.6 kHz
+- Fits comfortably in 12.5 kHz channel with guard bands
+- Leaves ~2.9 kHz for filtering rolloff and guard bands
+
 ### Python Bindings
 
 All blocks are available through Python bindings, including:
-- All modulation/demodulation blocks (2FSK, 4FSK, GMSK, BPSK, QPSK, DSSS, AM, SSB, NBFM)
+- All modulation/demodulation blocks (2FSK, 4FSK, GMSK, BPSK, QPSK, SOQPSK, DSSS, AM, SSB, NBFM)
 - All digital voice blocks (FreeDV, M17, DMR, **dPMR**, **NXDN**, MMDVM)
 - Supporting blocks (RSSI, M17 deframer, etc.)
 
@@ -97,6 +132,7 @@ Test Breakdown:
 Test Coverage:
 - Modulators: 2FSK, 4FSK, AM, GMSK, BPSK, SSB, QPSK, NBFM, DSSS, M17, DMR, dPMR, NXDN
 - Demodulators: 2FSK, 4FSK, AM, GMSK, BPSK, SSB, QPSK, NBFM, DSSS, WBFM, M17, DMR, dPMR, NXDN
+- Note: SOQPSK blocks are implemented and available but unit tests are planned for future releases
 ```
 
 **MMDVM Protocol Tests (Python):**
@@ -138,7 +174,7 @@ The module includes comprehensive fuzzing coverage using libFuzzer. See [fuzzing
 
 ### Python Validation Tests
 
-The module includes Python-based validation tests for all modulation types. See [fuzzing-results/results.md](fuzzing-results/results.md) for validation test results. All digital voice modes (FreeDV, M17, DMR, dPMR, NXDN) now have Python bindings and validation support.
+The module includes Python-based validation tests for all modulation types. See [fuzzing-results/results.md](fuzzing-results/results.md) for validation test results. All digital voice modes (FreeDV, M17, DMR, dPMR, NXDN) now have Python bindings and validation support. SOQPSK blocks have Python bindings and are available for use; validation tests are planned for future releases.
 
 ## Documentation
 

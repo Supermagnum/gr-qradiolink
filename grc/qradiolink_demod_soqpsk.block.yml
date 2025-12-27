@@ -1,0 +1,50 @@
+id: qradiolink_demod_soqpsk
+label: SOQPSK Demod
+category: '[QRadioLink]'
+flags: [ python ]
+
+parameters:
+-   id: mode
+    label: Mode
+    dtype: int
+    default: '1'
+    options: [1, 2]
+    option_labels: ['Single Channel (14.4 kbps)', 'Multi-Carrier (3x4.8 kbps)']
+-   id: sps
+    label: Samples/Symbol
+    dtype: int
+    default: '10'
+-   id: samp_rate
+    label: Sample Rate
+    dtype: int
+    default: '250000'
+-   id: carrier_freq
+    label: Carrier Freq
+    dtype: int
+    default: '0'
+-   id: filter_width
+    label: Filter Width
+    dtype: int
+    default: '10000'
+
+inputs:
+-   domain: stream
+    dtype: complex
+
+outputs:
+-   domain: stream
+    dtype: complex
+    label: Filtered
+-   domain: stream
+    dtype: complex
+    label: Constellation
+-   domain: stream
+    dtype: byte
+    label: Decoded
+
+templates:
+    imports: from gnuradio import qradiolink
+    make: qradiolink.demod_soqpsk(mode=${mode}, sps=${sps}, samp_rate=${samp_rate}, carrier_freq=${carrier_freq}, filter_width=${filter_width})
+
+file_format: 1
+

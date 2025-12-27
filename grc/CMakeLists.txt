@@ -17,6 +17,7 @@ install(FILES
     qradiolink_mod_bpsk.block.yml
     qradiolink_mod_ssb.block.yml
     qradiolink_mod_qpsk.block.yml
+    qradiolink_mod_soqpsk.block.yml
     qradiolink_mod_nbfm.block.yml
     qradiolink_mod_dsss.block.yml
     qradiolink_mod_nxdn.block.yml
@@ -32,6 +33,7 @@ install(FILES
     qradiolink_demod_nbfm.block.yml
     qradiolink_demod_bpsk.block.yml
     qradiolink_demod_qpsk.block.yml
+    qradiolink_demod_soqpsk.block.yml
     qradiolink_demod_gmsk.block.yml
     qradiolink_demod_4fsk.block.yml
     qradiolink_demod_dsss.block.yml

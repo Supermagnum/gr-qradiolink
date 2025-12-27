@@ -18,6 +18,7 @@ install(
           mod_bpsk.h
           mod_ssb.h
           mod_qpsk.h
+          mod_soqpsk.h
           mod_nbfm.h
           mod_dsss.h
           mod_freedv.h
@@ -38,6 +39,7 @@ install(
           demod_nbfm.h
           demod_bpsk.h
           demod_qpsk.h
+          demod_soqpsk.h
           demod_gmsk.h
           demod_4fsk.h
           demod_dsss.h

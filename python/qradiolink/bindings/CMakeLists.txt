@@ -22,6 +22,7 @@ list(
     mod_bpsk_python.cc
     mod_ssb_python.cc
     mod_qpsk_python.cc
+    mod_soqpsk_python.cc
     mod_nbfm_python.cc
     mod_dsss_python.cc
     mod_m17_python.cc
@@ -41,6 +42,7 @@ list(
     demod_nbfm_python.cc
     demod_bpsk_python.cc
     demod_qpsk_python.cc
+    demod_soqpsk_python.cc
     demod_gmsk_python.cc
     demod_4fsk_python.cc
     demod_dsss_python.cc

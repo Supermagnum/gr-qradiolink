@@ -20,6 +20,7 @@ set(gr_qradiolink_sources
     mod_bpsk_impl.cc
     mod_ssb_impl.cc
     mod_qpsk_impl.cc
+    mod_soqpsk_impl.cc
     mod_nbfm_impl.cc
     mod_dsss_impl.cc
     dsss_encoder_bb_impl.cc
@@ -42,6 +43,7 @@ set(gr_qradiolink_sources
     demod_nbfm_impl.cc
     demod_bpsk_impl.cc
     demod_qpsk_impl.cc
+    demod_soqpsk_impl.cc
     demod_gmsk_impl.cc
     demod_4fsk_impl.cc
     demod_dsss_impl.cc
