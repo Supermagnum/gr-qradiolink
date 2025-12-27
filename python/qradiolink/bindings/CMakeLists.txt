@@ -46,6 +46,8 @@ list(
     demod_gmsk_python.cc
     demod_4fsk_python.cc
     demod_dsss_python.cc
+    dsss_spreader_cc_python.cc
+    dsss_despreader_cc_python.cc
     demod_m17_python.cc
     demod_dmr_python.cc
     demod_dpmr_python.cc

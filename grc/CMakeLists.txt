@@ -20,6 +20,8 @@ install(FILES
     qradiolink_mod_soqpsk.block.yml
     qradiolink_mod_nbfm.block.yml
     qradiolink_mod_dsss.block.yml
+    qradiolink_dsss_spreader_cc.block.yml
+    qradiolink_dsss_despreader_cc.block.yml
     qradiolink_mod_nxdn.block.yml
     qradiolink_mod_dpmr.block.yml
     qradiolink_pocsag_encoder.block.yml

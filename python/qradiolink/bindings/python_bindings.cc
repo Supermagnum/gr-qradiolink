@@ -47,6 +47,8 @@ void bind_demod_soqpsk(py::module&);
 void bind_demod_gmsk(py::module&);
 void bind_demod_4fsk(py::module&);
 void bind_demod_dsss(py::module&);
+void bind_dsss_spreader_cc(py::module&);
+void bind_dsss_despreader_cc(py::module&);
 void bind_demod_m17(py::module&);
 void bind_demod_dmr(py::module&);
 void bind_demod_dpmr(py::module&);
@@ -122,6 +124,8 @@ PYBIND11_MODULE(qradiolink_python, m)
     bind_demod_gmsk(m);
     bind_demod_4fsk(m);
     bind_demod_dsss(m);
+    bind_dsss_spreader_cc(m);
+    bind_dsss_despreader_cc(m);
     bind_demod_m17(m);
     bind_demod_dmr(m);
     bind_demod_dpmr(m);

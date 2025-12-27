@@ -24,6 +24,9 @@ set(gr_qradiolink_sources
     mod_nbfm_impl.cc
     mod_dsss_impl.cc
     dsss_encoder_bb_impl.cc
+    dsss_spreader_cc_impl.cc
+    dsss_despreader_cc_impl.cc
+    pn_sequence_generator.cc
     mod_freedv_impl.cc
     mod_m17_impl.cc
     mod_dmr_impl.cc

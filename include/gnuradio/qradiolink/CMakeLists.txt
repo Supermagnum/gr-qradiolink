@@ -21,6 +21,8 @@ install(
           mod_soqpsk.h
           mod_nbfm.h
           mod_dsss.h
+          dsss_spreader_cc.h
+          dsss_despreader_cc.h
           mod_freedv.h
           mod_m17.h
           mod_dmr.h

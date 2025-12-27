@@ -21,6 +21,7 @@ The QRadioLink Codeberg page does not mention any crashes or other known issues.
 ### Modulation/Demodulation Blocks
 
 - **Digital Modulations**: 2FSK, 4FSK, GMSK, BPSK, QPSK, SOQPSK, DSSS
+  - **DSSS**: Direct Sequence Spread Spectrum with enhanced spreader/despreader blocks, PN sequence generation (m-sequences, Gold codes), timing recovery, and lock detection (see [DSSS Blocks Guide](docs/DSSS_BLOCKS.md))
 - **Analog Modulations**: AM, SSB (USB/LSB), NBFM
 - **Digital Voice**: FreeDV, M17, DMR (Tier I/II/III), dPMR, NXDN, MMDVM
   - **dPMR**: Digital Private Mobile Radio (ETSI TS 102 658), 2400 baud, 6.25 kHz channel spacing
@@ -31,6 +32,7 @@ The QRadioLink Codeberg page does not mention any crashes or other known issues.
     - **YSF**: C4FM protocol with Golay(20,8) and Golay(23,12) FEC
     - **P25**: Project 25 Phase 1 C4FM with BCH(63,16) and Trellis encoding
 - **Supporting Blocks**: Audio source/sink, RSSI, FFT, deframer, CESSB
+- **DSSS Blocks**: Enhanced spreader/despreader with PN sequence generation, timing recovery, and acquisition (see [DSSS Blocks Guide](docs/DSSS_BLOCKS.md))
 
 ### SOQPSK (Shaped Offset Quadrature Phase Shift Keying)
 
@@ -179,6 +181,7 @@ The module includes Python-based validation tests for all modulation types. See 
 ## Documentation
 
 - **[PTT Control Guide](docs/PTT_CONTROL.md)**: Comprehensive guide on controlling PTT (Push-To-Talk) with gr-osmosdr and similar SDR hardware when using gr-qradiolink blocks.
+- **[DSSS Blocks Guide](docs/DSSS_BLOCKS.md)**: Complete documentation for Direct Sequence Spread Spectrum (DSSS) spreader and despreader blocks, including PN sequence generation, timing recovery, and integration examples.
 
 ## License
 
