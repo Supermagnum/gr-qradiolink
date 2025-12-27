@@ -40,6 +40,8 @@ install(FILES
     qradiolink_demod_4fsk.block.yml
     qradiolink_demod_dsss.block.yml
     qradiolink_demod_m17.block.yml
+    qradiolink_m17_coder.block.yml
+    qradiolink_m17_decoder.block.yml
     qradiolink_demod_nxdn.block.yml
     qradiolink_demod_dpmr.block.yml
     qradiolink_pocsag_decoder.block.yml

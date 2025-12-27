@@ -38,7 +38,7 @@ class M17ModExample(gr.top_block, Qt.QWidget):
         self.setWindowTitle("M17 Modulation Example")
         qtgui.util.check_set_qss()
         try:
-            self.setWindowIcon(Qt.QIcon.fromTheme('gnuradio-grc'))
+            self.setWindowIcon(Qt.QIcon.fromTheme("gnuradio-grc"))
         except Exception:
             pass
         self.top_scroll_layout = Qt.QVBoxLayout()
@@ -62,18 +62,19 @@ class M17ModExample(gr.top_block, Qt.QWidget):
         # Blocks
         # Audio source (microphone input)
         try:
-            self.audio_source = audio.source(audio_rate, '', True)
+            self.audio_source = audio.source(audio_rate, "", True)
         except Exception:
             # Fallback to signal source if audio not available
             self.audio_source = analog.sig_source_f(
-                audio_rate, analog.GR_SIN_WAVE, 1000, 0.5, 0, 0)
+                audio_rate, analog.GR_SIN_WAVE, 1000, 0.5, 0, 0
+            )
 
         # M17 Modulator
         self.m17_mod = qradiolink.mod_m17(
             sps=125,
             samp_rate=samp_rate,
             carrier_freq=carrier_freq,
-            filter_width=filter_width
+            filter_width=filter_width,
         )
 
         # Throttle to prevent excessive CPU usage
@@ -87,11 +88,11 @@ class M17ModExample(gr.top_block, Qt.QWidget):
             samp_rate,
             "M17 Modulated Signal",
             1,
-            None
+            None,
         )
         self.qtgui_freq_sink_c_0.set_update_time(0.10)
         self.qtgui_freq_sink_c_0.set_y_axis(-140, 10)
-        self.qtgui_freq_sink_c_0.set_y_label('Relative', '')
+        self.qtgui_freq_sink_c_0.set_y_label("Relative", "")
         self.qtgui_freq_sink_c_0.set_trigger_mode(qtgui.TRIG_MODE_FREE, 0.0, 0, "")
         self.qtgui_freq_sink_c_0.enable_autoscale(False)
         self.qtgui_freq_sink_c_0.enable_grid(False)
@@ -102,9 +103,7 @@ class M17ModExample(gr.top_block, Qt.QWidget):
 
         # File sink to save modulated signal
         self.file_sink = blocks.file_sink(
-            gr.sizeof_gr_complex * 1,
-            '/tmp/m17_modulated.bin',
-            False
+            gr.sizeof_gr_complex * 1, "/tmp/m17_modulated.bin", False
         )
         self.file_sink.set_unbuffered(False)
 
@@ -116,7 +115,8 @@ class M17ModExample(gr.top_block, Qt.QWidget):
 
         # Qt GUI
         self._qtgui_freq_sink_c_0_win = sip.wrapinstance(  # type: ignore
-            self.qtgui_freq_sink_c_0.qwidget(), Qt.QWidget)
+            self.qtgui_freq_sink_c_0.qwidget(), Qt.QWidget
+        )
         self.top_grid_layout.addWidget(self._qtgui_freq_sink_c_0_win, 0, 0, 1, 1)
         for r in range(0, 1):
             self.top_grid_layout.setRowStretch(r, 1)
@@ -130,15 +130,16 @@ class M17ModExample(gr.top_block, Qt.QWidget):
 
 
 def main(top_block_cls=M17ModExample, options=None):
-    if sys.platform.startswith('linux'):
+    if sys.platform.startswith("linux"):
         try:
             import x11
+
             x11.XInitThreads()
         except Exception:
             pass
 
     if StrictVersion("4.5.0") <= StrictVersion(Qt.qVersion()) < StrictVersion("5.0.0"):
-        style = gr.prefs().get_string('qtgui', 'style', 'raster')
+        style = gr.prefs().get_string("qtgui", "style", "raster")
         Qt.QApplication.setGraphicsSystem(style)
     qapp = Qt.QApplication(sys.argv)
 
@@ -163,7 +164,7 @@ def main(top_block_cls=M17ModExample, options=None):
     tb.wait()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     try:
         from distutils.version import StrictVersion
     except ImportError:

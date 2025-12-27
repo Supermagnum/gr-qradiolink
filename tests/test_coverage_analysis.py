@@ -22,7 +22,7 @@ def main():
     # Get all available blocks
     available_blocks = []
     for attr in dir(qradiolink):
-        if not attr.startswith('_'):
+        if not attr.startswith("_"):
             try:
                 obj = getattr(qradiolink, attr)
                 if callable(obj):
@@ -34,24 +34,44 @@ def main():
 
     # Expected blocks from user's list
     expected_blocks = {
-        'Modulation': ['mod_2fsk', 'mod_4fsk', 'mod_gmsk', 'mod_bpsk', 'mod_qpsk',
-                       'mod_am', 'mod_ssb', 'mod_nbfm', 'mod_dsss', 'mod_freedv',
-                       'mod_m17', 'mod_dmr', 'mod_mmdvm'],
-        'Demodulation': [
-            'demod_2fsk', 'demod_4fsk', 'demod_gmsk', 'demod_bpsk', 'demod_qpsk',
-            'demod_am', 'demod_ssb', 'demod_nbfm', 'demod_dsss', 'demod_freedv',
-            'demod_m17', 'demod_dmr', 'demod_mmdvm'],
-        'Supporting': ['rssi_tag_block', 'm17_deframer']
+        "Modulation": [
+            "mod_2fsk",
+            "mod_4fsk",
+            "mod_gmsk",
+            "mod_bpsk",
+            "mod_qpsk",
+            "mod_am",
+            "mod_ssb",
+            "mod_nbfm",
+            "mod_dsss",
+            "mod_freedv",
+            "mod_m17",
+            "mod_dmr",
+            "mod_mmdvm",
+        ],
+        "Demodulation": [
+            "demod_2fsk",
+            "demod_4fsk",
+            "demod_gmsk",
+            "demod_bpsk",
+            "demod_qpsk",
+            "demod_am",
+            "demod_ssb",
+            "demod_nbfm",
+            "demod_dsss",
+            "demod_freedv",
+            "demod_m17",
+            "demod_dmr",
+            "demod_mmdvm",
+        ],
+        "Supporting": ["rssi_tag_block", "m17_deframer"],
     }
 
     # Currently tested blocks (from test_modulation_vectors.py)
-    tested_blocks = {
-        'mod_gmsk', 'mod_2fsk',
-        'demod_gmsk', 'demod_2fsk'
-    }
+    tested_blocks = {"mod_gmsk", "mod_2fsk", "demod_gmsk", "demod_2fsk"}
 
     # M17 deframer tested separately
-    tested_blocks.add('m17_deframer')
+    tested_blocks.add("m17_deframer")
 
     print("Available Blocks in Python Bindings:")
     print("-" * 70)
@@ -69,8 +89,9 @@ def main():
         for block in blocks:
             all_expected.add(block)
             if block in available_blocks:
-                status = ("✓ AVAILABLE" +
-                          (" (TESTED)" if block in tested_blocks else " (NOT TESTED)"))
+                status = "✓ AVAILABLE" + (
+                    " (TESTED)" if block in tested_blocks else " (NOT TESTED)"
+                )
             else:
                 status = "✗ NOT IN PYTHON BINDINGS"
             print(f"  {block:30s} {status}")

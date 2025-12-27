@@ -47,7 +47,7 @@ def bits_to_symbols(bits, symbol_map):
         matched = False
         for pattern_len in range(max_pattern_len, 0, -1):
             if i + pattern_len <= len(bits):
-                pattern = bits[i:i + pattern_len]
+                pattern = bits[i : i + pattern_len]
                 if pattern in symbol_map:
                     symbols.append(symbol_map[pattern])
                     i += pattern_len
@@ -128,11 +128,11 @@ def generate_test_signal(test_vector, sample_rate=1000000):
                 samp_rate=sample_rate,
                 carrier_freq=mod_params.get("carrier_freq", 1700),
                 filter_width=mod_params.get("bandwidth", 8000),
-                fm=False
+                fm=False,
             )
             if bit_string:
                 byte_array = [
-                    int(bit_string[i:i + 8], 2)
+                    int(bit_string[i : i + 8], 2)
                     for i in range(0, len(bit_string), 8)
                     if i + 8 <= len(bit_string)
                 ]
@@ -145,11 +145,11 @@ def generate_test_signal(test_vector, sample_rate=1000000):
                 samp_rate=sample_rate,
                 carrier_freq=mod_params.get("carrier_freq", 1700),
                 filter_width=mod_params.get("bandwidth", 8000),
-                fm=True
+                fm=True,
             )
             if bit_string:
                 byte_array = [
-                    int(bit_string[i:i + 8], 2)
+                    int(bit_string[i : i + 8], 2)
                     for i in range(0, len(bit_string), 8)
                     if i + 8 <= len(bit_string)
                 ]
@@ -161,11 +161,11 @@ def generate_test_signal(test_vector, sample_rate=1000000):
                 sps=sps,
                 samp_rate=sample_rate,
                 carrier_freq=mod_params.get("carrier_freq", 1700),
-                filter_width=mod_params.get("bandwidth", 8000)
+                filter_width=mod_params.get("bandwidth", 8000),
             )
             if bit_string:
                 byte_array = [
-                    int(bit_string[i:i + 8], 2)
+                    int(bit_string[i : i + 8], 2)
                     for i in range(0, len(bit_string), 8)
                     if i + 8 <= len(bit_string)
                 ]
@@ -177,11 +177,11 @@ def generate_test_signal(test_vector, sample_rate=1000000):
                 sps=sps,
                 samp_rate=sample_rate,
                 carrier_freq=mod_params.get("carrier_freq", 1700),
-                filter_width=mod_params.get("bandwidth", 8000)
+                filter_width=mod_params.get("bandwidth", 8000),
             )
             if bit_string:
                 byte_array = [
-                    int(bit_string[i:i + 8], 2)
+                    int(bit_string[i : i + 8], 2)
                     for i in range(0, len(bit_string), 8)
                     if i + 8 <= len(bit_string)
                 ]
@@ -193,11 +193,11 @@ def generate_test_signal(test_vector, sample_rate=1000000):
                 sps=sps,
                 samp_rate=sample_rate,
                 carrier_freq=mod_params.get("carrier_freq", 1700),
-                filter_width=mod_params.get("bandwidth", 8000)
+                filter_width=mod_params.get("bandwidth", 8000),
             )
             if bit_string:
                 byte_array = [
-                    int(bit_string[i:i + 8], 2)
+                    int(bit_string[i : i + 8], 2)
                     for i in range(0, len(bit_string), 8)
                     if i + 8 <= len(bit_string)
                 ]
@@ -218,11 +218,11 @@ def generate_test_signal(test_vector, sample_rate=1000000):
                 sps=sps,
                 samp_rate=sample_rate,
                 carrier_freq=mod_params.get("carrier_freq", 1700),
-                filter_width=filter_width
+                filter_width=filter_width,
             )
             if bit_string:
                 byte_array = [
-                    int(bit_string[i:i + 8], 2)
+                    int(bit_string[i : i + 8], 2)
                     for i in range(0, len(bit_string), 8)
                     if i + 8 <= len(bit_string)
                 ]
@@ -234,7 +234,7 @@ def generate_test_signal(test_vector, sample_rate=1000000):
                 sps=sps,
                 samp_rate=sample_rate,
                 carrier_freq=mod_params.get("carrier_freq", 1700),
-                filter_width=mod_params.get("bandwidth", 6000)
+                filter_width=mod_params.get("bandwidth", 6000),
             )
             # For AM, use float audio samples
             if audio is not None:
@@ -257,7 +257,7 @@ def generate_test_signal(test_vector, sample_rate=1000000):
                 samp_rate=sample_rate,
                 carrier_freq=mod_params.get("carrier_freq", 1700),
                 filter_width=mod_params.get("bandwidth", 3000),
-                sb=0 if sideband == "USB" else 1
+                sb=0 if sideband == "USB" else 1,
             )
             # For SSB, use float audio samples
             if audio is not None:
@@ -278,7 +278,7 @@ def generate_test_signal(test_vector, sample_rate=1000000):
                 sps=sps,
                 samp_rate=sample_rate,
                 carrier_freq=mod_params.get("carrier_freq", 1700),
-                filter_width=mod_params.get("bandwidth", 6000)
+                filter_width=mod_params.get("bandwidth", 6000),
             )
             # For NBFM, use float audio samples
             if audio is not None:
@@ -300,7 +300,7 @@ def generate_test_signal(test_vector, sample_rate=1000000):
                     sps=sps,
                     samp_rate=sample_rate,
                     carrier_freq=mod_params.get("carrier_freq", 1700),
-                    filter_width=mod_params.get("bandwidth", 9000)
+                    filter_width=mod_params.get("bandwidth", 9000),
                 )
             except AttributeError:
                 raise ValueError(
@@ -309,7 +309,7 @@ def generate_test_signal(test_vector, sample_rate=1000000):
                 )
             if bit_string:
                 byte_array = [
-                    int(bit_string[i:i + 8], 2)
+                    int(bit_string[i : i + 8], 2)
                     for i in range(0, len(bit_string), 8)
                     if i + 8 <= len(bit_string)
                 ]
@@ -322,7 +322,7 @@ def generate_test_signal(test_vector, sample_rate=1000000):
                     sps=sps,
                     samp_rate=sample_rate,
                     carrier_freq=mod_params.get("carrier_freq", 1700),
-                    filter_width=mod_params.get("bandwidth", 9000)
+                    filter_width=mod_params.get("bandwidth", 9000),
                 )
             except AttributeError:
                 raise ValueError(
@@ -331,7 +331,7 @@ def generate_test_signal(test_vector, sample_rate=1000000):
                 )
             if bit_string:
                 byte_array = [
-                    int(bit_string[i:i + 8], 2)
+                    int(bit_string[i : i + 8], 2)
                     for i in range(0, len(bit_string), 8)
                     if i + 8 <= len(bit_string)
                 ]
@@ -378,7 +378,7 @@ def generate_test_signal(test_vector, sample_rate=1000000):
                     filter_width=mod_params.get("bandwidth", 2000),
                     low_cutoff=mod_params.get("low_cutoff", 200),
                     mode=freedv_mode,
-                    sb=mod_params.get("sb", 0)  # 0=USB, 1=LSB
+                    sb=mod_params.get("sb", 0),  # 0=USB, 1=LSB
                 )
 
                 # FreeDV uses float audio samples
@@ -407,7 +407,7 @@ def generate_test_signal(test_vector, sample_rate=1000000):
             raise ValueError(f"Unsupported modulation type: {mod_type}")
 
         # Only create source/sink if not already done (for AM/SSB/NBFM)
-        if 'source' not in locals():
+        if "source" not in locals():
             source = blocks.vector_source_b(byte_array, False)
             sink = blocks.vector_sink_c()
 
@@ -435,7 +435,7 @@ def check_sync(received_frame, expected_sync):
     # Check with tolerance (up to 2 bit errors)
     sync_len = len(expected_sync)
     for i in range(len(received_frame) - sync_len + 1):
-        window = received_frame[i:i + sync_len]
+        window = received_frame[i : i + sync_len]
         errors = sum(1 for a, b in zip(window, expected_sync) if a != b)
         if errors <= 2:
             return True
@@ -495,17 +495,17 @@ def validate_receiver(received_frame, test_vector):
         results["ber_expected"] = validation.get("ber_expected", 0.0)
 
         results["passed"] = (
-            results["sync_detected"] == results["sync_expected"] and
-            results["crc_valid"] == results["crc_expected"] and
-            results["ber"] <= results["ber_expected"] + 0.01
+            results["sync_detected"] == results["sync_expected"]
+            and results["crc_valid"] == results["crc_expected"]
+            and results["ber"] <= results["ber_expected"] + 0.01
         )
     else:
         expected = test_vector.get("expected_behavior", {})
         results["sync_expected"] = expected.get("sync_detection", False)
         results["crc_expected"] = expected.get("crc_valid", False)
         results["passed"] = (
-            results["sync_detected"] == results["sync_expected"] and
-            results["crc_valid"] == results["crc_expected"]
+            results["sync_detected"] == results["sync_expected"]
+            and results["crc_valid"] == results["crc_expected"]
         )
 
     return results
@@ -567,7 +567,7 @@ def run_test_suite(modulation_type=None, test_type="all", verbose=True):
     """
     test_vectors = get_test_vectors_by_modulation(
         modulation_type=modulation_type,
-        validity=test_type if test_type != "all" else None
+        validity=test_type if test_type != "all" else None,
     )
 
     results = {
@@ -618,15 +618,21 @@ def run_test_suite(modulation_type=None, test_type="all", verbose=True):
         print(f"  Total: {results['total']}")
         print(f"  Passed: {results['passed']}")
         print(f"  Failed: {results['failed']}")
-        print(f"  Modulator: {results['modulator_tests']['passed']} passed, "
-              f"{results['modulator_tests']['failed']} failed")
-        print(f"  Demodulator: {results['demodulator_tests']['passed']} passed, "
-              f"{results['demodulator_tests']['failed']} failed")
+        print(
+            f"  Modulator: {results['modulator_tests']['passed']} passed, "
+            f"{results['modulator_tests']['failed']} failed"
+        )
+        print(
+            f"  Demodulator: {results['demodulator_tests']['passed']} passed, "
+            f"{results['demodulator_tests']['failed']} failed"
+        )
 
         if results["by_modulation"]:
             print("\n  By Modulation Type:")
             for mod_type, stats in results["by_modulation"].items():
-                print(f"    {mod_type}: {stats['passed']} passed, {stats['failed']} failed")
+                print(
+                    f"    {mod_type}: {stats['passed']} passed, {stats['failed']} failed"
+                )
 
         print(f"{'=' * 60}\n")
 
@@ -636,19 +642,20 @@ def run_test_suite(modulation_type=None, test_type="all", verbose=True):
 if __name__ == "__main__":
     import argparse
 
-    parser = argparse.ArgumentParser(
-        description="Test all modulation implementations")
+    parser = argparse.ArgumentParser(description="Test all modulation implementations")
     parser.add_argument(
-        "--modulation", "-m",
-        help="Modulation type to test (2FSK, 4FSK, GMSK, etc.)")
+        "--modulation", "-m", help="Modulation type to test (2FSK, 4FSK, GMSK, etc.)"
+    )
     parser.add_argument(
-        "--type", choices=["valid", "invalid", "all"], default="all",
-        help="Test vector type")
+        "--type",
+        choices=["valid", "invalid", "all"],
+        default="all",
+        help="Test vector type",
+    )
+    parser.add_argument("--verbose", "-v", action="store_true", help="Verbose output")
     parser.add_argument(
-        "--verbose", "-v", action="store_true", help="Verbose output")
-    parser.add_argument(
-        "--list", "-l", action="store_true",
-        help="List all available modulation types")
+        "--list", "-l", action="store_true", help="List all available modulation types"
+    )
 
     args = parser.parse_args()
 
@@ -658,4 +665,6 @@ if __name__ == "__main__":
             print(f"  - {mod_type}")  # noqa: F541
         sys.exit(0)
 
-    run_test_suite(modulation_type=args.modulation, test_type=args.type, verbose=args.verbose)
+    run_test_suite(
+        modulation_type=args.modulation, test_type=args.type, verbose=args.verbose
+    )

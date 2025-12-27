@@ -90,16 +90,19 @@ class TestVectorGenerator:
     def generate_step_function(samples=1000):
         """Generate step function"""
         signal = np.zeros(samples, dtype=np.complex64)
-        signal[samples // 2:] = 1.0 + 1j * 1.0
+        signal[samples // 2 :] = 1.0 + 1j * 1.0
         return signal
 
 
 def test_modulation_block(
-        block_maker, test_name, test_vector, block_params=None, input_type='byte'):
+    block_maker, test_name, test_vector, block_params=None, input_type="byte"
+):
     """Test a modulation block (expects byte or float input, produces complex output)"""
     print(f"\nTesting: {test_name}")
-    print(f"  Vector shape: {test_vector.shape}, dtype: {test_vector.dtype}, "
-          f"input_type: {input_type}")
+    print(
+        f"  Vector shape: {test_vector.shape}, dtype: {test_vector.dtype}, "
+        f"input_type: {input_type}"
+    )
 
     try:
         tb = gr.top_block()
@@ -111,7 +114,7 @@ def test_modulation_block(
             block = block_maker()
 
         # Create source based on input type
-        if input_type == 'float':
+        if input_type == "float":
             # For AM, SSB, NBFM - expect float input
             float_data = test_vector.real.astype(np.float32)
             if len(float_data) == 0:
@@ -120,7 +123,8 @@ def test_modulation_block(
         else:
             # For digital modulations - expect byte input
             byte_data = np.clip(
-                (test_vector.real * 127).astype(np.int8), -128, 127).astype(np.uint8)
+                (test_vector.real * 127).astype(np.int8), -128, 127
+            ).astype(np.uint8)
             if len(byte_data) == 0:
                 byte_data = np.array([0], dtype=np.uint8)
             source = blocks.vector_source_b(byte_data.tolist(), False)
@@ -151,7 +155,9 @@ def test_demodulation_block(block_maker, test_name, test_vector, block_params=No
     print(f"  Vector shape: {test_vector.shape}, dtype: {test_vector.dtype}")
     print(f"  Contains NaN: {np.isnan(test_vector).any()}")
     print(f"  Contains Inf: {np.isinf(test_vector).any()}")
-    print(f"  Min / Max: {np.min(np.abs(test_vector)):.6f} / {np.max(np.abs(test_vector)):.6f}")
+    print(
+        f"  Min / Max: {np.min(np.abs(test_vector)):.6f} / {np.max(np.abs(test_vector)):.6f}"
+    )
 
     try:
         tb = gr.top_block()
@@ -169,9 +175,11 @@ def test_demodulation_block(block_maker, test_name, test_vector, block_params=No
         # Connect all outputs to null sinks
         sink0 = blocks.null_sink(gr.sizeof_gr_complex)  # Filtered output
         sink1 = blocks.null_sink(gr.sizeof_gr_complex)  # Constellation output
-        sink2 = blocks.null_sink(gr.sizeof_char)        # Decoded bytes
-        sink3 = blocks.null_sink(gr.sizeof_char)        # Decoded bytes (delayed)
-        sink_float = blocks.null_sink(gr.sizeof_float)  # Audio output (for AM / SSB/NBFM / WBFM)
+        sink2 = blocks.null_sink(gr.sizeof_char)  # Decoded bytes
+        sink3 = blocks.null_sink(gr.sizeof_char)  # Decoded bytes (delayed)
+        sink_float = blocks.null_sink(
+            gr.sizeof_float
+        )  # Audio output (for AM / SSB/NBFM / WBFM)
 
         # Connect
         tb.connect(source, block)
@@ -234,7 +242,7 @@ def test_modulation_blocks():
     print("=" * 70)
 
     generator = TestVectorGenerator()
-    results = {'passed': 0, 'failed': 0}
+    results = {"passed": 0, "failed": 0}
 
     # Test mod_gmsk
     print("\n--- Testing mod_gmsk ---")
@@ -249,11 +257,11 @@ def test_modulation_blocks():
         if test_modulation_block(
             lambda: qradiolink.mod_gmsk(125, 250000, 1700, 8000),
             f"mod_gmsk - {name}",
-            vector
+            vector,
         ):
-            results['passed'] += 1
+            results["passed"] += 1
         else:
-            results['failed'] += 1
+            results["failed"] += 1
 
     # Test mod_2fsk
     print("\n--- Testing mod_2fsk ---")
@@ -261,11 +269,11 @@ def test_modulation_blocks():
         if test_modulation_block(
             lambda: qradiolink.mod_2fsk(125, 250000, 1700, 8000, False),
             f"mod_2fsk - {name}",
-            vector
+            vector,
         ):
-            results['passed'] += 1
+            results["passed"] += 1
         else:
-            results['failed'] += 1
+            results["failed"] += 1
 
     # Test mod_4fsk
     print("\n--- Testing mod_4fsk ---")
@@ -273,11 +281,11 @@ def test_modulation_blocks():
         if test_modulation_block(
             lambda: qradiolink.mod_4fsk(125, 250000, 1700, 8000, True),
             f"mod_4fsk - {name}",
-            vector
+            vector,
         ):
-            results['passed'] += 1
+            results["passed"] += 1
         else:
-            results['failed'] += 1
+            results["failed"] += 1
 
     # Test mod_bpsk
     print("\n--- Testing mod_bpsk ---")
@@ -285,11 +293,11 @@ def test_modulation_blocks():
         if test_modulation_block(
             lambda: qradiolink.mod_bpsk(125, 250000, 1700, 8000),
             f"mod_bpsk - {name}",
-            vector
+            vector,
         ):
-            results['passed'] += 1
+            results["passed"] += 1
         else:
-            results['failed'] += 1
+            results["failed"] += 1
 
     # Test mod_qpsk
     print("\n--- Testing mod_qpsk ---")
@@ -297,11 +305,11 @@ def test_modulation_blocks():
         if test_modulation_block(
             lambda: qradiolink.mod_qpsk(125, 250000, 1700, 8000),
             f"mod_qpsk - {name}",
-            vector
+            vector,
         ):
-            results['passed'] += 1
+            results["passed"] += 1
         else:
-            results['failed'] += 1
+            results["failed"] += 1
 
     # Test mod_dsss
     print("\n--- Testing mod_dsss ---")
@@ -309,11 +317,11 @@ def test_modulation_blocks():
         if test_modulation_block(
             lambda: qradiolink.mod_dsss(25, 250000, 1700, 8000),
             f"mod_dsss - {name}",
-            vector
+            vector,
         ):
-            results['passed'] += 1
+            results["passed"] += 1
         else:
-            results['failed'] += 1
+            results["failed"] += 1
 
     # Test mod_am (expects float input)
     print("\n--- Testing mod_am ---")
@@ -322,11 +330,11 @@ def test_modulation_blocks():
             lambda: qradiolink.mod_am(125, 250000, 1700, 8000),
             f"mod_am - {name}",
             vector,
-            input_type='float'
+            input_type="float",
         ):
-            results['passed'] += 1
+            results["passed"] += 1
         else:
-            results['failed'] += 1
+            results["failed"] += 1
 
     # Test mod_ssb (expects float input)
     print("\n--- Testing mod_ssb ---")
@@ -335,11 +343,11 @@ def test_modulation_blocks():
             lambda: qradiolink.mod_ssb(125, 250000, 1700, 8000, 0),
             f"mod_ssb - {name}",
             vector,
-            input_type='float'
+            input_type="float",
         ):
-            results['passed'] += 1
+            results["passed"] += 1
         else:
-            results['failed'] += 1
+            results["failed"] += 1
 
     # Test mod_nbfm (expects float input)
     print("\n--- Testing mod_nbfm ---")
@@ -348,11 +356,11 @@ def test_modulation_blocks():
             lambda: qradiolink.mod_nbfm(125, 250000, 1700, 8000),
             f"mod_nbfm - {name}",
             vector,
-            input_type='float'
+            input_type="float",
         ):
-            results['passed'] += 1
+            results["passed"] += 1
         else:
-            results['failed'] += 1
+            results["failed"] += 1
 
     return results
 
@@ -364,7 +372,7 @@ def test_demodulation_blocks():
     print("=" * 70)
 
     generator = TestVectorGenerator()
-    results = {'passed': 0, 'failed': 0}
+    results = {"passed": 0, "failed": 0}
 
     # Test demod_gmsk
     print("\n--- Testing demod_gmsk ---")
@@ -384,11 +392,11 @@ def test_demodulation_blocks():
         if test_demodulation_block(
             lambda: qradiolink.demod_gmsk(10, 250000, 1700, 8000),
             f"demod_gmsk - {name}",
-            vector
+            vector,
         ):
-            results['passed'] += 1
+            results["passed"] += 1
         else:
-            results['failed'] += 1
+            results["failed"] += 1
 
     # Test demod_2fsk
     print("\n--- Testing demod_2fsk ---")
@@ -396,11 +404,11 @@ def test_demodulation_blocks():
         if test_demodulation_block(
             lambda: qradiolink.demod_2fsk(125, 250000, 1700, 8000, False),
             f"demod_2fsk - {name}",
-            vector
+            vector,
         ):
-            results['passed'] += 1
+            results["passed"] += 1
         else:
-            results['failed'] += 1
+            results["failed"] += 1
 
     # Test demod_4fsk
     print("\n--- Testing demod_4fsk ---")
@@ -408,11 +416,11 @@ def test_demodulation_blocks():
         if test_demodulation_block(
             lambda: qradiolink.demod_4fsk(125, 250000, 1700, 8000, True),
             f"demod_4fsk - {name}",
-            vector
+            vector,
         ):
-            results['passed'] += 1
+            results["passed"] += 1
         else:
-            results['failed'] += 1
+            results["failed"] += 1
 
     # Test demod_bpsk
     print("\n--- Testing demod_bpsk ---")
@@ -420,11 +428,11 @@ def test_demodulation_blocks():
         if test_demodulation_block(
             lambda: qradiolink.demod_bpsk(125, 250000, 1700, 8000),
             f"demod_bpsk - {name}",
-            vector
+            vector,
         ):
-            results['passed'] += 1
+            results["passed"] += 1
         else:
-            results['failed'] += 1
+            results["failed"] += 1
 
     # Test demod_qpsk
     print("\n--- Testing demod_qpsk ---")
@@ -432,11 +440,11 @@ def test_demodulation_blocks():
         if test_demodulation_block(
             lambda: qradiolink.demod_qpsk(125, 250000, 1700, 8000),
             f"demod_qpsk - {name}",
-            vector
+            vector,
         ):
-            results['passed'] += 1
+            results["passed"] += 1
         else:
-            results['failed'] += 1
+            results["failed"] += 1
 
     # Test demod_dsss (needs smaller filter_width)
     print("\n--- Testing demod_dsss ---")
@@ -444,11 +452,11 @@ def test_demodulation_blocks():
         if test_demodulation_block(
             lambda: qradiolink.demod_dsss(25, 250000, 1700, 4000),
             f"demod_dsss - {name}",
-            vector
+            vector,
         ):
-            results['passed'] += 1
+            results["passed"] += 1
         else:
-            results['failed'] += 1
+            results["failed"] += 1
 
     # Test demod_m17
     print("\n--- Testing demod_m17 ---")
@@ -456,11 +464,11 @@ def test_demodulation_blocks():
         if test_demodulation_block(
             lambda: qradiolink.demod_m17(125, 250000, 1700, 8000),
             f"demod_m17 - {name}",
-            vector
+            vector,
         ):
-            results['passed'] += 1
+            results["passed"] += 1
         else:
-            results['failed'] += 1
+            results["failed"] += 1
 
     # Test demod_am
     print("\n--- Testing demod_am ---")
@@ -468,11 +476,11 @@ def test_demodulation_blocks():
         if test_demodulation_block(
             lambda: qradiolink.demod_am(125, 250000, 1700, 8000),
             f"demod_am - {name}",
-            vector
+            vector,
         ):
-            results['passed'] += 1
+            results["passed"] += 1
         else:
-            results['failed'] += 1
+            results["failed"] += 1
 
     # Test demod_ssb (needs smaller filter_width)
     print("\n--- Testing demod_ssb ---")
@@ -480,11 +488,11 @@ def test_demodulation_blocks():
         if test_demodulation_block(
             lambda: qradiolink.demod_ssb(125, 250000, 1700, 4000, 0),
             f"demod_ssb - {name}",
-            vector
+            vector,
         ):
-            results['passed'] += 1
+            results["passed"] += 1
         else:
-            results['failed'] += 1
+            results["failed"] += 1
 
     # Test demod_nbfm
     print("\n--- Testing demod_nbfm ---")
@@ -492,11 +500,11 @@ def test_demodulation_blocks():
         if test_demodulation_block(
             lambda: qradiolink.demod_nbfm(125, 250000, 1700, 8000),
             f"demod_nbfm - {name}",
-            vector
+            vector,
         ):
-            results['passed'] += 1
+            results["passed"] += 1
         else:
-            results['failed'] += 1
+            results["failed"] += 1
 
     # Test demod_wbfm
     print("\n--- Testing demod_wbfm ---")
@@ -504,11 +512,11 @@ def test_demodulation_blocks():
         if test_demodulation_block(
             lambda: qradiolink.demod_wbfm(125, 250000, 1700, 8000),
             f"demod_wbfm - {name}",
-            vector
+            vector,
         ):
-            results['passed'] += 1
+            results["passed"] += 1
         else:
-            results['failed'] += 1
+            results["failed"] += 1
 
     return results
 
@@ -520,7 +528,7 @@ def test_edge_cases():
     print("=" * 70)
 
     generator = TestVectorGenerator()
-    results = {'passed': 0, 'failed': 0}
+    results = {"passed": 0, "failed": 0}
 
     edge_cases = [
         ("Zero amplitude", generator.generate_zero_amplitude(100)),
@@ -538,11 +546,11 @@ def test_edge_cases():
         if test_demodulation_block(
             lambda: qradiolink.demod_gmsk(10, 250000, 1700, 8000),
             f"Edge case - {name}",
-            vector
+            vector,
         ):
-            results['passed'] += 1
+            results["passed"] += 1
         else:
-            results['failed'] += 1
+            results["failed"] += 1
 
     return results
 
@@ -553,22 +561,22 @@ def main():
     print("Testing modulation / demodulation blocks with various test vectors")
     print()
 
-    all_results = {'passed': 0, 'failed': 0}
+    all_results = {"passed": 0, "failed": 0}
 
     # Test modulation blocks
     mod_results = test_modulation_blocks()
-    all_results['passed'] += mod_results['passed']
-    all_results['failed'] += mod_results['failed']
+    all_results["passed"] += mod_results["passed"]
+    all_results["failed"] += mod_results["failed"]
 
     # Test demodulation blocks
     demod_results = test_demodulation_blocks()
-    all_results['passed'] += demod_results['passed']
-    all_results['failed'] += demod_results['failed']
+    all_results["passed"] += demod_results["passed"]
+    all_results["failed"] += demod_results["failed"]
 
     # Test edge cases
     edge_results = test_edge_cases()
-    all_results['passed'] += edge_results['passed']
-    all_results['failed'] += edge_results['failed']
+    all_results["passed"] += edge_results["passed"]
+    all_results["failed"] += edge_results["failed"]
 
     # Summary
     print("\n" + "=" * 70)
@@ -578,7 +586,7 @@ def main():
     print(f"Total tests failed: {all_results['failed']}")
     print(f"Total tests: {all_results['passed'] + all_results['failed']}")
 
-    if all_results['failed'] == 0:
+    if all_results["failed"] == 0:
         print("\n✓ All tests passed!")
         return 0
     else:

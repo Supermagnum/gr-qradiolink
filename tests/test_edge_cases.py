@@ -66,14 +66,17 @@ def main():
     print("=" * 70)
     print()
 
-    results = {'passed': 0, 'failed': 0}
+    results = {"passed": 0, "failed": 0}
 
     # Test vectors
     test_cases = [
         ("Zero amplitude", np.zeros(1000, dtype=np.complex64)),
         ("NaN values", np.full(1000, np.nan + 1j * np.nan, dtype=np.complex64)),
         ("Infinity values", np.full(1000, np.inf + 1j * np.inf, dtype=np.complex64)),
-        ("Negative infinity", np.full(1000, -np.inf + 1j * (-np.inf), dtype=np.complex64)),
+        (
+            "Negative infinity",
+            np.full(1000, -np.inf + 1j * (-np.inf), dtype=np.complex64),
+        ),
         ("Extreme positive", np.full(1000, 1e10 + 1j * 1e10, dtype=np.complex64)),
         ("Extreme negative", np.full(1000, -1e10 + 1j * (-1e10), dtype=np.complex64)),
         ("Very small values", np.full(1000, 1e-10 + 1j * 1e-10, dtype=np.complex64)),
@@ -102,11 +105,11 @@ def main():
             lambda: qradiolink.demod_gmsk(10, 250000, 1700, 8000),
             "demod_gmsk",
             name,
-            vector
+            vector,
         ):
-            results['passed'] += 1
+            results["passed"] += 1
         else:
-            results['failed'] += 1
+            results["failed"] += 1
 
     # Summary
     print()
@@ -117,7 +120,7 @@ def main():
     print(f"Failed: {results['failed']}")
     print(f"Total: {results['passed'] + results['failed']}")
 
-    return 0 if results['failed'] == 0 else 1
+    return 0 if results["failed"] == 0 else 1
 
 
 if __name__ == "__main__":

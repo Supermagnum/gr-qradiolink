@@ -29,6 +29,8 @@ set(gr_qradiolink_sources
     pn_sequence_generator.cc
     mod_freedv_impl.cc
     mod_m17_impl.cc
+    m17_coder_impl.cc
+    m17_decoder_impl.cc
     mod_dmr_impl.cc
     mod_nxdn_impl.cc
     mod_dpmr_impl.cc
@@ -70,6 +72,25 @@ set(gr_qradiolink_sources
     mmdvm_sink_impl.cc
     rssi_tag_block_impl.cc
     m17_deframer_impl.cc
+    # M17 protocol layer (libm17)
+    ../libm17/m17.c
+    ../libm17/decode/symbols.c
+    ../libm17/decode/viterbi.c
+    ../libm17/encode/symbols.c
+    ../libm17/encode/convol.c
+    ../libm17/math/golay.c
+    ../libm17/math/math.c
+    ../libm17/math/rrc.c
+    ../libm17/payload/call.c
+    ../libm17/payload/crc.c
+    ../libm17/payload/lich.c
+    ../libm17/payload/lsf.c
+    ../libm17/phy/interleave.c
+    ../libm17/phy/randomize.c
+    ../libm17/phy/sync.c
+    ../libm17/phy/slice.c
+    ../micro-ecc/uECC.c
+    ../tinier-aes/aes.c
     # Supporting blocks (CESSB)
     clipper_cc_impl.cc
     stretcher_cc_impl.cc
@@ -132,6 +153,9 @@ target_include_directories(
     PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../../qradiolink/src/gr> # For zero_idle_bursts
         PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../../qradiolink> # For src/bursttimer.h (project root)
         PUBLIC $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/src> # For src/gr/emphasis.h
+    PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../libm17> # For libm17
+    PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../micro-ecc> # For micro-ecc
+    PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../tinier-aes> # For tinier-aes
 )
 
 # Note: gr_library_foo requires targetConfig.cmake.in template which is not present

@@ -1,0 +1,98 @@
+id: qradiolink_m17_decoder
+label: M17 Decoder
+category: '[QRadioLink]'
+
+parameters:
+- id: debug_data
+  label: Debug Data
+  dtype: bool
+  default: 'False'
+  options: ['True', 'False']
+- id: debug_ctrl
+  label: Debug Control
+  dtype: bool
+  default: 'False'
+  options: ['True', 'False']
+- id: callsign
+  label: Display Callsign
+  dtype: bool
+  default: 'False'
+  options: ['True', 'False']
+- id: seed
+  label: Scrambler seed
+  dtype: string
+  default: ''
+- id: key
+  label: AES Key
+  dtype: string
+  default: ''
+- id: signed_str
+  label: SignedStr
+  dtype: bool
+  default: 'False'
+  options: ['True', 'False']
+- id: encr_type
+  label: Encr. type
+  dtype: int
+  default: 0
+  options: [0, 1, 2, 3]
+  option_labels: ['None', 'Scrambler', 'AES', 'Other/Reserved']
+- id: sw_threshold
+  label: Syncword threshold
+  dtype: float
+  default: 2.0
+- id: vt_threshold
+  label: Viterbi threshold
+  dtype: float
+  default: 30.0
+
+asserts:
+    - ${ len(key) <= 32 }
+
+templates:
+  imports: from gnuradio import qradiolink
+  make: qradiolink.m17_decoder(${debug_data},${debug_ctrl},${sw_threshold},${vt_threshold},${callsign},${signed_str},${encr_type},${key},${seed})
+
+  callbacks:
+    - set_debug_data(${debug_data})
+    - set_debug_ctrl(${debug_ctrl})
+    - set_key(${key})
+    - set_callsign(${callsign})
+    - set_signed(${signed_str})
+    - set_encr_type(${encr_type})
+    - set_seed(${seed})
+    - set_sw_threshold(${sw_threshold})
+    - set_vt_threshold(${vt_threshold})
+
+#  Make one 'inputs' list entry per input and one 'outputs' list entry per output.
+#  Keys include:
+#      * label (an identifier for the GUI)
+#      * domain (optional - stream or message. Default is stream)
+#      * dtype (e.g. int, float, complex, byte, short, xxx_vector, ...)
+#      * vlen (optional - data stream vector length. Default is 1)
+#      * optional (optional - set to 1 for optional inputs. Default is 0)
+inputs:
+- label: in
+  domain: stream
+  dtype: float
+  vlen: 1
+  optional: 0
+
+outputs:
+- label: out
+  domain: stream
+  dtype: byte
+  vlen: 1
+  optional: 0
+- label: fields
+  domain: message
+  id: fields
+  type: message
+  optional: true
+
+documentation: |-
+     The decoder block accepts two boolean debugging flags defining which messages are displayed in the console when messages are received, and a threshold parameter. The threshold defines a value below which the incoming message is detected. It is based on the Euclidean distance (L^2 norm) between the received symbol stream and protocol-defined syncronization patterns. Ideally, the distance would reach 0.0 for an ideal match. A default threshold value of 2.0 is selected.
+
+#  'file_format' specifies the version of the GRC yml format used in the file
+#  and should usually not be changed.
+file_format: 1

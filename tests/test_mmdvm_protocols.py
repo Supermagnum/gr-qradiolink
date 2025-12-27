@@ -857,7 +857,7 @@ class POCSAGValidator(unittest.TestCase):
 
         for i in range(0, len(bits), 20):
 
-            chunk = bits[i:i + 20].ljust(20, "0")
+            chunk = bits[i : i + 20].ljust(20, "0")
 
             data_20 = int(chunk, 2)
 

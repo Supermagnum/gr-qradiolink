@@ -26,6 +26,8 @@ list(
     mod_nbfm_python.cc
     mod_dsss_python.cc
     mod_m17_python.cc
+    m17_coder_python.cc
+    m17_decoder_python.cc
     mod_dmr_python.cc
     mod_dpmr_python.cc
     mod_nxdn_python.cc
@@ -69,7 +71,10 @@ target_include_directories(
     qradiolink_python
     PRIVATE ${CMAKE_CURRENT_BINARY_DIR}
             ${CMAKE_CURRENT_SOURCE_DIR}/../../lib
-            ${CMAKE_CURRENT_SOURCE_DIR}/../../include)
+            ${CMAKE_CURRENT_SOURCE_DIR}/../../include
+            ${CMAKE_CURRENT_SOURCE_DIR}/../../libm17
+            ${CMAKE_CURRENT_SOURCE_DIR}/../../micro-ecc
+            ${CMAKE_CURRENT_SOURCE_DIR}/../../tinier-aes)
 
 target_link_libraries(
     qradiolink_python

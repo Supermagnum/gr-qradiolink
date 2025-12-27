@@ -185,6 +185,414 @@ gnuradio-qradiolink/fast:
 	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/build
 .PHONY : gnuradio-qradiolink/fast
 
+__/libm17/decode/symbols.o: __/libm17/decode/symbols.c.o
+.PHONY : __/libm17/decode/symbols.o
+
+# target to build an object file
+__/libm17/decode/symbols.c.o:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/decode/symbols.c.o
+.PHONY : __/libm17/decode/symbols.c.o
+
+__/libm17/decode/symbols.i: __/libm17/decode/symbols.c.i
+.PHONY : __/libm17/decode/symbols.i
+
+# target to preprocess a source file
+__/libm17/decode/symbols.c.i:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/decode/symbols.c.i
+.PHONY : __/libm17/decode/symbols.c.i
+
+__/libm17/decode/symbols.s: __/libm17/decode/symbols.c.s
+.PHONY : __/libm17/decode/symbols.s
+
+# target to generate assembly for a file
+__/libm17/decode/symbols.c.s:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/decode/symbols.c.s
+.PHONY : __/libm17/decode/symbols.c.s
+
+__/libm17/decode/viterbi.o: __/libm17/decode/viterbi.c.o
+.PHONY : __/libm17/decode/viterbi.o
+
+# target to build an object file
+__/libm17/decode/viterbi.c.o:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/decode/viterbi.c.o
+.PHONY : __/libm17/decode/viterbi.c.o
+
+__/libm17/decode/viterbi.i: __/libm17/decode/viterbi.c.i
+.PHONY : __/libm17/decode/viterbi.i
+
+# target to preprocess a source file
+__/libm17/decode/viterbi.c.i:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/decode/viterbi.c.i
+.PHONY : __/libm17/decode/viterbi.c.i
+
+__/libm17/decode/viterbi.s: __/libm17/decode/viterbi.c.s
+.PHONY : __/libm17/decode/viterbi.s
+
+# target to generate assembly for a file
+__/libm17/decode/viterbi.c.s:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/decode/viterbi.c.s
+.PHONY : __/libm17/decode/viterbi.c.s
+
+__/libm17/encode/convol.o: __/libm17/encode/convol.c.o
+.PHONY : __/libm17/encode/convol.o
+
+# target to build an object file
+__/libm17/encode/convol.c.o:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/encode/convol.c.o
+.PHONY : __/libm17/encode/convol.c.o
+
+__/libm17/encode/convol.i: __/libm17/encode/convol.c.i
+.PHONY : __/libm17/encode/convol.i
+
+# target to preprocess a source file
+__/libm17/encode/convol.c.i:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/encode/convol.c.i
+.PHONY : __/libm17/encode/convol.c.i
+
+__/libm17/encode/convol.s: __/libm17/encode/convol.c.s
+.PHONY : __/libm17/encode/convol.s
+
+# target to generate assembly for a file
+__/libm17/encode/convol.c.s:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/encode/convol.c.s
+.PHONY : __/libm17/encode/convol.c.s
+
+__/libm17/encode/symbols.o: __/libm17/encode/symbols.c.o
+.PHONY : __/libm17/encode/symbols.o
+
+# target to build an object file
+__/libm17/encode/symbols.c.o:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/encode/symbols.c.o
+.PHONY : __/libm17/encode/symbols.c.o
+
+__/libm17/encode/symbols.i: __/libm17/encode/symbols.c.i
+.PHONY : __/libm17/encode/symbols.i
+
+# target to preprocess a source file
+__/libm17/encode/symbols.c.i:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/encode/symbols.c.i
+.PHONY : __/libm17/encode/symbols.c.i
+
+__/libm17/encode/symbols.s: __/libm17/encode/symbols.c.s
+.PHONY : __/libm17/encode/symbols.s
+
+# target to generate assembly for a file
+__/libm17/encode/symbols.c.s:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/encode/symbols.c.s
+.PHONY : __/libm17/encode/symbols.c.s
+
+__/libm17/m17.o: __/libm17/m17.c.o
+.PHONY : __/libm17/m17.o
+
+# target to build an object file
+__/libm17/m17.c.o:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/m17.c.o
+.PHONY : __/libm17/m17.c.o
+
+__/libm17/m17.i: __/libm17/m17.c.i
+.PHONY : __/libm17/m17.i
+
+# target to preprocess a source file
+__/libm17/m17.c.i:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/m17.c.i
+.PHONY : __/libm17/m17.c.i
+
+__/libm17/m17.s: __/libm17/m17.c.s
+.PHONY : __/libm17/m17.s
+
+# target to generate assembly for a file
+__/libm17/m17.c.s:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/m17.c.s
+.PHONY : __/libm17/m17.c.s
+
+__/libm17/math/golay.o: __/libm17/math/golay.c.o
+.PHONY : __/libm17/math/golay.o
+
+# target to build an object file
+__/libm17/math/golay.c.o:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/math/golay.c.o
+.PHONY : __/libm17/math/golay.c.o
+
+__/libm17/math/golay.i: __/libm17/math/golay.c.i
+.PHONY : __/libm17/math/golay.i
+
+# target to preprocess a source file
+__/libm17/math/golay.c.i:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/math/golay.c.i
+.PHONY : __/libm17/math/golay.c.i
+
+__/libm17/math/golay.s: __/libm17/math/golay.c.s
+.PHONY : __/libm17/math/golay.s
+
+# target to generate assembly for a file
+__/libm17/math/golay.c.s:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/math/golay.c.s
+.PHONY : __/libm17/math/golay.c.s
+
+__/libm17/math/math.o: __/libm17/math/math.c.o
+.PHONY : __/libm17/math/math.o
+
+# target to build an object file
+__/libm17/math/math.c.o:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/math/math.c.o
+.PHONY : __/libm17/math/math.c.o
+
+__/libm17/math/math.i: __/libm17/math/math.c.i
+.PHONY : __/libm17/math/math.i
+
+# target to preprocess a source file
+__/libm17/math/math.c.i:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/math/math.c.i
+.PHONY : __/libm17/math/math.c.i
+
+__/libm17/math/math.s: __/libm17/math/math.c.s
+.PHONY : __/libm17/math/math.s
+
+# target to generate assembly for a file
+__/libm17/math/math.c.s:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/math/math.c.s
+.PHONY : __/libm17/math/math.c.s
+
+__/libm17/math/rrc.o: __/libm17/math/rrc.c.o
+.PHONY : __/libm17/math/rrc.o
+
+# target to build an object file
+__/libm17/math/rrc.c.o:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/math/rrc.c.o
+.PHONY : __/libm17/math/rrc.c.o
+
+__/libm17/math/rrc.i: __/libm17/math/rrc.c.i
+.PHONY : __/libm17/math/rrc.i
+
+# target to preprocess a source file
+__/libm17/math/rrc.c.i:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/math/rrc.c.i
+.PHONY : __/libm17/math/rrc.c.i
+
+__/libm17/math/rrc.s: __/libm17/math/rrc.c.s
+.PHONY : __/libm17/math/rrc.s
+
+# target to generate assembly for a file
+__/libm17/math/rrc.c.s:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/math/rrc.c.s
+.PHONY : __/libm17/math/rrc.c.s
+
+__/libm17/payload/call.o: __/libm17/payload/call.c.o
+.PHONY : __/libm17/payload/call.o
+
+# target to build an object file
+__/libm17/payload/call.c.o:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/payload/call.c.o
+.PHONY : __/libm17/payload/call.c.o
+
+__/libm17/payload/call.i: __/libm17/payload/call.c.i
+.PHONY : __/libm17/payload/call.i
+
+# target to preprocess a source file
+__/libm17/payload/call.c.i:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/payload/call.c.i
+.PHONY : __/libm17/payload/call.c.i
+
+__/libm17/payload/call.s: __/libm17/payload/call.c.s
+.PHONY : __/libm17/payload/call.s
+
+# target to generate assembly for a file
+__/libm17/payload/call.c.s:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/payload/call.c.s
+.PHONY : __/libm17/payload/call.c.s
+
+__/libm17/payload/crc.o: __/libm17/payload/crc.c.o
+.PHONY : __/libm17/payload/crc.o
+
+# target to build an object file
+__/libm17/payload/crc.c.o:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/payload/crc.c.o
+.PHONY : __/libm17/payload/crc.c.o
+
+__/libm17/payload/crc.i: __/libm17/payload/crc.c.i
+.PHONY : __/libm17/payload/crc.i
+
+# target to preprocess a source file
+__/libm17/payload/crc.c.i:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/payload/crc.c.i
+.PHONY : __/libm17/payload/crc.c.i
+
+__/libm17/payload/crc.s: __/libm17/payload/crc.c.s
+.PHONY : __/libm17/payload/crc.s
+
+# target to generate assembly for a file
+__/libm17/payload/crc.c.s:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/payload/crc.c.s
+.PHONY : __/libm17/payload/crc.c.s
+
+__/libm17/payload/lich.o: __/libm17/payload/lich.c.o
+.PHONY : __/libm17/payload/lich.o
+
+# target to build an object file
+__/libm17/payload/lich.c.o:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/payload/lich.c.o
+.PHONY : __/libm17/payload/lich.c.o
+
+__/libm17/payload/lich.i: __/libm17/payload/lich.c.i
+.PHONY : __/libm17/payload/lich.i
+
+# target to preprocess a source file
+__/libm17/payload/lich.c.i:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/payload/lich.c.i
+.PHONY : __/libm17/payload/lich.c.i
+
+__/libm17/payload/lich.s: __/libm17/payload/lich.c.s
+.PHONY : __/libm17/payload/lich.s
+
+# target to generate assembly for a file
+__/libm17/payload/lich.c.s:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/payload/lich.c.s
+.PHONY : __/libm17/payload/lich.c.s
+
+__/libm17/payload/lsf.o: __/libm17/payload/lsf.c.o
+.PHONY : __/libm17/payload/lsf.o
+
+# target to build an object file
+__/libm17/payload/lsf.c.o:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/payload/lsf.c.o
+.PHONY : __/libm17/payload/lsf.c.o
+
+__/libm17/payload/lsf.i: __/libm17/payload/lsf.c.i
+.PHONY : __/libm17/payload/lsf.i
+
+# target to preprocess a source file
+__/libm17/payload/lsf.c.i:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/payload/lsf.c.i
+.PHONY : __/libm17/payload/lsf.c.i
+
+__/libm17/payload/lsf.s: __/libm17/payload/lsf.c.s
+.PHONY : __/libm17/payload/lsf.s
+
+# target to generate assembly for a file
+__/libm17/payload/lsf.c.s:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/payload/lsf.c.s
+.PHONY : __/libm17/payload/lsf.c.s
+
+__/libm17/phy/interleave.o: __/libm17/phy/interleave.c.o
+.PHONY : __/libm17/phy/interleave.o
+
+# target to build an object file
+__/libm17/phy/interleave.c.o:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/phy/interleave.c.o
+.PHONY : __/libm17/phy/interleave.c.o
+
+__/libm17/phy/interleave.i: __/libm17/phy/interleave.c.i
+.PHONY : __/libm17/phy/interleave.i
+
+# target to preprocess a source file
+__/libm17/phy/interleave.c.i:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/phy/interleave.c.i
+.PHONY : __/libm17/phy/interleave.c.i
+
+__/libm17/phy/interleave.s: __/libm17/phy/interleave.c.s
+.PHONY : __/libm17/phy/interleave.s
+
+# target to generate assembly for a file
+__/libm17/phy/interleave.c.s:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/phy/interleave.c.s
+.PHONY : __/libm17/phy/interleave.c.s
+
+__/libm17/phy/randomize.o: __/libm17/phy/randomize.c.o
+.PHONY : __/libm17/phy/randomize.o
+
+# target to build an object file
+__/libm17/phy/randomize.c.o:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/phy/randomize.c.o
+.PHONY : __/libm17/phy/randomize.c.o
+
+__/libm17/phy/randomize.i: __/libm17/phy/randomize.c.i
+.PHONY : __/libm17/phy/randomize.i
+
+# target to preprocess a source file
+__/libm17/phy/randomize.c.i:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/phy/randomize.c.i
+.PHONY : __/libm17/phy/randomize.c.i
+
+__/libm17/phy/randomize.s: __/libm17/phy/randomize.c.s
+.PHONY : __/libm17/phy/randomize.s
+
+# target to generate assembly for a file
+__/libm17/phy/randomize.c.s:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/phy/randomize.c.s
+.PHONY : __/libm17/phy/randomize.c.s
+
+__/libm17/phy/slice.o: __/libm17/phy/slice.c.o
+.PHONY : __/libm17/phy/slice.o
+
+# target to build an object file
+__/libm17/phy/slice.c.o:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/phy/slice.c.o
+.PHONY : __/libm17/phy/slice.c.o
+
+__/libm17/phy/slice.i: __/libm17/phy/slice.c.i
+.PHONY : __/libm17/phy/slice.i
+
+# target to preprocess a source file
+__/libm17/phy/slice.c.i:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/phy/slice.c.i
+.PHONY : __/libm17/phy/slice.c.i
+
+__/libm17/phy/slice.s: __/libm17/phy/slice.c.s
+.PHONY : __/libm17/phy/slice.s
+
+# target to generate assembly for a file
+__/libm17/phy/slice.c.s:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/phy/slice.c.s
+.PHONY : __/libm17/phy/slice.c.s
+
+__/libm17/phy/sync.o: __/libm17/phy/sync.c.o
+.PHONY : __/libm17/phy/sync.o
+
+# target to build an object file
+__/libm17/phy/sync.c.o:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/phy/sync.c.o
+.PHONY : __/libm17/phy/sync.c.o
+
+__/libm17/phy/sync.i: __/libm17/phy/sync.c.i
+.PHONY : __/libm17/phy/sync.i
+
+# target to preprocess a source file
+__/libm17/phy/sync.c.i:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/phy/sync.c.i
+.PHONY : __/libm17/phy/sync.c.i
+
+__/libm17/phy/sync.s: __/libm17/phy/sync.c.s
+.PHONY : __/libm17/phy/sync.s
+
+# target to generate assembly for a file
+__/libm17/phy/sync.c.s:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/libm17/phy/sync.c.s
+.PHONY : __/libm17/phy/sync.c.s
+
+__/micro-ecc/uECC.o: __/micro-ecc/uECC.c.o
+.PHONY : __/micro-ecc/uECC.o
+
+# target to build an object file
+__/micro-ecc/uECC.c.o:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/micro-ecc/uECC.c.o
+.PHONY : __/micro-ecc/uECC.c.o
+
+__/micro-ecc/uECC.i: __/micro-ecc/uECC.c.i
+.PHONY : __/micro-ecc/uECC.i
+
+# target to preprocess a source file
+__/micro-ecc/uECC.c.i:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/micro-ecc/uECC.c.i
+.PHONY : __/micro-ecc/uECC.c.i
+
+__/micro-ecc/uECC.s: __/micro-ecc/uECC.c.s
+.PHONY : __/micro-ecc/uECC.s
+
+# target to generate assembly for a file
+__/micro-ecc/uECC.c.s:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/micro-ecc/uECC.c.s
+.PHONY : __/micro-ecc/uECC.c.s
+
 __/src/gr/emphasis.o: __/src/gr/emphasis.cpp.o
 .PHONY : __/src/gr/emphasis.o
 
@@ -208,6 +616,30 @@ __/src/gr/emphasis.s: __/src/gr/emphasis.cpp.s
 __/src/gr/emphasis.cpp.s:
 	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/src/gr/emphasis.cpp.s
 .PHONY : __/src/gr/emphasis.cpp.s
+
+__/tinier-aes/aes.o: __/tinier-aes/aes.c.o
+.PHONY : __/tinier-aes/aes.o
+
+# target to build an object file
+__/tinier-aes/aes.c.o:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/tinier-aes/aes.c.o
+.PHONY : __/tinier-aes/aes.c.o
+
+__/tinier-aes/aes.i: __/tinier-aes/aes.c.i
+.PHONY : __/tinier-aes/aes.i
+
+# target to preprocess a source file
+__/tinier-aes/aes.c.i:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/tinier-aes/aes.c.i
+.PHONY : __/tinier-aes/aes.c.i
+
+__/tinier-aes/aes.s: __/tinier-aes/aes.c.s
+.PHONY : __/tinier-aes/aes.s
+
+# target to generate assembly for a file
+__/tinier-aes/aes.c.s:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/__/tinier-aes/aes.c.s
+.PHONY : __/tinier-aes/aes.c.s
 
 clipper_cc_impl.o: clipper_cc_impl.cc.o
 .PHONY : clipper_cc_impl.o
@@ -593,6 +1025,30 @@ demod_qpsk_impl.cc.s:
 	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/demod_qpsk_impl.cc.s
 .PHONY : demod_qpsk_impl.cc.s
 
+demod_soqpsk_impl.o: demod_soqpsk_impl.cc.o
+.PHONY : demod_soqpsk_impl.o
+
+# target to build an object file
+demod_soqpsk_impl.cc.o:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/demod_soqpsk_impl.cc.o
+.PHONY : demod_soqpsk_impl.cc.o
+
+demod_soqpsk_impl.i: demod_soqpsk_impl.cc.i
+.PHONY : demod_soqpsk_impl.i
+
+# target to preprocess a source file
+demod_soqpsk_impl.cc.i:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/demod_soqpsk_impl.cc.i
+.PHONY : demod_soqpsk_impl.cc.i
+
+demod_soqpsk_impl.s: demod_soqpsk_impl.cc.s
+.PHONY : demod_soqpsk_impl.s
+
+# target to generate assembly for a file
+demod_soqpsk_impl.cc.s:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/demod_soqpsk_impl.cc.s
+.PHONY : demod_soqpsk_impl.cc.s
+
 demod_ssb_impl.o: demod_ssb_impl.cc.o
 .PHONY : demod_ssb_impl.o
 
@@ -665,6 +1121,30 @@ dsss_decoder_cc_impl.cc.s:
 	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/dsss_decoder_cc_impl.cc.s
 .PHONY : dsss_decoder_cc_impl.cc.s
 
+dsss_despreader_cc_impl.o: dsss_despreader_cc_impl.cc.o
+.PHONY : dsss_despreader_cc_impl.o
+
+# target to build an object file
+dsss_despreader_cc_impl.cc.o:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/dsss_despreader_cc_impl.cc.o
+.PHONY : dsss_despreader_cc_impl.cc.o
+
+dsss_despreader_cc_impl.i: dsss_despreader_cc_impl.cc.i
+.PHONY : dsss_despreader_cc_impl.i
+
+# target to preprocess a source file
+dsss_despreader_cc_impl.cc.i:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/dsss_despreader_cc_impl.cc.i
+.PHONY : dsss_despreader_cc_impl.cc.i
+
+dsss_despreader_cc_impl.s: dsss_despreader_cc_impl.cc.s
+.PHONY : dsss_despreader_cc_impl.s
+
+# target to generate assembly for a file
+dsss_despreader_cc_impl.cc.s:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/dsss_despreader_cc_impl.cc.s
+.PHONY : dsss_despreader_cc_impl.cc.s
+
 dsss_encoder_bb_impl.o: dsss_encoder_bb_impl.cc.o
 .PHONY : dsss_encoder_bb_impl.o
 
@@ -688,6 +1168,30 @@ dsss_encoder_bb_impl.s: dsss_encoder_bb_impl.cc.s
 dsss_encoder_bb_impl.cc.s:
 	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/dsss_encoder_bb_impl.cc.s
 .PHONY : dsss_encoder_bb_impl.cc.s
+
+dsss_spreader_cc_impl.o: dsss_spreader_cc_impl.cc.o
+.PHONY : dsss_spreader_cc_impl.o
+
+# target to build an object file
+dsss_spreader_cc_impl.cc.o:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/dsss_spreader_cc_impl.cc.o
+.PHONY : dsss_spreader_cc_impl.cc.o
+
+dsss_spreader_cc_impl.i: dsss_spreader_cc_impl.cc.i
+.PHONY : dsss_spreader_cc_impl.i
+
+# target to preprocess a source file
+dsss_spreader_cc_impl.cc.i:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/dsss_spreader_cc_impl.cc.i
+.PHONY : dsss_spreader_cc_impl.cc.i
+
+dsss_spreader_cc_impl.s: dsss_spreader_cc_impl.cc.s
+.PHONY : dsss_spreader_cc_impl.s
+
+# target to generate assembly for a file
+dsss_spreader_cc_impl.cc.s:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/dsss_spreader_cc_impl.cc.s
+.PHONY : dsss_spreader_cc_impl.cc.s
 
 dstar_decoder_impl.o: dstar_decoder_impl.cc.o
 .PHONY : dstar_decoder_impl.o
@@ -760,6 +1264,54 @@ gr_4fsk_discriminator_impl.s: gr_4fsk_discriminator_impl.cc.s
 gr_4fsk_discriminator_impl.cc.s:
 	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/gr_4fsk_discriminator_impl.cc.s
 .PHONY : gr_4fsk_discriminator_impl.cc.s
+
+m17_coder_impl.o: m17_coder_impl.cc.o
+.PHONY : m17_coder_impl.o
+
+# target to build an object file
+m17_coder_impl.cc.o:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/m17_coder_impl.cc.o
+.PHONY : m17_coder_impl.cc.o
+
+m17_coder_impl.i: m17_coder_impl.cc.i
+.PHONY : m17_coder_impl.i
+
+# target to preprocess a source file
+m17_coder_impl.cc.i:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/m17_coder_impl.cc.i
+.PHONY : m17_coder_impl.cc.i
+
+m17_coder_impl.s: m17_coder_impl.cc.s
+.PHONY : m17_coder_impl.s
+
+# target to generate assembly for a file
+m17_coder_impl.cc.s:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/m17_coder_impl.cc.s
+.PHONY : m17_coder_impl.cc.s
+
+m17_decoder_impl.o: m17_decoder_impl.cc.o
+.PHONY : m17_decoder_impl.o
+
+# target to build an object file
+m17_decoder_impl.cc.o:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/m17_decoder_impl.cc.o
+.PHONY : m17_decoder_impl.cc.o
+
+m17_decoder_impl.i: m17_decoder_impl.cc.i
+.PHONY : m17_decoder_impl.i
+
+# target to preprocess a source file
+m17_decoder_impl.cc.i:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/m17_decoder_impl.cc.i
+.PHONY : m17_decoder_impl.cc.i
+
+m17_decoder_impl.s: m17_decoder_impl.cc.s
+.PHONY : m17_decoder_impl.s
+
+# target to generate assembly for a file
+m17_decoder_impl.cc.s:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/m17_decoder_impl.cc.s
+.PHONY : m17_decoder_impl.cc.s
 
 m17_deframer_impl.o: m17_deframer_impl.cc.o
 .PHONY : m17_deframer_impl.o
@@ -928,6 +1480,30 @@ mod_bpsk_impl.s: mod_bpsk_impl.cc.s
 mod_bpsk_impl.cc.s:
 	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/mod_bpsk_impl.cc.s
 .PHONY : mod_bpsk_impl.cc.s
+
+mod_cpm_4fsk_impl.o: mod_cpm_4fsk_impl.cc.o
+.PHONY : mod_cpm_4fsk_impl.o
+
+# target to build an object file
+mod_cpm_4fsk_impl.cc.o:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/mod_cpm_4fsk_impl.cc.o
+.PHONY : mod_cpm_4fsk_impl.cc.o
+
+mod_cpm_4fsk_impl.i: mod_cpm_4fsk_impl.cc.i
+.PHONY : mod_cpm_4fsk_impl.i
+
+# target to preprocess a source file
+mod_cpm_4fsk_impl.cc.i:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/mod_cpm_4fsk_impl.cc.i
+.PHONY : mod_cpm_4fsk_impl.cc.i
+
+mod_cpm_4fsk_impl.s: mod_cpm_4fsk_impl.cc.s
+.PHONY : mod_cpm_4fsk_impl.s
+
+# target to generate assembly for a file
+mod_cpm_4fsk_impl.cc.s:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/mod_cpm_4fsk_impl.cc.s
+.PHONY : mod_cpm_4fsk_impl.cc.s
 
 mod_dmr_impl.o: mod_dmr_impl.cc.o
 .PHONY : mod_dmr_impl.o
@@ -1193,6 +1769,30 @@ mod_qpsk_impl.cc.s:
 	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/mod_qpsk_impl.cc.s
 .PHONY : mod_qpsk_impl.cc.s
 
+mod_soqpsk_impl.o: mod_soqpsk_impl.cc.o
+.PHONY : mod_soqpsk_impl.o
+
+# target to build an object file
+mod_soqpsk_impl.cc.o:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/mod_soqpsk_impl.cc.o
+.PHONY : mod_soqpsk_impl.cc.o
+
+mod_soqpsk_impl.i: mod_soqpsk_impl.cc.i
+.PHONY : mod_soqpsk_impl.i
+
+# target to preprocess a source file
+mod_soqpsk_impl.cc.i:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/mod_soqpsk_impl.cc.i
+.PHONY : mod_soqpsk_impl.cc.i
+
+mod_soqpsk_impl.s: mod_soqpsk_impl.cc.s
+.PHONY : mod_soqpsk_impl.s
+
+# target to generate assembly for a file
+mod_soqpsk_impl.cc.s:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/mod_soqpsk_impl.cc.s
+.PHONY : mod_soqpsk_impl.cc.s
+
 mod_ssb_impl.o: mod_ssb_impl.cc.o
 .PHONY : mod_ssb_impl.o
 
@@ -1264,6 +1864,30 @@ p25_encoder_impl.s: p25_encoder_impl.cc.s
 p25_encoder_impl.cc.s:
 	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/p25_encoder_impl.cc.s
 .PHONY : p25_encoder_impl.cc.s
+
+pn_sequence_generator.o: pn_sequence_generator.cc.o
+.PHONY : pn_sequence_generator.o
+
+# target to build an object file
+pn_sequence_generator.cc.o:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/pn_sequence_generator.cc.o
+.PHONY : pn_sequence_generator.cc.o
+
+pn_sequence_generator.i: pn_sequence_generator.cc.i
+.PHONY : pn_sequence_generator.i
+
+# target to preprocess a source file
+pn_sequence_generator.cc.i:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/pn_sequence_generator.cc.i
+.PHONY : pn_sequence_generator.cc.i
+
+pn_sequence_generator.s: pn_sequence_generator.cc.s
+.PHONY : pn_sequence_generator.s
+
+# target to generate assembly for a file
+pn_sequence_generator.cc.s:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/pn_sequence_generator.cc.s
+.PHONY : pn_sequence_generator.cc.s
 
 pocsag_decoder_impl.o: pocsag_decoder_impl.cc.o
 .PHONY : pocsag_decoder_impl.o
@@ -1447,9 +2071,63 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... test"
 	@echo "... gnuradio-qradiolink"
+	@echo "... __/libm17/decode/symbols.o"
+	@echo "... __/libm17/decode/symbols.i"
+	@echo "... __/libm17/decode/symbols.s"
+	@echo "... __/libm17/decode/viterbi.o"
+	@echo "... __/libm17/decode/viterbi.i"
+	@echo "... __/libm17/decode/viterbi.s"
+	@echo "... __/libm17/encode/convol.o"
+	@echo "... __/libm17/encode/convol.i"
+	@echo "... __/libm17/encode/convol.s"
+	@echo "... __/libm17/encode/symbols.o"
+	@echo "... __/libm17/encode/symbols.i"
+	@echo "... __/libm17/encode/symbols.s"
+	@echo "... __/libm17/m17.o"
+	@echo "... __/libm17/m17.i"
+	@echo "... __/libm17/m17.s"
+	@echo "... __/libm17/math/golay.o"
+	@echo "... __/libm17/math/golay.i"
+	@echo "... __/libm17/math/golay.s"
+	@echo "... __/libm17/math/math.o"
+	@echo "... __/libm17/math/math.i"
+	@echo "... __/libm17/math/math.s"
+	@echo "... __/libm17/math/rrc.o"
+	@echo "... __/libm17/math/rrc.i"
+	@echo "... __/libm17/math/rrc.s"
+	@echo "... __/libm17/payload/call.o"
+	@echo "... __/libm17/payload/call.i"
+	@echo "... __/libm17/payload/call.s"
+	@echo "... __/libm17/payload/crc.o"
+	@echo "... __/libm17/payload/crc.i"
+	@echo "... __/libm17/payload/crc.s"
+	@echo "... __/libm17/payload/lich.o"
+	@echo "... __/libm17/payload/lich.i"
+	@echo "... __/libm17/payload/lich.s"
+	@echo "... __/libm17/payload/lsf.o"
+	@echo "... __/libm17/payload/lsf.i"
+	@echo "... __/libm17/payload/lsf.s"
+	@echo "... __/libm17/phy/interleave.o"
+	@echo "... __/libm17/phy/interleave.i"
+	@echo "... __/libm17/phy/interleave.s"
+	@echo "... __/libm17/phy/randomize.o"
+	@echo "... __/libm17/phy/randomize.i"
+	@echo "... __/libm17/phy/randomize.s"
+	@echo "... __/libm17/phy/slice.o"
+	@echo "... __/libm17/phy/slice.i"
+	@echo "... __/libm17/phy/slice.s"
+	@echo "... __/libm17/phy/sync.o"
+	@echo "... __/libm17/phy/sync.i"
+	@echo "... __/libm17/phy/sync.s"
+	@echo "... __/micro-ecc/uECC.o"
+	@echo "... __/micro-ecc/uECC.i"
+	@echo "... __/micro-ecc/uECC.s"
 	@echo "... __/src/gr/emphasis.o"
 	@echo "... __/src/gr/emphasis.i"
 	@echo "... __/src/gr/emphasis.s"
+	@echo "... __/tinier-aes/aes.o"
+	@echo "... __/tinier-aes/aes.i"
+	@echo "... __/tinier-aes/aes.s"
 	@echo "... clipper_cc_impl.o"
 	@echo "... clipper_cc_impl.i"
 	@echo "... clipper_cc_impl.s"
@@ -1498,6 +2176,9 @@ help:
 	@echo "... demod_qpsk_impl.o"
 	@echo "... demod_qpsk_impl.i"
 	@echo "... demod_qpsk_impl.s"
+	@echo "... demod_soqpsk_impl.o"
+	@echo "... demod_soqpsk_impl.i"
+	@echo "... demod_soqpsk_impl.s"
 	@echo "... demod_ssb_impl.o"
 	@echo "... demod_ssb_impl.i"
 	@echo "... demod_ssb_impl.s"
@@ -1507,9 +2188,15 @@ help:
 	@echo "... dsss_decoder_cc_impl.o"
 	@echo "... dsss_decoder_cc_impl.i"
 	@echo "... dsss_decoder_cc_impl.s"
+	@echo "... dsss_despreader_cc_impl.o"
+	@echo "... dsss_despreader_cc_impl.i"
+	@echo "... dsss_despreader_cc_impl.s"
 	@echo "... dsss_encoder_bb_impl.o"
 	@echo "... dsss_encoder_bb_impl.i"
 	@echo "... dsss_encoder_bb_impl.s"
+	@echo "... dsss_spreader_cc_impl.o"
+	@echo "... dsss_spreader_cc_impl.i"
+	@echo "... dsss_spreader_cc_impl.s"
 	@echo "... dstar_decoder_impl.o"
 	@echo "... dstar_decoder_impl.i"
 	@echo "... dstar_decoder_impl.s"
@@ -1519,6 +2206,12 @@ help:
 	@echo "... gr_4fsk_discriminator_impl.o"
 	@echo "... gr_4fsk_discriminator_impl.i"
 	@echo "... gr_4fsk_discriminator_impl.s"
+	@echo "... m17_coder_impl.o"
+	@echo "... m17_coder_impl.i"
+	@echo "... m17_coder_impl.s"
+	@echo "... m17_decoder_impl.o"
+	@echo "... m17_decoder_impl.i"
+	@echo "... m17_decoder_impl.s"
 	@echo "... m17_deframer_impl.o"
 	@echo "... m17_deframer_impl.i"
 	@echo "... m17_deframer_impl.s"
@@ -1540,6 +2233,9 @@ help:
 	@echo "... mod_bpsk_impl.o"
 	@echo "... mod_bpsk_impl.i"
 	@echo "... mod_bpsk_impl.s"
+	@echo "... mod_cpm_4fsk_impl.o"
+	@echo "... mod_cpm_4fsk_impl.i"
+	@echo "... mod_cpm_4fsk_impl.s"
 	@echo "... mod_dmr_impl.o"
 	@echo "... mod_dmr_impl.i"
 	@echo "... mod_dmr_impl.s"
@@ -1573,6 +2269,9 @@ help:
 	@echo "... mod_qpsk_impl.o"
 	@echo "... mod_qpsk_impl.i"
 	@echo "... mod_qpsk_impl.s"
+	@echo "... mod_soqpsk_impl.o"
+	@echo "... mod_soqpsk_impl.i"
+	@echo "... mod_soqpsk_impl.s"
 	@echo "... mod_ssb_impl.o"
 	@echo "... mod_ssb_impl.i"
 	@echo "... mod_ssb_impl.s"
@@ -1582,6 +2281,9 @@ help:
 	@echo "... p25_encoder_impl.o"
 	@echo "... p25_encoder_impl.i"
 	@echo "... p25_encoder_impl.s"
+	@echo "... pn_sequence_generator.o"
+	@echo "... pn_sequence_generator.i"
+	@echo "... pn_sequence_generator.s"
 	@echo "... pocsag_decoder_impl.o"
 	@echo "... pocsag_decoder_impl.i"
 	@echo "... pocsag_decoder_impl.s"

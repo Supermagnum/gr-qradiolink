@@ -27,7 +27,9 @@ class TestPOCSAGBlocks(unittest.TestCase):
     def test_pocsag_encoder_creation(self):
         """Test POCSAG encoder can be created"""
         try:
-            encoder = qradiolink.pocsag_encoder(baud_rate=1200, address=0x123456, function_bits=0)
+            encoder = qradiolink.pocsag_encoder(
+                baud_rate=1200, address=0x123456, function_bits=0
+            )
             self.assertIsNotNone(encoder)
             print("✓ POCSAG encoder created successfully")
         except Exception as e:
@@ -50,11 +52,13 @@ class TestPOCSAGBlocks(unittest.TestCase):
             # Create test message
             message = b"TEST MESSAGE\x00"  # Null - terminated
             source = blocks.vector_source_b(
-                message.tolist() if hasattr(message, 'tolist') else list(message),
-                False)
+                message.tolist() if hasattr(message, "tolist") else list(message), False
+            )
 
             # Create encoder and decoder
-            encoder = qradiolink.pocsag_encoder(baud_rate=1200, address=0x123456, function_bits=0)
+            encoder = qradiolink.pocsag_encoder(
+                baud_rate=1200, address=0x123456, function_bits=0
+            )
             decoder = qradiolink.pocsag_decoder(baud_rate=1200, sync_threshold=0.8)
 
             # Create sink
@@ -90,7 +94,7 @@ class TestDSTARBlocks(unittest.TestCase):
                 my_callsign="KE7XYZ ",
                 your_callsign="CQCQCQ  ",
                 rpt1_callsign="        ",
-                rpt2_callsign="        "
+                rpt2_callsign="        ",
             )
             self.assertIsNotNone(encoder)
             print("✓ D - STAR encoder created successfully")
@@ -117,7 +121,7 @@ class TestYSFBlocks(unittest.TestCase):
                 source_callsign="KE7XYZ    ",
                 destination_callsign="CQCQCQ    ",
                 radio_id=12345,
-                group_id=0
+                group_id=0,
             )
             self.assertIsNotNone(encoder)
             print("✓ YSF encoder created successfully")
@@ -141,10 +145,7 @@ class TestP25Blocks(unittest.TestCase):
         """Test P25 encoder can be created"""
         try:
             encoder = qradiolink.p25_encoder(
-                nac=0x293,
-                source_id=12345,
-                destination_id=0,
-                talkgroup_id=100
+                nac=0x293, source_id=12345, destination_id=0, talkgroup_id=100
             )
             self.assertIsNotNone(encoder)
             print("✓ P25 encoder created successfully")
@@ -191,12 +192,14 @@ def run_all_tests():
     print(f"Failures: {len(result.failures)}")
     print(f"Errors: {len(result.errors)}")
     success_rate = (
-        (result.testsRun - len(result.failures) - len(result.errors)) /
-        result.testsRun * 100)
+        (result.testsRun - len(result.failures) - len(result.errors))
+        / result.testsRun
+        * 100
+    )
     print(f"Success rate: {success_rate:.1f}%")
 
     return 0 if result.wasSuccessful() else 1
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(run_all_tests())

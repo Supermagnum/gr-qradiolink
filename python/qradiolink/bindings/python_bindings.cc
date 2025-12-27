@@ -27,6 +27,8 @@ void bind_mod_soqpsk(py::module&);
 void bind_mod_nbfm(py::module&);
 void bind_mod_dsss(py::module&);
 void bind_mod_m17(py::module&);
+void bind_m17_coder(py::module&);
+void bind_m17_decoder(py::module&);
 void bind_mod_dmr(py::module&);
 void bind_mod_dpmr(py::module&);
 void bind_mod_nxdn(py::module&);
@@ -104,6 +106,8 @@ PYBIND11_MODULE(qradiolink_python, m)
     bind_mod_nbfm(m);
     bind_mod_dsss(m);
     bind_mod_m17(m);
+    bind_m17_coder(m);
+    bind_m17_decoder(m);
     bind_mod_dmr(m);
     bind_mod_dpmr(m);
     bind_mod_nxdn(m);

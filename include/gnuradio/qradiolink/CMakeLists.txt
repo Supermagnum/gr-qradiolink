@@ -25,6 +25,8 @@ install(
           dsss_despreader_cc.h
           mod_freedv.h
           mod_m17.h
+          m17_coder.h
+          m17_decoder.h
           mod_dmr.h
           mod_nxdn.h
           mod_dpmr.h
