@@ -1,0 +1,44 @@
+id: qradiolink_ldpc_encoder
+label: LDPC Encoder
+category: '[QRadioLink]/FEC'
+flags: [ python ]
+
+parameters:
+-   id: alist_file
+    label: AList File
+    dtype: file_open
+    default: '"/usr/share/gnuradio/fec/ldpc/n_0100_k_0042_gap_02.alist"'
+
+inputs:
+-   domain: stream
+    dtype: byte
+
+outputs:
+-   domain: stream
+    dtype: byte
+
+templates:
+    imports: from gnuradio import fec
+    make: |-
+        fec.encoder(
+            fec.ldpc_encoder_make(${alist_file}),
+            gr.sizeof_char,
+            gr.sizeof_char)
+
+documentation: |-
+    LDPC (Low-Density Parity-Check) Encoder using soft-decision encoding.
+
+    This block encodes input bytes using an LDPC code defined by an AList file.
+    The AList file specifies the parity check matrix for the LDPC code.
+
+    Parameters:
+    - AList File: Path to the AList file defining the LDPC code matrix.
+      Standard files are available in /usr/share/gnuradio/fec/ldpc/
+
+    Input: Byte stream (raw data to encode)
+    Output: Byte stream (encoded codewords)
+
+    Compatible with the soft-decision LDPC decoder for error correction.
+
+file_format: 1
+

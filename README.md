@@ -44,6 +44,7 @@ The QRadioLink Codeberg page does not mention any crashes or other known issues.
     - **YSF**: C4FM protocol with Golay(20,8) and Golay(23,12) FEC (see [GRC Blocks](grc/qradiolink_ysf_encoder.block.yml), [Examples](examples/README.md))
     - **P25**: Project 25 Phase 1 C4FM with BCH(63,16) and Trellis encoding (see [GRC Blocks](grc/qradiolink_p25_encoder.block.yml), [Examples](examples/README.md))
 - **Supporting Blocks**: Audio source/sink, RSSI, FFT, deframer, CESSB, M17 deframer (see [GRC Block](grc/qradiolink_m17_deframer.block.yml))
+- **FEC Blocks**: Forward Error Correction with soft-decision LDPC encoder/decoder (see [GRC Blocks](grc/qradiolink_ldpc_encoder.block.yml))
 - **DSSS Blocks**: Enhanced spreader/despreader with PN sequence generation, timing recovery, and acquisition (see [DSSS Blocks Guide](docs/DSSS_BLOCKS.md), [GRC Blocks](grc/qradiolink_dsss_spreader_cc.block.yml))
 
 ### SOQPSK (Shaped Offset Quadrature Phase Shift Keying)
@@ -228,6 +229,9 @@ All blocks have GRC (GNU Radio Companion) block definitions in the `grc/` direct
 - [D-STAR Encoder](grc/qradiolink_dstar_encoder.block.yml) / [D-STAR Decoder](grc/qradiolink_dstar_decoder.block.yml)
 - [YSF Encoder](grc/qradiolink_ysf_encoder.block.yml) / [YSF Decoder](grc/qradiolink_ysf_decoder.block.yml)
 - [P25 Encoder](grc/qradiolink_p25_encoder.block.yml) / [P25 Decoder](grc/qradiolink_p25_decoder.block.yml)
+
+**FEC:**
+- [LDPC Encoder](grc/qradiolink_ldpc_encoder.block.yml) / [LDPC Decoder (Soft-Decision)](grc/qradiolink_ldpc_decoder.block.yml)
 
 For complete list of all blocks, see the [grc/](grc/) directory.
 

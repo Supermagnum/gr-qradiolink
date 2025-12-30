@@ -1,0 +1,57 @@
+id: qradiolink_ldpc_decoder
+label: LDPC Decoder (Soft-Decision)
+category: '[QRadioLink]/FEC'
+flags: [ python ]
+
+parameters:
+-   id: alist_file
+    label: AList File
+    dtype: file_open
+    default: '"/usr/share/gnuradio/fec/ldpc/n_0100_k_0042_gap_02.alist"'
+-   id: max_iterations
+    label: Max Iterations
+    dtype: int
+    default: '50'
+
+inputs:
+-   domain: stream
+    dtype: float
+
+outputs:
+-   domain: stream
+    dtype: byte
+
+templates:
+    imports: from gnuradio import fec
+    make: |-
+        fec.decoder(
+            fec.ldpc_decoder_make(${alist_file}, ${max_iterations}),
+            gr.sizeof_float,
+            gr.sizeof_char)
+
+documentation: |-
+    LDPC (Low-Density Parity-Check) Soft-Decision Decoder using belief propagation.
+
+    This is a soft-decision decoder that uses belief propagation (also known as
+    message passing) with the "tanh rule" algorithm. It accepts soft input values
+    (float, typically LLRs or probabilities) and outputs hard decisions (bytes).
+
+    Algorithm: Reduced-Complexity Decoding of LDPC Codes by Jinghu Chen et al.
+    Designed for a memoryless AWGN channel.
+
+    Parameters:
+    - AList File: Path to the AList file defining the LDPC code matrix.
+      Must match the encoder's AList file.
+      Standard files are available in /usr/share/gnuradio/fec/ldpc/
+    - Max Iterations: Maximum number of belief propagation iterations (default: 50)
+
+    Input: Float stream (soft values, typically from demodulator)
+    Output: Byte stream (hard decisions, decoded data)
+
+    Compatible with:
+    - PSK/QPSK/SOQPSK demodulators (soft outputs)
+    - LDPC encoder (matching AList file)
+    - DSSS despreader (soft symbol outputs)
+
+file_format: 1
+

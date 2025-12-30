@@ -51,6 +51,8 @@ install(FILES
     qradiolink_ysf_decoder.block.yml
     qradiolink_p25_decoder.block.yml
     qradiolink_m17_deframer.block.yml
+    qradiolink_ldpc_encoder.block.yml
+    qradiolink_ldpc_decoder.block.yml
     qradiolink.tree.yml
     DESTINATION ${GRC_BLOCKS_DIR})
 

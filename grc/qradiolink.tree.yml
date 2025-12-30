@@ -33,4 +33,7 @@ description: QRadioLink blocks for digital and analog modulation
   - qradiolink_demod_dpmr
 - Supporting Blocks:
   - qradiolink_m17_deframer
+- FEC:
+  - qradiolink_ldpc_encoder
+  - qradiolink_ldpc_decoder
 
