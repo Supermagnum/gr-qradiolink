@@ -4,10 +4,44 @@ category: '[QRadioLink]/FEC'
 flags: [ python ]
 
 parameters:
+-   id: code_selection_mode
+    label: Code Selection Mode
+    dtype: enum
+    options: ['Auto-select by Parameters', 'Custom AList File']
+    option_attributes:
+        use_custom: [False, True]
+    default: 'Auto-select by Parameters'
+-   id: block_length
+    label: Block Length (bits)
+    dtype: enum
+    options: ['576', '1152', '2304', 'Custom']
+    option_attributes:
+        block_length_val: [576, 1152, 2304, 0]
+    default: '576'
+    hide: ${ 'all' if code_selection_mode == 'Custom AList File' else 'none' }
+-   id: custom_block_length
+    label: Custom Block Length (bits)
+    dtype: int
+    default: '576'
+    hide: ${ 'none' if (code_selection_mode == 'Auto-select by Parameters' and block_length == 'Custom') else 'all' }
+-   id: code_rate
+    label: Code Rate
+    dtype: enum
+    options: ['1/2', '2/3', '3/4', 'Custom']
+    option_attributes:
+        rate_val: ['1/2', '2/3', '3/4', '0.5']
+    default: '1/2'
+    hide: ${ 'all' if code_selection_mode == 'Custom AList File' else 'none' }
+-   id: custom_code_rate
+    label: Custom Code Rate
+    dtype: string
+    default: '0.5'
+    hide: ${ 'none' if (code_selection_mode == 'Auto-select by Parameters' and code_rate == 'Custom') else 'all' }
 -   id: alist_file
-    label: AList File
+    label: Custom AList File
     dtype: file_open
     default: '"/usr/share/gnuradio/fec/ldpc/n_0100_k_0042_gap_02.alist"'
+    hide: ${ 'all' if code_selection_mode == 'Auto-select by Parameters' else 'none' }
 
 inputs:
 -   domain: stream
@@ -18,25 +52,78 @@ outputs:
     dtype: byte
 
 templates:
-    imports: from gnuradio import fec
+    imports: |-
+        from gnuradio import fec
+        import sys
+        import os
+        import glob
+        # Try to import helper module
+        try:
+            from gnuradio.qradiolink.ldpc_code_helper import get_code_selection
+        except ImportError:
+            # Fallback: try direct import
+            try:
+                import importlib.util
+                helper_path = os.path.join(os.environ.get('CMAKE_INSTALL_PREFIX', '/usr'), 'lib', 'python3.*', 'site-packages', 'gnuradio', 'qradiolink', 'ldpc_code_helper.py')
+                helper_files = glob.glob(helper_path)
+                if helper_files:
+                    spec = importlib.util.spec_from_file_location("ldpc_code_helper", helper_files[0])
+                    helper = importlib.util.module_from_spec(spec)
+                    spec.loader.exec_module(helper)
+                    get_code_selection = helper.get_code_selection
+                else:
+                    raise ImportError("Helper not found")
+            except (ImportError, AttributeError):
+                # Final fallback: simple selection function
+                def get_code_selection(use_custom, custom_file, block_length, code_rate, ldpc_dir='/usr/share/gnuradio/fec/ldpc/'):
+                    if use_custom and custom_file and os.path.exists(custom_file):
+                        return custom_file
+                    # Simple fallback
+                    return '/usr/share/gnuradio/fec/ldpc/n_0100_k_0042_gap_02.alist'
     make: |-
+        % if code_selection_mode == 'Custom AList File':
+        selected_file = ${alist_file}
+        % else:
+        # Auto-select based on parameters
+        bl = ${custom_block_length} if '${block_length}' == 'Custom' else ${block_length_val}
+        cr = '${custom_code_rate}' if '${code_rate}' == 'Custom' else '${rate_val}'
+        selected_file = get_code_selection(
+            use_custom=False,
+            custom_file='',
+            block_length=bl,
+            code_rate=cr
+        )
+        % endif
         fec.encoder(
-            fec.ldpc_encoder_make(${alist_file}),
+            fec.ldpc_encoder_make(selected_file),
             gr.sizeof_char,
             gr.sizeof_char)
 
 documentation: |-
-    LDPC (Low-Density Parity-Check) Encoder using soft-decision encoding.
+    LDPC (Low-Density Parity-Check) Encoder with configurable code parameters.
 
-    This block encodes input bytes using an LDPC code defined by an AList file.
-    The AList file specifies the parity check matrix for the LDPC code.
+    Supports both regular and irregular LDPC codes with configurable:
+    - Code rate: 1/2, 2/3, 3/4, or custom
+    - Block length: 576, 1152, 2304 bits, or custom
+    - Custom AList file override
+
+    Code Selection Modes:
+    1. Auto-select by Parameters: Automatically selects the closest matching
+       LDPC code from available AList files based on block length and code rate.
+    2. Custom AList File: Use a specific AList file (for custom codes or
+       exact specifications).
 
     Parameters:
-    - AList File: Path to the AList file defining the LDPC code matrix.
-      Standard files are available in /usr/share/gnuradio/fec/ldpc/
+    - Code Selection Mode: Choose auto-selection or custom file
+    - Block Length: Standard lengths (576, 1152, 2304) or custom
+    - Code Rate: Standard rates (1/2, 2/3, 3/4) or custom decimal
+    - Custom AList File: Path to AList file (if using custom mode)
 
     Input: Byte stream (raw data to encode)
     Output: Byte stream (encoded codewords)
+
+    The encoder automatically selects the best matching code from available
+    LDPC codes in /usr/share/gnuradio/fec/ldpc/ when using auto-select mode.
 
     Compatible with the soft-decision LDPC decoder for error correction.
 

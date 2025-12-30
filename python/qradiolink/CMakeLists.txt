@@ -6,10 +6,10 @@
 #
 
 ########################################################################
-# Install __init__.py
+# Install __init__.py and helper modules
 ########################################################################
 GR_PYTHON_INSTALL(
-    FILES __init__.py
+    FILES __init__.py ldpc_code_helper.py
     DESTINATION ${GR_PYTHON_DIR}/gnuradio/qradiolink
 )
 
