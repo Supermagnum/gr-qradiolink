@@ -2,6 +2,11 @@
 build/
 *_build/
 
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
 # Fuzzing artifacts
 fuzzing/corpus/*.seed
 fuzzing/corpus/*/crash-*
