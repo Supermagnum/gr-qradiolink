@@ -53,6 +53,79 @@ target_link_libraries(test_mod_4fsk gnuradio-qradiolink
 add_test(NAME test_mod_4fsk COMMAND test_mod_4fsk)
 
 ########################################################################
+# Test mod_8fsk
+########################################################################
+add_executable(test_mod_8fsk test_mod_8fsk.cc)
+target_link_libraries(test_mod_8fsk gnuradio-qradiolink
+                                 gnuradio-runtime
+                                 gnuradio-blocks
+                                 gnuradio-digital
+                                 gnuradio-filter
+                                 gnuradio-analog
+                                 gnuradio-fec
+                                 ${GR_RUNTIME_LIBRARIES}
+                                 ${GR_BLOCKS_LIBRARIES}
+                                 ${GR_DIGITAL_LIBRARIES}
+                                 ${GR_FILTER_LIBRARIES}
+                                 ${GR_ANALOG_LIBRARIES}
+                                 ${GR_FEC_LIBRARIES}
+                                 fmt)
+
+add_test(NAME test_mod_8fsk COMMAND test_mod_8fsk)
+
+########################################################################
+# Test gdss_spreader_cc
+########################################################################
+add_executable(test_gdss_spreader_cc test_gdss_spreader_cc.cc)
+target_link_libraries(test_gdss_spreader_cc gnuradio-qradiolink
+                                 gnuradio-runtime
+                                 gnuradio-blocks
+                                 ${GR_RUNTIME_LIBRARIES}
+                                 ${GR_BLOCKS_LIBRARIES}
+                                 fmt)
+
+add_test(NAME test_gdss_spreader_cc COMMAND test_gdss_spreader_cc)
+
+########################################################################
+# Test gdss_despreader_cc
+########################################################################
+add_executable(test_gdss_despreader_cc test_gdss_despreader_cc.cc)
+target_link_libraries(test_gdss_despreader_cc gnuradio-qradiolink
+                                 gnuradio-runtime
+                                 gnuradio-blocks
+                                 ${GR_RUNTIME_LIBRARIES}
+                                 ${GR_BLOCKS_LIBRARIES}
+                                 fmt)
+
+add_test(NAME test_gdss_despreader_cc COMMAND test_gdss_despreader_cc)
+
+########################################################################
+# Test dsss_cdma_transmitter_cc
+########################################################################
+add_executable(test_dsss_cdma_transmitter_cc test_dsss_cdma_transmitter_cc.cc)
+target_link_libraries(test_dsss_cdma_transmitter_cc gnuradio-qradiolink
+                                 gnuradio-runtime
+                                 gnuradio-blocks
+                                 ${GR_RUNTIME_LIBRARIES}
+                                 ${GR_BLOCKS_LIBRARIES}
+                                 fmt)
+
+add_test(NAME test_dsss_cdma_transmitter_cc COMMAND test_dsss_cdma_transmitter_cc)
+
+########################################################################
+# Test dsss_cdma_receiver_cc
+########################################################################
+add_executable(test_dsss_cdma_receiver_cc test_dsss_cdma_receiver_cc.cc)
+target_link_libraries(test_dsss_cdma_receiver_cc gnuradio-qradiolink
+                                 gnuradio-runtime
+                                 gnuradio-blocks
+                                 ${GR_RUNTIME_LIBRARIES}
+                                 ${GR_BLOCKS_LIBRARIES}
+                                 fmt)
+
+add_test(NAME test_dsss_cdma_receiver_cc COMMAND test_dsss_cdma_receiver_cc)
+
+########################################################################
 # Test mod_am
 ########################################################################
 add_executable(test_mod_am test_mod_am.cc)

@@ -16,6 +16,7 @@ list(
     qradiolink_python_files
     mod_2fsk_python.cc
     mod_4fsk_python.cc
+    mod_8fsk_python.cc
     mod_cpm_4fsk_python.cc
     mod_am_python.cc
     mod_gmsk_python.cc
@@ -47,9 +48,14 @@ list(
     demod_soqpsk_python.cc
     demod_gmsk_python.cc
     demod_4fsk_python.cc
+    demod_8fsk_python.cc
     demod_dsss_python.cc
     dsss_spreader_cc_python.cc
     dsss_despreader_cc_python.cc
+    dsss_cdma_transmitter_cc_python.cc
+    dsss_cdma_receiver_cc_python.cc
+    gdss_spreader_cc_python.cc
+    gdss_despreader_cc_python.cc
     demod_m17_python.cc
     demod_dmr_python.cc
     demod_dpmr_python.cc

@@ -713,6 +713,30 @@ demod_4fsk_impl.cc.s:
 	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/demod_4fsk_impl.cc.s
 .PHONY : demod_4fsk_impl.cc.s
 
+demod_8fsk_impl.o: demod_8fsk_impl.cc.o
+.PHONY : demod_8fsk_impl.o
+
+# target to build an object file
+demod_8fsk_impl.cc.o:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/demod_8fsk_impl.cc.o
+.PHONY : demod_8fsk_impl.cc.o
+
+demod_8fsk_impl.i: demod_8fsk_impl.cc.i
+.PHONY : demod_8fsk_impl.i
+
+# target to preprocess a source file
+demod_8fsk_impl.cc.i:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/demod_8fsk_impl.cc.i
+.PHONY : demod_8fsk_impl.cc.i
+
+demod_8fsk_impl.s: demod_8fsk_impl.cc.s
+.PHONY : demod_8fsk_impl.s
+
+# target to generate assembly for a file
+demod_8fsk_impl.cc.s:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/demod_8fsk_impl.cc.s
+.PHONY : demod_8fsk_impl.cc.s
+
 demod_am_impl.o: demod_am_impl.cc.o
 .PHONY : demod_am_impl.o
 
@@ -1097,6 +1121,54 @@ demod_wbfm_impl.cc.s:
 	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/demod_wbfm_impl.cc.s
 .PHONY : demod_wbfm_impl.cc.s
 
+dsss_cdma_receiver_cc_impl.o: dsss_cdma_receiver_cc_impl.cc.o
+.PHONY : dsss_cdma_receiver_cc_impl.o
+
+# target to build an object file
+dsss_cdma_receiver_cc_impl.cc.o:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/dsss_cdma_receiver_cc_impl.cc.o
+.PHONY : dsss_cdma_receiver_cc_impl.cc.o
+
+dsss_cdma_receiver_cc_impl.i: dsss_cdma_receiver_cc_impl.cc.i
+.PHONY : dsss_cdma_receiver_cc_impl.i
+
+# target to preprocess a source file
+dsss_cdma_receiver_cc_impl.cc.i:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/dsss_cdma_receiver_cc_impl.cc.i
+.PHONY : dsss_cdma_receiver_cc_impl.cc.i
+
+dsss_cdma_receiver_cc_impl.s: dsss_cdma_receiver_cc_impl.cc.s
+.PHONY : dsss_cdma_receiver_cc_impl.s
+
+# target to generate assembly for a file
+dsss_cdma_receiver_cc_impl.cc.s:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/dsss_cdma_receiver_cc_impl.cc.s
+.PHONY : dsss_cdma_receiver_cc_impl.cc.s
+
+dsss_cdma_transmitter_cc_impl.o: dsss_cdma_transmitter_cc_impl.cc.o
+.PHONY : dsss_cdma_transmitter_cc_impl.o
+
+# target to build an object file
+dsss_cdma_transmitter_cc_impl.cc.o:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/dsss_cdma_transmitter_cc_impl.cc.o
+.PHONY : dsss_cdma_transmitter_cc_impl.cc.o
+
+dsss_cdma_transmitter_cc_impl.i: dsss_cdma_transmitter_cc_impl.cc.i
+.PHONY : dsss_cdma_transmitter_cc_impl.i
+
+# target to preprocess a source file
+dsss_cdma_transmitter_cc_impl.cc.i:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/dsss_cdma_transmitter_cc_impl.cc.i
+.PHONY : dsss_cdma_transmitter_cc_impl.cc.i
+
+dsss_cdma_transmitter_cc_impl.s: dsss_cdma_transmitter_cc_impl.cc.s
+.PHONY : dsss_cdma_transmitter_cc_impl.s
+
+# target to generate assembly for a file
+dsss_cdma_transmitter_cc_impl.cc.s:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/dsss_cdma_transmitter_cc_impl.cc.s
+.PHONY : dsss_cdma_transmitter_cc_impl.cc.s
+
 dsss_decoder_cc_impl.o: dsss_decoder_cc_impl.cc.o
 .PHONY : dsss_decoder_cc_impl.o
 
@@ -1240,6 +1312,54 @@ dstar_encoder_impl.s: dstar_encoder_impl.cc.s
 dstar_encoder_impl.cc.s:
 	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/dstar_encoder_impl.cc.s
 .PHONY : dstar_encoder_impl.cc.s
+
+gdss_despreader_cc_impl.o: gdss_despreader_cc_impl.cc.o
+.PHONY : gdss_despreader_cc_impl.o
+
+# target to build an object file
+gdss_despreader_cc_impl.cc.o:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/gdss_despreader_cc_impl.cc.o
+.PHONY : gdss_despreader_cc_impl.cc.o
+
+gdss_despreader_cc_impl.i: gdss_despreader_cc_impl.cc.i
+.PHONY : gdss_despreader_cc_impl.i
+
+# target to preprocess a source file
+gdss_despreader_cc_impl.cc.i:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/gdss_despreader_cc_impl.cc.i
+.PHONY : gdss_despreader_cc_impl.cc.i
+
+gdss_despreader_cc_impl.s: gdss_despreader_cc_impl.cc.s
+.PHONY : gdss_despreader_cc_impl.s
+
+# target to generate assembly for a file
+gdss_despreader_cc_impl.cc.s:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/gdss_despreader_cc_impl.cc.s
+.PHONY : gdss_despreader_cc_impl.cc.s
+
+gdss_spreader_cc_impl.o: gdss_spreader_cc_impl.cc.o
+.PHONY : gdss_spreader_cc_impl.o
+
+# target to build an object file
+gdss_spreader_cc_impl.cc.o:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/gdss_spreader_cc_impl.cc.o
+.PHONY : gdss_spreader_cc_impl.cc.o
+
+gdss_spreader_cc_impl.i: gdss_spreader_cc_impl.cc.i
+.PHONY : gdss_spreader_cc_impl.i
+
+# target to preprocess a source file
+gdss_spreader_cc_impl.cc.i:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/gdss_spreader_cc_impl.cc.i
+.PHONY : gdss_spreader_cc_impl.cc.i
+
+gdss_spreader_cc_impl.s: gdss_spreader_cc_impl.cc.s
+.PHONY : gdss_spreader_cc_impl.s
+
+# target to generate assembly for a file
+gdss_spreader_cc_impl.cc.s:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/gdss_spreader_cc_impl.cc.s
+.PHONY : gdss_spreader_cc_impl.cc.s
 
 gr_4fsk_discriminator_impl.o: gr_4fsk_discriminator_impl.cc.o
 .PHONY : gr_4fsk_discriminator_impl.o
@@ -1432,6 +1552,30 @@ mod_4fsk_impl.s: mod_4fsk_impl.cc.s
 mod_4fsk_impl.cc.s:
 	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/mod_4fsk_impl.cc.s
 .PHONY : mod_4fsk_impl.cc.s
+
+mod_8fsk_impl.o: mod_8fsk_impl.cc.o
+.PHONY : mod_8fsk_impl.o
+
+# target to build an object file
+mod_8fsk_impl.cc.o:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/mod_8fsk_impl.cc.o
+.PHONY : mod_8fsk_impl.cc.o
+
+mod_8fsk_impl.i: mod_8fsk_impl.cc.i
+.PHONY : mod_8fsk_impl.i
+
+# target to preprocess a source file
+mod_8fsk_impl.cc.i:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/mod_8fsk_impl.cc.i
+.PHONY : mod_8fsk_impl.cc.i
+
+mod_8fsk_impl.s: mod_8fsk_impl.cc.s
+.PHONY : mod_8fsk_impl.s
+
+# target to generate assembly for a file
+mod_8fsk_impl.cc.s:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/gnuradio-qradiolink.dir/build.make lib/CMakeFiles/gnuradio-qradiolink.dir/mod_8fsk_impl.cc.s
+.PHONY : mod_8fsk_impl.cc.s
 
 mod_am_impl.o: mod_am_impl.cc.o
 .PHONY : mod_am_impl.o
@@ -2137,6 +2281,9 @@ help:
 	@echo "... demod_4fsk_impl.o"
 	@echo "... demod_4fsk_impl.i"
 	@echo "... demod_4fsk_impl.s"
+	@echo "... demod_8fsk_impl.o"
+	@echo "... demod_8fsk_impl.i"
+	@echo "... demod_8fsk_impl.s"
 	@echo "... demod_am_impl.o"
 	@echo "... demod_am_impl.i"
 	@echo "... demod_am_impl.s"
@@ -2185,6 +2332,12 @@ help:
 	@echo "... demod_wbfm_impl.o"
 	@echo "... demod_wbfm_impl.i"
 	@echo "... demod_wbfm_impl.s"
+	@echo "... dsss_cdma_receiver_cc_impl.o"
+	@echo "... dsss_cdma_receiver_cc_impl.i"
+	@echo "... dsss_cdma_receiver_cc_impl.s"
+	@echo "... dsss_cdma_transmitter_cc_impl.o"
+	@echo "... dsss_cdma_transmitter_cc_impl.i"
+	@echo "... dsss_cdma_transmitter_cc_impl.s"
 	@echo "... dsss_decoder_cc_impl.o"
 	@echo "... dsss_decoder_cc_impl.i"
 	@echo "... dsss_decoder_cc_impl.s"
@@ -2203,6 +2356,12 @@ help:
 	@echo "... dstar_encoder_impl.o"
 	@echo "... dstar_encoder_impl.i"
 	@echo "... dstar_encoder_impl.s"
+	@echo "... gdss_despreader_cc_impl.o"
+	@echo "... gdss_despreader_cc_impl.i"
+	@echo "... gdss_despreader_cc_impl.s"
+	@echo "... gdss_spreader_cc_impl.o"
+	@echo "... gdss_spreader_cc_impl.i"
+	@echo "... gdss_spreader_cc_impl.s"
 	@echo "... gr_4fsk_discriminator_impl.o"
 	@echo "... gr_4fsk_discriminator_impl.i"
 	@echo "... gr_4fsk_discriminator_impl.s"
@@ -2227,6 +2386,9 @@ help:
 	@echo "... mod_4fsk_impl.o"
 	@echo "... mod_4fsk_impl.i"
 	@echo "... mod_4fsk_impl.s"
+	@echo "... mod_8fsk_impl.o"
+	@echo "... mod_8fsk_impl.i"
+	@echo "... mod_8fsk_impl.s"
 	@echo "... mod_am_impl.o"
 	@echo "... mod_am_impl.i"
 	@echo "... mod_am_impl.s"

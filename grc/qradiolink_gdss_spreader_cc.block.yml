@@ -1,0 +1,66 @@
+id: qradiolink_gdss_spreader_cc
+label: GDSS Spreader
+category: '[QRadioLink]/DSSS'
+flags: [ python ]
+
+parameters:
+-   id: sequence_length
+    label: Sequence Length
+    dtype: int
+    default: '127'
+    minimum: 1
+-   id: chips_per_symbol
+    label: Chips per Symbol
+    dtype: int
+    default: '42'
+    minimum: 1
+-   id: variance
+    label: Variance
+    dtype: float
+    default: '1.0'
+    minimum: 0.001
+-   id: seed
+    label: Random Seed (0 = auto)
+    dtype: int
+    default: '0'
+    minimum: 0
+
+inputs:
+-   domain: stream
+    dtype: complex
+
+outputs:
+-   domain: stream
+    dtype: complex
+
+templates:
+    imports: |
+        from gnuradio import qradiolink
+    make: |-
+        qradiolink.gdss_spreader_cc(
+            ${sequence_length},
+            ${chips_per_symbol},
+            ${variance},
+            ${seed})
+
+documentation: |-
+    GDSS (Gaussian-Distributed Spread-Spectrum) Spreader.
+    
+    This block spreads complex symbols using a Gaussian-distributed spreading sequence,
+    providing better spectral properties than binary PN sequences.
+    
+    Parameters:
+    - Sequence Length: Length of the Gaussian spreading sequence
+    - Chips per Symbol: Number of chips per symbol (spreading factor)
+    - Variance: Variance of the Gaussian distribution (default: 1.0)
+    - Random Seed: Seed for random number generation (0 = use current time)
+    
+    Input: Complex symbols at symbol rate
+    Output: Spread spectrum signal at chip rate
+    
+    The spreading sequence is generated from a Gaussian distribution with zero mean
+    and the specified variance. This provides smoother spectral characteristics
+    compared to binary PN sequences.
+
+file_format: 1
+

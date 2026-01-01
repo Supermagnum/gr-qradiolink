@@ -592,6 +592,76 @@ test_mod_4fsk/fast:
 .PHONY : test_mod_4fsk/fast
 
 # Convenience name for target.
+tests/CMakeFiles/test_mod_8fsk.dir/rule:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/CMakeFiles/test_mod_8fsk.dir/rule
+.PHONY : tests/CMakeFiles/test_mod_8fsk.dir/rule
+
+# Convenience name for target.
+test_mod_8fsk: tests/CMakeFiles/test_mod_8fsk.dir/rule
+.PHONY : test_mod_8fsk
+
+# fast build rule for target.
+test_mod_8fsk/fast:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_mod_8fsk.dir/build.make tests/CMakeFiles/test_mod_8fsk.dir/build
+.PHONY : test_mod_8fsk/fast
+
+# Convenience name for target.
+tests/CMakeFiles/test_gdss_spreader_cc.dir/rule:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/CMakeFiles/test_gdss_spreader_cc.dir/rule
+.PHONY : tests/CMakeFiles/test_gdss_spreader_cc.dir/rule
+
+# Convenience name for target.
+test_gdss_spreader_cc: tests/CMakeFiles/test_gdss_spreader_cc.dir/rule
+.PHONY : test_gdss_spreader_cc
+
+# fast build rule for target.
+test_gdss_spreader_cc/fast:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_gdss_spreader_cc.dir/build.make tests/CMakeFiles/test_gdss_spreader_cc.dir/build
+.PHONY : test_gdss_spreader_cc/fast
+
+# Convenience name for target.
+tests/CMakeFiles/test_gdss_despreader_cc.dir/rule:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/CMakeFiles/test_gdss_despreader_cc.dir/rule
+.PHONY : tests/CMakeFiles/test_gdss_despreader_cc.dir/rule
+
+# Convenience name for target.
+test_gdss_despreader_cc: tests/CMakeFiles/test_gdss_despreader_cc.dir/rule
+.PHONY : test_gdss_despreader_cc
+
+# fast build rule for target.
+test_gdss_despreader_cc/fast:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_gdss_despreader_cc.dir/build.make tests/CMakeFiles/test_gdss_despreader_cc.dir/build
+.PHONY : test_gdss_despreader_cc/fast
+
+# Convenience name for target.
+tests/CMakeFiles/test_dsss_cdma_transmitter_cc.dir/rule:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/CMakeFiles/test_dsss_cdma_transmitter_cc.dir/rule
+.PHONY : tests/CMakeFiles/test_dsss_cdma_transmitter_cc.dir/rule
+
+# Convenience name for target.
+test_dsss_cdma_transmitter_cc: tests/CMakeFiles/test_dsss_cdma_transmitter_cc.dir/rule
+.PHONY : test_dsss_cdma_transmitter_cc
+
+# fast build rule for target.
+test_dsss_cdma_transmitter_cc/fast:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_dsss_cdma_transmitter_cc.dir/build.make tests/CMakeFiles/test_dsss_cdma_transmitter_cc.dir/build
+.PHONY : test_dsss_cdma_transmitter_cc/fast
+
+# Convenience name for target.
+tests/CMakeFiles/test_dsss_cdma_receiver_cc.dir/rule:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/CMakeFiles/test_dsss_cdma_receiver_cc.dir/rule
+.PHONY : tests/CMakeFiles/test_dsss_cdma_receiver_cc.dir/rule
+
+# Convenience name for target.
+test_dsss_cdma_receiver_cc: tests/CMakeFiles/test_dsss_cdma_receiver_cc.dir/rule
+.PHONY : test_dsss_cdma_receiver_cc
+
+# fast build rule for target.
+test_dsss_cdma_receiver_cc/fast:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_dsss_cdma_receiver_cc.dir/build.make tests/CMakeFiles/test_dsss_cdma_receiver_cc.dir/build
+.PHONY : test_dsss_cdma_receiver_cc/fast
+
+# Convenience name for target.
 tests/CMakeFiles/test_mod_am.dir/rule:
 	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/CMakeFiles/test_mod_am.dir/rule
 .PHONY : tests/CMakeFiles/test_mod_am.dir/rule
@@ -1301,6 +1371,102 @@ test_demod_wbfm.cc.s:
 	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/qradiolink_test_demod_wbfm.dir/build.make tests/CMakeFiles/qradiolink_test_demod_wbfm.dir/test_demod_wbfm.cc.s
 .PHONY : test_demod_wbfm.cc.s
 
+test_dsss_cdma_receiver_cc.o: test_dsss_cdma_receiver_cc.cc.o
+.PHONY : test_dsss_cdma_receiver_cc.o
+
+# target to build an object file
+test_dsss_cdma_receiver_cc.cc.o:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_dsss_cdma_receiver_cc.dir/build.make tests/CMakeFiles/test_dsss_cdma_receiver_cc.dir/test_dsss_cdma_receiver_cc.cc.o
+.PHONY : test_dsss_cdma_receiver_cc.cc.o
+
+test_dsss_cdma_receiver_cc.i: test_dsss_cdma_receiver_cc.cc.i
+.PHONY : test_dsss_cdma_receiver_cc.i
+
+# target to preprocess a source file
+test_dsss_cdma_receiver_cc.cc.i:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_dsss_cdma_receiver_cc.dir/build.make tests/CMakeFiles/test_dsss_cdma_receiver_cc.dir/test_dsss_cdma_receiver_cc.cc.i
+.PHONY : test_dsss_cdma_receiver_cc.cc.i
+
+test_dsss_cdma_receiver_cc.s: test_dsss_cdma_receiver_cc.cc.s
+.PHONY : test_dsss_cdma_receiver_cc.s
+
+# target to generate assembly for a file
+test_dsss_cdma_receiver_cc.cc.s:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_dsss_cdma_receiver_cc.dir/build.make tests/CMakeFiles/test_dsss_cdma_receiver_cc.dir/test_dsss_cdma_receiver_cc.cc.s
+.PHONY : test_dsss_cdma_receiver_cc.cc.s
+
+test_dsss_cdma_transmitter_cc.o: test_dsss_cdma_transmitter_cc.cc.o
+.PHONY : test_dsss_cdma_transmitter_cc.o
+
+# target to build an object file
+test_dsss_cdma_transmitter_cc.cc.o:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_dsss_cdma_transmitter_cc.dir/build.make tests/CMakeFiles/test_dsss_cdma_transmitter_cc.dir/test_dsss_cdma_transmitter_cc.cc.o
+.PHONY : test_dsss_cdma_transmitter_cc.cc.o
+
+test_dsss_cdma_transmitter_cc.i: test_dsss_cdma_transmitter_cc.cc.i
+.PHONY : test_dsss_cdma_transmitter_cc.i
+
+# target to preprocess a source file
+test_dsss_cdma_transmitter_cc.cc.i:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_dsss_cdma_transmitter_cc.dir/build.make tests/CMakeFiles/test_dsss_cdma_transmitter_cc.dir/test_dsss_cdma_transmitter_cc.cc.i
+.PHONY : test_dsss_cdma_transmitter_cc.cc.i
+
+test_dsss_cdma_transmitter_cc.s: test_dsss_cdma_transmitter_cc.cc.s
+.PHONY : test_dsss_cdma_transmitter_cc.s
+
+# target to generate assembly for a file
+test_dsss_cdma_transmitter_cc.cc.s:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_dsss_cdma_transmitter_cc.dir/build.make tests/CMakeFiles/test_dsss_cdma_transmitter_cc.dir/test_dsss_cdma_transmitter_cc.cc.s
+.PHONY : test_dsss_cdma_transmitter_cc.cc.s
+
+test_gdss_despreader_cc.o: test_gdss_despreader_cc.cc.o
+.PHONY : test_gdss_despreader_cc.o
+
+# target to build an object file
+test_gdss_despreader_cc.cc.o:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_gdss_despreader_cc.dir/build.make tests/CMakeFiles/test_gdss_despreader_cc.dir/test_gdss_despreader_cc.cc.o
+.PHONY : test_gdss_despreader_cc.cc.o
+
+test_gdss_despreader_cc.i: test_gdss_despreader_cc.cc.i
+.PHONY : test_gdss_despreader_cc.i
+
+# target to preprocess a source file
+test_gdss_despreader_cc.cc.i:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_gdss_despreader_cc.dir/build.make tests/CMakeFiles/test_gdss_despreader_cc.dir/test_gdss_despreader_cc.cc.i
+.PHONY : test_gdss_despreader_cc.cc.i
+
+test_gdss_despreader_cc.s: test_gdss_despreader_cc.cc.s
+.PHONY : test_gdss_despreader_cc.s
+
+# target to generate assembly for a file
+test_gdss_despreader_cc.cc.s:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_gdss_despreader_cc.dir/build.make tests/CMakeFiles/test_gdss_despreader_cc.dir/test_gdss_despreader_cc.cc.s
+.PHONY : test_gdss_despreader_cc.cc.s
+
+test_gdss_spreader_cc.o: test_gdss_spreader_cc.cc.o
+.PHONY : test_gdss_spreader_cc.o
+
+# target to build an object file
+test_gdss_spreader_cc.cc.o:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_gdss_spreader_cc.dir/build.make tests/CMakeFiles/test_gdss_spreader_cc.dir/test_gdss_spreader_cc.cc.o
+.PHONY : test_gdss_spreader_cc.cc.o
+
+test_gdss_spreader_cc.i: test_gdss_spreader_cc.cc.i
+.PHONY : test_gdss_spreader_cc.i
+
+# target to preprocess a source file
+test_gdss_spreader_cc.cc.i:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_gdss_spreader_cc.dir/build.make tests/CMakeFiles/test_gdss_spreader_cc.dir/test_gdss_spreader_cc.cc.i
+.PHONY : test_gdss_spreader_cc.cc.i
+
+test_gdss_spreader_cc.s: test_gdss_spreader_cc.cc.s
+.PHONY : test_gdss_spreader_cc.s
+
+# target to generate assembly for a file
+test_gdss_spreader_cc.cc.s:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_gdss_spreader_cc.dir/build.make tests/CMakeFiles/test_gdss_spreader_cc.dir/test_gdss_spreader_cc.cc.s
+.PHONY : test_gdss_spreader_cc.cc.s
+
 test_mod_2fsk.o: test_mod_2fsk.cc.o
 .PHONY : test_mod_2fsk.o
 
@@ -1348,6 +1514,30 @@ test_mod_4fsk.s: test_mod_4fsk.cc.s
 test_mod_4fsk.cc.s:
 	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_mod_4fsk.dir/build.make tests/CMakeFiles/test_mod_4fsk.dir/test_mod_4fsk.cc.s
 .PHONY : test_mod_4fsk.cc.s
+
+test_mod_8fsk.o: test_mod_8fsk.cc.o
+.PHONY : test_mod_8fsk.o
+
+# target to build an object file
+test_mod_8fsk.cc.o:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_mod_8fsk.dir/build.make tests/CMakeFiles/test_mod_8fsk.dir/test_mod_8fsk.cc.o
+.PHONY : test_mod_8fsk.cc.o
+
+test_mod_8fsk.i: test_mod_8fsk.cc.i
+.PHONY : test_mod_8fsk.i
+
+# target to preprocess a source file
+test_mod_8fsk.cc.i:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_mod_8fsk.dir/build.make tests/CMakeFiles/test_mod_8fsk.dir/test_mod_8fsk.cc.i
+.PHONY : test_mod_8fsk.cc.i
+
+test_mod_8fsk.s: test_mod_8fsk.cc.s
+.PHONY : test_mod_8fsk.s
+
+# target to generate assembly for a file
+test_mod_8fsk.cc.s:
+	cd /home/haaken/github-projects/gr-qradiolink/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_mod_8fsk.dir/build.make tests/CMakeFiles/test_mod_8fsk.dir/test_mod_8fsk.cc.s
+.PHONY : test_mod_8fsk.cc.s
 
 test_mod_am.o: test_mod_am.cc.o
 .PHONY : test_mod_am.o
@@ -1650,8 +1840,13 @@ help:
 	@echo "... qradiolink_test_mod_qpsk"
 	@echo "... qradiolink_test_mod_ssb"
 	@echo "... qradiolink_test_rssi_tag_block"
+	@echo "... test_dsss_cdma_receiver_cc"
+	@echo "... test_dsss_cdma_transmitter_cc"
+	@echo "... test_gdss_despreader_cc"
+	@echo "... test_gdss_spreader_cc"
 	@echo "... test_mod_2fsk"
 	@echo "... test_mod_4fsk"
+	@echo "... test_mod_8fsk"
 	@echo "... test_mod_am"
 	@echo "... test_mod_bpsk"
 	@echo "... test_mod_freedv"
@@ -1702,12 +1897,27 @@ help:
 	@echo "... test_demod_wbfm.o"
 	@echo "... test_demod_wbfm.i"
 	@echo "... test_demod_wbfm.s"
+	@echo "... test_dsss_cdma_receiver_cc.o"
+	@echo "... test_dsss_cdma_receiver_cc.i"
+	@echo "... test_dsss_cdma_receiver_cc.s"
+	@echo "... test_dsss_cdma_transmitter_cc.o"
+	@echo "... test_dsss_cdma_transmitter_cc.i"
+	@echo "... test_dsss_cdma_transmitter_cc.s"
+	@echo "... test_gdss_despreader_cc.o"
+	@echo "... test_gdss_despreader_cc.i"
+	@echo "... test_gdss_despreader_cc.s"
+	@echo "... test_gdss_spreader_cc.o"
+	@echo "... test_gdss_spreader_cc.i"
+	@echo "... test_gdss_spreader_cc.s"
 	@echo "... test_mod_2fsk.o"
 	@echo "... test_mod_2fsk.i"
 	@echo "... test_mod_2fsk.s"
 	@echo "... test_mod_4fsk.o"
 	@echo "... test_mod_4fsk.i"
 	@echo "... test_mod_4fsk.s"
+	@echo "... test_mod_8fsk.o"
+	@echo "... test_mod_8fsk.i"
+	@echo "... test_mod_8fsk.s"
 	@echo "... test_mod_am.o"
 	@echo "... test_mod_am.i"
 	@echo "... test_mod_am.s"

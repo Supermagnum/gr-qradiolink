@@ -1,0 +1,92 @@
+id: qradiolink_gdss_despreader_cc
+label: GDSS Despreader
+category: '[QRadioLink]/DSSS'
+flags: [ python ]
+
+parameters:
+-   id: sequence_length
+    label: Sequence Length
+    dtype: int
+    default: '127'
+    minimum: 1
+-   id: chips_per_symbol
+    label: Chips per Symbol
+    dtype: int
+    default: '42'
+    minimum: 1
+-   id: variance
+    label: Variance (must match transmitter)
+    dtype: float
+    default: '1.0'
+    minimum: 0.001
+-   id: seed
+    label: Random Seed (must match transmitter)
+    dtype: int
+    default: '0'
+    minimum: 0
+-   id: correlation_threshold
+    label: Correlation Threshold
+    dtype: float
+    default: '0.7'
+-   id: timing_error_tolerance
+    label: Timing Error Tolerance
+    dtype: int
+    default: '2'
+
+inputs:
+-   domain: stream
+    dtype: complex
+
+outputs:
+-   domain: stream
+    dtype: complex
+    label: Despread Symbols
+-   domain: stream
+    dtype: float
+    label: Lock Status
+-   domain: stream
+    dtype: float
+    label: SNR Estimate (dB)
+
+templates:
+    imports: |
+        from gnuradio import qradiolink
+        import numpy as np
+    make: |-
+        # Generate Gaussian spreading sequence (must match transmitter)
+        # Note: In practice, the sequence should be shared between tx/rx
+        # For GRC, we generate it here using the same parameters
+        np.random.seed(${seed} if ${seed} > 0 else None)
+        spreading_sequence = np.random.normal(0.0, np.sqrt(${variance}), ${sequence_length}).tolist()
+        
+        qradiolink.gdss_despreader_cc(
+            spreading_sequence,
+            ${chips_per_symbol},
+            ${correlation_threshold},
+            ${timing_error_tolerance})
+
+documentation: |-
+    GDSS (Gaussian-Distributed Spread-Spectrum) Despreader.
+    
+    This block despreads a GDSS signal using correlation with the Gaussian spreading
+    sequence. It includes timing synchronization, lock detection, and SNR estimation.
+    
+    Parameters:
+    - Sequence Length: Length of the Gaussian spreading sequence (must match transmitter)
+    - Chips per Symbol: Number of chips per symbol (must match transmitter)
+    - Variance: Variance of the Gaussian distribution (must match transmitter)
+    - Random Seed: Seed for random number generation (must match transmitter)
+    - Correlation Threshold: Threshold for valid correlation (default: 0.7)
+    - Timing Error Tolerance: Samples tolerance for timing errors (default: 2)
+    
+    Input: Spread spectrum signal at chip rate
+    Outputs:
+    - Despread Symbols: Recovered complex symbols at symbol rate
+    - Lock Status: 0.0 = unlocked, 1.0 = locked
+    - SNR Estimate: Signal-to-noise ratio in dB
+    
+    The spreading sequence is regenerated using the same parameters as the transmitter.
+    For best performance, ensure the seed and variance match exactly.
+
+file_format: 1
+

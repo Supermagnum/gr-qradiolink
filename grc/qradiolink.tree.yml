@@ -8,6 +8,7 @@ description: QRadioLink blocks for digital and analog modulation
 - Modulators:
   - qradiolink_mod_2fsk
   - qradiolink_mod_4fsk
+  - qradiolink_mod_8fsk
   - qradiolink_mod_am
   - qradiolink_mod_gmsk
   - qradiolink_mod_bpsk
@@ -27,10 +28,18 @@ description: QRadioLink blocks for digital and analog modulation
   - qradiolink_demod_qpsk
   - qradiolink_demod_gmsk
   - qradiolink_demod_4fsk
+  - qradiolink_demod_8fsk
   - qradiolink_demod_dsss
   - qradiolink_demod_m17
   - qradiolink_demod_nxdn
   - qradiolink_demod_dpmr
+- DSSS:
+  - qradiolink_dsss_spreader_cc
+  - qradiolink_dsss_despreader_cc
+  - qradiolink_dsss_cdma_transmitter_cc
+  - qradiolink_dsss_cdma_receiver_cc
+  - qradiolink_gdss_spreader_cc
+  - qradiolink_gdss_despreader_cc
 - Supporting Blocks:
   - qradiolink_m17_deframer
 - FEC:

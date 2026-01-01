@@ -82,9 +82,19 @@ public:
     static std::vector<int> generate_msequence_1023();
 
     /*!
+     * \brief Generate standard 255-chip m-sequence (polynomial [8,4,3,2])
+     */
+    static std::vector<int> generate_msequence_255();
+
+    /*!
+     * \brief Generate standard 2047-chip m-sequence (polynomial [11,2])
+     */
+    static std::vector<int> generate_msequence_2047();
+
+    /*!
      * \brief Generate Gold code family for multi-user operation
      *
-     * \param length Sequence length (127, 511, or 1023)
+     * \param length Sequence length (127, 255, 511, 1023, or 2047)
      * \param num_codes Number of codes to generate
      * \return Vector of code sequences
      */

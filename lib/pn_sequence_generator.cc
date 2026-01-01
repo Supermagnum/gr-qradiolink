@@ -148,6 +148,20 @@ std::vector<int> pn_sequence_generator::generate_msequence_1023()
     return generate_msequence(taps, 1023);
 }
 
+std::vector<int> pn_sequence_generator::generate_msequence_255()
+{
+    // Polynomial: x^8 + x^4 + x^3 + x^2 + 1 (taps: [8, 4, 3, 2])
+    std::vector<int> taps = {8, 4, 3, 2};
+    return generate_msequence(taps, 255);
+}
+
+std::vector<int> pn_sequence_generator::generate_msequence_2047()
+{
+    // Polynomial: x^11 + x^2 + 1 (taps: [11, 2])
+    std::vector<int> taps = {11, 2};
+    return generate_msequence(taps, 2047);
+}
+
 std::vector<std::vector<int>> pn_sequence_generator::generate_gold_code_family(int length, int num_codes)
 {
     std::vector<std::vector<int>> family;
@@ -160,6 +174,10 @@ std::vector<std::vector<int>> pn_sequence_generator::generate_gold_code_family(i
         // Preferred pair for 127: [7,1] and [7,3]
         poly1_taps = {7, 1};
         poly2_taps = {7, 3};
+    } else if (length == 255) {
+        // Preferred pair for 255: [8,4,3,2] and [8,6,5,3]
+        poly1_taps = {8, 4, 3, 2};
+        poly2_taps = {8, 6, 5, 3};
     } else if (length == 511) {
         // Preferred pair for 511: [9,4] and [9,6]
         poly1_taps = {9, 4};
@@ -168,11 +186,19 @@ std::vector<std::vector<int>> pn_sequence_generator::generate_gold_code_family(i
         // Preferred pair for 1023: [10,3] and [10,8]
         poly1_taps = {10, 3};
         poly2_taps = {10, 8};
+    } else if (length == 2047) {
+        // Preferred pair for 2047: [11,2] and [11,8]
+        poly1_taps = {11, 2};
+        poly2_taps = {11, 8};
     } else {
         // Default to m-sequence if no preferred pair defined
         if (length == 127) {
             for (int i = 0; i < num_codes; i++) {
                 family.push_back(generate_msequence_127());
+            }
+        } else if (length == 255) {
+            for (int i = 0; i < num_codes; i++) {
+                family.push_back(generate_msequence_255());
             }
         } else if (length == 511) {
             for (int i = 0; i < num_codes; i++) {
@@ -181,6 +207,10 @@ std::vector<std::vector<int>> pn_sequence_generator::generate_gold_code_family(i
         } else if (length == 1023) {
             for (int i = 0; i < num_codes; i++) {
                 family.push_back(generate_msequence_1023());
+            }
+        } else if (length == 2047) {
+            for (int i = 0; i < num_codes; i++) {
+                family.push_back(generate_msequence_2047());
             }
         }
         return family;

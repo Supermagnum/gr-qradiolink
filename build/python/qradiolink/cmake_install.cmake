@@ -43,7 +43,10 @@ if(NOT DEFINED CMAKE_OBJDUMP)
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python3.12/dist-packages/gnuradio/qradiolink" TYPE FILE FILES "/home/haaken/github-projects/gr-qradiolink/python/qradiolink/__init__.py")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python3.12/dist-packages/gnuradio/qradiolink" TYPE FILE FILES
+    "/home/haaken/github-projects/gr-qradiolink/python/qradiolink/__init__.py"
+    "/home/haaken/github-projects/gr-qradiolink/python/qradiolink/ldpc_code_helper.py"
+    )
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)

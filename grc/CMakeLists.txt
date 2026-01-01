@@ -11,6 +11,7 @@
 install(FILES
     qradiolink_mod_2fsk.block.yml
     qradiolink_mod_4fsk.block.yml
+    qradiolink_mod_8fsk.block.yml
     qradiolink_mod_cpm_4fsk.block.yml
     qradiolink_mod_am.block.yml
     qradiolink_mod_gmsk.block.yml
@@ -22,6 +23,10 @@ install(FILES
     qradiolink_mod_dsss.block.yml
     qradiolink_dsss_spreader_cc.block.yml
     qradiolink_dsss_despreader_cc.block.yml
+    qradiolink_dsss_cdma_transmitter_cc.block.yml
+    qradiolink_dsss_cdma_receiver_cc.block.yml
+    qradiolink_gdss_spreader_cc.block.yml
+    qradiolink_gdss_despreader_cc.block.yml
     qradiolink_mod_nxdn.block.yml
     qradiolink_mod_dpmr.block.yml
     qradiolink_mod_dmr.block.yml
@@ -39,6 +44,7 @@ install(FILES
     qradiolink_demod_soqpsk.block.yml
     qradiolink_demod_gmsk.block.yml
     qradiolink_demod_4fsk.block.yml
+    qradiolink_demod_8fsk.block.yml
     qradiolink_demod_dsss.block.yml
     qradiolink_demod_m17.block.yml
     qradiolink_m17_coder.block.yml

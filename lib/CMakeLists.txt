@@ -14,6 +14,7 @@ set(gr_qradiolink_sources
     # Modulators
     mod_2fsk_impl.cc
     mod_4fsk_impl.cc
+    mod_8fsk_impl.cc
     mod_cpm_4fsk_impl.cc
     mod_am_impl.cc
     mod_gmsk_impl.cc
@@ -26,6 +27,8 @@ set(gr_qradiolink_sources
     dsss_encoder_bb_impl.cc
     dsss_spreader_cc_impl.cc
     dsss_despreader_cc_impl.cc
+    dsss_cdma_transmitter_cc_impl.cc
+    dsss_cdma_receiver_cc_impl.cc
     pn_sequence_generator.cc
     mod_freedv_impl.cc
     mod_m17_impl.cc
@@ -51,8 +54,11 @@ set(gr_qradiolink_sources
     demod_soqpsk_impl.cc
     demod_gmsk_impl.cc
     demod_4fsk_impl.cc
+    demod_8fsk_impl.cc
     demod_dsss_impl.cc
     dsss_decoder_cc_impl.cc
+    gdss_spreader_cc_impl.cc
+    gdss_despreader_cc_impl.cc
     ../../src/gr/emphasis.cpp
     demod_m17_impl.cc
     demod_freedv_impl.cc

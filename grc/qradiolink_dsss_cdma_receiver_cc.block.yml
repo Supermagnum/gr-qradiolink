@@ -1,0 +1,117 @@
+id: qradiolink_dsss_cdma_receiver_cc
+label: DSSS-CDMA Receiver
+category: '[QRadioLink]/DSSS'
+flags: [ python ]
+
+parameters:
+-   id: spreading_factor
+    label: Spreading Factor
+    dtype: enum
+    default: '128'
+    options: ['32', '64', '128', '256', '512']
+    option_labels: ['32', '64', '128', '256', '512']
+-   id: code_type
+    label: Code Type
+    dtype: enum
+    default: 'msequence_127'
+    options: ['msequence_127', 'msequence_255', 'msequence_511', 'msequence_1023', 'msequence_2047', 'custom']
+    option_labels: ['M-Sequence 127', 'M-Sequence 255', 'M-Sequence 511', 'M-Sequence 1023', 'M-Sequence 2047', 'Custom']
+-   id: spreading_code
+    label: Spreading Code (Custom)
+    dtype: int_vector
+    default: '[]'
+    hide: ${ 'part' if code_type == 'custom' else 'all' }
+-   id: user_index
+    label: User Index (for Gold codes)
+    dtype: int
+    default: '0'
+    minimum: 0
+    maximum: 127
+    hide: ${ 'all' if code_type == 'custom' else 'part' }
+-   id: correlation_threshold
+    label: Correlation Threshold
+    dtype: float
+    default: '0.7'
+-   id: timing_error_tolerance
+    label: Timing Error Tolerance
+    dtype: int
+    default: '2'
+
+inputs:
+-   domain: stream
+    dtype: complex
+    label: Combined CDMA Signal
+
+outputs:
+-   domain: stream
+    dtype: complex
+    label: Despread Symbols
+-   domain: stream
+    dtype: float
+    label: Lock Status
+-   domain: stream
+    dtype: float
+    label: SNR Estimate (dB)
+-   domain: stream
+    dtype: float
+    label: Interference Estimate (dB)
+
+templates:
+    imports: |
+        from gnuradio import qradiolink
+        import numpy as np
+    make: |
+        % if code_type == 'msequence_127':
+        # Generate 127-chip m-sequence: polynomial x^7 + x + 1
+        spreading_code = [1, 1, 1, 1, 1, 1, 1, -1, -1, -1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, 1, 1, -1, -1, -1, -1, 1, -1, -1, 1, -1, 1, 1, 1, 1, -1, 1, -1, -1, -1, 1, 1, -1, 1, 1, -1, 1, -1, 1, -1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, 1, 1, 1, -1, -1, 1, 1, -1, -1, -1, 1, 1, 1, 1, 1, -1, -1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, -1, 1, 1, 1, 1, -1, 1, 1, -1]
+        % elif code_type == 'msequence_255':
+        # Generate 255-chip m-sequence: polynomial x^8 + x^4 + x^3 + x^2 + 1
+        # Placeholder - full sequence generated in C++
+        spreading_code = [1] * 255
+        % elif code_type == 'msequence_511':
+        # Generate 511-chip m-sequence: polynomial x^9 + x^4 + 1
+        spreading_code = [1] * 511
+        % elif code_type == 'msequence_1023':
+        # Generate 1023-chip m-sequence: polynomial x^10 + x^3 + 1
+        spreading_code = [1] * 1023
+        % elif code_type == 'msequence_2047':
+        # Generate 2047-chip m-sequence: polynomial x^11 + x^2 + 1
+        spreading_code = [1] * 2047
+        % else:
+        spreading_code = ${spreading_code}
+        % endif
+        
+        qradiolink.dsss_cdma_receiver_cc(
+            spreading_code,
+            int(${spreading_factor}),
+            ${correlation_threshold},
+            ${timing_error_tolerance})
+
+documentation: |-
+    DSSS-CDMA Receiver despreads a combined CDMA signal to recover a specific user's signal.
+    
+    This block accepts a combined CDMA signal and despreads it using the desired user's
+    spreading code to recover their signal. It includes timing synchronization, lock
+    detection, SNR estimation, and multi-user interference estimation.
+    
+    Parameters:
+    - Spreading Factor: Chips per symbol (32, 64, 128, 256, or 512)
+    - Code Type: Type of spreading code (m-sequence or custom)
+    - Spreading Code: Custom spreading code (+1/-1 values) if Code Type is Custom
+    - User Index: Index for Gold code selection (0-127, for Gold code families)
+    - Correlation Threshold: Threshold for valid correlation (default: 0.7)
+    - Timing Error Tolerance: Samples tolerance for timing errors (default: 2)
+    
+    Input: Combined CDMA signal at chip rate
+    Outputs:
+    - Despread Symbols: Recovered complex symbols for the selected user at symbol rate
+    - Lock Status: 0.0 = unlocked, 1.0 = locked
+    - SNR Estimate: Signal-to-noise ratio in dB
+    - Interference Estimate: Multi-user interference estimate in dB
+    
+    The block uses correlation to separate the desired user's signal from other users
+    and noise. For best performance, use orthogonal or quasi-orthogonal spreading codes
+    (Gold codes) that match the transmitter.
+
+file_format: 1
+

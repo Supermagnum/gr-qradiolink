@@ -12,6 +12,7 @@ install(
     FILES api.h
           mod_2fsk.h
           mod_4fsk.h
+          mod_8fsk.h
           mod_cpm_4fsk.h
           mod_am.h
           mod_gmsk.h
@@ -23,6 +24,8 @@ install(
           mod_dsss.h
           dsss_spreader_cc.h
           dsss_despreader_cc.h
+          dsss_cdma_transmitter_cc.h
+          dsss_cdma_receiver_cc.h
           mod_freedv.h
           mod_m17.h
           m17_coder.h
@@ -46,7 +49,10 @@ install(
           demod_soqpsk.h
           demod_gmsk.h
           demod_4fsk.h
+          demod_8fsk.h
           demod_dsss.h
+          gdss_spreader_cc.h
+          gdss_despreader_cc.h
           demod_m17.h
           demod_freedv.h
           demod_dmr.h

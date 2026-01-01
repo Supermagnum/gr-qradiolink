@@ -42,7 +42,7 @@
 /home/haaken/github-projects/gr-qradiolink/build/docs/doxygen/CMakeFiles/install.dir
 /home/haaken/github-projects/gr-qradiolink/build/docs/doxygen/CMakeFiles/install/local.dir
 /home/haaken/github-projects/gr-qradiolink/build/docs/doxygen/CMakeFiles/install/strip.dir
-/home/haaken/github-projects/gr-qradiolink/build/python/qradiolink/CMakeFiles/pygen_python_qradiolink_ed0f04db319a629b57d0e77610a5d272.dir
+/home/haaken/github-projects/gr-qradiolink/build/python/qradiolink/CMakeFiles/pygen_python_qradiolink_e05b4aa43e8ef6707f5f2fe764c83033.dir
 /home/haaken/github-projects/gr-qradiolink/build/python/qradiolink/CMakeFiles/test.dir
 /home/haaken/github-projects/gr-qradiolink/build/python/qradiolink/CMakeFiles/edit_cache.dir
 /home/haaken/github-projects/gr-qradiolink/build/python/qradiolink/CMakeFiles/rebuild_cache.dir
@@ -95,6 +95,11 @@
 /home/haaken/github-projects/gr-qradiolink/build/tests/CMakeFiles/ContinuousSubmit.dir
 /home/haaken/github-projects/gr-qradiolink/build/tests/CMakeFiles/test_mod_2fsk.dir
 /home/haaken/github-projects/gr-qradiolink/build/tests/CMakeFiles/test_mod_4fsk.dir
+/home/haaken/github-projects/gr-qradiolink/build/tests/CMakeFiles/test_mod_8fsk.dir
+/home/haaken/github-projects/gr-qradiolink/build/tests/CMakeFiles/test_gdss_spreader_cc.dir
+/home/haaken/github-projects/gr-qradiolink/build/tests/CMakeFiles/test_gdss_despreader_cc.dir
+/home/haaken/github-projects/gr-qradiolink/build/tests/CMakeFiles/test_dsss_cdma_transmitter_cc.dir
+/home/haaken/github-projects/gr-qradiolink/build/tests/CMakeFiles/test_dsss_cdma_receiver_cc.dir
 /home/haaken/github-projects/gr-qradiolink/build/tests/CMakeFiles/test_mod_am.dir
 /home/haaken/github-projects/gr-qradiolink/build/tests/CMakeFiles/test_mod_gmsk.dir
 /home/haaken/github-projects/gr-qradiolink/build/tests/CMakeFiles/test_mod_bpsk.dir

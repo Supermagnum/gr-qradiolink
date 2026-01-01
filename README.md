@@ -20,14 +20,17 @@ The QRadioLink Codeberg page does not mention any crashes or other known issues.
 
 ### Modulation/Demodulation Blocks
 
-- **Digital Modulations**: 2FSK, 4FSK, GMSK, BPSK, QPSK, SOQPSK, DSSS
+- **Digital Modulations**: 2FSK, 4FSK, 8FSK, GMSK, BPSK, QPSK, SOQPSK, DSSS, GDSS
   - **2FSK**: Binary Frequency Shift Keying modulator/demodulator (see [GRC Block](grc/qradiolink_mod_2fsk.block.yml), [Examples](examples/README.md))
   - **4FSK**: 4-level Frequency Shift Keying modulator/demodulator (see [GRC Block](grc/qradiolink_mod_4fsk.block.yml), [Examples](examples/README.md))
+  - **8FSK**: 8-level Frequency Shift Keying modulator/demodulator with 3 bits per symbol (see [GRC Block](grc/qradiolink_mod_8fsk.block.yml), [Examples](examples/README.md))
   - **GMSK**: Gaussian Minimum Shift Keying modulator/demodulator (see [GRC Block](grc/qradiolink_mod_gmsk.block.yml), [Examples](examples/README.md))
   - **BPSK**: Binary Phase Shift Keying modulator/demodulator (see [GRC Block](grc/qradiolink_mod_bpsk.block.yml), [Examples](examples/README.md))
   - **QPSK**: Quadrature Phase Shift Keying modulator/demodulator (see [GRC Block](grc/qradiolink_mod_qpsk.block.yml), [Examples](examples/README.md))
   - **SOQPSK**: Shaped Offset Quadrature Phase Shift Keying modulator/demodulator (see [GRC Block](grc/qradiolink_mod_soqpsk.block.yml), [Details](#soqpsk-shaped-offset-quadrature-phase-shift-keying))
   - **DSSS**: Direct Sequence Spread Spectrum with enhanced spreader/despreader blocks, PN sequence generation (m-sequences, Gold codes), timing recovery, and lock detection (see [DSSS Blocks Guide](docs/DSSS_BLOCKS.md), [GRC Blocks](grc/qradiolink_dsss_spreader_cc.block.yml))
+  - **DSSS-CDMA**: Code Division Multiple Access transmitter and receiver with multi-user support, configurable spreading factors (32, 64, 128, 256, 512), and support for multiple modulation schemes (2FSK, 4FSK, 8FSK, GMSK, BPSK, QPSK, SOQPSK) (see [GRC Blocks](grc/qradiolink_dsss_cdma_transmitter_cc.block.yml))
+  - **GDSS**: Gaussian-Distributed Spread-Spectrum with spreader/despreader blocks using Gaussian-distributed sequences instead of binary PN sequences, providing better spectral properties and improved interference rejection (see [GRC Blocks](grc/qradiolink_gdss_spreader_cc.block.yml))
 - **Analog Modulations**: AM, SSB (USB/LSB), NBFM
   - **AM**: Amplitude Modulation modulator/demodulator (see [GRC Block](grc/qradiolink_mod_am.block.yml), [Examples](examples/README.md))
   - **SSB**: Single Sideband (USB/LSB) modulator/demodulator (see [GRC Block](grc/qradiolink_mod_ssb.block.yml), [Examples](examples/README.md))
@@ -51,6 +54,8 @@ The QRadioLink Codeberg page does not mention any crashes or other known issues.
   - **Auto-selection**: Automatically selects best matching code from available AList files
   - See [GRC Blocks](grc/qradiolink_ldpc_encoder.block.yml)
 - **DSSS Blocks**: Enhanced spreader/despreader with PN sequence generation, timing recovery, and acquisition (see [DSSS Blocks Guide](docs/DSSS_BLOCKS.md), [GRC Blocks](grc/qradiolink_dsss_spreader_cc.block.yml))
+- **DSSS-CDMA Blocks**: Multi-user CDMA transmitter and receiver with configurable spreading factors, Gold code support, and multi-user interference estimation (see [GRC Blocks](grc/qradiolink_dsss_cdma_transmitter_cc.block.yml))
+- **GDSS Blocks**: Gaussian-Distributed Spread-Spectrum spreader and despreader with Gaussian sequence generation, timing recovery, and lock detection (see [GRC Blocks](grc/qradiolink_gdss_spreader_cc.block.yml))
 
 ### SOQPSK (Shaped Offset Quadrature Phase Shift Keying)
 
@@ -216,6 +221,8 @@ All blocks have GRC (GNU Radio Companion) block definitions in the `grc/` direct
 - [QPSK Modulator](grc/qradiolink_mod_qpsk.block.yml) / [QPSK Demodulator](grc/qradiolink_demod_qpsk.block.yml)
 - [SOQPSK Modulator](grc/qradiolink_mod_soqpsk.block.yml) / [SOQPSK Demodulator](grc/qradiolink_demod_soqpsk.block.yml)
 - [DSSS Spreader](grc/qradiolink_dsss_spreader_cc.block.yml) / [DSSS Despreader](grc/qradiolink_dsss_despreader_cc.block.yml)
+- [DSSS-CDMA Transmitter](grc/qradiolink_dsss_cdma_transmitter_cc.block.yml) / [DSSS-CDMA Receiver](grc/qradiolink_dsss_cdma_receiver_cc.block.yml)
+- [GDSS Spreader](grc/qradiolink_gdss_spreader_cc.block.yml) / [GDSS Despreader](grc/qradiolink_gdss_despreader_cc.block.yml)
 
 **Analog Modulations:**
 - [AM Modulator](grc/qradiolink_mod_am.block.yml) / [AM Demodulator](grc/qradiolink_demod_am.block.yml)

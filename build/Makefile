@@ -198,17 +198,17 @@ gnuradio-qradiolink/fast:
 .PHONY : gnuradio-qradiolink/fast
 
 #=============================================================================
-# Target rules for targets named pygen_python_qradiolink_ed0f04db319a629b57d0e77610a5d272
+# Target rules for targets named pygen_python_qradiolink_e05b4aa43e8ef6707f5f2fe764c83033
 
 # Build rule for target.
-pygen_python_qradiolink_ed0f04db319a629b57d0e77610a5d272: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pygen_python_qradiolink_ed0f04db319a629b57d0e77610a5d272
-.PHONY : pygen_python_qradiolink_ed0f04db319a629b57d0e77610a5d272
+pygen_python_qradiolink_e05b4aa43e8ef6707f5f2fe764c83033: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pygen_python_qradiolink_e05b4aa43e8ef6707f5f2fe764c83033
+.PHONY : pygen_python_qradiolink_e05b4aa43e8ef6707f5f2fe764c83033
 
 # fast build rule for target.
-pygen_python_qradiolink_ed0f04db319a629b57d0e77610a5d272/fast:
-	$(MAKE) $(MAKESILENT) -f python/qradiolink/CMakeFiles/pygen_python_qradiolink_ed0f04db319a629b57d0e77610a5d272.dir/build.make python/qradiolink/CMakeFiles/pygen_python_qradiolink_ed0f04db319a629b57d0e77610a5d272.dir/build
-.PHONY : pygen_python_qradiolink_ed0f04db319a629b57d0e77610a5d272/fast
+pygen_python_qradiolink_e05b4aa43e8ef6707f5f2fe764c83033/fast:
+	$(MAKE) $(MAKESILENT) -f python/qradiolink/CMakeFiles/pygen_python_qradiolink_e05b4aa43e8ef6707f5f2fe764c83033.dir/build.make python/qradiolink/CMakeFiles/pygen_python_qradiolink_e05b4aa43e8ef6707f5f2fe764c83033.dir/build
+.PHONY : pygen_python_qradiolink_e05b4aa43e8ef6707f5f2fe764c83033/fast
 
 #=============================================================================
 # Target rules for targets named qradiolink_python
@@ -614,6 +614,71 @@ test_mod_4fsk/fast:
 .PHONY : test_mod_4fsk/fast
 
 #=============================================================================
+# Target rules for targets named test_mod_8fsk
+
+# Build rule for target.
+test_mod_8fsk: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_mod_8fsk
+.PHONY : test_mod_8fsk
+
+# fast build rule for target.
+test_mod_8fsk/fast:
+	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_mod_8fsk.dir/build.make tests/CMakeFiles/test_mod_8fsk.dir/build
+.PHONY : test_mod_8fsk/fast
+
+#=============================================================================
+# Target rules for targets named test_gdss_spreader_cc
+
+# Build rule for target.
+test_gdss_spreader_cc: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_gdss_spreader_cc
+.PHONY : test_gdss_spreader_cc
+
+# fast build rule for target.
+test_gdss_spreader_cc/fast:
+	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_gdss_spreader_cc.dir/build.make tests/CMakeFiles/test_gdss_spreader_cc.dir/build
+.PHONY : test_gdss_spreader_cc/fast
+
+#=============================================================================
+# Target rules for targets named test_gdss_despreader_cc
+
+# Build rule for target.
+test_gdss_despreader_cc: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_gdss_despreader_cc
+.PHONY : test_gdss_despreader_cc
+
+# fast build rule for target.
+test_gdss_despreader_cc/fast:
+	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_gdss_despreader_cc.dir/build.make tests/CMakeFiles/test_gdss_despreader_cc.dir/build
+.PHONY : test_gdss_despreader_cc/fast
+
+#=============================================================================
+# Target rules for targets named test_dsss_cdma_transmitter_cc
+
+# Build rule for target.
+test_dsss_cdma_transmitter_cc: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_dsss_cdma_transmitter_cc
+.PHONY : test_dsss_cdma_transmitter_cc
+
+# fast build rule for target.
+test_dsss_cdma_transmitter_cc/fast:
+	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_dsss_cdma_transmitter_cc.dir/build.make tests/CMakeFiles/test_dsss_cdma_transmitter_cc.dir/build
+.PHONY : test_dsss_cdma_transmitter_cc/fast
+
+#=============================================================================
+# Target rules for targets named test_dsss_cdma_receiver_cc
+
+# Build rule for target.
+test_dsss_cdma_receiver_cc: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_dsss_cdma_receiver_cc
+.PHONY : test_dsss_cdma_receiver_cc
+
+# fast build rule for target.
+test_dsss_cdma_receiver_cc/fast:
+	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_dsss_cdma_receiver_cc.dir/build.make tests/CMakeFiles/test_dsss_cdma_receiver_cc.dir/build
+.PHONY : test_dsss_cdma_receiver_cc/fast
+
+#=============================================================================
 # Target rules for targets named test_mod_am
 
 # Build rule for target.
@@ -979,7 +1044,7 @@ help:
 	@echo "... NightlySubmit"
 	@echo "... NightlyTest"
 	@echo "... NightlyUpdate"
-	@echo "... pygen_python_qradiolink_ed0f04db319a629b57d0e77610a5d272"
+	@echo "... pygen_python_qradiolink_e05b4aa43e8ef6707f5f2fe764c83033"
 	@echo "... uninstall"
 	@echo "... gnuradio-qradiolink"
 	@echo "... qradiolink_python"
@@ -1003,8 +1068,13 @@ help:
 	@echo "... qradiolink_test_mod_qpsk"
 	@echo "... qradiolink_test_mod_ssb"
 	@echo "... qradiolink_test_rssi_tag_block"
+	@echo "... test_dsss_cdma_receiver_cc"
+	@echo "... test_dsss_cdma_transmitter_cc"
+	@echo "... test_gdss_despreader_cc"
+	@echo "... test_gdss_spreader_cc"
 	@echo "... test_mod_2fsk"
 	@echo "... test_mod_4fsk"
+	@echo "... test_mod_8fsk"
 	@echo "... test_mod_am"
 	@echo "... test_mod_bpsk"
 	@echo "... test_mod_freedv"
