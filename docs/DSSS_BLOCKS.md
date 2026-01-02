@@ -142,6 +142,94 @@ The despreader implements a three-state machine:
 - Noise power: Estimated from correlation sidelobes
 - Update rate: Exponential moving average (95% old, 5% new)
 
+## Using Lock Status and SNR Estimate Outputs
+
+The `dsss_despreader_cc` block provides two additional float outputs that can be connected to various GNU Radio blocks for monitoring, control, and analysis:
+
+### Lock Status Output (float: 0.0 = unlocked, 1.0 = locked)
+
+**Visualization and Monitoring:**
+- **QT GUI Number Sink**: Display current lock status as a numeric value
+- **QT GUI Time Sink**: Plot lock status over time to visualize acquisition and lock transitions
+- **QT GUI Range**: Use as an indicator (0.0 = red/unlocked, 1.0 = green/locked)
+
+**Logging and Recording:**
+- **File Sink**: Log lock status to a file for post-processing analysis
+- **Message Debug**: Print lock status changes to console for debugging
+
+**Control and Triggering:**
+- **Threshold**: Trigger actions when lock is achieved (e.g., enable data processing)
+- **Multiply Const**: Scale the lock status for use with other blocks
+- **Stream to Tagged Stream**: Tag the data stream when lock state changes
+
+**Statistics:**
+- **Probe Signal**: Sample lock status values programmatically
+- **Moving Average**: Smooth lock status for hysteresis control
+
+### SNR Estimate Output (float: dB)
+
+**Visualization and Monitoring:**
+- **QT GUI Number Sink**: Display current SNR value in dB
+- **QT GUI Time Sink**: Plot SNR over time to monitor signal quality
+- **QT GUI Waterfall Sink**: Visualize SNR alongside frequency/time data
+
+**Logging and Recording:**
+- **File Sink**: Record SNR measurements for performance analysis
+- **Message Debug**: Print SNR values to console
+
+**Adaptive Processing:**
+- **Multiply Const**: Scale SNR for gain control applications
+- **Threshold**: Trigger actions based on SNR thresholds (e.g., low SNR warning)
+- **Conditional Blocks**: Adjust processing parameters based on SNR (adaptive modulation, coding rate, etc.)
+
+**Statistics and Analysis:**
+- **Moving Average**: Smooth SNR values to reduce noise in measurements
+- **Probe Signal**: Sample SNR values for programmatic control
+- **Stream to Tagged Stream**: Tag data when SNR crosses specific thresholds
+
+### Common Use Cases
+
+**1. Lock Indicator Display:**
+```
+DSSS Despreader → Lock Status → QT GUI Number Sink
+```
+Shows 0.0 (unlocked) or 1.0 (locked) in real-time.
+
+**2. SNR Monitoring:**
+```
+DSSS Despreader → SNR Estimate → QT GUI Time Sink
+```
+Plots SNR over time to monitor signal quality and fading conditions.
+
+**3. Adaptive Gain Control:**
+```
+DSSS Despreader → SNR Estimate → Threshold → Multiply Const (for AGC)
+```
+Automatically adjusts gain based on received signal quality.
+
+**4. Data Logging:**
+```
+DSSS Despreader → Lock Status → File Sink (lock.log)
+DSSS Despreader → SNR Estimate → File Sink (snr.log)
+```
+Records lock status and SNR measurements for post-processing analysis.
+
+**5. Conditional Processing:**
+```
+DSSS Despreader → Lock Status → Stream to Tagged Stream → (process only when locked)
+```
+Only processes data when the despreader has achieved lock, improving system reliability.
+
+**6. Performance Monitoring:**
+```
+DSSS Despreader → SNR Estimate → Moving Average → QT GUI Number Sink
+```
+Displays smoothed SNR values for better readability.
+
+**Note:** Both outputs are float streams at the symbol rate (not chip rate), matching the despread symbols output rate. This ensures proper synchronization when connecting to downstream blocks.
+
+**Note for GDSS Blocks:** The `gdss_despreader_cc` block provides identical Lock Status and SNR Estimate outputs with the same characteristics and can be used with the same downstream blocks as described above.
+
 ## Integration with Existing System
 
 ### Transmit Chain

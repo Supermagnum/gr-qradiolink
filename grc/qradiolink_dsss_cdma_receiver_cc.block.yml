@@ -46,15 +46,19 @@ outputs:
 -   domain: stream
     dtype: complex
     label: Despread Symbols
+    optional: false
 -   domain: stream
     dtype: float
     label: Lock Status
+    optional: false
 -   domain: stream
     dtype: float
     label: SNR Estimate (dB)
+    optional: false
 -   domain: stream
     dtype: float
     label: Interference Estimate (dB)
+    optional: false
 
 templates:
     imports: |
