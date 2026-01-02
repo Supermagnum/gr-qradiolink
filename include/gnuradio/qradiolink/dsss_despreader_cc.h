@@ -98,6 +98,8 @@ public:
      */
     virtual float get_snr_estimate() const;
 
+    virtual ~dsss_despreader_cc();
+
 protected:
     dsss_despreader_cc(const std::string& name,
                        gr::io_signature::sptr input_signature,

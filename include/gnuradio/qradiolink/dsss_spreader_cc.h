@@ -57,6 +57,8 @@ public:
      */
     virtual void set_chips_per_symbol(int chips_per_symbol);
 
+    virtual ~dsss_spreader_cc();
+
 protected:
     dsss_spreader_cc(const std::string& name,
                      gr::io_signature::sptr input_signature,

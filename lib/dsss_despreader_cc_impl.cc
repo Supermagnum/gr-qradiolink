@@ -20,6 +20,35 @@
 namespace gr {
 namespace qradiolink {
 
+// Define virtual destructor - this forces vtable generation
+dsss_despreader_cc::~dsss_despreader_cc() {}
+
+// Base class implementations (should never be called, actual impl is in dsss_despreader_cc_impl)
+void dsss_despreader_cc::set_pn_sequence(const std::vector<int>& pn_sequence)
+{
+    (void)pn_sequence; // Suppress unused parameter warning
+}
+
+void dsss_despreader_cc::set_chips_per_symbol(int chips_per_symbol)
+{
+    (void)chips_per_symbol; // Suppress unused parameter warning
+}
+
+dsss_despreader_cc::sync_state dsss_despreader_cc::get_sync_state() const
+{
+    return STATE_ACQUISITION;
+}
+
+bool dsss_despreader_cc::is_locked() const
+{
+    return false;
+}
+
+float dsss_despreader_cc::get_snr_estimate() const
+{
+    return 0.0f;
+}
+
 dsss_despreader_cc::sptr dsss_despreader_cc::make(const std::vector<int>& pn_sequence,
                                                   int chips_per_symbol,
                                                   float correlation_threshold,

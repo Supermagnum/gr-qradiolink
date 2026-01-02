@@ -19,6 +19,20 @@
 namespace gr {
 namespace qradiolink {
 
+// Define virtual destructor - this forces vtable generation
+dsss_spreader_cc::~dsss_spreader_cc() {}
+
+// Base class implementations (should never be called, actual impl is in dsss_spreader_cc_impl)
+void dsss_spreader_cc::set_pn_sequence(const std::vector<int>& pn_sequence)
+{
+    (void)pn_sequence; // Suppress unused parameter warning
+}
+
+void dsss_spreader_cc::set_chips_per_symbol(int chips_per_symbol)
+{
+    (void)chips_per_symbol; // Suppress unused parameter warning
+}
+
 dsss_spreader_cc::sptr dsss_spreader_cc::make(const std::vector<int>& pn_sequence, int chips_per_symbol)
 {
     return gnuradio::get_initial_sptr(
