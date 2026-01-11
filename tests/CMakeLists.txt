@@ -233,6 +233,7 @@ list(APPEND test_gr_qradiolink_sources
     test_mod_ssb.cc
     test_mod_qpsk.cc
     test_mod_nbfm.cc
+    test_mod_wbfm.cc
     test_mod_dsss.cc
     test_demod_2fsk.cc
     test_demod_am.cc

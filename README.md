@@ -20,10 +20,11 @@ The QRadioLink Codeberg page does not mention any crashes or other known issues.
 
 ### Modulation/Demodulation Blocks
 
-- **Digital Modulations**: 2FSK, 4FSK, 8FSK, GMSK, BPSK, QPSK, SOQPSK, DSSS, GDSS
+- **Digital Modulations**: 2FSK, 4FSK, 8FSK, CPM-4FSK, GMSK, BPSK, QPSK, SOQPSK, DSSS, GDSS
   - **2FSK**: Binary Frequency Shift Keying modulator/demodulator (see [GRC Block](grc/qradiolink_mod_2fsk.block.yml), [Examples](examples/README.md))
   - **4FSK**: 4-level Frequency Shift Keying modulator/demodulator (see [GRC Block](grc/qradiolink_mod_4fsk.block.yml), [Examples](examples/README.md))
   - **8FSK**: 8-level Frequency Shift Keying modulator/demodulator with 3 bits per symbol (see [GRC Block](grc/qradiolink_mod_8fsk.block.yml), [Examples](examples/README.md))
+  - **CPM-4FSK**: Continuous Phase Modulation 4FSK modulator (see [GRC Block](grc/qradiolink_mod_cpm_4fsk.block.yml))
   - **GMSK**: Gaussian Minimum Shift Keying modulator/demodulator (see [GRC Block](grc/qradiolink_mod_gmsk.block.yml), [Examples](examples/README.md))
   - **BPSK**: Binary Phase Shift Keying modulator/demodulator (see [GRC Block](grc/qradiolink_mod_bpsk.block.yml), [Examples](examples/README.md))
   - **QPSK**: Quadrature Phase Shift Keying modulator/demodulator (see [GRC Block](grc/qradiolink_mod_qpsk.block.yml), [Examples](examples/README.md))
@@ -31,10 +32,11 @@ The QRadioLink Codeberg page does not mention any crashes or other known issues.
   - **DSSS**: Direct Sequence Spread Spectrum with enhanced spreader/despreader blocks, PN sequence generation (m-sequences, Gold codes), timing recovery, and lock detection (see [DSSS Blocks Guide](docs/DSSS_BLOCKS.md), [GRC Blocks](grc/qradiolink_dsss_spreader_cc.block.yml))
   - **DSSS-CDMA**: Code Division Multiple Access transmitter and receiver with multi-user support, configurable spreading factors (32, 64, 128, 256, 512), and support for multiple modulation schemes (2FSK, 4FSK, 8FSK, GMSK, BPSK, QPSK, SOQPSK) (see [GRC Blocks](grc/qradiolink_dsss_cdma_transmitter_cc.block.yml))
   - **GDSS**: Gaussian-Distributed Spread-Spectrum with spreader/despreader blocks using Gaussian-distributed sequences instead of binary PN sequences, providing better spectral properties and improved interference rejection (see [GRC Blocks](grc/qradiolink_gdss_spreader_cc.block.yml))
-- **Analog Modulations**: AM, SSB (USB/LSB), NBFM
+- **Analog Modulations**: AM, SSB (USB/LSB), NBFM, WBFM
   - **AM**: Amplitude Modulation modulator/demodulator (see [GRC Block](grc/qradiolink_mod_am.block.yml), [Examples](examples/README.md))
   - **SSB**: Single Sideband (USB/LSB) modulator/demodulator (see [GRC Block](grc/qradiolink_mod_ssb.block.yml), [Examples](examples/README.md))
   - **NBFM**: Narrowband Frequency Modulation modulator/demodulator (see [GRC Block](grc/qradiolink_mod_nbfm.block.yml), [Examples](examples/nbfm_example.py))
+  - **WBFM**: Wideband Frequency Modulation modulator/demodulator (see [GRC Block](grc/qradiolink_mod_wbfm.block.yml), [WBFM Demodulator](grc/qradiolink_demod_wbfm.block.yml))
 - **Digital Voice**: FreeDV, M17, DMR (Tier I/II/III), dPMR, NXDN, MMDVM
   - **FreeDV**: FreeDV digital voice codec (see [Examples](examples/freedv_example.py))
   - **M17**: M17 digital voice protocol with physical and protocol layer support (see [GRC Blocks](grc/qradiolink_m17_coder.block.yml), [Examples](examples/m17_mod_example.py))
@@ -46,7 +48,7 @@ The QRadioLink Codeberg page does not mention any crashes or other known issues.
     - **D-STAR**: Digital Smart Technologies for Amateur Radio with Golay(24,12) FEC (see [GRC Blocks](grc/qradiolink_dstar_encoder.block.yml), [Examples](examples/README.md))
     - **YSF**: C4FM protocol with Golay(20,8) and Golay(23,12) FEC (see [GRC Blocks](grc/qradiolink_ysf_encoder.block.yml), [Examples](examples/README.md))
     - **P25**: Project 25 Phase 1 C4FM with BCH(63,16) and Trellis encoding (see [GRC Blocks](grc/qradiolink_p25_encoder.block.yml), [Examples](examples/README.md))
-- **Supporting Blocks**: Audio source/sink, RSSI, FFT, deframer, CESSB, M17 deframer (see [GRC Block](grc/qradiolink_m17_deframer.block.yml))
+- **Supporting Blocks**: Audio source/sink, RSSI, FFT, deframer, CESSB, M17 deframer, MMDVM source/sink, clipper, stretcher, zero idle bursts (see [GRC Block](grc/qradiolink_m17_deframer.block.yml))
 - **FEC Blocks**: Forward Error Correction with soft-decision LDPC encoder/decoder
   - **LDPC Encoder/Decoder**: Supports regular and irregular LDPC codes
   - **Configurable code rates**: 1/2, 2/3, 3/4, or custom
@@ -95,9 +97,9 @@ SOQPSK efficiency: ~1.5 bps/Hz
 ### Python Bindings
 
 All blocks are available through Python bindings, including:
-- All modulation/demodulation blocks (2FSK, 4FSK, GMSK, BPSK, QPSK, SOQPSK, DSSS, AM, SSB, NBFM)
-- All digital voice blocks (FreeDV, M17, DMR, **dPMR**, **NXDN**, MMDVM)
-- Supporting blocks (RSSI, M17 deframer, etc.)
+- All modulation/demodulation blocks (2FSK, 4FSK, 8FSK, CPM-4FSK, GMSK, BPSK, QPSK, SOQPSK, DSSS, AM, SSB, NBFM, WBFM)
+- All digital voice blocks (FreeDV, M17, DMR, dPMR, NXDN, MMDVM)
+- Supporting blocks (RSSI, M17 deframer, MMDVM source/sink, clipper, stretcher, etc.)
 
 The Python bindings enable use in GNU Radio Companion flowgraphs and Python scripts.
 
@@ -155,9 +157,9 @@ Test Breakdown:
   demodulator tests
 
 Test Coverage:
-- Modulators: 2FSK, 4FSK, AM, GMSK, BPSK, SSB, QPSK, NBFM, DSSS, M17, DMR, dPMR, NXDN
-- Demodulators: 2FSK, 4FSK, AM, GMSK, BPSK, SSB, QPSK, NBFM, DSSS, WBFM, M17, DMR, dPMR, NXDN
-- Note: SOQPSK blocks are implemented and available but unit tests are planned for future releases
+- Modulators: 2FSK, 4FSK, 8FSK, AM, GMSK, BPSK, SSB, QPSK, NBFM, WBFM, DSSS, M17, DMR, dPMR, NXDN
+- Demodulators: 2FSK, 4FSK, 8FSK, AM, GMSK, BPSK, SSB, QPSK, NBFM, WBFM, DSSS, M17, DMR, dPMR, NXDN
+- Note: SOQPSK and CPM-4FSK blocks are implemented and available but unit tests are planned for future releases
 ```
 
 **MMDVM Protocol Tests (Python):**
@@ -216,6 +218,8 @@ All blocks have GRC (GNU Radio Companion) block definitions in the `grc/` direct
 **Digital Modulations:**
 - [2FSK Modulator](grc/qradiolink_mod_2fsk.block.yml) / [2FSK Demodulator](grc/qradiolink_demod_2fsk.block.yml)
 - [4FSK Modulator](grc/qradiolink_mod_4fsk.block.yml) / [4FSK Demodulator](grc/qradiolink_demod_4fsk.block.yml)
+- [8FSK Modulator](grc/qradiolink_mod_8fsk.block.yml) / [8FSK Demodulator](grc/qradiolink_demod_8fsk.block.yml)
+- [CPM-4FSK Modulator](grc/qradiolink_mod_cpm_4fsk.block.yml)
 - [GMSK Modulator](grc/qradiolink_mod_gmsk.block.yml) / [GMSK Demodulator](grc/qradiolink_demod_gmsk.block.yml)
 - [BPSK Modulator](grc/qradiolink_mod_bpsk.block.yml) / [BPSK Demodulator](grc/qradiolink_demod_bpsk.block.yml)
 - [QPSK Modulator](grc/qradiolink_mod_qpsk.block.yml) / [QPSK Demodulator](grc/qradiolink_demod_qpsk.block.yml)
@@ -228,7 +232,7 @@ All blocks have GRC (GNU Radio Companion) block definitions in the `grc/` direct
 - [AM Modulator](grc/qradiolink_mod_am.block.yml) / [AM Demodulator](grc/qradiolink_demod_am.block.yml)
 - [SSB Modulator](grc/qradiolink_mod_ssb.block.yml) / [SSB Demodulator](grc/qradiolink_demod_ssb.block.yml)
 - [NBFM Modulator](grc/qradiolink_mod_nbfm.block.yml) / [NBFM Demodulator](grc/qradiolink_demod_nbfm.block.yml)
-- [WBFM Demodulator](grc/qradiolink_demod_wbfm.block.yml)
+- [WBFM Modulator](grc/qradiolink_mod_wbfm.block.yml) / [WBFM Demodulator](grc/qradiolink_demod_wbfm.block.yml)
 
 **Digital Voice:**
 - [M17 Coder](grc/qradiolink_m17_coder.block.yml) / [M17 Decoder](grc/qradiolink_m17_decoder.block.yml) / [M17 Deframer](grc/qradiolink_m17_deframer.block.yml)

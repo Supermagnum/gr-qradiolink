@@ -25,6 +25,7 @@ list(
     mod_qpsk_python.cc
     mod_soqpsk_python.cc
     mod_nbfm_python.cc
+    mod_wbfm_python.cc
     mod_dsss_python.cc
     mod_m17_python.cc
     m17_coder_python.cc

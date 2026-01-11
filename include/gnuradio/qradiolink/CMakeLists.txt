@@ -21,6 +21,7 @@ install(
           mod_qpsk.h
           mod_soqpsk.h
           mod_nbfm.h
+          mod_wbfm.h
           mod_dsss.h
           dsss_spreader_cc.h
           dsss_despreader_cc.h

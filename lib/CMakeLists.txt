@@ -23,6 +23,7 @@ set(gr_qradiolink_sources
     mod_qpsk_impl.cc
     mod_soqpsk_impl.cc
     mod_nbfm_impl.cc
+    mod_wbfm_impl.cc
     mod_dsss_impl.cc
     dsss_encoder_bb_impl.cc
     dsss_spreader_cc_impl.cc
