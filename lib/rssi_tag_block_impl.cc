@@ -24,7 +24,7 @@
 namespace gr {
 namespace qradiolink {
 
-static const pmt::pmt_t RSSI_TAG = pmt::string_to_symbol("RSSI");
+static const pmt::pmt_t RSSI_TAG = pmt::string_to_symbol(std::string("RSSI"));
 
 rssi_tag_block::~rssi_tag_block() {}
 

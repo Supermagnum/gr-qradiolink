@@ -31,8 +31,8 @@ const uint8_t MARK_SLOT1 = 0x08U;
 const uint8_t MARK_SLOT2 = 0x04U;
 const uint8_t MARK_NONE = 0x00U;
 
-static const pmt::pmt_t TIME_TAG = pmt::string_to_symbol("rx_time");
-static const pmt::pmt_t RSSI_TAG = pmt::string_to_symbol("RSSI");
+static const pmt::pmt_t TIME_TAG = pmt::string_to_symbol(std::string("rx_time"));
+static const pmt::pmt_t RSSI_TAG = pmt::string_to_symbol(std::string("RSSI"));
 
 mmdvm_sink::sptr mmdvm_sink::make(BurstTimer* burst_timer,
                                   uint8_t cn,

@@ -35,9 +35,9 @@ const uint8_t MARK_SLOT2 = 0x04U;
 const uint8_t MARK_NONE = 0x00U;
 const int32_t ZERO_SAMPLES = 720 * 25 / 24; // resampling ratio (SAMPLES_PER_SLOT = 720)
 
-static const pmt::pmt_t TIME_TAG = pmt::string_to_symbol("tx_time");
-static const pmt::pmt_t LENGTH_TAG = pmt::string_to_symbol("burst_length");
-static const pmt::pmt_t ZERO_TAG = pmt::string_to_symbol("zero_samples");
+static const pmt::pmt_t TIME_TAG = pmt::string_to_symbol(std::string("tx_time"));
+static const pmt::pmt_t LENGTH_TAG = pmt::string_to_symbol(std::string("burst_length"));
+static const pmt::pmt_t ZERO_TAG = pmt::string_to_symbol(std::string("zero_samples"));
 
 mmdvm_source::sptr mmdvm_source::make(BurstTimer* burst_timer,
                                       uint8_t cn,

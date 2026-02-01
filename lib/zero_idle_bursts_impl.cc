@@ -51,7 +51,7 @@ int zero_idle_bursts_impl::work(int noutput_items,
     std::vector<gr::tag_t> tags;
     uint64_t nitems = nitems_written(0);
 
-    static const pmt::pmt_t ZERO_TAG = pmt::string_to_symbol("zero_samples");
+    static const pmt::pmt_t ZERO_TAG = pmt::string_to_symbol(std::string("zero_samples"));
 
     get_tags_in_window(tags, 0, 0, noutput_items, ZERO_TAG);
     if (!tags.empty()) {
