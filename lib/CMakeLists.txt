@@ -73,6 +73,7 @@ set(gr_qradiolink_sources
     ysf_decoder_impl.cc
     p25_decoder_impl.cc
     # Supporting blocks
+    interleaver_bb_impl.cc
     gr_4fsk_discriminator_impl.cc
     zero_idle_bursts_impl.cc
     mmdvm_source_impl.cc

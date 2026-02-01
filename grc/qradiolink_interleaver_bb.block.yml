@@ -1,0 +1,49 @@
+id: qradiolink_interleaver_bb
+label: Interleaver (HF Burst)
+category: '[QRadioLink]/FEC'
+flags: [ python ]
+
+parameters:
+-   id: n_rows
+    label: Rows (Depth)
+    dtype: int
+    default: '8'
+-   id: n_cols
+    label: Columns
+    dtype: int
+    default: '46'
+-   id: interleave
+    label: Mode
+    dtype: enum
+    options: ['Interleave (TX)', 'Deinterleave (RX)']
+    option_attributes:
+        interleave: [true, false]
+    default: 'Interleave (TX)'
+
+inputs:
+-   domain: stream
+    dtype: byte
+
+outputs:
+-   domain: stream
+    dtype: byte
+
+templates:
+    imports: from gnuradio import qradiolink
+    make: qradiolink.interleaver_bb(${n_rows}, ${n_cols}, ${interleave})
+
+documentation: |-
+    Block interleaver for HF burst error handling.
+
+    Spreads burst errors across multiple symbol positions so FEC codes
+    can correct them. Ionospheric fading on HF causes burst errors;
+    interleaving converts them to scattered single errors.
+
+    TX path: FEC encoder -> Interleaver -> Modulator
+    RX path: Demodulator -> Deinterleaver -> FEC decoder
+
+    Block size = Rows x Columns (e.g. 8x46 = 368 bytes).
+
+    Typical HF configs: 8x46 (368), 12x20 (240), 16x23 (368).
+
+file_format: 1

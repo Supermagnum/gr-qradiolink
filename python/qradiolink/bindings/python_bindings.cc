@@ -71,6 +71,7 @@ void bind_ysf_decoder(py::module&);
 void bind_p25_decoder(py::module&);
 void bind_rssi_tag_block(py::module&);
 void bind_m17_deframer(py::module&);
+void bind_interleaver_bb(py::module&);
 
 // We need this hack because import_array() returns NULL
 // for newer Python versions.
@@ -157,5 +158,6 @@ PYBIND11_MODULE(qradiolink_python, m)
     bind_p25_decoder(m);
     bind_rssi_tag_block(m);
     bind_m17_deframer(m);
+    bind_interleaver_bb(m);
 }
 

@@ -65,6 +65,7 @@ install(
           dstar_decoder.h
           ysf_decoder.h
           p25_decoder.h
+          interleaver_bb.h
           gr_4fsk_discriminator.h
           zero_idle_bursts.h
           mmdvm_source.h

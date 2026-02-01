@@ -251,6 +251,7 @@ list(APPEND test_gr_qradiolink_sources
     test_demod_mmdvm_multi.cc
     test_demod_mmdvm_multi2.cc
     test_rssi_tag_block.cc
+    test_interleaver_bb.cc
 )
 
 ########################################################################

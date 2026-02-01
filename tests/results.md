@@ -1,14 +1,56 @@
 # Test Results for gr-qradiolink
 
-Generated: 2025-11-21 12:49:01
+Generated: 2025-02-01
 
 ## Test Suite Overview
 
-This document contains results from Python test harnesses for GNU Radio blocks in gr-qradiolink. These tests provide basic confidence that blocks handle edge cases without crashing and can be used with memory checkers (Valgrind/ASan) during normal use.
+This document contains results from C++ unit tests and Python test harnesses for GNU Radio blocks in gr-qradiolink. These tests provide basic confidence that blocks handle edge cases without crashing and can be used with memory checkers (Valgrind/ASan) during normal use.
 
 ---
 
-## Test Results
+## C++ Unit Tests (CTest/Boost.Test)
+
+### Interleaver (HF Burst) - 13 tests, all passed
+
+```
+Running 13 test cases...
+*** No errors detected
+```
+
+**Test cases:**
+- Instantiation (interleaver and deinterleaver)
+- Invalid arguments (n_rows=0, n_cols=0 throw std::invalid_argument)
+- Flowgraph round-trip (multiple blocks)
+- Single block round-trip
+- Edge: minimum 1x1
+- Edge: single row (1x46)
+- Edge: single column (8x1)
+- Edge: asymmetric 2x3 and 3x2
+- Edge: all zeros, all 0xFF
+- Edge: many blocks (100 blocks)
+- Edge: interleave permutation verification
+
+### RSSI Tag Block - 8 tests, all passed
+
+```
+Running 8 test cases...
+*** No errors detected
+```
+
+**Test cases:**
+- Instantiation, flowgraph, calibrate
+- Edge: calibrate with zero, small (1e-10), large (1e10)
+- Edge: zero input (1000 samples), single sample
+
+### Other C++ Tests
+
+Manual tests: test_mod_2fsk, test_mod_4fsk, test_mod_8fsk, test_mod_am, test_mod_gmsk, test_mod_bpsk, test_mod_mmdvm, test_mod_freedv, test_gdss_spreader_cc, test_gdss_despreader_cc, test_dsss_cdma_transmitter_cc, test_dsss_cdma_receiver_cc
+
+Boost.Test tests: mod_ssb, mod_qpsk, mod_nbfm, mod_wbfm, mod_dsss, demod_2fsk through demod_mmdvm_multi2, rssi_tag_block, interleaver_bb. Many include edge case tests (zero input, extreme amplitude).
+
+---
+
+## Python Test Results
 
 ### 1. test_modulation_vectors.py
 
@@ -27,29 +69,29 @@ Testing Modulation Blocks
 
 Testing: mod_gmsk - Zero amplitude
   Vector shape: (1000,), dtype: complex64
-  ✓ PASSED - No crashes or errors
+  PASSED - No crashes or errors
 
 Testing: mod_gmsk - Normal signal
   Vector shape: (1000,), dtype: complex64
-  ✓ PASSED - No crashes or errors
+  PASSED - No crashes or errors
 
 Testing: mod_gmsk - Extreme amplitude
   Vector shape: (1000,), dtype: complex64
-  ✓ PASSED - No crashes or errors
+  PASSED - No crashes or errors
 
 Testing: mod_gmsk - Phase discontinuity
   Vector shape: (1000,), dtype: complex64
-  ✓ PASSED - No crashes or errors
+  PASSED - No crashes or errors
 
 --- Testing mod_2fsk ---
 
 Testing: mod_2fsk - Zero amplitude
   Vector shape: (1000,), dtype: complex64
-  ✓ PASSED - No crashes or errors
+  PASSED - No crashes or errors
 
 Testing: mod_2fsk - Normal signal
   Vector shape: (1000,), dtype: complex64
-  ✓ PASSED - No crashes or errors
+  PASSED - No crashes or errors
 
 ======================================================================
 Testing Demodulation Blocks
@@ -62,63 +104,63 @@ Testing: demod_gmsk - Zero amplitude
   Contains NaN: False
   Contains Inf: False
   Min/Max: 0.000000 / 0.000000
-  ✓ PASSED - No crashes or errors
+  PASSED - No crashes or errors
 
 Testing: demod_gmsk - Normal signal
   Vector shape: (1000,), dtype: complex64
   Contains NaN: False
   Contains Inf: False
   Min/Max: 0.500000 / 0.500000
-  ✓ PASSED - No crashes or errors
+  PASSED - No crashes or errors
 
 Testing: demod_gmsk - NaN values
   Vector shape: (1000,), dtype: complex64
   Contains NaN: True
   Contains Inf: False
   Min/Max: nan / nan
-  ✓ PASSED - No crashes or errors
+  PASSED - No crashes or errors
 
 Testing: demod_gmsk - Infinity values
   Vector shape: (1000,), dtype: complex64
   Contains NaN: True
   Contains Inf: True
   Min/Max: 0.000000 / inf
-  ✓ PASSED - No crashes or errors
+  PASSED - No crashes or errors
 
 Testing: demod_gmsk - Extreme amplitude
   Vector shape: (1000,), dtype: complex64
   Contains NaN: False
   Contains Inf: False
   Min/Max: 0.000000 / 14142135296.000000
-  ✓ PASSED - No crashes or errors
+  PASSED - No crashes or errors
 
 Testing: demod_gmsk - Phase discontinuity
   Vector shape: (1000,), dtype: complex64
   Contains NaN: False
   Contains Inf: False
   Min/Max: 1.000000 / 1.000000
-  ✓ PASSED - No crashes or errors
+  PASSED - No crashes or errors
 
 Testing: demod_gmsk - Frequency offset
   Vector shape: (1000,), dtype: complex64
   Contains NaN: False
   Contains Inf: False
   Min/Max: 1.000000 / 1.000000
-  ✓ PASSED - No crashes or errors
+  PASSED - No crashes or errors
 
 Testing: demod_gmsk - Impulse
   Vector shape: (1000,), dtype: complex64
   Contains NaN: False
   Contains Inf: False
   Min/Max: 0.000000 / 1.414214
-  ✓ PASSED - No crashes or errors
+  PASSED - No crashes or errors
 
 Testing: demod_gmsk - Step function
   Vector shape: (1000,), dtype: complex64
   Contains NaN: False
   Contains Inf: False
   Min/Max: 0.000000 / 1.414214
-  ✓ PASSED - No crashes or errors
+  PASSED - No crashes or errors
 
 --- Testing demod_2fsk ---
 
@@ -127,35 +169,35 @@ Testing: demod_2fsk - Zero amplitude
   Contains NaN: False
   Contains Inf: False
   Min/Max: 0.000000 / 0.000000
-  ✓ PASSED - No crashes or errors
+  PASSED - No crashes or errors
 
 Testing: demod_2fsk - Normal signal
   Vector shape: (1000,), dtype: complex64
   Contains NaN: False
   Contains Inf: False
   Min/Max: 0.500000 / 0.500000
-  ✓ PASSED - No crashes or errors
+  PASSED - No crashes or errors
 
 Testing: demod_2fsk - NaN values
   Vector shape: (1000,), dtype: complex64
   Contains NaN: True
   Contains Inf: False
   Min/Max: nan / nan
-  ✓ PASSED - No crashes or errors
+  PASSED - No crashes or errors
 
 Testing: demod_2fsk - Infinity values
   Vector shape: (1000,), dtype: complex64
   Contains NaN: True
   Contains Inf: True
   Min/Max: 0.000000 / inf
-  ✓ PASSED - No crashes or errors
+  PASSED - No crashes or errors
 
 Testing: demod_2fsk - Extreme amplitude
   Vector shape: (1000,), dtype: complex64
   Contains NaN: False
   Contains Inf: False
   Min/Max: 0.000000 / 14142135296.000000
-  ✓ PASSED - No crashes or errors
+  PASSED - No crashes or errors
 
 ======================================================================
 Testing Edge Cases
@@ -168,56 +210,56 @@ Testing: Edge case - Zero amplitude
   Contains NaN: False
   Contains Inf: False
   Min/Max: 0.000000 / 0.000000
-  ✓ PASSED - No crashes or errors
+  PASSED - No crashes or errors
 
 Testing: Edge case - NaN values
   Vector shape: (100,), dtype: complex64
   Contains NaN: True
   Contains Inf: False
   Min/Max: nan / nan
-  ✓ PASSED - No crashes or errors
+  PASSED - No crashes or errors
 
 Testing: Edge case - Infinity values
   Vector shape: (100,), dtype: complex64
   Contains NaN: True
   Contains Inf: True
   Min/Max: 0.000000 / inf
-  ✓ PASSED - No crashes or errors
+  PASSED - No crashes or errors
 
 Testing: Edge case - Extreme positive
   Vector shape: (100,), dtype: complex64
   Contains NaN: False
   Contains Inf: False
   Min/Max: 14142135624.000000 / 14142135624.000000
-  ✓ PASSED - No crashes or errors
+  PASSED - No crashes or errors
 
 Testing: Edge case - Extreme negative
   Vector shape: (100,), dtype: complex64
   Contains NaN: False
   Contains Inf: False
   Min/Max: 14142135624.000000 / 14142135624.000000
-  ✓ PASSED - No crashes or errors
+  PASSED - No crashes or errors
 
 Testing: Edge case - Very small values
   Vector shape: (100,), dtype: complex64
   Contains NaN: False
   Contains Inf: False
   Min/Max: 0.000000 / 0.000000
-  ✓ PASSED - No crashes or errors
+  PASSED - No crashes or errors
 
 Testing: Edge case - Phase jump 180°
   Vector shape: (100,), dtype: complex64
   Contains NaN: False
   Contains Inf: False
   Min/Max: 1.000000 / 1.000000
-  ✓ PASSED - No crashes or errors
+  PASSED - No crashes or errors
 
 Testing: Edge case - Large frequency offset
   Vector shape: (100,), dtype: complex64
   Contains NaN: False
   Contains Inf: False
   Min/Max: 1.000000 / 1.000000
-  ✓ PASSED - No crashes or errors
+  PASSED - No crashes or errors
 
 ======================================================================
 Test Summary
@@ -226,7 +268,7 @@ Total tests passed: 28
 Total tests failed: 0
 Total tests: 28
 
-✓ All tests passed!
+All tests passed.
 ```
 
 **Result: 28/28 tests passed**
@@ -243,25 +285,33 @@ Edge Case Tests for gr-qradiolink
 ======================================================================
 
 Testing demod_gmsk:
-Testing demod_gmsk - Zero amplitude... ✓ PASSED
-Testing demod_gmsk - NaN values... ✓ PASSED
-Testing demod_gmsk - Infinity values... ✓ PASSED
-Testing demod_gmsk - Negative infinity... ✓ PASSED
-Testing demod_gmsk - Extreme positive... ✓ PASSED
-Testing demod_gmsk - Extreme negative... ✓ PASSED
-Testing demod_gmsk - Very small values... ✓ PASSED
-Testing demod_gmsk - Phase discontinuity (180° jump)... ✓ PASSED
-Testing demod_gmsk - Large frequency offset (10kHz)... ✓ PASSED
+Testing demod_gmsk - Zero amplitude... PASSED
+Testing demod_gmsk - NaN values... PASSED
+Testing demod_gmsk - Infinity values... PASSED
+Testing demod_gmsk - Negative infinity... PASSED
+Testing demod_gmsk - Extreme positive... PASSED
+Testing demod_gmsk - Extreme negative... PASSED
+Testing demod_gmsk - Very small values... PASSED
+Testing demod_gmsk - Phase discontinuity (180 deg jump)... PASSED
+Testing demod_gmsk - Large frequency offset (10kHz)... PASSED
+
+Testing interleaver_bb:
+Testing interleaver_bb - minimal 1x1... PASSED
+Testing interleaver_bb - all zeros... PASSED
+Testing interleaver_bb - all 0xFF... PASSED
+Testing interleaver_bb - single row... PASSED
+Testing interleaver_bb - single column... PASSED
+Testing interleaver_bb - asymmetric 2x3... PASSED
 
 ======================================================================
 Edge Case Test Summary
 ======================================================================
-Passed: 9
+Passed: 15
 Failed: 0
-Total: 9
+Total: 15
 ```
 
-**Result: 9/9 tests passed**
+**Result: 15/15 tests passed** (9 demod_gmsk + 6 interleaver_bb)
 
 ---
 
@@ -277,16 +327,16 @@ Memory Safety Tests for gr-qradiolink
 --- Testing demod_gmsk ---
 
 Testing demod_gmsk with large input (100000 samples)...
-  ✓ PASSED - Handled large input without crash
+  PASSED - Handled large input without crash
 
 Testing demod_gmsk with rapid restart (10 iterations)...
-  ✓ PASSED - No memory leaks detected
+  PASSED - No memory leaks detected
 
 Testing demod_gmsk with empty input...
-  ✓ PASSED - Handled empty input gracefully
+  PASSED - Handled empty input gracefully
 
 Testing demod_gmsk with single sample...
-  ✓ PASSED - Handled single sample
+  PASSED - Handled single sample
 
 ======================================================================
 Memory Safety Test Summary
@@ -310,40 +360,40 @@ M17 Deframer Attack Vector Tests
 
 Generated 34 attack vectors
 
-Testing: valid_lsf (48 bytes) ... ✓ LSF/Stream sync word
-Testing: valid_stream (50 bytes) ... ✓ LSF/Stream sync word
-Testing: valid_packet (100 bytes) ... ✓ Packet sync word
-Testing: truncated_lsf (12 bytes) ... ✓ LSF/Stream sync word
-Testing: truncated_packet (3 bytes) ... ✓ Packet sync word
-Testing: oversized_lsf (146 bytes) ... ✓ LSF/Stream sync word
-Testing: oversized_packet (500 bytes) ... ✓ Packet sync word
-Testing: invalid_sync_1 (48 bytes) ... ✗ No sync word (attack vector)
-Testing: invalid_sync_2 (48 bytes) ... ✗ No sync word (attack vector)
-Testing: invalid_sync_3 (48 bytes) ... ✗ No sync word (attack vector)
-Testing: sync_bitflip_1 (48 bytes) ... ✗ No sync word (attack vector)
-Testing: sync_bitflip_2 (48 bytes) ... ✗ No sync word (attack vector)
-Testing: sync_bitflip_3 (48 bytes) ... ✗ No sync word (attack vector)
-Testing: empty_frame (2 bytes) ... ✓ LSF/Stream sync word
-Testing: minimal_packet (3 bytes) ... ✓ Packet sync word
-Testing: incomplete_sync (1 bytes) ... ✗ Too short (< 2 bytes)
-Testing: split_sync_1 (48 bytes) ... ✓ LSF/Stream sync word
-Testing: split_sync_2 (48 bytes) ... ✓ Packet sync word
-Testing: all_zeros (100 bytes) ... ✗ No sync word (attack vector)
-Testing: all_ones (100 bytes) ... ✗ No sync word (attack vector)
-Testing: alternating (100 bytes) ... ✗ No sync word (attack vector)
-Testing: incremental (100 bytes) ... ✗ No sync word (attack vector)
-Testing: decremental (100 bytes) ... ✗ No sync word (attack vector)
-Testing: sync_in_payload (48 bytes) ... ✓ LSF/Stream sync word
-Testing: multiple_sync (48 bytes) ... ✓ LSF/Stream sync word
-Testing: mixed_frames (148 bytes) ... ✓ LSF/Stream sync word
-Testing: long_no_sync (1000 bytes) ... ✗ No sync word (attack vector)
-Testing: null_payload (48 bytes) ... ✓ LSF/Stream sync word
-Testing: max_values (48 bytes) ... ✓ LSF/Stream sync word
-Testing: sync_at_end (48 bytes) ... ✓ LSF/Stream sync word
-Testing: repeated_sync (20 bytes) ... ✓ LSF/Stream sync word
-Testing: sync_like_payload (48 bytes) ... ✓ LSF/Stream sync word
-Testing: preamble_frame (54 bytes) ... ✓ LSF/Stream sync word
-Testing: special_bytes (48 bytes) ... ✓ LSF/Stream sync word
+Testing: valid_lsf (48 bytes) ... PASS LSF/Stream sync word
+Testing: valid_stream (50 bytes) ... PASS LSF/Stream sync word
+Testing: valid_packet (100 bytes) ... PASS Packet sync word
+Testing: truncated_lsf (12 bytes) ... PASS LSF/Stream sync word
+Testing: truncated_packet (3 bytes) ... PASS Packet sync word
+Testing: oversized_lsf (146 bytes) ... PASS LSF/Stream sync word
+Testing: oversized_packet (500 bytes) ... PASS Packet sync word
+Testing: invalid_sync_1 (48 bytes) ... EXPECTED_FAIL No sync word (attack vector)
+Testing: invalid_sync_2 (48 bytes) ... EXPECTED_FAIL No sync word (attack vector)
+Testing: invalid_sync_3 (48 bytes) ... EXPECTED_FAIL No sync word (attack vector)
+Testing: sync_bitflip_1 (48 bytes) ... EXPECTED_FAIL No sync word (attack vector)
+Testing: sync_bitflip_2 (48 bytes) ... EXPECTED_FAIL No sync word (attack vector)
+Testing: sync_bitflip_3 (48 bytes) ... EXPECTED_FAIL No sync word (attack vector)
+Testing: empty_frame (2 bytes) ... PASS LSF/Stream sync word
+Testing: minimal_packet (3 bytes) ... PASS Packet sync word
+Testing: incomplete_sync (1 bytes) ... EXPECTED_FAIL Too short (< 2 bytes)
+Testing: split_sync_1 (48 bytes) ... PASS LSF/Stream sync word
+Testing: split_sync_2 (48 bytes) ... PASS Packet sync word
+Testing: all_zeros (100 bytes) ... EXPECTED_FAIL No sync word (attack vector)
+Testing: all_ones (100 bytes) ... EXPECTED_FAIL No sync word (attack vector)
+Testing: alternating (100 bytes) ... EXPECTED_FAIL No sync word (attack vector)
+Testing: incremental (100 bytes) ... EXPECTED_FAIL No sync word (attack vector)
+Testing: decremental (100 bytes) ... EXPECTED_FAIL No sync word (attack vector)
+Testing: sync_in_payload (48 bytes) ... PASS LSF/Stream sync word
+Testing: multiple_sync (48 bytes) ... PASS LSF/Stream sync word
+Testing: mixed_frames (148 bytes) ... PASS LSF/Stream sync word
+Testing: long_no_sync (1000 bytes) ... EXPECTED_FAIL No sync word (attack vector)
+Testing: null_payload (48 bytes) ... PASS LSF/Stream sync word
+Testing: max_values (48 bytes) ... PASS LSF/Stream sync word
+Testing: sync_at_end (48 bytes) ... PASS LSF/Stream sync word
+Testing: repeated_sync (20 bytes) ... PASS LSF/Stream sync word
+Testing: sync_like_payload (48 bytes) ... PASS LSF/Stream sync word
+Testing: preamble_frame (54 bytes) ... PASS LSF/Stream sync word
+Testing: special_bytes (48 bytes) ... PASS LSF/Stream sync word
 
 ======================================================================
 Test Summary
@@ -365,11 +415,13 @@ Location: fuzzing/corpus/m17_attack_vectors
 
 | Test Suite | Tests Passed | Tests Failed | Status |
 |------------|--------------|--------------|--------|
-| test_modulation_vectors.py | 28 | 0 | ✓ PASSED |
-| test_edge_cases.py | 9 | 0 | ✓ PASSED |
-| test_memory_safety.py | 4 | 0 | ✓ PASSED |
-| test_m17_deframer_scapy.py | 20 processed | 14 attack vectors | ✓ PASSED |
-| **TOTAL** | **61** | **0** | **✓ ALL PASSED** |
+| C++ interleaver_bb | 13 | 0 | PASSED |
+| C++ rssi_tag_block | 8 | 0 | PASSED |
+| test_modulation_vectors.py | 28 | 0 | PASSED |
+| test_edge_cases.py | 15 | 0 | PASSED |
+| test_memory_safety.py | 4 | 0 | PASSED |
+| test_m17_deframer_scapy.py | 20 processed | 14 attack vectors | PASSED |
+| **TOTAL** | **88+** | **0** | **ALL PASSED** |
 
 ---
 
@@ -379,40 +431,43 @@ Location: fuzzing/corpus/m17_attack_vectors
 
 The following blocks are available in the Python bindings and can be tested:
 
+**FEC/Supporting Blocks:**
+- interleaver_bb (TESTED - 13 C++ tests, 6 Python edge cases)
+
 **Modulation Blocks:**
-- ✓ mod_2fsk (TESTED)
-- ✓ mod_4fsk (AVAILABLE, NOT TESTED)
-- ✓ mod_gmsk (TESTED)
-- ✓ mod_bpsk (AVAILABLE, NOT TESTED)
-- ✓ mod_qpsk (AVAILABLE, NOT TESTED)
-- ✓ mod_am (AVAILABLE, NOT TESTED)
-- ✓ mod_ssb (AVAILABLE, NOT TESTED)
-- ✓ mod_nbfm (AVAILABLE, NOT TESTED)
-- ✓ mod_dsss (AVAILABLE, NOT TESTED)
+- mod_2fsk (TESTED)
+- mod_4fsk (AVAILABLE, NOT TESTED)
+- mod_gmsk (TESTED)
+- mod_bpsk (AVAILABLE, NOT TESTED)
+- mod_qpsk (AVAILABLE, NOT TESTED)
+- mod_am (AVAILABLE, NOT TESTED)
+- mod_ssb (AVAILABLE, NOT TESTED)
+- mod_nbfm (AVAILABLE, NOT TESTED)
+- mod_dsss (AVAILABLE, NOT TESTED)
 
 **Demodulation Blocks:**
-- ✓ demod_2fsk (TESTED)
-- ✓ demod_4fsk (AVAILABLE, NOT TESTED)
-- ✓ demod_gmsk (TESTED)
-- ✓ demod_bpsk (AVAILABLE, NOT TESTED)
-- ✓ demod_qpsk (AVAILABLE, NOT TESTED)
-- ✓ demod_am (AVAILABLE, NOT TESTED)
-- ✓ demod_ssb (AVAILABLE, NOT TESTED)
-- ✓ demod_nbfm (AVAILABLE, NOT TESTED)
-- ✓ demod_dsss (AVAILABLE, NOT TESTED)
-- ✓ demod_m17 (AVAILABLE, NOT TESTED)
-- ✓ demod_wbfm (AVAILABLE, NOT TESTED)
+- demod_2fsk (TESTED)
+- demod_4fsk (AVAILABLE, NOT TESTED)
+- demod_gmsk (TESTED)
+- demod_bpsk (AVAILABLE, NOT TESTED)
+- demod_qpsk (AVAILABLE, NOT TESTED)
+- demod_am (AVAILABLE, NOT TESTED)
+- demod_ssb (AVAILABLE, NOT TESTED)
+- demod_nbfm (AVAILABLE, NOT TESTED)
+- demod_dsss (AVAILABLE, NOT TESTED)
+- demod_m17 (AVAILABLE, NOT TESTED)
+- demod_wbfm (AVAILABLE, NOT TESTED)
 
 **Missing from Python Bindings:**
-- ✗ mod_freedv
-- ✗ demod_freedv
-- ✗ mod_m17
-- ✗ mod_dmr
-- ✗ demod_dmr
-- ✗ mod_mmdvm
-- ✗ demod_mmdvm
-- ✗ rssi_tag_block
-- ✗ m17_deframer (tested separately via Scapy)
+- [no Python binding] mod_freedv
+- [no Python binding] demod_freedv
+- [no Python binding] mod_m17
+- [no Python binding] mod_dmr
+- [no Python binding] demod_dmr
+- [no Python binding] mod_mmdvm
+- [no Python binding] demod_mmdvm
+- [no Python binding] rssi_tag_block
+- [no Python binding] m17_deframer (tested separately via Scapy)
 
 **Notes:**
 - FFT is part of GNU Radio core, not qradiolink

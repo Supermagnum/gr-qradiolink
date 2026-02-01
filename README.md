@@ -144,21 +144,24 @@ The module includes comprehensive unit tests for all blocks. Tests are run using
 
 ### Test Results
 
-All tests pass successfully. See [fuzzing-results/results.md](fuzzing-results/results.md) for detailed test results including MMDVM protocol tests.
+All tests pass successfully. See [tests/results.md](tests/results.md) for C++ unit tests, Python test harness, and edge case results. See [fuzzing-results/results.md](fuzzing-results/results.md) for fuzzing and MMDVM protocol test details.
 
 **C++ Unit Tests:**
 ```
-100% tests passed, 0 tests failed out of 20
+100% tests passed
 
 Test Breakdown:
-- 5 Manual tests (with int main): test_mod_2fsk, test_mod_4fsk, test_mod_am, 
-  test_mod_gmsk, test_mod_bpsk
-- 15 Boost.Test tests (using gr_add_cpp_test): All remaining modulator and 
-  demodulator tests
+- 12 Manual tests (with int main): test_mod_2fsk, test_mod_4fsk, test_mod_8fsk,
+  test_mod_am, test_mod_gmsk, test_mod_bpsk, test_mod_mmdvm, test_mod_freedv,
+  test_gdss_spreader_cc, test_gdss_despreader_cc, test_dsss_cdma_transmitter_cc,
+  test_dsss_cdma_receiver_cc
+- Boost.Test tests: mod_ssb, mod_qpsk, mod_nbfm, mod_wbfm, mod_dsss, all
+  demodulators, rssi_tag_block (8 tests), interleaver_bb (13 tests with edge cases)
 
 Test Coverage:
 - Modulators: 2FSK, 4FSK, 8FSK, AM, GMSK, BPSK, SSB, QPSK, NBFM, WBFM, DSSS, M17, DMR, dPMR, NXDN
 - Demodulators: 2FSK, 4FSK, 8FSK, AM, GMSK, BPSK, SSB, QPSK, NBFM, WBFM, DSSS, M17, DMR, dPMR, NXDN
+- FEC: interleaver_bb (HF burst error handling, 13 tests including edge cases)
 - Note: SOQPSK and CPM-4FSK blocks are implemented and available but unit tests are planned for future releases
 ```
 

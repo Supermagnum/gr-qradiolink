@@ -19,7 +19,7 @@ except ImportError as e:
 
 
 def test_edge_case(block_maker, block_name, test_name, test_vector):
-    """Test a block with an edge case vector"""
+    """Test a block with an edge case vector (complex)"""
     print(f"Testing {block_name} - {test_name}...", end=" ")
 
     try:
@@ -52,10 +52,39 @@ def test_edge_case(block_maker, block_name, test_name, test_vector):
         tb.stop()
         tb.wait()
 
-        print("✓ PASSED")
+        print("PASSED")
         return True
     except Exception as e:
-        print(f"✗ FAILED: {e}")
+        print(f"FAILED: {e}")
+        return False
+
+
+def test_interleaver_edge_case(test_name, test_data, n_rows, n_cols):
+    """Test interleaver with byte edge case"""
+    print(f"Testing interleaver_bb - {test_name}...", end=" ")
+
+    try:
+        tb = gr.top_block()
+        src = blocks.vector_source_b(test_data, False)
+        inter = qradiolink.interleaver_bb(n_rows, n_cols, True)
+        deinter = qradiolink.interleaver_bb(n_rows, n_cols, False)
+        sink = blocks.vector_sink_b()
+
+        tb.connect(src, inter, deinter, sink)
+        tb.start()
+        tb.wait()
+        tb.stop()
+        tb.wait()
+
+        out = list(sink.data())
+        if test_data != out:
+            print(f"FAILED: output mismatch")
+            return False
+
+        print("PASSED")
+        return True
+    except Exception as e:
+        print(f"FAILED: {e}")
         return False
 
 
@@ -107,6 +136,22 @@ def main():
             name,
             vector,
         ):
+            results["passed"] += 1
+        else:
+            results["failed"] += 1
+
+    # Test interleaver_bb edge cases (byte stream)
+    print("\nTesting interleaver_bb:")
+    interleaver_cases = [
+        ("minimal 1x1", [0x42], 1, 1),
+        ("all zeros", [0] * 368, 8, 46),
+        ("all 0xFF", [0xFF] * 368, 8, 46),
+        ("single row", list(range(46)), 1, 46),
+        ("single column", list(range(8)), 8, 1),
+        ("asymmetric 2x3", [0, 1, 2, 3, 4, 5], 2, 3),
+    ]
+    for name, data, rows, cols in interleaver_cases:
+        if test_interleaver_edge_case(name, data, rows, cols):
             results["passed"] += 1
         else:
             results["failed"] += 1

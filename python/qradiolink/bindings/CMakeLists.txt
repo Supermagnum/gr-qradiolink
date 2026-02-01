@@ -70,6 +70,7 @@ list(
     p25_decoder_python.cc
     rssi_tag_block_python.cc
     m17_deframer_python.cc
+    interleaver_bb_python.cc
     python_bindings.cc)
 
 pybind11_add_module(qradiolink_python ${qradiolink_python_files})
