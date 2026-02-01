@@ -107,10 +107,10 @@ namespace gr
       if (_debug == true)
       {
         // destination set to "@ALL"
-        encode_callsign_bytes(_lsf.dst, (const unsigned char *)"@ALL");
+        encode_callsign_bytes(_lsf.dst, "@ALL");
 
         // source set to "N0CALL"
-        encode_callsign_bytes(_lsf.src, (const unsigned char *)"N0CALL");
+        encode_callsign_bytes(_lsf.src, "N0CALL");
 
         // no enc or subtype field, normal 3200 voice
         _type = M17_TYPE_STREAM | M17_TYPE_VOICE | M17_TYPE_CAN(0);
@@ -262,7 +262,7 @@ namespace gr
       {
         _src_id[i] = toupper(src_id.c_str()[i]);
       }
-      encode_callsign_bytes(_lsf.src, _src_id); // 6 byte ID <- 9 char callsign
+      encode_callsign_bytes(_lsf.src, reinterpret_cast<const char*>(_src_id)); // 6 byte ID <- 9 char callsign
 
       uint16_t ccrc = LSF_CRC(&_lsf);
       _lsf.crc[0] = ccrc >> 8;
@@ -284,7 +284,7 @@ namespace gr
       {
         _dst_id[i] = toupper(dst_id.c_str()[i]);
       }
-      encode_callsign_bytes(_lsf.dst, _dst_id); // 6 byte ID <- 9 char callsign
+      encode_callsign_bytes(_lsf.dst, reinterpret_cast<const char*>(_dst_id)); // 6 byte ID <- 9 char callsign
       uint16_t ccrc = LSF_CRC(&_lsf);
       _lsf.crc[0] = ccrc >> 8;
       _lsf.crc[1] = ccrc & 0xFF;

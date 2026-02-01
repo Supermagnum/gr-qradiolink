@@ -557,8 +557,8 @@ namespace gr
 							{
 								// handle message output
 								pmt::pmt_t msg;
-								decode_callsign_bytes(d_dst, _lsf.dst);
-								decode_callsign_bytes(d_src, _lsf.src);
+								decode_callsign_bytes(reinterpret_cast<char*>(d_dst), _lsf.dst);
+								decode_callsign_bytes(reinterpret_cast<char*>(d_src), _lsf.src);
 
 								pmt::pmt_t dict = pmt::make_dict();
 								dict = pmt::dict_add(dict, pmt::mp("src"), pmt::intern((char *)d_src));
@@ -694,8 +694,8 @@ namespace gr
 							// dump data
 							if (_callsign == true)
 							{
-								decode_callsign_bytes(d_dst, _lsf.dst);
-								decode_callsign_bytes(d_src, _lsf.src);
+								decode_callsign_bytes(reinterpret_cast<char*>(d_dst), _lsf.dst);
+								decode_callsign_bytes(reinterpret_cast<char*>(d_src), _lsf.src);
 								if (_debug_ctrl == true)
 								{
 									printf("DST: %-9s ", d_dst); // DST

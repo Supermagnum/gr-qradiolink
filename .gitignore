@@ -1,5 +1,7 @@
 # Build directories
 build/
+build-fuzz/
+build-test/
 *_build/
 
 # Python cache
