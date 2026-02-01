@@ -9,6 +9,25 @@ This document lists all dependencies required to build and use the gr-qradiolink
 - **pkg-config** (for dependency detection)
 - **Make** or **Ninja** (build system)
 
+## Git Submodules
+
+The project uses Git submodules for M17 protocol support. Clone with submodules:
+
+```bash
+git clone --recursive https://github.com/Supermagnum/gr-qradiolink.git
+```
+
+If you already cloned without `--recursive`, initialize submodules:
+
+```bash
+git submodule update --init --recursive
+```
+
+Submodules:
+- **libm17** - M17 protocol C library (M17 coder/decoder/deframer blocks)
+- **micro-ecc** - Elliptic curve cryptography (M17 encryption)
+- **tinier-aes** - AES implementation (M17 encryption)
+
 ## Required GNU Radio Components
 
 The following GNU Radio components are required via pkg-config:

@@ -49,12 +49,13 @@ The QRadioLink Codeberg page does not mention any crashes or other known issues.
     - **YSF**: C4FM protocol with Golay(20,8) and Golay(23,12) FEC (see [GRC Blocks](grc/qradiolink_ysf_encoder.block.yml), [Examples](examples/README.md))
     - **P25**: Project 25 Phase 1 C4FM with BCH(63,16) and Trellis encoding (see [GRC Blocks](grc/qradiolink_p25_encoder.block.yml), [Examples](examples/README.md))
 - **Supporting Blocks**: Audio source/sink, RSSI, FFT, deframer, CESSB, M17 deframer, MMDVM source/sink, clipper, stretcher, zero idle bursts (see [GRC Block](grc/qradiolink_m17_deframer.block.yml))
-- **FEC Blocks**: Forward Error Correction with soft-decision LDPC encoder/decoder
+- **FEC Blocks**: Forward Error Correction with soft-decision LDPC encoder/decoder and block interleaver
   - **LDPC Encoder/Decoder**: Supports regular and irregular LDPC codes
   - **Configurable code rates**: 1/2, 2/3, 3/4, or custom
   - **Configurable block lengths**: 576, 1152, 2304 bits, or custom
   - **Auto-selection**: Automatically selects best matching code from available AList files
   - See [GRC Blocks](grc/qradiolink_ldpc_encoder.block.yml)
+  - **Interleaver (HF Burst)**: Block interleaver for burst error mitigation on HF channels; spreads burst errors across symbol positions for better FEC performance (see [GRC Block](grc/qradiolink_interleaver_bb.block.yml))
 - **DSSS Blocks**: Enhanced spreader/despreader with PN sequence generation, timing recovery, and acquisition (see [DSSS Blocks Guide](docs/DSSS_BLOCKS.md), [GRC Blocks](grc/qradiolink_dsss_spreader_cc.block.yml))
 - **DSSS-CDMA Blocks**: Multi-user CDMA transmitter and receiver with configurable spreading factors, Gold code support, and multi-user interference estimation (see [GRC Blocks](grc/qradiolink_dsss_cdma_transmitter_cc.block.yml))
 - **GDSS Blocks**: Gaussian-Distributed Spread-Spectrum spreader and despreader with Gaussian sequence generation, timing recovery, and lock detection (see [GRC Blocks](grc/qradiolink_gdss_spreader_cc.block.yml))
@@ -99,6 +100,7 @@ SOQPSK efficiency: ~1.5 bps/Hz
 All blocks are available through Python bindings, including:
 - All modulation/demodulation blocks (2FSK, 4FSK, 8FSK, CPM-4FSK, GMSK, BPSK, QPSK, SOQPSK, DSSS, AM, SSB, NBFM, WBFM)
 - All digital voice blocks (FreeDV, M17, DMR, dPMR, NXDN, MMDVM)
+- FEC blocks (LDPC encoder/decoder, interleaver)
 - Supporting blocks (RSSI, M17 deframer, MMDVM source/sink, clipper, stretcher, etc.)
 
 The Python bindings enable use in GNU Radio Companion flowgraphs and Python scripts.
@@ -118,6 +120,7 @@ gr-qradiolink/
 ├── grc/                    # GNU Radio Companion block definitions
 ├── docs/                   # Documentation
 │   ├── doxygen/
+│   ├── DSSS_BLOCKS.md      # DSSS spreader/despreader guide
 │   └── PTT_CONTROL.md      # PTT control with gr-osmosdr
 ├── examples/               # Example flowgraphs
 ├── tests/                  # Unit tests
@@ -130,6 +133,7 @@ gr-qradiolink/
 See [DEPENDENCIES.md](DEPENDENCIES.md) for a complete list of required and optional dependencies.
 
 **Quick Summary:**
+- Clone with `git clone --recursive` (or run `git submodule update --init --recursive` after cloning)
 - GNU Radio >= 3.10 (with vocoder component built with Codec2 support)
 - CMake >= 3.16
 - Boost libraries
@@ -255,6 +259,7 @@ All blocks have GRC (GNU Radio Companion) block definitions in the `grc/` direct
   - Configurable code rates: 1/2, 2/3, 3/4, or custom
   - Configurable block lengths: 576, 1152, 2304 bits, or custom
   - Auto-selection of best matching code from available AList files
+- [Interleaver (HF Burst)](grc/qradiolink_interleaver_bb.block.yml) - Block interleaver/deinterleaver for HF burst error handling
 
 For complete list of all blocks, see the [grc/](grc/) directory.
 
