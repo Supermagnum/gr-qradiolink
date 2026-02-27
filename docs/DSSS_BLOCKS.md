@@ -22,7 +22,7 @@ This document describes the enhanced Direct Sequence Spread Spectrum (DSSS) bloc
 Accepts complex symbol stream at symbol rate and spreads each symbol using a PN sequence to produce a wideband signal at chip rate.
 
 **Parameters:**
-- `pn_sequence`: Vector of +1/-1 values representing the PN sequence
+- `pn_sequence`: Vector of 0/1 chip values (internally mapped to -1/+1 for correlation)
 - `chips_per_symbol`: Number of chips per symbol (default: 42)
 
 **Input:**
@@ -63,6 +63,12 @@ Accepts spread spectrum signal at chip rate and despreads it to recover the orig
 - Lock detection
 - SNR estimation
 - State machine: Acquisition → Tracking → Locked
+
+## Verification
+
+- **Barker-13:** The hierarchical blocks `mod_dsss`/`demod_dsss` use the standard Barker-13 code `{1,1,1,1,1,0,0,1,1,0,1,0,1}`. The base spreader/despreader map 0 to -1 and 1 to +1 so that correlation matches standard DSSS.
+- **BER simulation:** [examples/dsss_ber_simulation.py](../examples/dsss_ber_simulation.py) runs spreader -> AWGN -> despreader and plots BER vs SNR for N=64, 128, 256, overlaying the theoretical curve 0.5*erfc(sqrt(N*Es/N0/2)); simulated curves match theory within simulation noise.
+- **Enhancements:** Timing recovery, lock detection, adaptive threshold, and coarse-to-fine acquisition are additive and do not change the base correlation/despreading behaviour.
 
 ## PN Sequence Generator
 

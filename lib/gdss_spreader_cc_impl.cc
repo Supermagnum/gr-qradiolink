@@ -40,6 +40,11 @@ void gdss_spreader_cc::regenerate_sequence(float variance, unsigned int seed)
     (void)seed; // Suppress unused parameter warning
 }
 
+std::vector<float> gdss_spreader_cc::get_spreading_sequence() const
+{
+    return std::vector<float>();
+}
+
 gdss_spreader_cc::sptr gdss_spreader_cc::make(int sequence_length,
                                                int chips_per_symbol,
                                                float variance,
@@ -81,37 +86,41 @@ gdss_spreader_cc_impl::gdss_spreader_cc_impl(int sequence_length,
     }
 
     generate_sequence();
-    update_sequence_complex();
 }
 
 gdss_spreader_cc_impl::~gdss_spreader_cc_impl() {}
 
 void gdss_spreader_cc_impl::generate_sequence()
 {
-    d_spreading_sequence.resize(d_sequence_length);
-    for (int i = 0; i < d_sequence_length; i++) {
-        d_spreading_sequence[i] = d_gaussian(d_rng);
-    }
-}
-
-void gdss_spreader_cc_impl::update_sequence_complex()
-{
     d_spreading_sequence_complex.resize(d_sequence_length);
     for (int i = 0; i < d_sequence_length; i++) {
-        // Convert Gaussian value to complex (real part only for now)
-        d_spreading_sequence_complex[i] = gr_complex(d_spreading_sequence[i], 0.0f);
+        float u = d_gaussian(d_rng);
+        float v = d_gaussian(d_rng);
+        d_spreading_sequence_complex[i] =
+            gr_complex(std::abs(u), std::abs(v));
     }
 }
 
 void gdss_spreader_cc_impl::set_spreading_sequence(const std::vector<float>& sequence)
 {
     std::lock_guard<std::mutex> lock(d_mutex);
-    if (static_cast<int>(sequence.size()) != d_sequence_length) {
-        throw std::invalid_argument("Sequence length must match");
+    int need = 2 * d_sequence_length;
+    if (static_cast<int>(sequence.size()) == need) {
+        d_spreading_sequence_complex.resize(d_sequence_length);
+        for (int i = 0; i < d_sequence_length; i++) {
+            d_spreading_sequence_complex[i] =
+                gr_complex(sequence[2 * i], sequence[2 * i + 1]);
+        }
+    } else if (static_cast<int>(sequence.size()) == d_sequence_length) {
+        d_spreading_sequence_complex.resize(d_sequence_length);
+        for (int i = 0; i < d_sequence_length; i++) {
+            d_spreading_sequence_complex[i] =
+                gr_complex(std::abs(sequence[i]), 0.0f);
+        }
+    } else {
+        throw std::invalid_argument("Sequence length must be sequence_length or 2*sequence_length (I,Q interleaved)");
     }
-    d_spreading_sequence = sequence;
-    update_sequence_complex();
-    d_chip_index = 0; // Reset chip index
+    d_chip_index = 0;
 }
 
 void gdss_spreader_cc_impl::set_chips_per_symbol(int chips_per_symbol)
@@ -137,8 +146,18 @@ void gdss_spreader_cc_impl::regenerate_sequence(float variance, unsigned int see
     d_rng.seed(d_seed);
     d_gaussian = std::normal_distribution<float>(0.0f, std::sqrt(variance));
     generate_sequence();
-    update_sequence_complex();
     d_chip_index = 0;
+}
+
+std::vector<float> gdss_spreader_cc_impl::get_spreading_sequence() const
+{
+    std::lock_guard<std::mutex> lock(d_mutex);
+    std::vector<float> out(2 * d_sequence_length);
+    for (int i = 0; i < d_sequence_length; i++) {
+        out[2 * i] = d_spreading_sequence_complex[i].real();
+        out[2 * i + 1] = d_spreading_sequence_complex[i].imag();
+    }
+    return out;
 }
 
 int gdss_spreader_cc_impl::work(int noutput_items,
@@ -158,12 +177,11 @@ int gdss_spreader_cc_impl::work(int noutput_items,
 
         // Spread this symbol: repeat it chips_per_symbol times and multiply by Gaussian sequence
         for (int chip = 0; chip < d_chips_per_symbol; chip++) {
-            // Get spreading chip (wraparound if needed)
             int seq_idx = (d_chip_index + chip) % d_sequence_length;
-            gr_complex spreading_chip = d_spreading_sequence_complex[seq_idx];
-
-            // Multiply symbol by spreading chip
-            out[output_idx++] = symbol * spreading_chip;
+            gr_complex mask = d_spreading_sequence_complex[seq_idx];
+            out[output_idx++] = gr_complex(
+                symbol.real() * mask.real(),
+                symbol.imag() * mask.imag());
         }
 
         // Advance chip index for next symbol

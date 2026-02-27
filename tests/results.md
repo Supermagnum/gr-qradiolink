@@ -1,6 +1,6 @@
 # Test Results for gr-qradiolink
 
-Generated: 2026-02-27 (updated for data assertions and DSSS/GDSS despreader enhancements)
+Generated: 2026-02-01 (full test suite run: C++ 34/34, Python MMDVM 41/41; DSSS PN +1/-1 mapping, BER simulation)
 
 ## Test Suite Overview
 
@@ -442,8 +442,9 @@ Location: fuzzing/corpus/m17_attack_vectors
 | test_modulation_vectors.py | 28 | 0 | PASSED |
 | test_edge_cases.py | 15 | 0 | PASSED |
 | test_memory_safety.py | 4 | 0 | PASSED |
+| test_mmdvm_protocols.py | 41 | 0 | PASSED |
 | test_m17_deframer_scapy.py | 20 processed | 14 attack vectors | PASSED |
-| **TOTAL** | **81+** | **0** | **ALL PASSED** |
+| **TOTAL** | **122+** | **0** | **ALL PASSED** |
 
 C++ tests assert on output data (vector_sink + size/content checks) for modulator, GDSS, and DSSS receiver tests; 2FSK roundtrip asserts decoded length.
 
@@ -536,13 +537,14 @@ To run these tests:
 
 ```bash
 # C++ tests (from build directory, after cmake + make)
-cd build && ctest --output-on-failure
+cd build && XDG_CACHE_HOME=/tmp/gr_cache ctest --output-on-failure
 
-# Python tests
+# Python tests (set PYTHONPATH to build/python:build/lib if needed)
 python3 tests/test_modulation_vectors.py
 python3 tests/test_edge_cases.py
 python3 tests/test_memory_safety.py
 python3 tests/test_m17_deframer_scapy.py
+python3 tests/test_mmdvm_protocols.py -v
 
 # With Valgrind (memory checking)
 valgrind --leak-check=full python3 tests/test_memory_safety.py

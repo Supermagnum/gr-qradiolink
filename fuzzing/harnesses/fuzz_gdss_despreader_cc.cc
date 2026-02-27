@@ -22,10 +22,13 @@
 
 namespace {
 
-std::vector<float> make_deterministic_sequence(int length) {
-    std::vector<float> seq(length);
-    for (int i = 0; i < length; ++i) {
-        seq[i] = 0.5f * std::sin(0.1f * (float)i) + 0.3f * std::cos(0.07f * (float)i);
+std::vector<float> make_deterministic_sequence(int num_chips) {
+    std::vector<float> seq(2 * num_chips);
+    for (int i = 0; i < num_chips; ++i) {
+        float u = 0.5f * std::sin(0.1f * (float)i) + 0.3f * std::cos(0.07f * (float)i);
+        float v = 0.4f * std::cos(0.13f * (float)i) + 0.2f * std::sin(0.11f * (float)i);
+        seq[2 * i] = std::abs(u);
+        seq[2 * i + 1] = std::abs(v);
     }
     return seq;
 }
@@ -38,9 +41,9 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size) {
     }
 
     try {
-        int seq_len = 127;
+        int num_chips = 127;
         int chips_per_symbol = 42;
-        std::vector<float> spreading_sequence = make_deterministic_sequence(seq_len);
+        std::vector<float> spreading_sequence = make_deterministic_sequence(num_chips);
 
         auto despreader = gr::qradiolink::gdss_despreader_cc::make(
             spreading_sequence, chips_per_symbol, 0.7f, 2);

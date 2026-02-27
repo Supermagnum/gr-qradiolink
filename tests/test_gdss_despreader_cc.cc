@@ -35,9 +35,10 @@ int main(int argc, char** argv)
 
         std::mt19937 rng(12345);
         std::normal_distribution<float> gaussian(0.0f, 1.0f);
-        std::vector<float> spreading_sequence(127);
+        std::vector<float> spreading_sequence(254);
         for (int i = 0; i < 127; i++) {
-            spreading_sequence[i] = gaussian(rng);
+            spreading_sequence[2 * i] = std::abs(gaussian(rng));
+            spreading_sequence[2 * i + 1] = std::abs(gaussian(rng));
         }
 
         auto despreader = gr::qradiolink::gdss_despreader_cc::make(

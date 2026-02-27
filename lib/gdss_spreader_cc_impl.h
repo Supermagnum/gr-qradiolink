@@ -22,8 +22,7 @@ namespace qradiolink {
 class gdss_spreader_cc_impl : public gdss_spreader_cc
 {
 private:
-    std::vector<float> d_spreading_sequence;
-    std::vector<gr_complex> d_spreading_sequence_complex;
+    std::vector<gr_complex> d_spreading_sequence_complex;  /* per-chip (|U|, |V|) per paper */
     int d_sequence_length;
     int d_chips_per_symbol;
     int d_chip_index;
@@ -31,10 +30,9 @@ private:
     unsigned int d_seed;
     std::mt19937 d_rng;
     std::normal_distribution<float> d_gaussian;
-    std::mutex d_mutex;
+    mutable std::mutex d_mutex;
 
     void generate_sequence();
-    void update_sequence_complex();
 
 public:
     gdss_spreader_cc_impl(int sequence_length,
@@ -46,6 +44,7 @@ public:
     void set_spreading_sequence(const std::vector<float>& sequence) override;
     void set_chips_per_symbol(int chips_per_symbol) override;
     void regenerate_sequence(float variance, unsigned int seed) override;
+    std::vector<float> get_spreading_sequence() const override;
 
     int work(int noutput_items,
              gr_vector_const_void_star& input_items,

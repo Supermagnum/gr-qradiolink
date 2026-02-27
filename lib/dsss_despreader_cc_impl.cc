@@ -114,10 +114,10 @@ dsss_despreader_cc_impl::dsss_despreader_cc_impl(const std::vector<int>& pn_sequ
         throw std::invalid_argument("Chips per symbol must be positive");
     }
 
-    // Convert PN sequence to complex
     d_pn_sequence_complex.resize(d_code_length);
     for (int i = 0; i < d_code_length; i++) {
-        d_pn_sequence_complex[i] = gr_complex(static_cast<float>(d_pn_sequence[i]), 0.0f);
+        float chip = (d_pn_sequence[i] == 1) ? 1.0f : -1.0f;
+        d_pn_sequence_complex[i] = gr_complex(chip, 0.0f);
     }
 
     // Initialize input buffer
@@ -232,7 +232,8 @@ void dsss_despreader_cc_impl::set_pn_sequence(const std::vector<int>& pn_sequenc
 
     d_pn_sequence_complex.resize(d_code_length);
     for (int i = 0; i < d_code_length; i++) {
-        d_pn_sequence_complex[i] = gr_complex(static_cast<float>(d_pn_sequence[i]), 0.0f);
+        float chip = (d_pn_sequence[i] == 1) ? 1.0f : -1.0f;
+        d_pn_sequence_complex[i] = gr_complex(chip, 0.0f);
     }
 
     // Reset state

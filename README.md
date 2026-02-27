@@ -14,6 +14,10 @@ This module provides GNU Radio blocks for various digital and analog modulation 
 
 This module was converted from the [QRadioLink](https://qradiolink.org/) application, which is a multimode SDR transceiver for GNU Radio, ADALM-Pluto, LimeSDR, USRP, and other SDR hardware. The original source code is located at [https://codeberg.org/qradiolink/qradiolink](https://codeberg.org/qradiolink/qradiolink).
 
+**Credit and origin:**
+- **QRadioLink (Codeberg)** is the origin of all converted modes: modulation/demodulation (2FSK, 4FSK, 8FSK, CPM-4FSK, GMSK, BPSK, QPSK, SOQPSK, AM, SSB, NBFM, WBFM), digital voice (FreeDV, M17, DMR, dPMR, NXDN), MMDVM protocols (POCSAG, D-STAR, YSF, P25), and supporting blocks (RSSI, M17 deframer, MMDVM source/sink, clipper, stretcher, etc.). The DSP and mode behaviour in this repository were derived from or reimplemented from the QRadioLink application.
+- **The only new additions in this module** (not from QRadioLink) are: **(1) DSSS enhancements** (soft-decision metrics, AFC, adaptive correlation threshold, coarse-to-fine acquisition, timing recovery) on top of base DSSS spreading/despreading, and **(2) GDSS** (Gaussian-Distributed Spread-Spectrum spreader/despreader), which is not part of QRadioLink and is implemented from Shakeel et al., *Sensors* 2023 (see References below).
+
 The QRadioLink Codeberg page does not mention any crashes or other known issues. The code has been fuzzed extensively using libFuzzer with over 104 million executions across multiple blocks, and no crashes or memory leaks were discovered. However, the codebase could potentially benefit from further fuzzing, particularly for blocks that have not yet been fuzzed (see [fuzzing-results/results.md](fuzzing-results/results.md) for coverage details).
 
 ## Features
@@ -31,7 +35,7 @@ The QRadioLink Codeberg page does not mention any crashes or other known issues.
   - **SOQPSK**: Shaped Offset Quadrature Phase Shift Keying modulator/demodulator (see [GRC Block](grc/qradiolink_mod_soqpsk.block.yml), [Details](#soqpsk-shaped-offset-quadrature-phase-shift-keying))
   - **DSSS**: Direct Sequence Spread Spectrum with enhanced spreader/despreader blocks, PN sequence generation (m-sequences, Gold codes), timing recovery, lock detection, soft-decision metrics, AFC support, adaptive correlation threshold, and coarse-to-fine acquisition (see [DSSS Blocks Guide](docs/DSSS_BLOCKS.md), [GRC Blocks](grc/qradiolink_dsss_spreader_cc.block.yml))
   - **DSSS-CDMA**: Code Division Multiple Access transmitter and receiver with multi-user support, configurable spreading factors (32, 64, 128, 256, 512), and support for multiple modulation schemes (2FSK, 4FSK, 8FSK, GMSK, BPSK, QPSK, SOQPSK) (see [GRC Blocks](grc/qradiolink_dsss_cdma_transmitter_cc.block.yml))
-  - **GDSS**: Gaussian-Distributed Spread-Spectrum with spreader/despreader blocks using Gaussian-distributed sequences; soft-decision metrics, AFC support, adaptive threshold, and coarse-to-fine acquisition (see [GDSS Blocks Guide](docs/GDSS_BLOCKS.md), [GRC Blocks](grc/qradiolink_gdss_spreader_cc.block.yml))
+  - **GDSS**: Gaussian-Distributed Spread-Spectrum with spreader/despreader blocks using Gaussian-distributed sequences; soft-decision metrics, AFC support, adaptive threshold, and coarse-to-fine acquisition. The GDSS scheme follows Shakeel et al., *Gaussian-Distributed Spread-Spectrum for Covert Communications*, Sensors 2023, 23(8), 4081; [doi:10.3390/s23084081](https://doi.org/10.3390/s23084081). (See [GDSS Blocks Guide](docs/GDSS_BLOCKS.md), [GRC Blocks](grc/qradiolink_gdss_spreader_cc.block.yml))
 - **Analog Modulations**: AM, SSB (USB/LSB), NBFM, WBFM
   - **AM**: Amplitude Modulation modulator/demodulator (see [GRC Block](grc/qradiolink_mod_am.block.yml), [Examples](examples/README.md))
   - **SSB**: Single Sideband (USB/LSB) modulator/demodulator (see [GRC Block](grc/qradiolink_mod_ssb.block.yml), [Examples](examples/README.md))
@@ -58,7 +62,7 @@ The QRadioLink Codeberg page does not mention any crashes or other known issues.
   - **Interleaver (HF Burst)**: Block interleaver for burst error mitigation on HF channels; spreads burst errors across symbol positions for better FEC performance (see [GRC Block](grc/qradiolink_interleaver_bb.block.yml))
 - **DSSS Blocks**: Enhanced spreader/despreader with PN sequence generation, timing recovery, acquisition, soft-decision support, AFC, adaptive threshold, and coarse-to-fine code search (see [DSSS Blocks Guide](docs/DSSS_BLOCKS.md), [GRC Blocks](grc/qradiolink_dsss_spreader_cc.block.yml))
 - **DSSS-CDMA Blocks**: Multi-user CDMA transmitter and receiver with configurable spreading factors, Gold code support, and multi-user interference estimation (see [GRC Blocks](grc/qradiolink_dsss_cdma_transmitter_cc.block.yml))
-- **GDSS Blocks**: Gaussian-Distributed Spread-Spectrum spreader and despreader with soft-decision, AFC, adaptive threshold, and coarse-to-fine acquisition (see [GDSS Blocks Guide](docs/GDSS_BLOCKS.md), [GRC Blocks](grc/qradiolink_gdss_spreader_cc.block.yml))
+- **GDSS Blocks**: Gaussian-Distributed Spread-Spectrum spreader and despreader with soft-decision, AFC, adaptive threshold, and coarse-to-fine acquisition. GDSS is based on Shakeel et al., Sensors 2023, doi:10.3390/s23084081. (See [GDSS Blocks Guide](docs/GDSS_BLOCKS.md), [GRC Blocks](grc/qradiolink_gdss_spreader_cc.block.yml))
 
 ### SOQPSK (Shaped Offset Quadrature Phase Shift Keying)
 
@@ -187,6 +191,8 @@ Test Coverage:
 
 See [fuzzing-results/results.md](fuzzing-results/results.md) for complete MMDVM protocol test results.
 
+A **DSSS BER simulation** ([examples/dsss_ber_simulation.py](examples/dsss_ber_simulation.py)) runs spreader -> AWGN -> despreader and plots BER vs SNR for N=64, 128, 256, overlaying the theoretical curve 0.5*erfc(sqrt(N*Es/N0/2)); the curves match within simulation noise, confirming correct DSSS behaviour.
+
 ### Running Tests
 
 To build and run the test suite:
@@ -264,6 +270,10 @@ All blocks have GRC (GNU Radio Companion) block definitions in the `grc/` direct
 - [Interleaver (HF Burst)](grc/qradiolink_interleaver_bb.block.yml) - Block interleaver/deinterleaver for HF burst error handling
 
 For complete list of all blocks, see the [grc/](grc/) directory.
+
+## References
+
+- **GDSS (Gaussian-Distributed Spread-Spectrum):** Shakeel, I.; Hilliard, J.; Zhang, W.; Rice, M. Gaussian-Distributed Spread-Spectrum for Covert Communications. *Sensors* 2023, 23(8), 4081. [doi:10.3390/s23084081](https://doi.org/10.3390/s23084081). The GDSS spreader/despreader blocks in this module implement the quadrant-preserving I/Q masking scheme (Section 3) from this paper: each chip uses independent Gaussian samples U, V with element-wise masking I = R(S)*|U|, Q = Im(S)*|V|.
 
 ## License
 

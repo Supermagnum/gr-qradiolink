@@ -54,6 +54,16 @@ A GNU Radio Companion flowgraph for M17 digital voice demodulation.
 - Filter width: 9000 Hz
 - Samples per symbol: 125
 
+### DSSS BER Simulation (`dsss_ber_simulation.py`)
+
+A Python script that runs spreader -> AWGN channel -> despreader and plots BER vs SNR for spreading factors N=64, 128, 256, overlaying the theoretical DSSS QPSK curve BER = 0.5*erfc(sqrt(N*Es/N0/2)) (Sensors 2023, Eq. 1). Used to verify that the DSSS blocks match theory within simulation noise.
+
+**Usage:** From the project root, with gr-qradiolink built and on PYTHONPATH:
+```bash
+python3 examples/dsss_ber_simulation.py
+```
+Requires: numpy, matplotlib, gnuradio, gr-qradiolink. Saves `dsss_ber_curves.png` in the current directory.
+
 ### M17 Modulation Example (`m17_mod_example.py`)
 
 A Python script demonstrating M17 digital voice modulation.

@@ -22,8 +22,7 @@ namespace qradiolink {
 class gdss_despreader_cc_impl : public gdss_despreader_cc
 {
 private:
-    std::vector<float> d_spreading_sequence;
-    std::vector<gr_complex> d_spreading_sequence_complex;
+    std::vector<gr_complex> d_spreading_sequence_complex;  /* per-chip (|U|, |V|) for element-wise correlation */
     int d_sequence_length;
     int d_chips_per_symbol;
     float d_correlation_threshold;
@@ -71,7 +70,7 @@ private:
 
     mutable std::mutex d_mutex;
 
-    // Helper functions
+    void build_sequence_complex(const std::vector<float>& spreading_sequence);
     gr_complex correlate(const gr_complex* samples, int offset, int length);
     void update_timing();
     void update_lock_detection(float correlation);

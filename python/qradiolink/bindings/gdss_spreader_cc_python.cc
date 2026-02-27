@@ -46,6 +46,10 @@ void bind_gdss_spreader_cc(py::module& m)
              &gdss_spreader_cc::regenerate_sequence,
              py::arg("variance"),
              py::arg("seed") = 0,
-             "Regenerate spreading sequence");
+             "Regenerate spreading sequence")
+
+        .def("get_spreading_sequence",
+             &gdss_spreader_cc::get_spreading_sequence,
+             "Get current spreading sequence (I,Q interleaved, 2*sequence_length floats) for receiver");
 }
 

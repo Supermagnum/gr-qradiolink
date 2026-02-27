@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document describes the Gaussian-Distributed Spread-Spectrum (GDSS) blocks for gr-qradiolink. These blocks provide spreading and despreading capabilities using Gaussian-distributed sequences instead of binary PN sequences, offering improved spectral properties and better interference rejection.
+This document describes the Gaussian-Distributed Spread-Spectrum (GDSS) blocks for gr-qradiolink. The implementation follows the scheme in **Shakeel et al., *Gaussian-Distributed Spread-Spectrum for Covert Communications*, Sensors 2023, 23(8), 4081;** [doi:10.3390/s23084081](https://doi.org/10.3390/s23084081). GDSS uses Gaussian-distributed sequences with quadrant-preserving masking: each chip uses independent I and Q masks (|U|, |V|) so that I = R(S)*|U| and Q = Im(S)*|V| (element-wise), preserving symbol quadrant and producing a noise-like transmitted signal.
 
 ## Key Differences from DSSS
 
@@ -50,12 +50,7 @@ Accepts complex symbol stream at symbol rate and spreads each symbol using a Gau
 
 **Sequence Generation:**
 
-The spreading sequence is generated from a Gaussian distribution with:
-- Mean: 0.0
-- Variance: Configurable (default: 1.0)
-- Distribution: Normal (Gaussian) distribution
-
-The sequence is generated once at initialization and can be regenerated using `regenerate_sequence()` if needed.
+Per the paper (Section 3), each chip has independent I and Q Gaussian samples; the spreader uses their absolute values so symbols stay in the same quadrant. The sequence is stored per-chip as (|U|, |V|). It is generated from a Gaussian distribution with mean 0.0 and configurable variance, and can be regenerated using `regenerate_sequence()`. Use `get_spreading_sequence()` to obtain the sequence as 2*sequence_length interleaved floats [|U_0|, |V_0|, |U_1|, |V_1|, ...] for the despreader.
 
 ### gdss_despreader_cc
 
@@ -64,7 +59,7 @@ The sequence is generated once at initialization and can be regenerated using `r
 Accepts spread spectrum signal at chip rate and despreads it to recover the original symbols at symbol rate using correlation with the Gaussian spreading sequence.
 
 **Parameters:**
-- `spreading_sequence`: Gaussian spreading sequence vector (must match transmitter)
+- `spreading_sequence`: Gaussian spreading sequence as 2*N floats (I,Q interleaved: [|U_0|, |V_0|, |U_1|, |V_1|, ...]) to match the spreader. Obtain from the spreader via `get_spreading_sequence()`.
 - `chips_per_symbol`: Number of chips per symbol (must match transmitter, default: 42)
 - `correlation_threshold`: Threshold for valid correlation (default: 0.7)
 - `timing_error_tolerance`: Samples tolerance for timing errors (default: 2)

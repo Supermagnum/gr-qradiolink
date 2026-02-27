@@ -78,6 +78,14 @@ public:
      */
     virtual void regenerate_sequence(float variance, unsigned int seed);
 
+    /*!
+     * \brief Get current spreading sequence for receiver (I,Q interleaved)
+     *
+     * Returns 2*sequence_length floats: [|U_0|, |V_0|, |U_1|, |V_1|, ...]
+     * for use with gdss_despreader_cc::make().
+     */
+    virtual std::vector<float> get_spreading_sequence() const;
+
     virtual ~gdss_spreader_cc();
 
 protected:

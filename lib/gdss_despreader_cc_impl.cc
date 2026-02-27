@@ -84,8 +84,9 @@ gdss_despreader_cc_impl::gdss_despreader_cc_impl(
                         chips_per_symbol,
                         correlation_threshold,
                         timing_error_tolerance),
-      d_spreading_sequence(spreading_sequence),
-      d_sequence_length(spreading_sequence.size()),
+      d_sequence_length(static_cast<int>(spreading_sequence.size()) % 2 == 0
+                            ? static_cast<int>(spreading_sequence.size()) / 2
+                            : static_cast<int>(spreading_sequence.size())),
       d_chips_per_symbol(chips_per_symbol),
       d_correlation_threshold(correlation_threshold),
       d_timing_error_tolerance(timing_error_tolerance),
@@ -116,17 +117,28 @@ gdss_despreader_cc_impl::gdss_despreader_cc_impl(
         throw std::invalid_argument("Chips per symbol must be positive");
     }
 
-    // Convert spreading sequence to complex
-    d_spreading_sequence_complex.resize(d_sequence_length);
-    for (int i = 0; i < d_sequence_length; i++) {
-        d_spreading_sequence_complex[i] = gr_complex(d_spreading_sequence[i], 0.0f);
-    }
+    build_sequence_complex(spreading_sequence);
 
-    // Initialize input buffer
     d_input_buffer.clear();
 }
 
 gdss_despreader_cc_impl::~gdss_despreader_cc_impl() {}
+
+void gdss_despreader_cc_impl::build_sequence_complex(const std::vector<float>& spreading_sequence)
+{
+    d_spreading_sequence_complex.resize(d_sequence_length);
+    if (spreading_sequence.size() == static_cast<size_t>(2 * d_sequence_length)) {
+        for (int i = 0; i < d_sequence_length; i++) {
+            d_spreading_sequence_complex[i] =
+                gr_complex(spreading_sequence[2 * i], spreading_sequence[2 * i + 1]);
+        }
+    } else {
+        for (int i = 0; i < d_sequence_length; i++) {
+            d_spreading_sequence_complex[i] =
+                gr_complex(std::abs(spreading_sequence[i]), 0.0f);
+        }
+    }
+}
 
 void gdss_despreader_cc_impl::forecast(int noutput_items, gr_vector_int& ninput_items_required)
 {
@@ -136,18 +148,23 @@ void gdss_despreader_cc_impl::forecast(int noutput_items, gr_vector_int& ninput_
 
 gr_complex gdss_despreader_cc_impl::correlate(const gr_complex* samples, int offset, int length)
 {
-    gr_complex correlation = gr_complex(0.0f, 0.0f);
+    float sum_i = 0.0f;
+    float sum_q = 0.0f;
+    int n = std::min(length, d_sequence_length);
 
-    // Correlate samples with Gaussian spreading sequence
-    for (int i = 0; i < length && i < d_sequence_length; i++) {
+    for (int i = 0; i < n; i++) {
         int seq_idx = (d_code_phase + i) % d_sequence_length;
-        correlation += samples[offset + i] * std::conj(d_spreading_sequence_complex[seq_idx]);
+        gr_complex s = samples[offset + i];
+        gr_complex m = d_spreading_sequence_complex[seq_idx];
+        sum_i += s.real() * m.real();
+        sum_q += s.imag() * m.imag();
     }
 
-    // Normalize by sequence length
-    correlation /= static_cast<float>(std::min(length, d_sequence_length));
-
-    return correlation;
+    if (n > 0) {
+        sum_i /= static_cast<float>(n);
+        sum_q /= static_cast<float>(n);
+    }
+    return gr_complex(sum_i, sum_q);
 }
 
 void gdss_despreader_cc_impl::update_timing()
@@ -225,16 +242,13 @@ void gdss_despreader_cc_impl::update_snr_estimate(gr_complex symbol, float corre
 void gdss_despreader_cc_impl::set_spreading_sequence(const std::vector<float>& spreading_sequence)
 {
     std::lock_guard<std::mutex> lock(d_mutex);
-    d_spreading_sequence = spreading_sequence;
-    d_sequence_length = spreading_sequence.size();
-    if (d_sequence_length == 0) {
+    if (spreading_sequence.empty()) {
         throw std::invalid_argument("Spreading sequence cannot be empty");
     }
-
-    d_spreading_sequence_complex.resize(d_sequence_length);
-    for (int i = 0; i < d_sequence_length; i++) {
-        d_spreading_sequence_complex[i] = gr_complex(d_spreading_sequence[i], 0.0f);
-    }
+    d_sequence_length = (spreading_sequence.size() % 2 == 0)
+                            ? static_cast<int>(spreading_sequence.size()) / 2
+                            : static_cast<int>(spreading_sequence.size());
+    build_sequence_complex(spreading_sequence);
 
     // Reset state
     d_code_phase = 0;
