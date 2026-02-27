@@ -43,6 +43,7 @@ protected:
                     const std::vector<int>& spreading_code)
         : sync_block(name, input_signature, output_signature)
     {
+        (void)spreading_code;
         // Base class constructor - implementation in derived class
     }
 };

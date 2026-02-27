@@ -89,6 +89,7 @@ void mod_freedv_impl::set_bb_gain(float value) { d_bb_gain->set_k(value); }
 
 void mod_freedv::set_bb_gain(float value)
 {
+    (void)value;
     // This should never be called, as mod_freedv is only an interface
     // The actual implementation is in mod_freedv_impl
 }

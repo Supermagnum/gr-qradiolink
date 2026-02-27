@@ -13,6 +13,7 @@
 #include <gnuradio/blocks/null_source.h>
 #include <gnuradio/blocks/null_sink.h>
 #include <gnuradio/blocks/vector_source.h>
+#include <gnuradio/blocks/vector_sink.h>
 #include <gnuradio/top_block.h>
 #include <gnuradio/gr_complex.h>
 #include <boost/test/unit_test.hpp>
@@ -29,16 +30,20 @@ BOOST_AUTO_TEST_CASE(test_rssi_tag_block_instantiation)
 
 BOOST_AUTO_TEST_CASE(test_rssi_tag_block_flowgraph)
 {
+    std::vector<gr_complex> iq(1000, gr_complex(0.5f, 0.0f));
     auto tb = gr::make_top_block("test");
     auto rssi = rssi_tag_block::make();
-    auto source = gr::blocks::null_source::make(sizeof(gr_complex));
-    auto sink = gr::blocks::null_sink::make(sizeof(gr_complex));
+    auto source = gr::blocks::vector_source<gr_complex>::make(iq, false);
+    auto sink = gr::blocks::vector_sink<gr_complex>::make();
 
     tb->connect(source, 0, rssi, 0);
     tb->connect(rssi, 0, sink, 0);
-    
-    // If we get here, all connections succeeded
-    BOOST_REQUIRE(true);
+    tb->start();
+    tb->wait();
+    tb->stop();
+    tb->wait();
+
+    BOOST_REQUIRE(sink->data().size() == 1000);
 }
 
 BOOST_AUTO_TEST_CASE(test_rssi_tag_block_calibrate)
@@ -83,7 +88,7 @@ BOOST_AUTO_TEST_CASE(test_rssi_tag_block_flowgraph_zero_input)
     auto rssi = rssi_tag_block::make();
     std::vector<gr_complex> zeros(1000, gr_complex(0.0f, 0.0f));
     auto source = gr::blocks::vector_source<gr_complex>::make(zeros, false);
-    auto sink = gr::blocks::null_sink::make(sizeof(gr_complex));
+    auto sink = gr::blocks::vector_sink<gr_complex>::make();
 
     tb->connect(source, 0, rssi, 0);
     tb->connect(rssi, 0, sink, 0);
@@ -91,7 +96,8 @@ BOOST_AUTO_TEST_CASE(test_rssi_tag_block_flowgraph_zero_input)
     tb->wait();
     tb->stop();
     tb->wait();
-    BOOST_REQUIRE(true);
+
+    BOOST_REQUIRE(sink->data().size() == 1000);
 }
 
 BOOST_AUTO_TEST_CASE(test_rssi_tag_block_flowgraph_single_sample)
@@ -100,7 +106,7 @@ BOOST_AUTO_TEST_CASE(test_rssi_tag_block_flowgraph_single_sample)
     auto rssi = rssi_tag_block::make();
     std::vector<gr_complex> single = {gr_complex(1.0f, 0.0f)};
     auto source = gr::blocks::vector_source<gr_complex>::make(single, false);
-    auto sink = gr::blocks::null_sink::make(sizeof(gr_complex));
+    auto sink = gr::blocks::vector_sink<gr_complex>::make();
 
     tb->connect(source, 0, rssi, 0);
     tb->connect(rssi, 0, sink, 0);
@@ -108,7 +114,8 @@ BOOST_AUTO_TEST_CASE(test_rssi_tag_block_flowgraph_single_sample)
     tb->wait();
     tb->stop();
     tb->wait();
-    BOOST_REQUIRE(true);
+
+    BOOST_REQUIRE(sink->data().size() == 1);
 }
 
 } // namespace qradiolink

@@ -11,7 +11,7 @@
 #include <cstdint>
 #include <cstddef>
 #include <algorithm>
-#include "../../../src/gr/dsss_encoder_bb_impl.h"
+#include <gnuradio/dsss/dsss_encoder_bb.h>
 #include <gnuradio/blocks/null_sink.h>
 #include <gnuradio/blocks/vector_source.h>
 #include <gnuradio/blocks/head.h>
@@ -52,8 +52,9 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
         tb->start();
         tb->wait();
     } catch (...) {
+        throw;  // Report exception-based crashes to libFuzzer
     }
-    
+
     return 0;
 }
 

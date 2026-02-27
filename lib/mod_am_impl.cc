@@ -98,12 +98,14 @@ void mod_am_impl::set_bb_gain(float value) { d_bb_gain->set_k(value); }
 
 void mod_am::set_filter_width(int filter_width)
 {
+    (void)filter_width;
     // This should never be called, as mod_am is only an interface
     // The actual implementation is in mod_am_impl
 }
 
 void mod_am::set_bb_gain(float value)
 {
+    (void)value;
     // This should never be called, as mod_am is only an interface
     // The actual implementation is in mod_am_impl
 }

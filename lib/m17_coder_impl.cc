@@ -74,6 +74,8 @@ namespace gr
                                                                         _mode(mode), _data(data), _encr_subtype(encr_subtype), _aes_subtype(aes_subtype), _can(can), _meta(meta), _debug(debug),
                                                                         _signed_str(signed_str), _eot_cnt(eot_cnt)
     {
+      (void)key;
+      (void)priv_key;
       set_encr_type(encr_type); // overwritten by set_seed()
       set_type(mode, data, _encr_type, encr_subtype, can);
       set_aes_subtype(aes_subtype, encr_type);

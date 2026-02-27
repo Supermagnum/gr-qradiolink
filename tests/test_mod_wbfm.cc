@@ -13,6 +13,7 @@
 #include <gnuradio/blocks/null_source.h>
 #include <gnuradio/blocks/null_sink.h>
 #include <gnuradio/blocks/vector_source.h>
+#include <gnuradio/blocks/vector_sink.h>
 #include <gnuradio/blocks/head.h>
 #include <gnuradio/top_block.h>
 #include <gnuradio/gr_complex.h>
@@ -30,14 +31,22 @@ BOOST_AUTO_TEST_CASE(test_mod_wbfm_instantiation)
 
 BOOST_AUTO_TEST_CASE(test_mod_wbfm_flowgraph)
 {
+    std::vector<float> audio(1000, 0.1f);
     auto tb = gr::make_top_block("test");
     auto mod = mod_wbfm::make(125, 250000, 1700, 8000);
-    auto source = gr::blocks::null_source::make(sizeof(float));
-    auto sink = gr::blocks::null_sink::make(sizeof(gr_complex));
+    auto source = gr::blocks::vector_source<float>::make(audio, true);
+    auto head = gr::blocks::head::make(sizeof(gr_complex), 500);
+    auto sink = gr::blocks::vector_sink<gr_complex>::make();
 
     tb->connect(source, 0, mod, 0);
-    tb->connect(mod, 0, sink, 0);
-    BOOST_REQUIRE(true);
+    tb->connect(mod, 0, head, 0);
+    tb->connect(head, 0, sink, 0);
+    tb->start();
+    tb->wait();
+    tb->stop();
+    tb->wait();
+
+    BOOST_REQUIRE(sink->data().size() == 500);
 }
 
 BOOST_AUTO_TEST_CASE(test_mod_wbfm_setters)
@@ -55,7 +64,7 @@ BOOST_AUTO_TEST_CASE(test_mod_wbfm_edge_zero_input)
     auto mod = mod_wbfm::make(125, 250000, 1700, 8000);
     auto source = gr::blocks::vector_source<float>::make(zeros, false);
     auto head = gr::blocks::head::make(sizeof(gr_complex), 500);
-    auto sink = gr::blocks::null_sink::make(sizeof(gr_complex));
+    auto sink = gr::blocks::vector_sink<gr_complex>::make();
 
     tb->connect(source, 0, mod, 0);
     tb->connect(mod, 0, head, 0);
@@ -64,7 +73,8 @@ BOOST_AUTO_TEST_CASE(test_mod_wbfm_edge_zero_input)
     tb->wait();
     tb->stop();
     tb->wait();
-    BOOST_REQUIRE(true);
+
+    BOOST_REQUIRE(sink->data().size() == 500);
 }
 
 BOOST_AUTO_TEST_CASE(test_mod_wbfm_edge_extreme_amplitude)
@@ -74,7 +84,7 @@ BOOST_AUTO_TEST_CASE(test_mod_wbfm_edge_extreme_amplitude)
     auto mod = mod_wbfm::make(125, 250000, 1700, 8000);
     auto source = gr::blocks::vector_source<float>::make(extreme, false);
     auto head = gr::blocks::head::make(sizeof(gr_complex), 500);
-    auto sink = gr::blocks::null_sink::make(sizeof(gr_complex));
+    auto sink = gr::blocks::vector_sink<gr_complex>::make();
 
     tb->connect(source, 0, mod, 0);
     tb->connect(mod, 0, head, 0);
@@ -83,7 +93,8 @@ BOOST_AUTO_TEST_CASE(test_mod_wbfm_edge_extreme_amplitude)
     tb->wait();
     tb->stop();
     tb->wait();
-    BOOST_REQUIRE(true);
+
+    BOOST_REQUIRE(sink->data().size() == 500);
 }
 
 } // namespace qradiolink

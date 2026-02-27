@@ -144,6 +144,7 @@ void mod_dpmr_impl::set_bb_gain(float value) { d_bb_gain->set_k(value); }
 
 void mod_dpmr::set_bb_gain(float value)
 {
+    (void)value;
     // This should never be called, as mod_dpmr is only an interface
     // The actual implementation is in mod_dpmr_impl
 }

@@ -39,6 +39,7 @@ public:
     virtual ~MockBurstTimer() = default;
     
     uint64_t allocate_slot(int slot_number, int64_t timing_correction, int channel) override {
+        (void)timing_correction;
         std::lock_guard<std::mutex> lock(mtx);
         if (channel >= 0 && channel < 7) {
             slot_numbers[channel] = slot_number;

@@ -2,6 +2,7 @@
 build/
 build-fuzz/
 build-test/
+build-werror/
 *_build/
 
 # Python cache

@@ -12,9 +12,14 @@
 #include <gnuradio/block.h>
 #include <gnuradio/blocks/null_source.h>
 #include <gnuradio/blocks/null_sink.h>
+#include <gnuradio/blocks/vector_source.h>
+#include <gnuradio/blocks/vector_sink.h>
+#include <gnuradio/blocks/head.h>
 #include <gnuradio/top_block.h>
+#include <gnuradio/gr_complex.h>
 #include <boost/test/unit_test.hpp>
 #include <iostream>
+#include <vector>
 
 namespace gr {
 namespace qradiolink {
@@ -29,16 +34,22 @@ BOOST_AUTO_TEST_CASE(test_mod_dsss_instantiation)
 
 BOOST_AUTO_TEST_CASE(test_mod_dsss_flowgraph)
 {
+    std::vector<unsigned char> data(100, 0xAA);
     auto tb = gr::make_top_block("test");
     auto mod = mod_dsss::make(25, 250000, 1700, 2000);
-    auto source = gr::blocks::null_source::make(sizeof(char));
-    auto sink = gr::blocks::null_sink::make(sizeof(gr_complex));
+    auto source = gr::blocks::vector_source<unsigned char>::make(data, true);
+    auto head = gr::blocks::head::make(sizeof(gr_complex), 500);
+    auto sink = gr::blocks::vector_sink<gr_complex>::make();
 
     tb->connect(source, 0, mod, 0);
-    tb->connect(mod, 0, sink, 0);
-    
-    // If we get here, all connections succeeded
-    BOOST_REQUIRE(true);
+    tb->connect(mod, 0, head, 0);
+    tb->connect(head, 0, sink, 0);
+    tb->start();
+    tb->wait();
+    tb->stop();
+    tb->wait();
+
+    BOOST_REQUIRE(sink->data().size() == 500);
 }
 
 BOOST_AUTO_TEST_CASE(test_mod_dsss_set_bb_gain)

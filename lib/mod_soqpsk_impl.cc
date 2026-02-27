@@ -219,6 +219,7 @@ void mod_soqpsk_impl::set_bb_gain(float value)
 
 void mod_soqpsk::set_bb_gain(float value)
 {
+    (void)value;
     // This should never be called, as mod_soqpsk is only an interface
     // The actual implementation is in mod_soqpsk_impl
 }

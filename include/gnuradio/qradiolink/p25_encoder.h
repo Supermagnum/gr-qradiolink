@@ -63,6 +63,10 @@ protected:
                 uint16_t talkgroup_id)
         : sync_block(name, input_signature, output_signature)
     {
+        (void)nac;
+        (void)source_id;
+        (void)destination_id;
+        (void)talkgroup_id;
     }
 };
 

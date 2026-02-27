@@ -42,6 +42,11 @@ The fuzzing targets will be built in `build/fuzzing/harnesses/`.
 - **fuzz_demod_gmsk** - Tests `demod_gmsk` with complex input data
 - **fuzz_demod_dsss** - Tests `demod_dsss` with complex input data
 
+### GDSS Block Fuzzers
+
+- **fuzz_gdss_spreader_cc** - Tests `gdss_spreader_cc` with complex symbol input
+- **fuzz_gdss_despreader_cc** - Tests `gdss_despreader_cc` with complex chip-rate input
+
 ### Supporting Block Fuzzers
 
 - **fuzz_clipper_cc** - Tests CESSB clipper block with complex input
@@ -127,7 +132,7 @@ cd fuzzing
 ```
 
 This script will:
-- Start all 13 fuzzers using `nohup` (detached from terminal)
+- Start all 15 fuzzers using `nohup` (detached from terminal)
 - Run each fuzzer for 6 hours (21600 seconds)
 - Create separate corpus directories for each fuzzer
 - Log output to individual log files

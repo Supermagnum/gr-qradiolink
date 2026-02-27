@@ -141,6 +141,7 @@ void mod_8fsk_impl::set_bb_gain(float value) { d_bb_gain->set_k(value); }
 
 void mod_8fsk::set_bb_gain(float value)
 {
+    (void)value;
     // This should never be called, as mod_8fsk is only an interface
     // The actual implementation is in mod_8fsk_impl
 }

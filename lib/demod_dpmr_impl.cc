@@ -31,11 +31,11 @@ demod_dpmr_impl::demod_dpmr_impl(int sps, int samp_rate)
     : demod_dpmr("demod_dpmr",
                 gr::io_signature::make(1, 1, sizeof(gr_complex)),
                 gr::io_signature::makev(4, 4, {sizeof(gr_complex), sizeof(gr_complex), sizeof(unsigned char), sizeof(float)})),
-      d_symbol_rate(2400),  // dPMR fixed at 2400 baud
       d_sps(sps),
       d_samp_rate(samp_rate),
       d_target_samp_rate(2400 * 5),  // 5 samples per symbol at IF
-      d_filter_width(5000.0f)  // 6.25 kHz channel, ~5 kHz filter
+      d_filter_width(5000.0f),  // 6.25 kHz channel, ~5 kHz filter
+      d_symbol_rate(2400)  // dPMR fixed at 2400 baud
 {
     unsigned int samples_per_symbol = 5;
     

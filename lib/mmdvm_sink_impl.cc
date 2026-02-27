@@ -80,9 +80,9 @@ int mmdvm_sink_impl::work(int noutput_items,
                           gr_vector_void_star& output_items)
 {
     (void)output_items;
-    short* in[MAX_MMDVM_CHANNELS];
+    const short* in[MAX_MMDVM_CHANNELS];
     for (int i = 0; i < d_num_channels; i++) {
-        in[i] = (short*)(input_items[i]);
+        in[i] = static_cast<const short*>(input_items[i]);
     }
 
     for (int chan = 0; chan < d_num_channels; chan++) {

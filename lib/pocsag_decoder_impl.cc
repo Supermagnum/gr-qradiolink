@@ -101,9 +101,10 @@ uint32_t pocsag_decoder_impl::correct_bch_errors(uint32_t codeword)
     // This is a simplified approach - full BCH decoder would be more complex
     // For now, we'll just check parity and return corrected codeword if we can determine it
     
-    // Compute syndrome
+    // Compute syndrome (reserved for full BCH decoder)
     uint32_t syndrome = received_parity ^ expected_parity;
-    
+    (void)syndrome;
+
     // Simple error correction: try flipping bits in data
     // This is not a complete BCH decoder, but handles common cases
     for (int i = 0; i < 20; i++) {

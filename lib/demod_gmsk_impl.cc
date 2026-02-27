@@ -34,7 +34,9 @@ demod_gmsk_impl::demod_gmsk_impl(int sps, int samp_rate, int carrier_freq, int f
                  gr::io_signature::make(1, 1, sizeof(gr_complex)),
                  gr::io_signature::makev(4, 4, std::vector<int>{sizeof(gr_complex), sizeof(gr_complex), sizeof(char), sizeof(char)}))
 {
-    int decim, interp, nfilts;
+    int decim;
+    int interp;
+    int nfilts;
     if (sps == 10) {
         d_target_samp_rate = 20000;
         d_samples_per_symbol = sps;
@@ -53,6 +55,12 @@ demod_gmsk_impl::demod_gmsk_impl(int sps, int samp_rate, int carrier_freq, int f
         decim = 25;
         interp = 2;
         nfilts = 80;
+    } else {
+        d_target_samp_rate = 40000;
+        d_samples_per_symbol = sps * 2;
+        decim = 25;
+        interp = 1;
+        nfilts = 55;
     }
 
     if ((nfilts % 2) == 0)

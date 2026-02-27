@@ -90,6 +90,9 @@ protected:
                      unsigned int seed)
         : sync_interpolator(name, input_signature, output_signature, chips_per_symbol)
     {
+        (void)sequence_length;
+        (void)variance;
+        (void)seed;
     }
 };
 

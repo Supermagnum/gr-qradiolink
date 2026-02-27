@@ -111,30 +111,35 @@ void demod_ssb_impl::set_gain(float value) { d_if_gain->set_k(value); }
 
 void demod_ssb::set_squelch(int value)
 {
+    (void)value;
     // This should never be called, as demod_ssb is only an interface
     // The actual implementation is in demod_ssb_impl
 }
 
 void demod_ssb::set_filter_width(int filter_width)
 {
+    (void)filter_width;
     // This should never be called, as demod_ssb is only an interface
     // The actual implementation is in demod_ssb_impl
 }
 
 void demod_ssb::set_agc_attack(float value)
 {
+    (void)value;
     // This should never be called, as demod_ssb is only an interface
     // The actual implementation is in demod_ssb_impl
 }
 
 void demod_ssb::set_agc_decay(float value)
 {
+    (void)value;
     // This should never be called, as demod_ssb is only an interface
     // The actual implementation is in demod_ssb_impl
 }
 
 void demod_ssb::set_gain(float value)
 {
+    (void)value;
     // This should never be called, as demod_ssb is only an interface
     // The actual implementation is in demod_ssb_impl
 }

@@ -67,10 +67,10 @@ dsss_cdma_transmitter_cc_impl::dsss_cdma_transmitter_cc_impl(
                                num_users,
                                normalize_power),
       d_spreading_codes(spreading_codes),
+      d_chip_indices(num_users, 0),
       d_spreading_factor(spreading_factor),
       d_num_users(num_users),
-      d_normalize_power(normalize_power),
-      d_chip_indices(num_users, 0)
+      d_normalize_power(normalize_power)
 {
     if (static_cast<int>(spreading_codes.size()) != num_users) {
         throw std::invalid_argument("Number of spreading codes must match number of users");

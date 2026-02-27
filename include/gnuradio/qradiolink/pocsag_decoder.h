@@ -54,6 +54,8 @@ protected:
                    float sync_threshold)
         : sync_block(name, input_signature, output_signature)
     {
+        (void)baud_rate;
+        (void)sync_threshold;
     }
 };
 

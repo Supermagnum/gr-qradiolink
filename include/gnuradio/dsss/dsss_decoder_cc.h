@@ -45,6 +45,8 @@ protected:
                     const std::vector<int>& spreading_code, int samples_per_symbol)
         : sync_block(name, input_signature, output_signature)
     {
+        (void)spreading_code;
+        (void)samples_per_symbol;
         // Base class constructor - implementation in derived class
     }
 };

@@ -107,18 +107,21 @@ void demod_nbfm_impl::set_filter_width(int filter_width)
 
 void demod_nbfm::set_squelch(int value)
 {
+    (void)value;
     // This should never be called, as demod_nbfm is only an interface
     // The actual implementation is in demod_nbfm_impl
 }
 
 void demod_nbfm::set_ctcss(float value)
 {
+    (void)value;
     // This should never be called, as demod_nbfm is only an interface
     // The actual implementation is in demod_nbfm_impl
 }
 
 void demod_nbfm::set_filter_width(int filter_width)
 {
+    (void)filter_width;
     // This should never be called, as demod_nbfm is only an interface
     // The actual implementation is in demod_nbfm_impl
 }

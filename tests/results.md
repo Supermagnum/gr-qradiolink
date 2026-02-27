@@ -1,14 +1,16 @@
 # Test Results for gr-qradiolink
 
-Generated: 2025-02-01 (updated for DSSS/GDSS despreader enhancements)
+Generated: 2025-02-01 (updated for data assertions and DSSS/GDSS despreader enhancements)
 
 ## Test Suite Overview
 
-This document contains results from C++ unit tests and Python test harnesses for GNU Radio blocks in gr-qradiolink. These tests provide basic confidence that blocks handle edge cases without crashing and can be used with memory checkers (Valgrind/ASan) during normal use.
+This document contains results from C++ unit tests and Python test harnesses for GNU Radio blocks in gr-qradiolink. All C++ tests assert on output data (vector_sink with size or content checks) where applicable; they provide confidence that blocks produce expected output, not only that they run without crashing.
 
 ---
 
 ## C++ Unit Tests (CTest/Boost.Test)
+
+**Total: 34 tests, all passed** (run via `ctest` in build directory)
 
 ### Interleaver (HF Burst) - 13 tests, all passed
 
@@ -42,13 +44,32 @@ Running 8 test cases...
 - Edge: calibrate with zero, small (1e-10), large (1e10)
 - Edge: zero input (1000 samples), single sample
 
-### Other C++ Tests
+### Manual C++ Tests (data assertions)
 
-Manual tests: test_mod_2fsk, test_mod_4fsk, test_mod_8fsk, test_mod_am, test_mod_gmsk, test_mod_bpsk, test_mod_mmdvm, test_mod_freedv, test_gdss_spreader_cc, test_gdss_despreader_cc, test_dsss_cdma_transmitter_cc, test_dsss_cdma_receiver_cc
+All of the following use `vector_sink` and assert on output size or content:
 
-Boost.Test tests: mod_ssb, mod_qpsk, mod_nbfm, mod_wbfm, mod_dsss, demod_2fsk through demod_mmdvm_multi2, rssi_tag_block, interleaver_bb. Many include edge case tests (zero input, extreme amplitude).
+- **test_mod_2fsk, test_mod_4fsk, test_mod_8fsk, test_mod_bpsk, test_mod_gmsk**: Assert modulator produces exactly 1000 complex samples (head-limited); source runs with repeat.
+- **test_mod_am**: Assert 5000 complex samples (head limit).
+- **test_mod_mmdvm**: Assert 1000 complex samples (head limit).
+- **test_mod_freedv**: Assert 5000 complex samples (head limit).
+- **test_gdss_spreader_cc**: Assert output size = 4200 (100 symbols x 42 chips/symbol).
+- **test_gdss_despreader_cc**: Assert all three outputs (complex, lock, SNR) have size > 0.
+- **test_dsss_cdma_receiver_cc**: Assert all four outputs have size > 0.
+- **test_dsss_cdma_transmitter_cc**: Flowgraph run only (single- and multi-user); no output assertion due to block scheduling.
 
-DSSS and GDSS despreaders (test_gdss_despreader_cc, and use of dsss_despreader_cc in flowgraphs) support soft-decision metrics (get_last_soft_metric), AFC (get_frequency_error), adaptive correlation threshold, and coarse-to-fine code phase search for faster acquisition. See [DSSS Blocks Guide](../docs/DSSS_BLOCKS.md) and [GDSS Blocks Guide](../docs/GDSS_BLOCKS.md).
+### Boost.Test (data assertions)
+
+All flowgraph tests below run the flowgraph (vector_source + head + vector_sink where applicable), then assert on output:
+
+- **qradiolink_test_demod_2fsk**: Flowgraph assert sink0->data().size() > 0; edge (zero input) and **roundtrip** (mod_2fsk -> demod_2fsk, assert decoded length > 0 and >= input bytes).
+- **qradiolink_test_mod_ssb, mod_qpsk, mod_nbfm, mod_wbfm, mod_dsss**: Flowgraph assert output size (500 complex samples from head-limited run).
+- **qradiolink_test_mod_nbfm, mod_wbfm**: Edge zero_input and (wbfm) edge_extreme_amplitude assert sink->data().size() == 500.
+- **qradiolink_test_demod_am, demod_ssb, demod_wbfm, demod_nbfm, demod_bpsk, demod_qpsk, demod_gmsk, demod_4fsk, demod_dsss, demod_m17, demod_dmr, demod_freedv**: Flowgraph assert filtered output (sink0->data().size() > 0).
+- **qradiolink_test_demod_mmdvm_multi, qradiolink_test_demod_mmdvm_multi2**: No output ports; flowgraph run only (source -> head -> demod) to exercise block.
+- **qradiolink_test_rssi_tag_block**: Flowgraph assert sink->data().size() == 1000; flowgraph_zero_input and flowgraph_single_sample assert size 1000 and 1.
+- **qradiolink_test_interleaver_bb**: Interleaver/deinterleaver roundtrip and edge cases with data assertions.
+
+DSSS and GDSS despreaders (test_gdss_despreader_cc, and use of dsss_despreader_cc in flowgraphs) support soft-decision metrics (get_last_soft_metric), AFC (get_frequency_error), adaptive correlation threshold, and coarse-to-fine code phase search. See [DSSS Blocks Guide](../docs/DSSS_BLOCKS.md) and [GDSS Blocks Guide](../docs/GDSS_BLOCKS.md).
 
 ---
 
@@ -417,13 +438,14 @@ Location: fuzzing/corpus/m17_attack_vectors
 
 | Test Suite | Tests Passed | Tests Failed | Status |
 |------------|--------------|--------------|--------|
-| C++ interleaver_bb | 13 | 0 | PASSED |
-| C++ rssi_tag_block | 8 | 0 | PASSED |
+| C++ CTest (34 total) | 34 | 0 | PASSED |
 | test_modulation_vectors.py | 28 | 0 | PASSED |
 | test_edge_cases.py | 15 | 0 | PASSED |
 | test_memory_safety.py | 4 | 0 | PASSED |
 | test_m17_deframer_scapy.py | 20 processed | 14 attack vectors | PASSED |
-| **TOTAL** | **88+** | **0** | **ALL PASSED** |
+| **TOTAL** | **81+** | **0** | **ALL PASSED** |
+
+C++ tests assert on output data (vector_sink + size/content checks) for modulator, GDSS, and DSSS receiver tests; 2FSK roundtrip asserts decoded length.
 
 ---
 
@@ -513,7 +535,10 @@ This testing approach provides confidence that the blocks handle edge cases grac
 To run these tests:
 
 ```bash
-# Run all tests
+# C++ tests (from build directory, after cmake + make)
+cd build && ctest --output-on-failure
+
+# Python tests
 python3 tests/test_modulation_vectors.py
 python3 tests/test_edge_cases.py
 python3 tests/test_memory_safety.py
@@ -531,6 +556,7 @@ python3 -X dev tests/test_memory_safety.py
 ## Notes
 
 - Thread priority warnings (`pthread_setschedparam failed`) are non-critical and can be ignored
-- Tests are designed to verify blocks don't crash on edge cases, not to validate signal processing correctness
-- For signal processing validation, use real-world test signals and compare outputs with expected results
+- C++ tests assert on output data (vector_sink size, decoded length) where applicable; manual modulator tests and GDSS/DSSS receiver tests verify non-empty and expected-length output
+- 2FSK roundtrip test (Boost) verifies mod_2fsk -> demod_2fsk produces decoded bytes (length >= input)
+- For full signal processing validation, use real-world test signals and compare outputs with expected results
 

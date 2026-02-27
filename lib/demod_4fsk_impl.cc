@@ -108,7 +108,6 @@ demod_4fsk_impl::demod_4fsk_impl(int sps, int samp_rate, int carrier_freq, int f
         1,
         gr::filter::firdes::low_pass(
             1, d_target_samp_rate, d_filter_width, d_filter_width / 2, gr::fft::window::WIN_BLACKMAN_HARRIS));
-    gr::qradiolink::gr_4fsk_discriminator::sptr d_discriminator;
     if (!d_fm) {
         d_filter1 = gr::filter::fft_filter_ccc::make(
             1,

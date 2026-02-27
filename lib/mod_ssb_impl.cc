@@ -110,12 +110,14 @@ void mod_ssb_impl::set_bb_gain(float value) { d_bb_gain->set_k(value); }
 
 void mod_ssb::set_filter_width(int filter_width)
 {
+    (void)filter_width;
     // This should never be called, as mod_ssb is only an interface
     // The actual implementation is in mod_ssb_impl
 }
 
 void mod_ssb::set_bb_gain(float value)
 {
+    (void)value;
     // This should never be called, as mod_ssb is only an interface
     // The actual implementation is in mod_ssb_impl
 }

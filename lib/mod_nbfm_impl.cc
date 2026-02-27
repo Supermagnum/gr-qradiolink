@@ -101,6 +101,7 @@ void mod_nbfm_impl::set_filter_width(int filter_width)
 
 void mod_nbfm_impl::set_ctcss(float value)
 {
+    (void)value;
     // TODO: Implement CTCSS tone setting
     // This would require reconnecting the tone source
 }
@@ -109,18 +110,21 @@ void mod_nbfm_impl::set_bb_gain(float value) { d_bb_gain->set_k(value); }
 
 void mod_nbfm::set_filter_width(int filter_width)
 {
+    (void)filter_width;
     // This should never be called, as mod_nbfm is only an interface
     // The actual implementation is in mod_nbfm_impl
 }
 
 void mod_nbfm::set_ctcss(float value)
 {
+    (void)value;
     // This should never be called, as mod_nbfm is only an interface
     // The actual implementation is in mod_nbfm_impl
 }
 
 void mod_nbfm::set_bb_gain(float value)
 {
+    (void)value;
     // This should never be called, as mod_nbfm is only an interface
     // The actual implementation is in mod_nbfm_impl
 }

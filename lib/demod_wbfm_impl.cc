@@ -88,12 +88,14 @@ void demod_wbfm_impl::set_filter_width(int filter_width)
 
 void demod_wbfm::set_squelch(int value)
 {
+    (void)value;
     // This should never be called, as demod_wbfm is only an interface
     // The actual implementation is in demod_wbfm_impl
 }
 
 void demod_wbfm::set_filter_width(int filter_width)
 {
+    (void)filter_width;
     // This should never be called, as demod_wbfm is only an interface
     // The actual implementation is in demod_wbfm_impl
 }

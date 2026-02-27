@@ -12,9 +12,14 @@
 #include <gnuradio/block.h>
 #include <gnuradio/blocks/null_source.h>
 #include <gnuradio/blocks/null_sink.h>
+#include <gnuradio/blocks/vector_source.h>
+#include <gnuradio/blocks/vector_sink.h>
+#include <gnuradio/blocks/head.h>
 #include <gnuradio/top_block.h>
+#include <gnuradio/gr_complex.h>
 #include <boost/test/unit_test.hpp>
 #include <iostream>
+#include <vector>
 
 namespace gr {
 namespace qradiolink {
@@ -27,20 +32,26 @@ BOOST_AUTO_TEST_CASE(test_demod_m17_instantiation)
 
 BOOST_AUTO_TEST_CASE(test_demod_m17_flowgraph)
 {
+    std::vector<gr_complex> iq(1000, gr_complex(0.5f, 0.0f));
     auto tb = gr::make_top_block("test");
     auto demod = demod_m17::make(125, 1000000, 1700, 9000);
-    auto source = gr::blocks::null_source::make(sizeof(gr_complex));
+    auto source = gr::blocks::vector_source<gr_complex>::make(iq, true);
+    auto head = gr::blocks::head::make(sizeof(gr_complex), 500);
+    auto sink0 = gr::blocks::vector_sink<gr_complex>::make();
     auto sink1 = gr::blocks::null_sink::make(sizeof(gr_complex));
-    auto sink2 = gr::blocks::null_sink::make(sizeof(gr_complex));
-    auto sink3 = gr::blocks::null_sink::make(sizeof(unsigned char));
+    auto sink2 = gr::blocks::null_sink::make(sizeof(unsigned char));
 
     tb->connect(source, 0, demod, 0);
-    tb->connect(demod, 0, sink1, 0); // Filtered output
-    tb->connect(demod, 1, sink2, 0); // Constellation output
-    tb->connect(demod, 2, sink3, 0); // Decoded bytes
-    
-    // If we get here, all connections succeeded
-    BOOST_REQUIRE(true);
+    tb->connect(demod, 0, head, 0);
+    tb->connect(head, 0, sink0, 0);
+    tb->connect(demod, 1, sink1, 0);
+    tb->connect(demod, 2, sink2, 0);
+    tb->start();
+    tb->wait();
+    tb->stop();
+    tb->wait();
+
+    BOOST_REQUIRE(sink0->data().size() > 0);
 }
 
 } // namespace qradiolink

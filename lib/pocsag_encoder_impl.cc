@@ -103,9 +103,9 @@ uint32_t pocsag_encoder_impl::create_address_codeword(uint32_t address, int func
     // Bit 31: Even parity bit (over all 31 bits)
     
     // Extract frame number from address (bits 18-20 of 21-bit address)
-    // Frame number = address % 8
     int frame_num = address & 0x7;
-    
+    (void)frame_num;  // reserved for future use
+
     // Extract address bits 0-17 (18 bits)
     uint32_t addr_bits = (address >> 3) & 0x3FFFF;
     

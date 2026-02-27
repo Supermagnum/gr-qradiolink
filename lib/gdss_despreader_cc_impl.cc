@@ -372,22 +372,27 @@ int gdss_despreader_cc_impl::general_work(int noutput_items,
         } else {
             // STATE_TRACKING or STATE_LOCKED - use early-late gate
 
-            // Early correlation (one sample early)
+            // Early correlation (one sample early); clamp to valid range
             int early_offset = std::max(0, input_offset - 1);
+            int max_offset = ninput_items_used - d_chips_per_symbol;
+            if (max_offset < 0) {
+                break;
+            }
             d_early_correlation = std::abs(correlate(in, early_offset, d_chips_per_symbol));
 
             // Prompt correlation (on-time)
             d_prompt_correlation = std::abs(correlate(in, input_offset, d_chips_per_symbol));
 
-            // Late correlation (one sample late)
-            int late_offset = std::min(ninput_items_used - d_chips_per_symbol, input_offset + 1);
+            // Late correlation (one sample late); ensure non-negative and in range
+            int late_offset = std::max(0, std::min(max_offset, input_offset + 1));
             d_late_correlation = std::abs(correlate(in, late_offset, d_chips_per_symbol));
 
             // Update timing
             update_timing();
 
-            // Despread using prompt correlation
-            gr_complex despread = correlate(in, input_offset + d_timing_offset, d_chips_per_symbol);
+            // Despread using prompt with timing offset; clamp to [0, max_offset] to avoid OOB
+            int despread_offset = std::max(0, std::min(max_offset, input_offset + d_timing_offset));
+            gr_complex despread = correlate(in, despread_offset, d_chips_per_symbol);
             out_symbols[output_idx] = despread;
 
             // Update lock detection and SNR

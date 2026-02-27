@@ -96,24 +96,28 @@ void demod_am_impl::set_agc_decay(float value) { d_agc->set_decay_rate(value); }
 
 void demod_am::set_squelch(int value)
 {
+    (void)value;
     // This should never be called, as demod_am is only an interface
     // The actual implementation is in demod_am_impl
 }
 
 void demod_am::set_filter_width(int filter_width)
 {
+    (void)filter_width;
     // This should never be called, as demod_am is only an interface
     // The actual implementation is in demod_am_impl
 }
 
 void demod_am::set_agc_attack(float value)
 {
+    (void)value;
     // This should never be called, as demod_am is only an interface
     // The actual implementation is in demod_am_impl
 }
 
 void demod_am::set_agc_decay(float value)
 {
+    (void)value;
     // This should never be called, as demod_am is only an interface
     // The actual implementation is in demod_am_impl
 }

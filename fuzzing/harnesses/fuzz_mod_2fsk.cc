@@ -65,7 +65,7 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
         tb->wait();
         
     } catch (...) {
-        // Catch all exceptions to prevent crashes from stopping fuzzing
+        throw;
     }
     
     return 0;

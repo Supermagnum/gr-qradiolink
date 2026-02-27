@@ -122,6 +122,10 @@ protected:
                          int timing_error_tolerance)
         : block(name, input_signature, output_signature)
     {
+        (void)spreading_code;
+        (void)spreading_factor;
+        (void)correlation_threshold;
+        (void)timing_error_tolerance;
     }
 };
 

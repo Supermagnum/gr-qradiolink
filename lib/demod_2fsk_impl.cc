@@ -46,7 +46,9 @@ demod_2fsk_impl::demod_2fsk_impl(int sps, int samp_rate, int carrier_freq, int f
                      return sig;
                  }()))
 {
-    int decim, interp, nfilts;
+    int decim;
+    int interp;
+    int nfilts;
     if (sps == 10) {
         d_target_samp_rate = 20000;
         d_samples_per_symbol = sps;
@@ -65,6 +67,13 @@ demod_2fsk_impl::demod_2fsk_impl(int sps, int samp_rate, int carrier_freq, int f
         decim = 25;
         interp = 2;
         nfilts = 125 * d_samples_per_symbol;
+    } else {
+        /* Default for other sps values (e.g. 2, 3, 4) */
+        d_target_samp_rate = 40000;
+        d_samples_per_symbol = sps * 2;
+        decim = 25;
+        interp = 1;
+        nfilts = 35 * d_samples_per_symbol;
     }
     int spacing = 2;
     if (fm)

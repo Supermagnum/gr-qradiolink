@@ -45,6 +45,12 @@ include(GrBoost)
 include(GrMinReq)
 include(GrCompilerSettings)
 
+# Strict warnings: C++ with -Werror; C (submodules) without -Werror to avoid patching third-party code
+if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror -Wshadow")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Wshadow")
+endif()
+
 find_package(Volk REQUIRED)
 
 ########################################################################

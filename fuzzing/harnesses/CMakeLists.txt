@@ -188,3 +188,27 @@ target_link_libraries(fuzz_demod_dsss gnuradio-qradiolink
                                       ${GR_ANALOG_LIBRARIES}
                                       ${GR_FEC_LIBRARIES})
 
+# Fuzzer for gdss_spreader_cc (complex symbols in -> complex chips out)
+add_executable(fuzz_gdss_spreader_cc fuzz_gdss_spreader_cc.cc)
+target_link_libraries(fuzz_gdss_spreader_cc gnuradio-qradiolink
+                                            gnuradio-runtime
+                                            gnuradio-blocks
+                                            ${GR_RUNTIME_LIBRARIES}
+                                            ${GR_BLOCKS_LIBRARIES})
+
+# Fuzzer for gdss_despreader_cc (complex chips in -> complex + lock + snr out)
+add_executable(fuzz_gdss_despreader_cc fuzz_gdss_despreader_cc.cc)
+target_link_libraries(fuzz_gdss_despreader_cc gnuradio-qradiolink
+                                              gnuradio-runtime
+                                              gnuradio-blocks
+                                              gnuradio-digital
+                                              gnuradio-filter
+                                              gnuradio-analog
+                                              gnuradio-fec
+                                              ${GR_RUNTIME_LIBRARIES}
+                                              ${GR_BLOCKS_LIBRARIES}
+                                              ${GR_DIGITAL_LIBRARIES}
+                                              ${GR_FILTER_LIBRARIES}
+                                              ${GR_ANALOG_LIBRARIES}
+                                              ${GR_FEC_LIBRARIES})
+

@@ -57,7 +57,6 @@ demod_dsss_impl::demod_dsss_impl(int sps, int samp_rate, int carrier_freq, int f
     std::vector<float> taps = gr::filter::firdes::low_pass(
         1, d_samp_rate, d_if_samp_rate / 2, d_if_samp_rate / 2, gr::fft::window::WIN_BLACKMAN_HARRIS);
     d_resampler = gr::filter::rational_resampler_ccf::make(1, 50, taps);
-    d_resampler->set_thread_priority(99);
 
     std::vector<float> taps_if = gr::filter::firdes::low_pass(
         1, d_if_samp_rate, d_target_samp_rate / 2, d_target_samp_rate / 2, gr::fft::window::WIN_BLACKMAN_HARRIS);
@@ -70,8 +69,8 @@ demod_dsss_impl::demod_dsss_impl(int sps, int samp_rate, int carrier_freq, int f
             1, d_target_samp_rate, d_filter_width, 1200, gr::fft::window::WIN_BLACKMAN_HARRIS));
     d_costas_loop = gr::digital::costas_loop_cc::make(2 * M_PI / 100, 2);
     d_costas_freq = gr::digital::costas_loop_cc::make(M_PI / 200, 2, true);
-    // DSSS decoder - Barker-13 spreading code correlation
-    gr::dsss::dsss_decoder_cc::sptr d_dsss_decoder = gr::dsss::dsss_decoder_cc::make(dsss_code, d_samples_per_symbol);
+    // DSSS decoder - Barker-13 spreading code correlation (assign to member, not local)
+    d_dsss_decoder = gr::dsss::dsss_decoder_cc::make(dsss_code, d_samples_per_symbol);
     d_complex_to_real = gr::blocks::complex_to_real::make();
     d_clock_recovery = gr::digital::clock_recovery_mm_cc::make(
         1, gain_omega * gain_omega, 0.5, gain_mu, omega_rel_limit);

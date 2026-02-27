@@ -123,6 +123,10 @@ protected:
                        int timing_error_tolerance)
         : block(name, input_signature, output_signature)
     {
+        (void)spreading_sequence;
+        (void)chips_per_symbol;
+        (void)correlation_threshold;
+        (void)timing_error_tolerance;
     }
 };
 

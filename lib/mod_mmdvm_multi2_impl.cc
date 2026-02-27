@@ -133,6 +133,7 @@ void mod_mmdvm_multi2_impl::set_bb_gain(float value)
 
 void mod_mmdvm_multi2::set_bb_gain(float value)
 {
+    (void)value;
     // This should never be called, as mod_mmdvm_multi2 is only an interface
     // The actual implementation is in mod_mmdvm_multi2_impl
 }

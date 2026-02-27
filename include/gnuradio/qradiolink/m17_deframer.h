@@ -46,6 +46,7 @@ protected:
                  int max_frame_length)
         : sync_block(name, input_signature, output_signature)
     {
+        (void)max_frame_length;
     }
 };
 

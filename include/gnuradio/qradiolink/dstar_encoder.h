@@ -64,6 +64,11 @@ protected:
                   const std::string& message_text)
         : sync_block(name, input_signature, output_signature)
     {
+        (void)my_callsign;
+        (void)your_callsign;
+        (void)rpt1_callsign;
+        (void)rpt2_callsign;
+        (void)message_text;
     }
 };
 

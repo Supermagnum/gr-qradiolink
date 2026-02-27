@@ -76,6 +76,7 @@ void mod_bpsk_impl::set_bb_gain(float value) { d_bb_gain->set_k(value); }
 
 void mod_bpsk::set_bb_gain(float value)
 {
+    (void)value;
     // This should never be called, as mod_bpsk is only an interface
     // The actual implementation is in mod_bpsk_impl
 }

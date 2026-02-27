@@ -39,10 +39,10 @@ int gr_4fsk_discriminator_impl::work(int noutput_items,
                                      gr_vector_const_void_star& input_items,
                                      gr_vector_void_star& output_items)
 {
-    float* in1 = (float*)(input_items[0]);
-    float* in2 = (float*)(input_items[1]);
-    float* in3 = (float*)(input_items[2]);
-    float* in4 = (float*)(input_items[3]);
+    const float* in1 = static_cast<const float*>(input_items[0]);
+    const float* in2 = static_cast<const float*>(input_items[1]);
+    const float* in3 = static_cast<const float*>(input_items[2]);
+    const float* in4 = static_cast<const float*>(input_items[3]);
 
     gr_complex* out = (gr_complex*)(output_items[0]);
 

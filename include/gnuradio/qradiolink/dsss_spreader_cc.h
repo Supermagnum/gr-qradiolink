@@ -67,6 +67,7 @@ protected:
                      int chips_per_symbol)
         : sync_interpolator(name, input_signature, output_signature, chips_per_symbol)
     {
+        (void)pn_sequence;
     }
 };
 

@@ -56,6 +56,9 @@ protected:
                    int function_bits)
         : sync_block(name, input_signature, output_signature)
     {
+        (void)baud_rate;
+        (void)address;
+        (void)function_bits;
     }
 };
 

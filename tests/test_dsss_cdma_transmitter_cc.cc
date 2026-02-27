@@ -23,6 +23,8 @@
 
 int main(int argc, char** argv)
 {
+    (void)argc;
+    (void)argv;
     std::cout << "Testing DSSS-CDMA Transmitter" << std::endl;
     std::cout << "=============================" << std::endl;
     
@@ -52,13 +54,13 @@ int main(int argc, char** argv)
         auto tb1 = gr::make_top_block("test1");
         std::vector<gr_complex> test_data_single(10, gr_complex(0.5f, 0.3f));
         auto source_single = gr::blocks::vector_source<gr_complex>::make(test_data_single, false);
-        auto head_single = gr::blocks::head::make(sizeof(gr_complex), 1280); // 10 symbols * 128
+        auto head_single = gr::blocks::head::make(sizeof(gr_complex), 1280);
         auto sink_single = gr::blocks::null_sink::make(sizeof(gr_complex));
-        
+
         tb1->connect(source_single, 0, transmitter_single, 0);
         tb1->connect(transmitter_single, 0, head_single, 0);
         tb1->connect(head_single, 0, sink_single, 0);
-        
+
         tb1->start();
         tb1->wait();
         tb1->stop();
@@ -74,20 +76,18 @@ int main(int argc, char** argv)
         std::vector<gr_complex> test_data2(5, gr_complex(0.3f, 0.5f));
         auto source1 = gr::blocks::vector_source<gr_complex>::make(test_data1, false);
         auto source2 = gr::blocks::vector_source<gr_complex>::make(test_data2, false);
-        // Limit output to expected amount (5 symbols * 128 chips = 640)
         auto head_out = gr::blocks::head::make(sizeof(gr_complex), 640);
         auto sink = gr::blocks::null_sink::make(sizeof(gr_complex));
-        
+
         tb->connect(source1, 0, transmitter, 0);
         tb->connect(source2, 0, transmitter, 1);
         tb->connect(transmitter, 0, head_out, 0);
         tb->connect(head_out, 0, sink, 0);
-        
+
         tb->start();
         tb->wait();
         tb->stop();
         tb->wait();
-        
         std::cout << "PASSED" << std::endl;
         
         std::cout << "All tests PASSED" << std::endl;

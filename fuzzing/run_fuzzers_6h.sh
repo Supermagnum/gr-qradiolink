@@ -54,6 +54,8 @@ FUZZERS=(
     "fuzz_m17_deframer"
     "fuzz_demod_gmsk"
     "fuzz_demod_dsss"
+    "fuzz_gdss_spreader_cc"
+    "fuzz_gdss_despreader_cc"
 )
 
 # Create results directories

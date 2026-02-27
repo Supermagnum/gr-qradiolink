@@ -67,8 +67,8 @@ mod_dsss_impl::mod_dsss_impl(int sps, int samp_rate, int carrier_freq, int filte
         gr::filter::firdes::root_raised_cosine(
             d_samples_per_symbol, d_samples_per_symbol, 1.0, 0.35, 11 * d_samples_per_symbol));
 
-    // DSSS encoder - Barker-13 spreading code
-    gr::dsss::dsss_encoder_bb::sptr d_dsss_encoder = gr::dsss::dsss_encoder_bb::make(dsss_code);
+    // DSSS encoder - Barker-13 spreading code (assign to member, not local)
+    d_dsss_encoder = gr::dsss::dsss_encoder_bb::make(dsss_code);
     d_amplify = gr::blocks::multiply_const_cc::make(0.65, 1);
     d_bb_gain = gr::blocks::multiply_const_cc::make(1, 1);
     d_filter = gr::filter::fft_filter_ccf::make(
@@ -101,6 +101,7 @@ void mod_dsss_impl::set_bb_gain(float value) { d_bb_gain->set_k(value); }
 
 void mod_dsss::set_bb_gain(float value)
 {
+    (void)value;
     // This should never be called, as mod_dsss is only an interface
     // The actual implementation is in mod_dsss_impl
 }

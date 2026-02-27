@@ -62,6 +62,7 @@ namespace gr
 																				_sw_threshold(sw_threshold), _vt_threshold(vt_threshold),
 																				_callsign(callsign), _signed_str(signed_str)
 		{
+			(void)seed;
 			set_debug_data(debug_data);
 			set_debug_ctrl(debug_ctrl);
 			set_sw_threshold(sw_threshold);
@@ -228,6 +229,7 @@ namespace gr
 		m17_decoder_impl::forecast(int noutput_items,
 								   gr_vector_int &ninput_items_required)
 		{
+			(void)noutput_items;
 			ninput_items_required[0] = 1; // do work only if there is at least one symbol available
 		}
 
@@ -410,6 +412,7 @@ namespace gr
 									   gr_vector_const_void_star &input_items,
 									   gr_vector_void_star &output_items)
 		{
+			(void)noutput_items;
 			const float *in = (const float *)input_items[0];
 			char *out = (char *)output_items[0];
 			int countout = 0;

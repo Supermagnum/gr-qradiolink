@@ -62,6 +62,10 @@ protected:
                 uint32_t group_id)
         : sync_block(name, input_signature, output_signature)
     {
+        (void)source_callsign;
+        (void)destination_callsign;
+        (void)radio_id;
+        (void)group_id;
     }
 };
 

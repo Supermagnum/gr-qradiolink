@@ -96,6 +96,10 @@ protected:
                             bool normalize_power)
         : block(name, input_signature, output_signature)
     {
+        (void)spreading_codes;
+        (void)spreading_factor;
+        (void)num_users;
+        (void)normalize_power;
     }
 };
 

@@ -40,7 +40,11 @@ demod_8fsk_impl::demod_8fsk_impl(int sps, int samp_rate, int carrier_freq, int f
     d_filter_width = filter_width;
     d_fm = fm;
 
-    int rs, bw, decimation, interpolation, nfilts;
+    int rs = 0;
+    int bw = 0;
+    int decimation = 0;
+    int interpolation = 0;
+    int nfilts = 0;
 
     if (sps == 1) {
         d_target_samp_rate = 80000;
@@ -76,6 +80,8 @@ demod_8fsk_impl::demod_8fsk_impl(int sps, int samp_rate, int carrier_freq, int f
         d_target_samp_rate = 500000;
         nfilts = 50 * d_samples_per_symbol;
     }
+    (void)rs;
+    (void)bw;
     if ((nfilts % 2) == 0)
         nfilts += 1;
 

@@ -12,9 +12,13 @@
 #include <gnuradio/block.h>
 #include <gnuradio/blocks/null_source.h>
 #include <gnuradio/blocks/null_sink.h>
+#include <gnuradio/blocks/vector_source.h>
+#include <gnuradio/blocks/head.h>
 #include <gnuradio/top_block.h>
+#include <gnuradio/gr_complex.h>
 #include <boost/test/unit_test.hpp>
 #include <iostream>
+#include <vector>
 #include "test_bursttimer.h"
 
 namespace gr {
@@ -55,26 +59,28 @@ BOOST_AUTO_TEST_CASE(test_demod_mmdvm_multi_instantiation_with_tdma)
 
 BOOST_AUTO_TEST_CASE(test_demod_mmdvm_multi_flowgraph)
 {
-    // Test flowgraph connection without TDMA
-    // Note: demod_mmdvm_multi has no output ports (output signature is 0, 0)
-    // It uses mmdvm_sink internally which outputs via ZeroMQ
+    // demod_mmdvm_multi has no output ports; run flowgraph to exercise block.
+    std::vector<gr_complex> iq(1000, gr_complex(0.5f, 0.0f));
     auto tb = gr::make_top_block("test");
     auto demod = demod_mmdvm_multi::make(
         nullptr,  // burst_timer
-        3,        // num_channels
-        25000,    // channel_separation
-        false,    // use_tdma
-        125,      // sps
-        250000,   // samp_rate
-        1700,     // carrier_freq
-        8000      // filter_width
+        3,       // num_channels
+        25000,   // channel_separation
+        false,   // use_tdma
+        125,     // sps
+        250000,  // samp_rate
+        1700,    // carrier_freq
+        8000     // filter_width
     );
-    auto source = gr::blocks::null_source::make(sizeof(gr_complex));
-    
-    // Connect input only (no output ports to connect)
-    tb->connect(source, 0, demod, 0);
-    
-    // If we get here, connection succeeded
+    auto source = gr::blocks::vector_source<gr_complex>::make(iq, true);
+    auto head = gr::blocks::head::make(sizeof(gr_complex), 500);
+
+    tb->connect(source, 0, head, 0);
+    tb->connect(head, 0, demod, 0);
+    tb->start();
+    tb->wait();
+    tb->stop();
+    tb->wait();
     BOOST_REQUIRE(true);
 }
 

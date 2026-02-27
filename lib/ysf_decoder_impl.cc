@@ -122,6 +122,7 @@ void ysf_decoder_impl::decode_fich(const std::vector<uint8_t>& fich)
     // Decode FICH to extract frame information
     // Byte 0: Frame type and mode
     uint8_t frame_type = fich[0] & 0x0F;
+    (void)frame_type;
     
     // Bytes 1-4: Radio ID, Group ID, etc.
     d_radio_id = (static_cast<uint32_t>(fich[1]) << 16) |

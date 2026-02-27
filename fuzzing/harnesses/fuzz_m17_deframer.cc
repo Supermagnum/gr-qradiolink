@@ -44,6 +44,7 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
         // libFuzzer's timeout will catch hangs
         tb->wait();
     } catch (...) {
+        throw;
     }
     
     return 0;
