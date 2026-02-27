@@ -48,7 +48,6 @@ private:
     int d_num_channels;
     int64_t d_timing_correction;
     int d_sn;
-    bool d_add_time_tag;
     bool d_use_tdma;
 
 public:

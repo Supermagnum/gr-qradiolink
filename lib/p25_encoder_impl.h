@@ -30,9 +30,6 @@ private:
     static constexpr int IMBE_FRAME_BYTES = 11;
     
     uint16_t d_nac; // Network Access Code (12 bits)
-    uint32_t d_source_id;
-    uint32_t d_destination_id;
-    uint16_t d_talkgroup_id;
     
     // State machine
     enum state_t {

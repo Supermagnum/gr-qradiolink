@@ -37,9 +37,9 @@ demod_soqpsk_impl::demod_soqpsk_impl(int mode, int sps, int samp_rate, int carri
       d_mode(mode),
       d_samples_per_symbol(sps),
       d_samp_rate(samp_rate),
-      d_carrier_freq(carrier_freq),
-      d_filter_width(filter_width)
+      d_carrier_freq(carrier_freq)
 {
+    (void)filter_width;
     int decimation;
     int interpolation;
     float costas_bw;

@@ -49,13 +49,13 @@ mod_mmdvm_multi2_impl::mod_mmdvm_multi2_impl(BurstTimer* burst_timer,
                       gr::io_signature::make(0, 0, sizeof(short)),
                       gr::io_signature::make(1, 1, sizeof(gr_complex))),
       d_samp_rate(samp_rate),
-      d_sps(sps),
-      d_carrier_freq(carrier_freq),
       d_filter_width(filter_width),
       d_num_channels(num_channels),
       d_use_tdma(use_tdma)
 {
     (void)channel_separation;
+    (void)sps;
+    (void)carrier_freq;
     if (num_channels > MAX_MMDVM_CHANNELS)
         num_channels = MAX_MMDVM_CHANNELS;
     d_num_channels = num_channels;

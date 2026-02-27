@@ -37,7 +37,6 @@ private:
     gr::filter::fft_filter_ccf::sptr d_filter;
     gr::filter::fft_filter_fff::sptr d_audio_filter;
 
-    int d_samples_per_symbol;
     int d_samp_rate;
     int d_carrier_freq;
     int d_filter_width;

@@ -29,7 +29,6 @@ private:
     static constexpr int FRAMES_PER_BATCH = 8;
     static constexpr int CODEWORDS_PER_BATCH = 1 + (FRAMES_PER_BATCH * CODEWORDS_PER_FRAME); // 1 sync + 16 data
     
-    int d_baud_rate;
     uint32_t d_address;
     int d_function_bits;
     

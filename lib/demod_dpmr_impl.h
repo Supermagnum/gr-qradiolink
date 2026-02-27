@@ -58,7 +58,6 @@ private:
     int d_samp_rate;
     int d_target_samp_rate;
     float d_filter_width;
-    int d_symbol_rate;
 
 public:
     demod_dpmr_impl(int sps, int samp_rate);

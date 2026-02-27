@@ -43,12 +43,12 @@ p25_encoder_impl::p25_encoder_impl(uint16_t nac,
                   destination_id,
                   talkgroup_id),
       d_nac(nac & 0xFFF), // Ensure 12 bits
-      d_source_id(source_id),
-      d_destination_id(destination_id),
-      d_talkgroup_id(talkgroup_id),
       d_state(STATE_NID),
       d_frame_count(0)
 {
+    (void)source_id;
+    (void)destination_id;
+    (void)talkgroup_id;
     // Validate NAC (12 bits max)
     if (d_nac > 0xFFF) {
         throw std::invalid_argument("NAC must be 12 bits (max 0xFFF)");

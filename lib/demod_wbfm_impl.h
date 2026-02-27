@@ -33,7 +33,6 @@ private:
     gr::filter::rational_resampler_ccf::sptr d_resampler;
     gr::filter::fft_filter_ccf::sptr d_filter;
 
-    int d_samples_per_symbol;
     int d_samp_rate;
     int d_carrier_freq;
     int d_filter_width;

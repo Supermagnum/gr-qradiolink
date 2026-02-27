@@ -50,8 +50,6 @@ private:
     gr::blocks::null_source::sptr d_null_source[10];
 
     int d_samp_rate;
-    int d_sps;
-    int d_carrier_freq;
     int d_filter_width;
     int d_num_channels;
     bool d_use_tdma;

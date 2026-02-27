@@ -50,8 +50,7 @@ mmdvm_sink_impl::mmdvm_sink_impl(BurstTimer* burst_timer,
                 gr::io_signature::make(cn, cn, sizeof(short)),
                 gr::io_signature::make(0, 0, 0)),
       d_burst_timer(burst_timer),
-      d_num_channels(cn),
-      d_use_tdma(use_tdma)
+      d_num_channels(cn)
 {
     if (use_tdma && burst_timer == nullptr) {
         std::cerr << "Warning: mmdvm_sink: use_tdma=true but burst_timer is nullptr. TDMA timing will be disabled." << std::endl;

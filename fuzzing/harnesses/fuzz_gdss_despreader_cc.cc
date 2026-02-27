@@ -41,8 +41,10 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size) {
     }
 
     try {
-        int num_chips = 127;
-        int chips_per_symbol = 42;
+        static const int num_chips_vals[] = {31, 63, 127};
+        static const int chips_vals[] = {7, 14, 21};
+        int num_chips = num_chips_vals[data[0] % 3];
+        int chips_per_symbol = chips_vals[data[1] % 3];
         std::vector<float> spreading_sequence = make_deterministic_sequence(num_chips);
 
         auto despreader = gr::qradiolink::gdss_despreader_cc::make(

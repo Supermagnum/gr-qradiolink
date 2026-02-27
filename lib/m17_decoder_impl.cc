@@ -599,7 +599,7 @@ namespace gr
 								if (_debug_ctrl == true)
 								{
 									printf("TYPE: %04X (", type);
-									if (type && 1)
+									if (type & 1)
 										printf("STREAM: ");
 									else
 										printf("PACKET: "); // shouldn't happen
@@ -726,7 +726,7 @@ namespace gr
 							if (_debug_ctrl == true)
 							{
 								printf("TYPE: %04X (", type);
-								if (type && 1)
+								if (type & 1)
 									printf("STREAM: ");
 								else
 									printf("PACKET: "); // shouldn't happen

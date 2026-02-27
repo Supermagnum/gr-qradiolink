@@ -51,10 +51,10 @@ demod_freedv_impl::demod_freedv_impl(int sps,
                    gr::io_signature::make(1, 1, sizeof(gr_complex)),
                    gr::io_signature::makev(2, 2, {sizeof(gr_complex), sizeof(float)})),
       d_samp_rate(samp_rate),
-      d_carrier_freq(carrier_freq),
       d_filter_width(filter_width),
       d_target_samp_rate(8000)
 {
+    (void)carrier_freq;
     std::vector<float> taps = gr::filter::firdes::low_pass(
         sps, d_samp_rate, d_target_samp_rate / 2, d_target_samp_rate / 2, gr::fft::window::WIN_BLACKMAN_HARRIS);
     d_resampler = gr::filter::rational_resampler_ccf::make(1, sps, taps);

@@ -49,7 +49,6 @@ private:
     gr::digital::map_bb::sptr d_symbol_map;
     gr::blocks::pack_k_bits_bb::sptr d_packer;
     gr::blocks::unpack_k_bits_bb::sptr d_unpacker;
-    int d_sps;
     int d_samp_rate;
     int d_filter_width;
     float d_target_samp_rate;

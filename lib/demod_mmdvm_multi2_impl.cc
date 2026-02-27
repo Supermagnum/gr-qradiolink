@@ -53,12 +53,12 @@ demod_mmdvm_multi2_impl::demod_mmdvm_multi2_impl(BurstTimer* burst_timer,
                         gr::io_signature::make(1, 1, sizeof(gr_complex)),
                         gr::io_signature::make(0, 0, sizeof(short))),
       d_samp_rate(samp_rate),
-      d_carrier_freq(carrier_freq),
       d_filter_width(filter_width),
       d_num_channels(num_channels),
       d_use_tdma(use_tdma)
 {
     (void)sps;
+    (void)carrier_freq;
     (void)channel_separation;
     int min_c = std::min(num_channels, 4);
     if (num_channels > MAX_MMDVM_CHANNELS)

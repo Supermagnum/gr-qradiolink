@@ -60,7 +60,6 @@ private:
     int d_samples_per_symbol;
     int d_samp_rate;
     int d_carrier_freq;
-    int d_filter_width;
 
 public:
     mod_soqpsk_impl(int mode, int sps, int samp_rate, int carrier_freq, int filter_width);

@@ -25,14 +25,15 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size) {
     }
 
     try {
+        static const int seq_lens[] = {31, 63, 127};
+        static const int chips_vals[] = {7, 21, 42};
+        int sequence_length = seq_lens[data[0] % 3];
+        int chips_per_symbol = chips_vals[data[1] % 3];
+        unsigned int seed = size > 4 ? (data[2] | (data[3] << 8) | (data[4] << 16)) : 12345u;
         auto tb = gr::make_top_block("fuzz");
-        int sequence_length = 127;
-        int chips_per_symbol = 42;
-        float variance = 1.0f;
-        unsigned int seed = 12345u;
         auto spreader =
             gr::qradiolink::gdss_spreader_cc::make(
-                sequence_length, chips_per_symbol, variance, seed);
+                sequence_length, chips_per_symbol, 1.0f, seed);
         auto sink = gr::blocks::null_sink::make(sizeof(gr_complex));
 
         std::vector<gr_complex> complex_data;

@@ -25,8 +25,10 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
     }
 
     try {
+        static const int sps_vals[] = {2, 10, 125};
+        int sps = sps_vals[data[0] % 3];
         auto tb = gr::make_top_block("fuzz");
-        auto mod = gr::qradiolink::mod_bpsk::make(125, 250000, 1700, 8000);
+        auto mod = gr::qradiolink::mod_bpsk::make(sps, 250000, 1700, 8000);
         auto sink = gr::blocks::null_sink::make(sizeof(gr_complex));
         
         // Pad input to minimum size to ensure enough data is processed

@@ -82,7 +82,6 @@ private:
     int d_samples_per_symbol;
     int d_samp_rate;
     int d_carrier_freq;
-    int d_filter_width;
     int d_target_samp_rate;
 
 public:

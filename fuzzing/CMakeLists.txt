@@ -15,8 +15,8 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     
     if(ENABLE_FUZZING)
         # Set compiler flags for libFuzzer
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=fuzzer,address -g -O1")
-        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=fuzzer,address -g -O1")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=fuzzer,address,undefined -g -O1")
+        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=fuzzer,address,undefined -g -O1")
         
         # Add fuzzing harnesses subdirectory
         add_subdirectory(harnesses)

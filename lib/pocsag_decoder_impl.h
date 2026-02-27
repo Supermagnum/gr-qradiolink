@@ -29,7 +29,6 @@ private:
     static constexpr int FRAMES_PER_BATCH = 8;
     static constexpr int CODEWORDS_PER_BATCH = 1 + (FRAMES_PER_BATCH * CODEWORDS_PER_FRAME);
     
-    int d_baud_rate;
     float d_sync_threshold;
     
     // State machine

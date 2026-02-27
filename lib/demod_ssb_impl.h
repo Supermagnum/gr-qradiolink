@@ -39,7 +39,6 @@ private:
     gr::qradiolink::clipper_cc::sptr d_clipper;
     gr::qradiolink::stretcher_cc::sptr d_stretcher;
 
-    int d_samples_per_symbol;
     int d_samp_rate;
     int d_sps;
     int d_carrier_freq;

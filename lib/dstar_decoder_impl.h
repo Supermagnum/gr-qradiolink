@@ -45,7 +45,6 @@ private:
     std::vector<uint8_t> d_current_voice_frame;
     int d_bytes_received;
     int d_expected_bytes;
-    int d_slow_data_bit_pos;
     std::vector<uint8_t> d_slow_data_bits;
     std::string d_decoded_message;
     

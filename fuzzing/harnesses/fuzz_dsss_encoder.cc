@@ -24,10 +24,10 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
     }
 
     try {
+        std::vector<int> spreading_code(16);
+        for (size_t i = 0; i < 16; ++i)
+            spreading_code[i] = (i < size ? data[i] : 0) & 1;
         auto tb = gr::make_top_block("fuzz");
-        
-        // Create spreading code (PN sequence)
-        std::vector<int> spreading_code = {1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0};
         auto encoder = gr::dsss::dsss_encoder_bb::make(spreading_code);
         auto sink = gr::blocks::null_sink::make(sizeof(char));
         

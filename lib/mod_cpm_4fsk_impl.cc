@@ -43,12 +43,12 @@ mod_cpm_4fsk_impl::mod_cpm_4fsk_impl(int sps,
                    gr::io_signature::make(1, 1, sizeof(gr_complex))),
       d_samples_per_symbol(sps),
       d_samp_rate(samp_rate),
-      d_carrier_freq(carrier_freq),
       d_filter_width(filter_width),
       d_h(h),
       d_L(L),
       d_beta(beta)
 {
+    (void)carrier_freq;
     // 4FSK constellation: -1.5, -0.5, 0.5, 1.5
     std::vector<float> constellation;
     constellation.push_back(-1.5);

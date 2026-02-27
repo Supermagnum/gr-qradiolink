@@ -30,14 +30,10 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
         // Create a top block and modulator
         auto tb = gr::make_top_block("fuzz");
         
-        // Standard parameters for 2FSK
-        int sps = 125;
-        int samp_rate = 250000;
-        int carrier_freq = 1700;
-        int filter_width = 8000;
-        bool fm = false;
-        
-        auto mod = gr::qradiolink::mod_2fsk::make(sps, samp_rate, carrier_freq, filter_width, fm);
+        static const int sps_vals[] = {2, 10, 125};
+        int sps = sps_vals[data[0] % 3];
+        bool fm = size > 1 ? (data[1] & 1) : false;
+        auto mod = gr::qradiolink::mod_2fsk::make(sps, 250000, 1700, 8000, fm);
         auto sink = gr::blocks::null_sink::make(sizeof(gr_complex));
         
         // Pad input to minimum size to ensure enough data is processed

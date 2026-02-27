@@ -23,6 +23,7 @@
 #include <algorithm>
 #include <iostream>
 #include <cstring>
+#include <vector>
 #include <ctime>
 
 #include "../src/config_mmdvm.h"
@@ -32,7 +33,6 @@ namespace qradiolink {
 
 const uint8_t MARK_SLOT1 = 0x08U;
 const uint8_t MARK_SLOT2 = 0x04U;
-const uint8_t MARK_NONE = 0x00U;
 const int32_t ZERO_SAMPLES = 720 * 25 / 24; // resampling ratio (SAMPLES_PER_SLOT = 720)
 
 static const pmt::pmt_t TIME_TAG = pmt::string_to_symbol(std::string("tx_time"));
@@ -59,7 +59,6 @@ mmdvm_source_impl::mmdvm_source_impl(BurstTimer* burst_timer,
       d_num_channels(cn),
       d_timing_correction(0),
       d_sn(2),
-      d_add_time_tag((cn == 0) || (cn == 1)),
       d_use_tdma(use_tdma)
 {
     if (use_tdma && burst_timer == nullptr) {
@@ -101,15 +100,15 @@ void mmdvm_source_impl::get_zmq_message()
         uint32_t buf_size = 0;
         memcpy(&buf_size, (uint8_t*)mq_message.data(), sizeof(uint32_t));
 
-        if (buf_size > 0) {
+        if (buf_size > 0 && buf_size <= 65536) {
             d_in_tx[j] = true;
-            uint8_t control[buf_size];
-            int16_t data[buf_size];
-            memcpy(&control,
+            std::vector<uint8_t> control(buf_size);
+            std::vector<int16_t> data(buf_size);
+            memcpy(control.data(),
                    (uint8_t*)mq_message.data() + sizeof(uint32_t),
                    buf_size * sizeof(uint8_t));
 
-            memcpy(&data,
+            memcpy(data.data(),
                    (uint8_t*)mq_message.data() + sizeof(uint32_t) + buf_size * sizeof(uint8_t),
                    buf_size * sizeof(int16_t));
             for (uint32_t i = 0; i < buf_size; i++) {

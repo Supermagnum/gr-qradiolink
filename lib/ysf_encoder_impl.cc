@@ -47,7 +47,6 @@ ysf_encoder_impl::ysf_encoder_impl(const std::string& source_callsign,
       d_destination_callsign(destination_callsign),
       d_radio_id(radio_id),
       d_group_id(group_id),
-      d_state(STATE_FICH),
       d_frame_count(0)
 {
     // Validate and pad callsigns to 10 characters

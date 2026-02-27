@@ -27,8 +27,10 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
     }
 
     try {
+        static const int sps_vals[] = {10, 25, 50};
+        int sps = sps_vals[data[0] % 3];
         auto tb = gr::make_top_block("fuzz");
-        auto demod = gr::qradiolink::demod_dsss::make(25, 250000, 1700, 8000);
+        auto demod = gr::qradiolink::demod_dsss::make(sps, 250000, 1700, 8000);
         
         // Create null sinks for all outputs
         auto sink0 = gr::blocks::null_sink::make(sizeof(gr_complex));

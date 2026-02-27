@@ -39,9 +39,9 @@ mod_soqpsk_impl::mod_soqpsk_impl(int mode, int sps, int samp_rate, int carrier_f
       d_mode(mode),
       d_samples_per_symbol(sps),
       d_samp_rate(samp_rate),
-      d_carrier_freq(carrier_freq),
-      d_filter_width(filter_width)
+      d_carrier_freq(carrier_freq)
 {
+    (void)filter_width;
     // QPSK symbol table
     std::vector<gr_complex> symbol_table;
     symbol_table.push_back(gr_complex(-0.707, -0.707));

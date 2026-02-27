@@ -34,10 +34,10 @@ demod_dmr_impl::demod_dmr_impl(int sps, int samp_rate)
     : demod_dmr("demod_dmr",
                 gr::io_signature::make(1, 1, sizeof(gr_complex)),
                 gr::io_signature::makev(4, 4, {sizeof(gr_complex), sizeof(gr_complex), sizeof(unsigned char), sizeof(float)})),
-      d_sps(sps),
       d_samp_rate(samp_rate),
       d_target_samp_rate(24000)
 {
+    (void)sps;
     unsigned int samples_per_symbol = 5;
     std::vector<gr_complex> constellation_points;
     constellation_points.push_back(gr_complex(-1.5, 0));

@@ -25,8 +25,9 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
     }
 
     try {
+        float clip = 0.2f + 0.8f * (float)(data[0] % 81) / 80.0f;
         auto tb = gr::make_top_block("fuzz");
-        auto clipper = gr::qradiolink::clipper_cc::make(1.0f);
+        auto clipper = gr::qradiolink::clipper_cc::make(clip);
         auto sink = gr::blocks::null_sink::make(sizeof(gr_complex));
         
         std::vector<gr_complex> complex_data;

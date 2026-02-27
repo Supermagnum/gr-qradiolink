@@ -30,7 +30,8 @@ int main(int argc, char** argv)
 
     try {
         std::cout << "Testing GDSS Spreader creation... ";
-        auto spreader = gr::qradiolink::gdss_spreader_cc::make(127, 42, 1.0f, 12345);
+        const int chips_per_symbol = 42;
+        auto spreader = gr::qradiolink::gdss_spreader_cc::make(127, chips_per_symbol, 1.0f, 12345);
         if (spreader == nullptr) {
             std::cout << "FAILED: nullptr returned" << std::endl;
             return 1;
@@ -41,7 +42,6 @@ int main(int argc, char** argv)
         auto tb = gr::make_top_block("test");
 
         const int num_symbols = 100;
-        const int chips_per_symbol = 42;
         std::vector<gr_complex> test_data(num_symbols, gr_complex(0.5f, 0.3f));
         auto source = gr::blocks::vector_source<gr_complex>::make(test_data);
         auto sink = gr::blocks::vector_sink<gr_complex>::make();

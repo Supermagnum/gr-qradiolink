@@ -43,8 +43,7 @@ dstar_decoder_impl::dstar_decoder_impl(float sync_threshold)
       d_sync_threshold(sync_threshold),
       d_state(STATE_SYNC_SEARCH),
       d_bytes_received(0),
-      d_expected_bytes(0),
-      d_slow_data_bit_pos(0)
+      d_expected_bytes(0)
 {
     // Validate sync threshold
     if (sync_threshold < 0.0f || sync_threshold > 1.0f) {

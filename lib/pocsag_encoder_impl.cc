@@ -34,7 +34,6 @@ pocsag_encoder_impl::pocsag_encoder_impl(int baud_rate, uint32_t address, int fu
                      baud_rate,
                      address,
                      function_bits),
-      d_baud_rate(baud_rate),
       d_address(address),
       d_function_bits(function_bits & 0x3), // Ensure 2 bits only
       d_state(STATE_PREAMBLE),

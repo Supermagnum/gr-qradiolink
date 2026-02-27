@@ -38,7 +38,6 @@ private:
     std::vector<uint64_t> d_rssi[MAX_MMDVM_CHANNELS];
     int d_last_rssi_on_timeslot[MAX_MMDVM_CHANNELS];
     uint64_t d_slot_sample_counter[MAX_MMDVM_CHANNELS];
-    bool d_use_tdma;
 
 public:
     mmdvm_sink_impl(BurstTimer* burst_timer,

@@ -25,8 +25,9 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
     }
 
     try {
+        int max_size = 100 + (data[0] % 231);
         auto tb = gr::make_top_block("fuzz");
-        auto deframer = gr::qradiolink::m17_deframer::make(330);
+        auto deframer = gr::qradiolink::m17_deframer::make(max_size);
         auto sink = gr::blocks::null_sink::make(sizeof(uint8_t));
         
         // Use input as-is, no padding needed

@@ -32,12 +32,6 @@ private:
     uint32_t d_radio_id;
     uint32_t d_group_id;
     
-    // State machine
-    enum state_t {
-        STATE_FICH,
-        STATE_VOICE_FRAME
-    } d_state;
-    
     int d_frame_count;
     std::deque<uint8_t> d_voice_queue;
     std::vector<uint8_t> d_fich;

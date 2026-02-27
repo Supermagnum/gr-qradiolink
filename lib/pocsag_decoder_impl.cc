@@ -38,7 +38,6 @@ pocsag_decoder_impl::pocsag_decoder_impl(int baud_rate, float sync_threshold)
                      gr::io_signature::make(1, 1, sizeof(unsigned char)),
                      baud_rate,
                      sync_threshold),
-      d_baud_rate(baud_rate),
       d_sync_threshold(sync_threshold),
       d_state(STATE_SYNC_SEARCH),
       d_codewords_received(0),

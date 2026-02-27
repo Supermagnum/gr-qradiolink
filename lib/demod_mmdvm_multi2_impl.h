@@ -48,9 +48,7 @@ private:
     gr::filter::pfb_channelizer_ccf::sptr d_channelizer;
     gr::blocks::stream_to_streams::sptr d_stream_to_streams;
 
-    int d_samples_per_symbol;
     int d_samp_rate;
-    int d_carrier_freq;
     int d_filter_width;
     int d_num_channels;
     bool d_use_tdma;

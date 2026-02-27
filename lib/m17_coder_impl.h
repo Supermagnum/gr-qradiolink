@@ -70,7 +70,6 @@ namespace gr
       uint8_t _priv_key[32] = { 0 };	//private key
       uint8_t _sig[64] = { 0 };	//ECDSA signature
       int _eot_cnt = 1;
-      bool _init_frame;
 
 #ifdef ECC
 //Scrambler

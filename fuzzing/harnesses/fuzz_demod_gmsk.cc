@@ -27,10 +27,10 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
     }
 
     try {
+        static const int filter_widths[] = {4000, 8000, 12000};
+        int filter_width = filter_widths[data[0] % 3];
         auto tb = gr::make_top_block("fuzz");
-        // Use sps=10 (valid value) instead of 125 to properly initialize nfilts
-        // This will exercise the sps==10 code path and avoid undefined behavior
-        auto demod = gr::qradiolink::demod_gmsk::make(10, 250000, 1700, 8000);
+        auto demod = gr::qradiolink::demod_gmsk::make(10, 250000, 1700, filter_width);
         
         // Create null sinks for all outputs
         auto sink0 = gr::blocks::null_sink::make(sizeof(gr_complex));

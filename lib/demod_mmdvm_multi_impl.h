@@ -46,9 +46,7 @@ private:
     gr::qradiolink::rssi_tag_block::sptr d_rssi_tag_block[MAX_MMDVM_CHANNELS];
     gr::blocks::rotator_cc::sptr d_rotator[MAX_MMDVM_CHANNELS];
 
-    int d_samples_per_symbol;
     int d_samp_rate;
-    int d_carrier_freq;
     int d_filter_width;
     int d_num_channels;
     bool d_use_tdma;
