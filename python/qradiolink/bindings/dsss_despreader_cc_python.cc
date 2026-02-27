@@ -56,6 +56,14 @@ void bind_dsss_despreader_cc(py::module& m)
 
         .def("get_snr_estimate",
              &dsss_despreader_cc::get_snr_estimate,
-             "Get SNR estimate in dB");
+             "Get SNR estimate in dB")
+
+        .def("get_last_soft_metric",
+             &dsss_despreader_cc::get_last_soft_metric,
+             "Get last soft-decision metric (normalized correlation magnitude)")
+
+        .def("get_frequency_error",
+             &dsss_despreader_cc::get_frequency_error,
+             "Get estimated frequency error in rad/symbol for AFC");
 }
 

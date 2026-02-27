@@ -98,6 +98,20 @@ public:
      */
     virtual float get_snr_estimate() const;
 
+    /*!
+     * \brief Get last soft-decision metric (normalized correlation magnitude)
+     *
+     * \return Normalized correlation magnitude in [0, ~1] for use with soft-decision FEC
+     */
+    virtual float get_last_soft_metric() const;
+
+    /*!
+     * \brief Get estimated frequency error (rad per symbol, for AFC)
+     *
+     * \return Estimated residual frequency error in rad/symbol for external AFC
+     */
+    virtual float get_frequency_error() const;
+
     virtual ~dsss_despreader_cc();
 
 protected:

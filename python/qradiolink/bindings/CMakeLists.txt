@@ -75,6 +75,13 @@ list(
 
 pybind11_add_module(qradiolink_python ${qradiolink_python_files})
 
+# Disable LTO for this target so the shared library is produced in-place;
+# with LTO the linker may write to a temp path and strip then fails with "No such file"
+if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    target_compile_options(qradiolink_python PRIVATE -fno-lto)
+    target_link_options(qradiolink_python PRIVATE -fno-lto)
+endif()
+
 target_include_directories(
     qradiolink_python
     PRIVATE ${CMAKE_CURRENT_BINARY_DIR}

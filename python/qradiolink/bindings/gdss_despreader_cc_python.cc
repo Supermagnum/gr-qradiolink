@@ -51,7 +51,15 @@ void bind_gdss_despreader_cc(py::module& m)
 
         .def("get_snr_estimate",
              &gdss_despreader_cc::get_snr_estimate,
-             "Get SNR estimate in dB");
+             "Get SNR estimate in dB")
+
+        .def("get_last_soft_metric",
+             &gdss_despreader_cc::get_last_soft_metric,
+             "Get last soft-decision metric (normalized correlation magnitude)")
+
+        .def("get_frequency_error",
+             &gdss_despreader_cc::get_frequency_error,
+             "Get estimated frequency error in rad/symbol for AFC");
 
     // Bind sync_state enum
     py::enum_<gdss_despreader_cc::sync_state>(m, "gdss_sync_state")

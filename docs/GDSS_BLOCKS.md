@@ -130,12 +130,40 @@ The GRC blocks automatically handle sequence generation. For the despreader, the
 2. The despreader will automatically regenerate the sequence using NumPy
 3. Ensure the seed matches exactly between transmitter and receiver
 
+## Soft-Decision Decoding Support
+
+The despreader provides a per-symbol reliability metric for soft-decision FEC (e.g. LDPC):
+
+- **`get_last_soft_metric()`**: Returns normalized correlation magnitude in [0, ~1]. Poll after each symbol (or use the value corresponding to the last output symbol). Use as soft input to a soft-decision LDPC decoder or other FEC.
+
+## Automatic Frequency Control (AFC) Support
+
+The despreader estimates residual frequency error from the phase drift of the prompt correlation:
+
+- **`get_frequency_error()`**: Returns estimated frequency error in **rad/symbol**. Use to drive an upstream NCO or rotator for AFC. The estimate is low-pass filtered; apply correction in your carrier recovery loop.
+
+## Parallel Code Search (Faster Acquisition)
+
+Acquisition uses a **coarse-to-fine** code phase search instead of a full linear sweep:
+
+- **Coarse search**: Evaluates correlation at a subset of phases (e.g. 32 bins) to find the best coarse bin.
+- **Fine search**: Refines the phase in a small window around the best coarse bin.
+
+This reduces the number of correlation operations per symbol during acquisition and speeds up lock.
+
+## Adaptive Correlation Threshold
+
+Lock detection uses an **adaptive threshold** derived from the running correlation statistics:
+
+- Threshold = max(0.2, user_threshold * (correlation_avg / correlation_peak)).
+- In weak channels the threshold relaxes; in strong channels it tightens, improving acquisition and lock stability.
+
 ## State Machine
 
 The despreader implements a three-state machine identical to DSSS:
 
 1. **STATE_ACQUISITION**: Searching for code alignment
-   - Searches over all code phases
+   - Coarse-to-fine search over code phases
    - Finds best correlation peak
    - Transitions to TRACKING when threshold exceeded
 
@@ -160,7 +188,7 @@ The despreader implements a three-state machine identical to DSSS:
 ### Lock Detection
 
 - Lock threshold: 10 consecutive good correlations
-- Correlation threshold: Configurable (default 0.7)
+- Correlation threshold: Configurable (default 0.7), applied adaptively (see Adaptive Correlation Threshold)
 - Lock counter: Increments on good correlation, decrements on poor
 
 ### Timing Recovery
@@ -368,13 +396,10 @@ Signal Source → Split → GDSS Spreader ──┐
 
 ## Future Enhancements
 
-- Soft-decision decoding support
-- Automatic Frequency Control (AFC)
 - Enhanced multipath handling
-- Parallel code search for faster acquisition
-- Adaptive correlation threshold
 - Sequence sharing mechanisms for multi-user scenarios
 - Optimized sequence generation algorithms
+- Optional stream output for soft-decision metrics (currently available via `get_last_soft_metric()`)
 
 ## References
 

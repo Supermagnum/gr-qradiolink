@@ -20,6 +20,9 @@
 namespace gr {
 namespace qradiolink {
 
+const float dsss_despreader_cc_impl::ADAPTIVE_THRESHOLD_MIN = 0.2f;
+const int dsss_despreader_cc_impl::COARSE_SEARCH_BINS = 32;
+
 // Define virtual destructor - this forces vtable generation
 dsss_despreader_cc::~dsss_despreader_cc() {}
 
@@ -45,6 +48,16 @@ bool dsss_despreader_cc::is_locked() const
 }
 
 float dsss_despreader_cc::get_snr_estimate() const
+{
+    return 0.0f;
+}
+
+float dsss_despreader_cc::get_last_soft_metric() const
+{
+    return 0.0f;
+}
+
+float dsss_despreader_cc::get_frequency_error() const
 {
     return 0.0f;
 }
@@ -88,7 +101,11 @@ dsss_despreader_cc_impl::dsss_despreader_cc_impl(const std::vector<int>& pn_sequ
       d_is_locked(false),
       d_signal_power(0.0f),
       d_noise_power(0.0f),
-      d_snr_db(0.0f)
+      d_snr_db(0.0f),
+      d_last_soft_metric(0.0f),
+      d_freq_error_rad_per_sym(0.0f),
+      d_prev_corr_phase(0.0f),
+      d_have_prev_corr(false)
 {
     if (d_code_length == 0) {
         throw std::invalid_argument("PN sequence cannot be empty");
@@ -158,8 +175,13 @@ void dsss_despreader_cc_impl::update_lock_detection(float correlation)
         d_correlation_peak = corr_mag;
     }
 
+    // Adaptive correlation threshold: scale user threshold by avg/peak
+    float peak = std::max(d_correlation_peak, 1e-3f);
+    float rel = d_correlation_avg / peak;
+    float adaptive = std::max(ADAPTIVE_THRESHOLD_MIN, d_correlation_threshold * rel);
+
     // Check for lock
-    if (corr_mag > d_correlation_threshold) {
+    if (corr_mag > adaptive) {
         d_lock_counter++;
         if (d_lock_counter >= LOCK_THRESHOLD) {
             d_is_locked = true;
@@ -218,6 +240,9 @@ void dsss_despreader_cc_impl::set_pn_sequence(const std::vector<int>& pn_sequenc
     d_state = STATE_ACQUISITION;
     d_lock_counter = 0;
     d_is_locked = false;
+    d_have_prev_corr = false;
+    d_freq_error_rad_per_sym = 0.0f;
+    d_last_soft_metric = 0.0f;
 }
 
 void dsss_despreader_cc_impl::set_chips_per_symbol(int chips_per_symbol)
@@ -247,6 +272,18 @@ float dsss_despreader_cc_impl::get_snr_estimate() const
     return d_snr_db;
 }
 
+float dsss_despreader_cc_impl::get_last_soft_metric() const
+{
+    std::lock_guard<std::mutex> lock(d_mutex);
+    return d_last_soft_metric;
+}
+
+float dsss_despreader_cc_impl::get_frequency_error() const
+{
+    std::lock_guard<std::mutex> lock(d_mutex);
+    return d_freq_error_rad_per_sym;
+}
+
 int dsss_despreader_cc_impl::general_work(int noutput_items,
                                           gr_vector_int& ninput_items,
                                           gr_vector_const_void_star& input_items,
@@ -274,16 +311,28 @@ int dsss_despreader_cc_impl::general_work(int noutput_items,
         }
 
         if (d_state == STATE_ACQUISITION) {
-            // Search for code alignment
+            // Coarse-to-fine code phase search for faster acquisition
+            int step = std::max(1, d_code_length / COARSE_SEARCH_BINS);
             float best_correlation = 0.0f;
             int best_phase = d_code_phase;
 
-            // Search over code phases
-            for (int phase = 0; phase < d_code_length; phase++) {
+            // Coarse search
+            for (int phase = 0; phase < d_code_length; phase += step) {
                 d_code_phase = phase;
                 gr_complex corr = correlate(in, input_offset, d_chips_per_symbol);
                 float corr_mag = std::abs(corr);
-
+                if (corr_mag > best_correlation) {
+                    best_correlation = corr_mag;
+                    best_phase = phase;
+                }
+            }
+            // Fine search around best coarse bin
+            int start = std::max(0, best_phase - step);
+            int stop = std::min(d_code_length, best_phase + step + 1);
+            for (int phase = start; phase < stop; phase++) {
+                d_code_phase = phase;
+                gr_complex corr = correlate(in, input_offset, d_chips_per_symbol);
+                float corr_mag = std::abs(corr);
                 if (corr_mag > best_correlation) {
                     best_correlation = corr_mag;
                     best_phase = phase;
@@ -302,6 +351,22 @@ int dsss_despreader_cc_impl::general_work(int noutput_items,
             // Despread using best phase
             gr_complex despread = correlate(in, input_offset, d_chips_per_symbol);
             out_symbols[output_idx] = despread;
+
+            // Soft-decision metric
+            float peak = std::max(d_correlation_peak, 1e-6f);
+            d_last_soft_metric = best_correlation / peak;
+
+            // AFC: estimate frequency error from phase drift
+            float phase = std::arg(despread);
+            if (d_have_prev_corr) {
+                float dphi = phase - d_prev_corr_phase;
+                if (dphi > 3.14159265f) dphi -= 6.28318531f;
+                if (dphi < -3.14159265f) dphi += 6.28318531f;
+                d_freq_error_rad_per_sym = 0.9f * d_freq_error_rad_per_sym + 0.1f * dphi;
+            } else {
+                d_have_prev_corr = true;
+            }
+            d_prev_corr_phase = phase;
 
         } else {
             // STATE_TRACKING or STATE_LOCKED - use early-late gate
@@ -327,6 +392,22 @@ int dsss_despreader_cc_impl::general_work(int noutput_items,
             // Update lock detection and SNR
             update_lock_detection(d_prompt_correlation);
             update_snr_estimate(despread, d_prompt_correlation);
+
+            // Soft-decision metric
+            float peak = std::max(d_correlation_peak, 1e-6f);
+            d_last_soft_metric = d_prompt_correlation / peak;
+
+            // AFC: estimate frequency error from phase drift
+            float phase = std::arg(despread);
+            if (d_have_prev_corr) {
+                float dphi = phase - d_prev_corr_phase;
+                if (dphi > 3.14159265f) dphi -= 6.28318531f;
+                if (dphi < -3.14159265f) dphi += 6.28318531f;
+                d_freq_error_rad_per_sym = 0.9f * d_freq_error_rad_per_sym + 0.1f * dphi;
+            } else {
+                d_have_prev_corr = true;
+            }
+            d_prev_corr_phase = phase;
 
             // Advance code phase for next symbol
             d_code_phase = (d_code_phase + d_chips_per_symbol) % d_code_length;

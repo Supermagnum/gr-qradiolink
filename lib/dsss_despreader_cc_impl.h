@@ -58,6 +58,17 @@ private:
     float d_noise_power;
     float d_snr_db;
 
+    // Soft-decision: normalized correlation magnitude [0, ~1]
+    float d_last_soft_metric;
+
+    // AFC: phase drift -> frequency error (rad/symbol)
+    float d_freq_error_rad_per_sym;
+    float d_prev_corr_phase;
+    bool d_have_prev_corr;
+
+    static const float ADAPTIVE_THRESHOLD_MIN;
+    static const int COARSE_SEARCH_BINS;
+
     mutable std::mutex d_mutex;
 
     // Helper functions
@@ -80,6 +91,8 @@ public:
     sync_state get_sync_state() const override;
     bool is_locked() const override;
     float get_snr_estimate() const override;
+    float get_last_soft_metric() const override;
+    float get_frequency_error() const override;
 
     int general_work(int noutput_items,
                      gr_vector_int& ninput_items,
