@@ -71,6 +71,10 @@ All flowgraph tests below run the flowgraph (vector_source + head + vector_sink 
 
 DSSS and GDSS despreaders (test_gdss_despreader_cc, and use of dsss_despreader_cc in flowgraphs) support soft-decision metrics (get_last_soft_metric), AFC (get_frequency_error), adaptive correlation threshold, and coarse-to-fine code phase search. See [DSSS Blocks Guide](../docs/DSSS_BLOCKS.md) and [GDSS Blocks Guide](../docs/GDSS_BLOCKS.md).
 
+### DSSS BER simulation result
+
+The script [examples/dsss_ber_simulation.py](../examples/dsss_ber_simulation.py) runs spreader -> AWGN channel -> despreader and plots BER vs SNR for spreading factors N=64, 128, 256. When run (e.g. with `PYTHONPATH=build/python:build/lib python3 examples/dsss_ber_simulation.py`), the simulated BER curves match the theoretical DSSS curve BER = 0.5*erfc(sqrt(N*Es/N0/2)) (Sensors 2023, Eq. 1) within simulation noise, confirming that the DSSS spreader and despreader behaviour is correct. The script saves `dsss_ber_curves.png` in the current directory.
+
 ---
 
 ## Python Test Results
