@@ -66,6 +66,7 @@ mod_dsss_impl::mod_dsss_impl(int sps, int samp_rate, int carrier_freq, int filte
         1,
         gr::filter::firdes::root_raised_cosine(
             d_samples_per_symbol, d_samples_per_symbol, 1.0, 0.35, 11 * d_samples_per_symbol));
+    d_resampler->set_thread_priority(99);
 
     // DSSS encoder - Barker-13 spreading code (assign to member, not local)
     d_dsss_encoder = gr::dsss::dsss_encoder_bb::make(dsss_code);
@@ -90,8 +91,7 @@ mod_dsss_impl::mod_dsss_impl(int sps, int samp_rate, int carrier_freq, int filte
     connect(d_resampler, 0, d_amplify, 0);
     connect(d_amplify, 0, d_bb_gain, 0);
     connect(d_bb_gain, 0, d_resampler_if, 0);
-    connect(d_resampler_if, 0, d_filter, 0);
-    connect(d_filter, 0, d_resampler_rf, 0);
+    connect(d_resampler_if, 0, d_resampler_rf, 0);
     connect(d_resampler_rf, 0, self(), 0);
 }
 

@@ -57,6 +57,7 @@ demod_dsss_impl::demod_dsss_impl(int sps, int samp_rate, int carrier_freq, int f
     std::vector<float> taps = gr::filter::firdes::low_pass(
         1, d_samp_rate, d_if_samp_rate / 2, d_if_samp_rate / 2, gr::fft::window::WIN_BLACKMAN_HARRIS);
     d_resampler = gr::filter::rational_resampler_ccf::make(1, 50, taps);
+    d_resampler->set_thread_priority(99);
 
     std::vector<float> taps_if = gr::filter::firdes::low_pass(
         1, d_if_samp_rate, d_target_samp_rate / 2, d_target_samp_rate / 2, gr::fft::window::WIN_BLACKMAN_HARRIS);
