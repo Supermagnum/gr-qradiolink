@@ -93,7 +93,7 @@ mod_mmdvm_multi2_impl::mod_mmdvm_multi2_impl(BurstTimer* burst_timer,
         d_zero_idle[i] = gr::qradiolink::zero_idle_bursts::make();
     }
     std::vector<float> synth_taps = gr::filter::firdes::low_pass_2(
-        d_sps, d_samp_rate, d_filter_width, 2000, 60, gr::fft::window::WIN_BLACKMAN_HARRIS);
+        10, d_samp_rate, d_filter_width, 2000, 60, gr::fft::window::WIN_BLACKMAN_HARRIS);
     d_synthesizer = gr::filter::pfb_synthesizer_ccf::make(10, synth_taps, false);
     d_divide_level = gr::blocks::multiply_const_cc::make(1.0f / float(num_channels));
     d_mmdvm_source = gr::qradiolink::mmdvm_source::make(burst_timer, num_channels, true, d_use_tdma);

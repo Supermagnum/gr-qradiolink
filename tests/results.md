@@ -75,6 +75,22 @@ DSSS and GDSS despreaders (test_gdss_despreader_cc, and use of dsss_despreader_c
 
 The script [examples/dsss_ber_simulation.py](../examples/dsss_ber_simulation.py) runs spreader -> AWGN channel -> despreader and plots BER vs SNR for spreading factors N=64, 128, 256. When run (e.g. with `PYTHONPATH=build/python:build/lib python3 examples/dsss_ber_simulation.py`), the simulated BER curves match the theoretical DSSS curve BER = 0.5*erfc(sqrt(N*Es/N0/2)) (Sensors 2023, Eq. 1) within simulation noise, confirming that the DSSS spreader and despreader behaviour is correct. The script saves `dsss_ber_curves.png` in the current directory.
 
+### QRadioLink validation (continued)
+
+Additional lib file pairs were compared line-by-line against the QRadioLink originals (branch `next`, codeberg.org/qradiolink/qradiolink). Constructor blocks/args, flowgraph connections, and all setter/update methods were checked. Outcome:
+
+- **gr_4fsk_discriminator**: Constructor and work() (4 float in, 1 complex out; quadrant mapping) match.
+- **rssi_tag_block**: Constructor, work() (power squared sum, 300-item RSSI tag, calibrate_rssi) match.
+- **zero_idle_bursts**: Constructor (delay, history 2*SAMPLES_PER_SLOT), work() (ZERO_TAG, sample_counter) match.
+- **clipper_cc** (cessb): Constructor (clip, CHUNK_SIZE, alignment), work() (magnitude, atan2, min, cos/sin, interleave) match.
+- **stretcher_cc** (cessb): Constructor, forecast(), general_work() (emax, envelope, divide) match.
+- **demod_dmr, mod_dmr**: Blocks, parameters (24000, samples_per_symbol 5, resampler 3/125, level_control 0.9, map 3,1,2,0 / 2,3,1,0), connections and set_bb_gain match.
+- **demod_m17, mod_m17**: Blocks (resampler 3/125, filter, fm_demod, symbol_filter root_raised_cosine 1.5/0.5, symbol_sync, map 3,1,2,0), connections and set_bb_gain match.
+- **demod_mmdvm_multi, demod_mmdvm_multi2**: Constructor (resampler, filter, fm_demod, level_control, float_to_short 32767, rotator/channelizer, rssi_tag_block, mmdvm_sink), connections, set_filter_width and calibrate_rssi match.
+- **mod_mmdvm_multi2**: Constructor and set_bb_gain match. **Fix applied:** PFB synthesizer taps now use `low_pass_2(10, d_samp_rate, ...)` to match the original (first argument 10, not d_sps).
+
+Blocks with no QRadioLink `src/gr/` counterpart (8FSK, SOQPSK, CPM-4FSK, dPMR, NXDN, POCSAG, D-STAR, YSF, P25) are attributed in the README Block origin table and in fuzzing-results/results.md. DSSS and GDSS blocks were not modified.
+
 ---
 
 ## Python Test Results

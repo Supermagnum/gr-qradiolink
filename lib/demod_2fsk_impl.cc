@@ -100,6 +100,7 @@ demod_2fsk_impl::demod_2fsk_impl(int sps, int samp_rate, int carrier_freq, int f
         1.0, d_target_samp_rate, d_target_samp_rate / d_samples_per_symbol,
         d_target_samp_rate / d_samples_per_symbol, gr::fft::window::WIN_HAMMING);
     d_resampler = gr::filter::rational_resampler_ccf::make(interp, decim, taps);
+    d_resampler->set_thread_priority(99);
     d_fll = gr::digital::fll_band_edge_cc::make(d_samples_per_symbol, 0.1, 16, 24 * M_PI / 100);
     d_filter = gr::filter::fft_filter_ccf::make(
         1,

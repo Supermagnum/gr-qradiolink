@@ -14,11 +14,33 @@ This module provides GNU Radio blocks for various digital and analog modulation 
 
 This module was converted from the [QRadioLink](https://qradiolink.org/) application, which is a multimode SDR transceiver for GNU Radio, ADALM-Pluto, LimeSDR, USRP, and other SDR hardware. The original source code is located at [https://codeberg.org/qradiolink/qradiolink](https://codeberg.org/qradiolink/qradiolink).
 
-**Validation:** The converted blocks in this codebase have been validated against the original QRadioLink source (branch `next`, [codeberg.org/qradiolink/qradiolink](https://codeberg.org/qradiolink/qradiolink)) so that flowgraphs, filter parameters, scaling constants, and block behaviour match. SSB and AM modulator/demodulator chains (including CESSB structure and clipper/stretcher constants) were restored to match the original where they had diverged.
+**Validation:** Converted blocks that have a counterpart in QRadioLink have been validated against the original QRadioLink source (branch `next`, [codeberg.org/qradiolink/qradiolink](https://codeberg.org/qradiolink/qradiolink)) so that flowgraphs, filter parameters, scaling constants, and block behaviour match. SSB and AM modulator/demodulator chains (including CESSB structure and clipper/stretcher constants) were restored to match the original where they had diverged. Some blocks in this module have no corresponding source in QRadioLink's `src/gr/`; their origin is stated in the table below.
 
 **Credit and origin:**
-- **QRadioLink (Codeberg)** is the origin of all converted modes: modulation/demodulation (2FSK, 4FSK, 8FSK, CPM-4FSK, GMSK, BPSK, QPSK, SOQPSK, AM, SSB, NBFM, WBFM), digital voice (FreeDV, M17, DMR, dPMR, NXDN), MMDVM protocols (POCSAG, D-STAR, YSF, P25), and supporting blocks (RSSI, M17 deframer, MMDVM source/sink, clipper, stretcher, etc.). The DSP and mode behaviour in this repository were derived from or reimplemented from the QRadioLink application.
-- **The only new additions in this module** (not from QRadioLink) are: **(1) DSSS enhancements** (soft-decision metrics, AFC, adaptive correlation threshold, coarse-to-fine acquisition, timing recovery) on top of base DSSS spreading/despreading, and **(2) GDSS** (Gaussian-Distributed Spread-Spectrum spreader/despreader), which is not part of QRadioLink and is implemented from Shakeel et al., *Sensors* 2023 (see References below). The QRadioLink Codeberg page does not mention any crashes or other known issues. The code has been fuzzed extensively using libFuzzer with over 104 million executions across multiple blocks, and no crashes or memory leaks were discovered. However, the codebase could potentially benefit from further fuzzing, particularly for blocks that have not yet been fuzzed (see [fuzzing-results/results.md](fuzzing-results/results.md) for coverage details).
+
+- **QRadioLink (Codeberg)** is the origin of the following modes (validated against [codeberg.org/qradiolink/qradiolink](https://codeberg.org/qradiolink/qradiolink) branch `next`, `src/gr/`): modulation/demodulation (2FSK, 4FSK, GMSK, BPSK, QPSK, AM, SSB, NBFM, WBFM), digital voice (FreeDV, M17, DMR), and supporting blocks (RSSI, M17 deframer, MMDVM source/sink, clipper, stretcher, zero_idle_bursts, gr_4fsk_discriminator, demod_mmdvm_multi, demod_mmdvm_multi2, mod_mmdvm_multi2). The DSP and mode behaviour for these blocks were derived from or reimplemented from the QRadioLink application.
+- **Blocks not from QRadioLink** (no `gr_*` source in QRadioLink `src/gr/`): 8FSK, SOQPSK, CPM-4FSK, dPMR, NXDN, POCSAG, D-STAR, YSF, P25. Their origin is given in the Block origin table below.
+- **Additions in this module** (not from QRadioLink): **(1) DSSS enhancements** (soft-decision metrics, AFC, adaptive correlation threshold, coarse-to-fine acquisition, timing recovery) on top of base DSSS spreading/despreading; **(2) GDSS** (Gaussian-Distributed Spread-Spectrum spreader/despreader), implemented from Shakeel et al., *Sensors* 2023 (see References below).
+
+**Block origin (validation / attribution):**
+
+| Block(s) | Origin | Notes |
+|----------|--------|--------|
+| 2FSK, 4FSK, GMSK, BPSK, QPSK, AM, SSB, NBFM, WBFM, FreeDV, M17, DMR | QRadioLink | Validated against QRadioLink `src/gr/` (gr_demod_*, gr_mod_*). |
+| MMDVM source/sink, demod_mmdvm_multi, demod_mmdvm_multi2, mod_mmdvm_multi2, RSSI, clipper, stretcher, zero_idle_bursts, gr_4fsk_discriminator | QRadioLink | Validated against QRadioLink `src/gr/`. |
+| 8FSK | Implemented for this module | No gr_demod_8fsk/gr_mod_8fsk in QRadioLink. Extension of 4FSK-style design. |
+| SOQPSK | Implemented for this module | No gr_demod_soqpsk/gr_mod_soqpsk in QRadioLink. From SOQPSK literature/specs. |
+| CPM-4FSK | Implemented for this module | No gr_mod_cpm_4fsk in QRadioLink. |
+| dPMR | Implemented for this module | No gr_* in QRadioLink. From ETSI TS 102 658 (test vectors and code comments). |
+| NXDN | Implemented for this module | No gr_* in QRadioLink. From NXDN Forum specs; symbol mapping references MMDVM convention. |
+| POCSAG | Implemented for this module | No gr_* in QRadioLink. From POCSAG/ITU-R M.584-2; protocol compatible with MMDVMHost. |
+| D-STAR | Implemented for this module | No gr_* in QRadioLink. From D-STAR/JARL spec (Golay FEC); compatible with MMDVMHost. |
+| YSF | Implemented for this module | No gr_* in QRadioLink. From YSF protocol documentation; compatible with MMDVMHost. |
+| P25 | Implemented for this module | No gr_* in QRadioLink. From P25 Phase 1 TIA-102; compatible with MMDVMHost. |
+| DSSS (base) | QRadioLink | Validated against QRadioLink gr_demod_dsss/gr_mod_dsss. |
+| DSSS (enhancements), GDSS | This module | DSSS: enhancements on top of QRadioLink base. GDSS: from Shakeel et al., Sensors 2023. |
+
+The code has been fuzzed extensively using libFuzzer with over 104 million executions across multiple blocks, and no crashes or memory leaks were discovered. See [fuzzing-results/results.md](fuzzing-results/results.md) for coverage details.
 
 ## Features
 

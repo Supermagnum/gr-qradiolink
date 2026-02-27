@@ -10,6 +10,7 @@
 
 #include <climits>
 #include <cstdint>
+#include <stdexcept>
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -101,9 +102,33 @@ void mod_nbfm_impl::set_filter_width(int filter_width)
 
 void mod_nbfm_impl::set_ctcss(float value)
 {
-    (void)value;
-    // TODO: Implement CTCSS tone setting
-    // This would require reconnecting the tone source
+    const float target_samp_rate = 8000.0f;
+    lock();
+    if (value == 0) {
+        d_audio_amplify->set_k(0.98);
+        d_audio_filter->set_taps(gr::filter::firdes::low_pass_2(
+            1, target_samp_rate, 3500, 200, 35, gr::fft::window::WIN_BLACKMAN_HARRIS));
+        try {
+            disconnect(d_audio_amplify, 0, d_add, 0);
+            disconnect(d_add, 0, d_pre_emph_filter, 0);
+            disconnect(d_tone_source, 0, d_add, 1);
+            connect(d_audio_amplify, 0, d_pre_emph_filter, 0);
+        } catch (const std::invalid_argument&) {
+        }
+    } else {
+        d_audio_amplify->set_k(0.85);
+        d_audio_filter->set_taps(gr::filter::firdes::band_pass_2(
+            1, target_samp_rate, 300, 3500, 200, 35, gr::fft::window::WIN_BLACKMAN_HARRIS));
+        d_tone_source->set_frequency(value);
+        try {
+            disconnect(d_audio_amplify, 0, d_pre_emph_filter, 0);
+            connect(d_audio_amplify, 0, d_add, 0);
+            connect(d_add, 0, d_pre_emph_filter, 0);
+            connect(d_tone_source, 0, d_add, 1);
+        } catch (const std::invalid_argument&) {
+        }
+    }
+    unlock();
 }
 
 void mod_nbfm_impl::set_bb_gain(float value) { d_bb_gain->set_k(value); }

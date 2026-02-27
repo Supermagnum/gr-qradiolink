@@ -82,8 +82,8 @@ void mod_am_impl::set_filter_width(int filter_width)
     d_filter_width = filter_width;
     std::vector<float> interp_taps = gr::filter::firdes::low_pass(
         d_sps, d_samp_rate, d_filter_width, d_filter_width);
-    std::vector<gr_complex> filter_taps = gr::filter::firdes::complex_band_pass(
-        1, d_samp_rate, -d_filter_width, d_filter_width, 1200,
+    std::vector<gr_complex> filter_taps = gr::filter::firdes::complex_band_pass_2(
+        1, d_samp_rate, -d_filter_width, d_filter_width, 1200, 90,
         gr::fft::window::WIN_BLACKMAN_HARRIS);
 
     d_resampler->set_taps(interp_taps);

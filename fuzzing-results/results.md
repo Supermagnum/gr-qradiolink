@@ -750,24 +750,31 @@ python3 -X dev tests/test_memory_safety.py
 
 ### Results by Modulation Type
 
-| Modulation Type | C++ Tests | Python Tests | Status | Notes |
-|----------------|-----------|--------------|--------|-------|
-| **2FSK** | ✓ mod, demod | ✓ mod (3 tests) | ✓ Tested | All tests successful |
-| **4FSK** | ✓ mod, demod | ✓ mod (1 test) | ✓ Tested | Working correctly |
-| **GMSK** | ✓ mod, demod | ✓ mod (1 test) | ✓ Tested | Working correctly |
-| **BPSK** | ✓ mod, demod | ✓ mod (1 test) | ✓ Tested | Working correctly |
-| **QPSK** | ✓ mod, demod | ✓ mod (1 test) | ✓ Tested | Working correctly |
-| **AM** | ✓ mod, demod | ✓ mod (1 test) | ✓ Tested | Working correctly |
-| **SSB** | ✓ mod, demod | ✓ mod (2 tests) | ✓ Tested | Upper and lower sideband working |
-| **NBFM** | ✓ mod, demod | ✓ mod (1 test) | ✓ Tested | Working correctly (emphasis.h implementation added) |
-| **WBFM** | ✓ demod | N/A | ✓ Tested | Working correctly (emphasis.h implementation added) |
-| **DSSS** | ✓ mod, demod | ✓ mod (1 test) | ✓ Tested | Working correctly (implementation fixed) |
-| **M17** | ✓ demod | ✓ mod (1 test) | ✓ Tested | Successfully tested |
-| **DMR** | ✓ demod | ✓ mod (1 test) | ✓ Tested | Successfully tested |
-| **dPMR** | N/A | ✓ Separate validation | ✓ Tested | Python bindings + validation tests (test_nxdn_dpmr_validation.py) |
-| **NXDN** | N/A | ✓ Separate validation | ✓ Tested | Python bindings + validation tests (test_nxdn_dpmr_validation.py) |
-| **FreeDV** | ✓ mod, demod | ✓ mod (1 test) | ✓ Tested | Validation logic implemented |
-| **MMDVM** | ✓ mod | N/A | ✓ Tested | C++ test available |
+| Modulation Type | Origin | C++ Tests | Python Tests | Status | Notes |
+|----------------|--------|-----------|--------------|--------|-------|
+| **2FSK** | QRadioLink | ✓ mod, demod | ✓ mod (3 tests) | ✓ Tested | All tests successful |
+| **4FSK** | QRadioLink | ✓ mod, demod | ✓ mod (1 test) | ✓ Tested | Working correctly |
+| **GMSK** | QRadioLink | ✓ mod, demod | ✓ mod (1 test) | ✓ Tested | Working correctly |
+| **BPSK** | QRadioLink | ✓ mod, demod | ✓ mod (1 test) | ✓ Tested | Working correctly |
+| **QPSK** | QRadioLink | ✓ mod, demod | ✓ mod (1 test) | ✓ Tested | Working correctly |
+| **AM** | QRadioLink | ✓ mod, demod | ✓ mod (1 test) | ✓ Tested | Working correctly |
+| **SSB** | QRadioLink | ✓ mod, demod | ✓ mod (2 tests) | ✓ Tested | Upper and lower sideband working |
+| **NBFM** | QRadioLink | ✓ mod, demod | ✓ mod (1 test) | ✓ Tested | Working correctly (emphasis.h implementation added) |
+| **WBFM** | QRadioLink | ✓ demod | N/A | ✓ Tested | Working correctly (emphasis.h implementation added) |
+| **DSSS** | QRadioLink (base) | ✓ mod, demod | ✓ mod (1 test) | ✓ Tested | Working correctly (implementation fixed) |
+| **M17** | QRadioLink | ✓ demod | ✓ mod (1 test) | ✓ Tested | Successfully tested |
+| **DMR** | QRadioLink | ✓ demod | ✓ mod (1 test) | ✓ Tested | Successfully tested |
+| **8FSK** | This module | ✓ mod, demod | N/A | ✓ Tested | No QRadioLink gr_*; implemented for this module |
+| **SOQPSK** | This module | N/A | N/A | Available | No QRadioLink gr_*; implemented for this module |
+| **CPM-4FSK** | This module | N/A | N/A | Available | No QRadioLink gr_*; implemented for this module |
+| **dPMR** | This module | N/A | ✓ Separate validation | ✓ Tested | ETSI TS 102 658; test_nxdn_dpmr_validation.py |
+| **NXDN** | This module | N/A | ✓ Separate validation | ✓ Tested | NXDN Forum specs; MMDVM ref; test_nxdn_dpmr_validation.py |
+| **POCSAG** | This module | N/A | ✓ Protocol | ✓ Tested | ITU-R M.584-2; MMDVMHost-compatible |
+| **D-STAR** | This module | N/A | ✓ Protocol | ✓ Tested | D-STAR/JARL; MMDVMHost-compatible |
+| **YSF** | This module | N/A | ✓ Protocol | ✓ Tested | YSF protocol; MMDVMHost-compatible |
+| **P25** | This module | N/A | ✓ Protocol | ✓ Tested | P25 Phase 1 TIA-102; MMDVMHost-compatible |
+| **FreeDV** | QRadioLink | ✓ mod, demod | ✓ mod (1 test) | ✓ Tested | Validation logic implemented |
+| **MMDVM** | QRadioLink | ✓ mod | N/A | ✓ Tested | C++ test available |
 
 ### Detailed Test Results
 

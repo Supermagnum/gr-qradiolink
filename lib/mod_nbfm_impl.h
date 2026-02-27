@@ -20,8 +20,6 @@
 #include <gnuradio/filter/rational_resampler.h>
 #include <gnuradio/filter/iir_filter_ffd.h>
 #include <gnuradio/blocks/multiply_const.h>
-#include <gnuradio/blocks/multiply.h>
-#include <gnuradio/analog/rail_ff.h>
 #include <vector>
 
 namespace gr {
@@ -41,9 +39,6 @@ private:
     gr::blocks::multiply_const_ff::sptr d_audio_amplify;
     gr::filter::fft_filter_fff::sptr d_audio_filter;
     gr::filter::fft_filter_ccf::sptr d_filter;
-    gr::analog::sig_source_f::sptr d_signal_source;
-    gr::blocks::multiply_ff::sptr d_multiply;
-    gr::analog::rail_ff::sptr d_rail;
 
     int d_samp_rate;
     int d_sps;

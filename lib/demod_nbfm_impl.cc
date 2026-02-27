@@ -20,6 +20,7 @@
 #include <gnuradio/filter/firdes.h>
 #include <gnuradio/fft/window.h>
 #include <cmath>
+#include <stdexcept>
 #include <gr/emphasis.h>
 
 namespace gr {
@@ -84,15 +85,28 @@ void demod_nbfm_impl::set_squelch(int value) { d_squelch->set_threshold(value); 
 
 void demod_nbfm_impl::set_ctcss(float value)
 {
+    lock();
     if (value == 0) {
-        // Disable CTCSS
-        d_ctcss->set_level(0);
+        try {
+            disconnect(d_audio_resampler, 0, d_ctcss, 0);
+            disconnect(d_ctcss, 0, d_audio_filter, 0);
+            d_audio_filter->set_taps(gr::filter::firdes::low_pass_2(
+                1, 8000, 3500, 200, 35, gr::fft::window::WIN_BLACKMAN_HARRIS));
+            connect(d_audio_resampler, 0, d_audio_filter, 0);
+        } catch (const std::invalid_argument&) {
+        }
     } else {
-        // Enable CTCSS with specified frequency
-        d_ctcss->set_level(0.01);
-        // Note: set_frequency may not be available, may need to recreate block
-        // For now, just set the level
+        d_ctcss->set_frequency(value);
+        try {
+            disconnect(d_audio_resampler, 0, d_audio_filter, 0);
+            d_audio_filter->set_taps(gr::filter::firdes::band_pass_2(
+                1, 8000, 300, 3500, 200, 35, gr::fft::window::WIN_BLACKMAN_HARRIS));
+            connect(d_audio_resampler, 0, d_ctcss, 0);
+            connect(d_ctcss, 0, d_audio_filter, 0);
+        } catch (const std::invalid_argument&) {
+        }
     }
+    unlock();
 }
 
 void demod_nbfm_impl::set_filter_width(int filter_width)
