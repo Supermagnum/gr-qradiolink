@@ -121,6 +121,7 @@ gr-qradiolink/
 ├── docs/                   # Documentation
 │   ├── doxygen/
 │   ├── DSSS_BLOCKS.md      # DSSS spreader/despreader guide
+│   ├── GDSS_BLOCKS.md      # GDSS spreader/despreader guide
 │   └── PTT_CONTROL.md      # PTT control with gr-osmosdr
 ├── examples/               # Example flowgraphs
 ├── tests/                  # Unit tests
@@ -216,6 +217,7 @@ The module includes Python-based validation tests for all modulation types. See 
 
 - **[PTT Control Guide](docs/PTT_CONTROL.md)**: Comprehensive guide on controlling PTT (Push-To-Talk) with gr-osmosdr and similar SDR hardware when using gr-qradiolink blocks.
 - **[DSSS Blocks Guide](docs/DSSS_BLOCKS.md)**: Complete documentation for Direct Sequence Spread Spectrum (DSSS) spreader and despreader blocks, including PN sequence generation, timing recovery, and integration examples.
+- **[GDSS Blocks Guide](docs/GDSS_BLOCKS.md)**: Complete documentation for Gaussian-Distributed Spread-Spectrum (GDSS) spreader and despreader blocks, including sequence generation, timing recovery, and advantages over binary PN sequences.
 - **[Examples Directory](examples/README.md)**: Example flowgraphs and Python scripts demonstrating usage of various blocks.
 
 ### Block Reference Links
