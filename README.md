@@ -29,9 +29,9 @@ The QRadioLink Codeberg page does not mention any crashes or other known issues.
   - **BPSK**: Binary Phase Shift Keying modulator/demodulator (see [GRC Block](grc/qradiolink_mod_bpsk.block.yml), [Examples](examples/README.md))
   - **QPSK**: Quadrature Phase Shift Keying modulator/demodulator (see [GRC Block](grc/qradiolink_mod_qpsk.block.yml), [Examples](examples/README.md))
   - **SOQPSK**: Shaped Offset Quadrature Phase Shift Keying modulator/demodulator (see [GRC Block](grc/qradiolink_mod_soqpsk.block.yml), [Details](#soqpsk-shaped-offset-quadrature-phase-shift-keying))
-  - **DSSS**: Direct Sequence Spread Spectrum with enhanced spreader/despreader blocks, PN sequence generation (m-sequences, Gold codes), timing recovery, and lock detection (see [DSSS Blocks Guide](docs/DSSS_BLOCKS.md), [GRC Blocks](grc/qradiolink_dsss_spreader_cc.block.yml))
+  - **DSSS**: Direct Sequence Spread Spectrum with enhanced spreader/despreader blocks, PN sequence generation (m-sequences, Gold codes), timing recovery, lock detection, soft-decision metrics, AFC support, adaptive correlation threshold, and coarse-to-fine acquisition (see [DSSS Blocks Guide](docs/DSSS_BLOCKS.md), [GRC Blocks](grc/qradiolink_dsss_spreader_cc.block.yml))
   - **DSSS-CDMA**: Code Division Multiple Access transmitter and receiver with multi-user support, configurable spreading factors (32, 64, 128, 256, 512), and support for multiple modulation schemes (2FSK, 4FSK, 8FSK, GMSK, BPSK, QPSK, SOQPSK) (see [GRC Blocks](grc/qradiolink_dsss_cdma_transmitter_cc.block.yml))
-  - **GDSS**: Gaussian-Distributed Spread-Spectrum with spreader/despreader blocks using Gaussian-distributed sequences instead of binary PN sequences, providing better spectral properties and improved interference rejection (see [GRC Blocks](grc/qradiolink_gdss_spreader_cc.block.yml))
+  - **GDSS**: Gaussian-Distributed Spread-Spectrum with spreader/despreader blocks using Gaussian-distributed sequences; soft-decision metrics, AFC support, adaptive threshold, and coarse-to-fine acquisition (see [GDSS Blocks Guide](docs/GDSS_BLOCKS.md), [GRC Blocks](grc/qradiolink_gdss_spreader_cc.block.yml))
 - **Analog Modulations**: AM, SSB (USB/LSB), NBFM, WBFM
   - **AM**: Amplitude Modulation modulator/demodulator (see [GRC Block](grc/qradiolink_mod_am.block.yml), [Examples](examples/README.md))
   - **SSB**: Single Sideband (USB/LSB) modulator/demodulator (see [GRC Block](grc/qradiolink_mod_ssb.block.yml), [Examples](examples/README.md))
@@ -56,9 +56,9 @@ The QRadioLink Codeberg page does not mention any crashes or other known issues.
   - **Auto-selection**: Automatically selects best matching code from available AList files
   - See [GRC Blocks](grc/qradiolink_ldpc_encoder.block.yml)
   - **Interleaver (HF Burst)**: Block interleaver for burst error mitigation on HF channels; spreads burst errors across symbol positions for better FEC performance (see [GRC Block](grc/qradiolink_interleaver_bb.block.yml))
-- **DSSS Blocks**: Enhanced spreader/despreader with PN sequence generation, timing recovery, and acquisition (see [DSSS Blocks Guide](docs/DSSS_BLOCKS.md), [GRC Blocks](grc/qradiolink_dsss_spreader_cc.block.yml))
+- **DSSS Blocks**: Enhanced spreader/despreader with PN sequence generation, timing recovery, acquisition, soft-decision support, AFC, adaptive threshold, and coarse-to-fine code search (see [DSSS Blocks Guide](docs/DSSS_BLOCKS.md), [GRC Blocks](grc/qradiolink_dsss_spreader_cc.block.yml))
 - **DSSS-CDMA Blocks**: Multi-user CDMA transmitter and receiver with configurable spreading factors, Gold code support, and multi-user interference estimation (see [GRC Blocks](grc/qradiolink_dsss_cdma_transmitter_cc.block.yml))
-- **GDSS Blocks**: Gaussian-Distributed Spread-Spectrum spreader and despreader with Gaussian sequence generation, timing recovery, and lock detection (see [GRC Blocks](grc/qradiolink_gdss_spreader_cc.block.yml))
+- **GDSS Blocks**: Gaussian-Distributed Spread-Spectrum spreader and despreader with soft-decision, AFC, adaptive threshold, and coarse-to-fine acquisition (see [GDSS Blocks Guide](docs/GDSS_BLOCKS.md), [GRC Blocks](grc/qradiolink_gdss_spreader_cc.block.yml))
 
 ### SOQPSK (Shaped Offset Quadrature Phase Shift Keying)
 
@@ -216,8 +216,8 @@ The module includes Python-based validation tests for all modulation types. See 
 ### Block Documentation
 
 - **[PTT Control Guide](docs/PTT_CONTROL.md)**: Comprehensive guide on controlling PTT (Push-To-Talk) with gr-osmosdr and similar SDR hardware when using gr-qradiolink blocks.
-- **[DSSS Blocks Guide](docs/DSSS_BLOCKS.md)**: Complete documentation for Direct Sequence Spread Spectrum (DSSS) spreader and despreader blocks, including PN sequence generation, timing recovery, and integration examples.
-- **[GDSS Blocks Guide](docs/GDSS_BLOCKS.md)**: Complete documentation for Gaussian-Distributed Spread-Spectrum (GDSS) spreader and despreader blocks, including sequence generation, timing recovery, and advantages over binary PN sequences.
+- **[DSSS Blocks Guide](docs/DSSS_BLOCKS.md)**: DSSS spreader and despreader blocks: PN sequence generation, timing recovery, soft-decision metrics, AFC, adaptive correlation threshold, coarse-to-fine acquisition, and integration examples.
+- **[GDSS Blocks Guide](docs/GDSS_BLOCKS.md)**: GDSS spreader and despreader blocks: sequence generation, timing recovery, soft-decision metrics, AFC, adaptive threshold, coarse-to-fine acquisition, and advantages over binary PN sequences.
 - **[Examples Directory](examples/README.md)**: Example flowgraphs and Python scripts demonstrating usage of various blocks.
 
 ### Block Reference Links

@@ -1,6 +1,6 @@
 # Test Results for gr-qradiolink
 
-Generated: 2025-02-01
+Generated: 2025-02-01 (updated for DSSS/GDSS despreader enhancements)
 
 ## Test Suite Overview
 
@@ -47,6 +47,8 @@ Running 8 test cases...
 Manual tests: test_mod_2fsk, test_mod_4fsk, test_mod_8fsk, test_mod_am, test_mod_gmsk, test_mod_bpsk, test_mod_mmdvm, test_mod_freedv, test_gdss_spreader_cc, test_gdss_despreader_cc, test_dsss_cdma_transmitter_cc, test_dsss_cdma_receiver_cc
 
 Boost.Test tests: mod_ssb, mod_qpsk, mod_nbfm, mod_wbfm, mod_dsss, demod_2fsk through demod_mmdvm_multi2, rssi_tag_block, interleaver_bb. Many include edge case tests (zero input, extreme amplitude).
+
+DSSS and GDSS despreaders (test_gdss_despreader_cc, and use of dsss_despreader_cc in flowgraphs) support soft-decision metrics (get_last_soft_metric), AFC (get_frequency_error), adaptive correlation threshold, and coarse-to-fine code phase search for faster acquisition. See [DSSS Blocks Guide](../docs/DSSS_BLOCKS.md) and [GDSS Blocks Guide](../docs/GDSS_BLOCKS.md).
 
 ---
 
