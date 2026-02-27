@@ -1,6 +1,6 @@
 # Test Results for gr-qradiolink
 
-Generated: 2026-02-01 (full test suite run: C++ 34/34, Python MMDVM 41/41; DSSS PN +1/-1 mapping, BER simulation)
+Generated: 2026-02-01 (unit tests re-run: C++ 34/34 passed, Python MMDVM 41/41 passed; after QRadioLink SSB/AM conversion fixes)
 
 ## Test Suite Overview
 

@@ -15,18 +15,11 @@
 #include <gnuradio/filter/fft_filter_ccc.h>
 #include <gnuradio/filter/fft_filter_fff.h>
 #include <gnuradio/filter/rational_resampler.h>
-#include <gnuradio/analog/agc2_ff.h>
-#include <gnuradio/analog/feedforward_agc_cc.h>
 #include <gnuradio/blocks/multiply_const.h>
 #include <gnuradio/blocks/float_to_complex.h>
-#include <gnuradio/analog/rail_ff.h>
 #include <gnuradio/fft/window.h>
 #include <gnuradio/qradiolink/clipper_cc.h>
 #include <gnuradio/qradiolink/stretcher_cc.h>
-
-// CESSB blocks - these are in src/gr/cessb
-// For now, we'll reference them from the original location
-// TODO: Migrate CESSB blocks to the module as well
 
 namespace gr {
 namespace qradiolink {
@@ -35,16 +28,17 @@ class mod_ssb_impl : public mod_ssb
 {
 private:
     gr::filter::rational_resampler_ccf::sptr d_resampler;
-    gr::blocks::multiply_const_cc::sptr d_amplify;
+    gr::blocks::multiply_const_cc::sptr d_re_scale1;
+    gr::blocks::multiply_const_cc::sptr d_re_scale2;
     gr::blocks::multiply_const_cc::sptr d_bb_gain;
     gr::filter::fft_filter_fff::sptr d_audio_filter;
-    gr::analog::agc2_ff::sptr d_agc;
-    gr::analog::feedforward_agc_cc::sptr d_feed_forward_agc;
-    gr::filter::fft_filter_ccc::sptr d_filter_usb;
-    gr::filter::fft_filter_ccc::sptr d_filter_lsb;
+    gr::filter::fft_filter_ccc::sptr d_filter_usb1;
+    gr::filter::fft_filter_ccc::sptr d_filter_usb2;
+    gr::filter::fft_filter_ccc::sptr d_filter_usb3;
+    gr::filter::fft_filter_ccc::sptr d_filter_lsb1;
+    gr::filter::fft_filter_ccc::sptr d_filter_lsb2;
+    gr::filter::fft_filter_ccc::sptr d_filter_lsb3;
     gr::blocks::float_to_complex::sptr d_float_to_complex;
-    gr::analog::rail_ff::sptr d_rail;
-    // CESSB blocks - migrated to qradiolink namespace
     gr::qradiolink::clipper_cc::sptr d_clipper;
     gr::qradiolink::stretcher_cc::sptr d_stretcher;
 

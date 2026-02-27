@@ -61,8 +61,8 @@ demod_ssb_impl::demod_ssb_impl(int sps, int samp_rate, int carrier_freq, int fil
         gr::filter::firdes::band_pass_2(
             1, d_target_samp_rate, 200, d_filter_width, 200, 90, gr::fft::window::WIN_BLACKMAN_HARRIS));
     d_complex_to_real = gr::blocks::complex_to_real::make();
-    d_level_control = gr::blocks::multiply_const_ff::make(1.333);
-    d_clipper = gr::qradiolink::clipper_cc::make(0.95);
+    d_level_control = gr::blocks::multiply_const_ff::make(1.0f / 0.353553390593f);
+    d_clipper = gr::qradiolink::clipper_cc::make(0.353553390593f);
     d_stretcher = gr::qradiolink::stretcher_cc::make();
 
     connect(self(), 0, d_resampler, 0);

@@ -19,6 +19,8 @@
 #include <gnuradio/io_signature.h>
 #include <gnuradio/filter/firdes.h>
 #include <gnuradio/fft/window.h>
+#include <gnuradio/qradiolink/clipper_cc.h>
+#include <gnuradio/qradiolink/stretcher_cc.h>
 
 namespace gr {
 namespace qradiolink {
@@ -40,9 +42,10 @@ demod_am_impl::demod_am_impl(int sps, int samp_rate, int carrier_freq, int filte
     d_filter_width = filter_width;
 
     std::vector<float> taps = gr::filter::firdes::low_pass(
-        1, d_samp_rate, d_target_samp_rate / 2, d_target_samp_rate / 2, gr::fft::window::WIN_BLACKMAN_HARRIS);
-    std::vector<float> audio_taps = gr::filter::firdes::low_pass(
-        2, 2 * d_target_samp_rate, 3600, 600, gr::fft::window::WIN_BLACKMAN_HARRIS);
+        1, d_samp_rate, d_target_samp_rate / 2, d_target_samp_rate / 2,
+        gr::fft::window::WIN_BLACKMAN_HARRIS);
+    std::vector<float> audio_taps = gr::filter::firdes::low_pass_2(
+        2, 2 * d_target_samp_rate, 3500, 300, 65, gr::fft::window::WIN_BLACKMAN_HARRIS);
     d_resampler = gr::filter::rational_resampler_ccf::make(1, 50, taps);
     d_audio_resampler = gr::filter::rational_resampler_fff::make(2, 5, audio_taps);
     d_filter = gr::filter::fft_filter_ccc::make(
@@ -51,7 +54,9 @@ demod_am_impl::demod_am_impl(int sps, int samp_rate, int carrier_freq, int filte
             1, d_target_samp_rate, -d_filter_width, d_filter_width, 200, 90,
             gr::fft::window::WIN_BLACKMAN_HARRIS));
     d_squelch = gr::analog::pwr_squelch_cc::make(-140, 0.01, 0, true);
-    d_agc = gr::analog::agc2_ff::make(1e-1, 1e-1, 1.0, 1.0);
+    d_agc = gr::analog::agc2_cc::make(1e-1, 1e-1, 0.25, 1.0);
+    d_clipper = gr::qradiolink::clipper_cc::make(0.353553390593f);
+    d_stretcher = gr::qradiolink::stretcher_cc::make();
     d_complex_to_mag = gr::blocks::complex_to_mag::make();
     std::vector<double> fft;
     fft.push_back(1);
@@ -60,22 +65,24 @@ demod_am_impl::demod_am_impl(int sps, int samp_rate, int carrier_freq, int filte
     ffd.push_back(0);
     ffd.push_back(0.9999);
     d_iir_filter = gr::filter::iir_filter_ffd::make(fft, ffd);
-    d_audio_gain = gr::blocks::multiply_const_ff::make(0.99);
+    d_audio_gain = gr::blocks::multiply_const_ff::make(1.0f / 0.353553390593f);
     d_audio_filter = gr::filter::fft_filter_fff::make(
         1,
         gr::filter::firdes::low_pass(1, 8000, 3600, 300, gr::fft::window::WIN_BLACKMAN_HARRIS));
 
     connect(self(), 0, d_resampler, 0);
     connect(d_resampler, 0, d_filter, 0);
-    connect(d_filter, 0, self(), 0); // Output 0: filtered complex
+    connect(d_filter, 0, self(), 0);
     connect(d_filter, 0, d_squelch, 0);
-    connect(d_squelch, 0, d_complex_to_mag, 0);
-    connect(d_complex_to_mag, 0, d_agc, 0);
-    connect(d_agc, 0, d_iir_filter, 0);
+    connect(d_squelch, 0, d_agc, 0);
+    connect(d_agc, 0, d_clipper, 0);
+    connect(d_clipper, 0, d_stretcher, 0);
+    connect(d_stretcher, 0, d_complex_to_mag, 0);
+    connect(d_complex_to_mag, 0, d_iir_filter, 0);
     connect(d_iir_filter, 0, d_audio_gain, 0);
     connect(d_audio_gain, 0, d_audio_resampler, 0);
     connect(d_audio_resampler, 0, d_audio_filter, 0);
-    connect(d_audio_filter, 0, self(), 1); // Output 1: audio
+    connect(d_audio_filter, 0, self(), 1);
 }
 
 demod_am_impl::~demod_am_impl() {}

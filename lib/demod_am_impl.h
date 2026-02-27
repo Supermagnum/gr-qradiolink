@@ -13,12 +13,14 @@
 #include <gnuradio/qradiolink/demod_am.h>
 #include <gnuradio/filter/rational_resampler.h>
 #include <gnuradio/analog/pwr_squelch_cc.h>
+#include <gnuradio/analog/agc2_cc.h>
 #include <gnuradio/filter/fft_filter_ccc.h>
-#include <gnuradio/analog/agc2_ff.h>
 #include <gnuradio/blocks/complex_to_mag.h>
 #include <gnuradio/filter/iir_filter_ffd.h>
 #include <gnuradio/blocks/multiply_const.h>
 #include <gnuradio/filter/fft_filter_fff.h>
+#include <gnuradio/qradiolink/clipper_cc.h>
+#include <gnuradio/qradiolink/stretcher_cc.h>
 
 namespace gr {
 namespace qradiolink {
@@ -30,13 +32,14 @@ private:
     gr::filter::rational_resampler_fff::sptr d_audio_resampler;
     gr::analog::pwr_squelch_cc::sptr d_squelch;
     gr::filter::fft_filter_ccc::sptr d_filter;
-    gr::analog::agc2_ff::sptr d_agc;
+    gr::analog::agc2_cc::sptr d_agc;
+    gr::qradiolink::clipper_cc::sptr d_clipper;
+    gr::qradiolink::stretcher_cc::sptr d_stretcher;
     gr::blocks::complex_to_mag::sptr d_complex_to_mag;
     gr::filter::iir_filter_ffd::sptr d_iir_filter;
     gr::blocks::multiply_const_ff::sptr d_audio_gain;
     gr::filter::fft_filter_fff::sptr d_audio_filter;
 
-    int d_samples_per_symbol;
     int d_samp_rate;
     int d_carrier_freq;
     int d_filter_width;
