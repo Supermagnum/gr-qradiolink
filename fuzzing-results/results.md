@@ -593,7 +593,7 @@ The following blocks are actively tested in the test suite:
 
 **Note:** demod_mmdvm_multi and demod_mmdvm_multi2 have C++ unit tests using a mock BurstTimer implementation (test_bursttimer.h). Tests cover both TDMA and non-TDMA modes, instantiation, flowgraph connections, and method calls. All blocks now have test coverage.
 
-**Note:** The blocks mod_freedv, demod_freedv, demod_dmr, mod_mmdvm, and rssi_tag_block have C++ unit tests that pass (included in the 25/25 passing tests). The demod_mmdvm_multi and demod_mmdvm_multi2 blocks accept None for burst_timer parameter when not using TDMA timing, or an integer pointer address when a BurstTimer instance is available from C++ code.
+**Note:** The blocks mod_freedv, demod_freedv, demod_dmr, mod_mmdvm, and rssi_tag_block have C++ unit tests that pass (included in the 27/27 passing tests). The demod_mmdvm_multi and demod_mmdvm_multi2 blocks accept None for burst_timer parameter when not using TDMA timing, or an integer pointer address when a BurstTimer instance is available from C++ code.
 
 ---
 
