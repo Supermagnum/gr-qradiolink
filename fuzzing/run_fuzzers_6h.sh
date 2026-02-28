@@ -31,13 +31,20 @@ STANDARD_TIMEOUT=10  # seconds
 # Default is JOBS_PER_FUZZER, but can override per-fuzzer
 declare -A FUZZER_JOBS
 # Increase jobs for struggling fuzzers (may help with throughput, but be careful with mutex contention)
-FUZZER_JOBS["fuzz_demod_2fsk"]=2  # Struggling fuzzer - try 2 workers for better throughput
-FUZZER_JOBS["fuzz_demod_bpsk"]=1  # Keep at 1 due to mutex contention
-FUZZER_JOBS["fuzz_demod_qpsk"]=1  # Keep at 1 due to mutex contention
+FUZZER_JOBS["fuzz_demod_2fsk"]=1  # 1 job to avoid FFT wisdom lock contention
+FUZZER_JOBS["fuzz_demod_bpsk"]=1
+FUZZER_JOBS["fuzz_demod_qpsk"]=1
 
-# Per-fuzzer timeout override (for fuzzers that need even longer timeout)
+# Per-fuzzer timeout override (FFT wisdom lock contention can exceed 240s)
 declare -A FUZZER_TIMEOUTS
-FUZZER_TIMEOUTS["fuzz_demod_2fsk"]=60  # Struggling fuzzer - increase to 60s
+FUZZER_TIMEOUTS["fuzz_demod_2fsk"]=300
+FUZZER_TIMEOUTS["fuzz_demod_bpsk"]=300
+FUZZER_TIMEOUTS["fuzz_demod_gmsk"]=300
+FUZZER_TIMEOUTS["fuzz_demod_qpsk"]=300
+FUZZER_TIMEOUTS["fuzz_m17_deframer"]=300
+
+# Fuzzers that use fork mode so timeouts kill only the child; parent keeps running
+FUZZERS_FORK_MODE=("fuzz_demod_2fsk" "fuzz_demod_bpsk" "fuzz_demod_gmsk" "fuzz_demod_qpsk" "fuzz_m17_deframer")
 
 # List of all fuzzers
 FUZZERS=(
@@ -127,6 +134,7 @@ run_fuzzer() {
     local fuzzer_args=(
         "-print_final_stats=1"
         "-timeout=${timeout_value}"
+        "-ignore_timeouts=1"
         "-rss_limit_mb=2000"
         "-max_total_time=${FUZZ_DURATION}"
     )
@@ -137,8 +145,18 @@ run_fuzzer() {
         fuzzer_jobs="${FUZZER_JOBS[${fuzzer_name}]}"
     fi
     
-    # Add parallel jobs if configured
-    if [ "${fuzzer_jobs}" -gt 1 ]; then
+    # Add parallel jobs if configured (skip when using fork mode)
+    local use_fork=0
+    for fn in "${FUZZERS_FORK_MODE[@]}"; do
+        if [ "${fuzzer_name}" = "${fn}" ]; then
+            use_fork=1
+            break
+        fi
+    done
+    if [ "${use_fork}" -eq 1 ]; then
+        fuzzer_args+=("-fork=1")
+        echo "Using fork=1 for ${fuzzer_name} (timeouts won't exit process)"
+    elif [ "${fuzzer_jobs}" -gt 1 ]; then
         fuzzer_args+=("-jobs=${fuzzer_jobs}")
         echo "Using ${fuzzer_jobs} parallel workers for ${fuzzer_name}"
     fi

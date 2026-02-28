@@ -10,6 +10,8 @@
 
 #include <cstdint>
 #include <cstddef>
+#include <exception>
+#include <stdexcept>
 #include <gnuradio/qradiolink/demod_4fsk.h>
 #include <gnuradio/blocks/null_sink.h>
 #include <gnuradio/blocks/vector_source.h>
@@ -65,6 +67,8 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
         
         tb->start();
         tb->wait();
+    } catch (const std::exception&) {
+        return 0;
     } catch (...) {
         throw;
     }

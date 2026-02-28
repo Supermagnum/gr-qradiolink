@@ -15,4 +15,9 @@ fuzzing/corpus/*.seed
 fuzzing/corpus/*/crash-*
 fuzzing/corpus/*/timeout-*
 fuzzing/corpus/*/leak-*
+fuzzing/results_*/
+crash-*
+timeout-*
+oom-*
+fuzz-*.log
 
