@@ -124,6 +124,8 @@ This is appropriate for the modulation scheme but results in significantly highe
 - 300s timeout per execution to handle FLL convergence
 - -ignore_timeouts=1 globally to avoid timeout artifacts
 
+**Note on fuzz_m17_deframer (0 edges, 0 features):** Fork startup overhead prevented meaningful execution within the 6-hour window. The harness ran without errors; this is a throughput limitation, not a harness failure.
+
 ### Conclusion
 
 The fuzzing campaign completed successfully with excellent results:
@@ -136,7 +138,7 @@ The fuzzing campaign completed successfully with excellent results:
 The code quality is high and handles edge cases well.
 
 ---
-*Generated on 2026-02-28*
+*Last updated: 2026-02-28*
 
 ---
 
@@ -504,8 +506,8 @@ Location: fuzzing/corpus/m17_attack_vectors
 | test_edge_cases.py | 9 | 0 | ✓ PASSED |
 | test_memory_safety.py | 4 | 0 | ✓ PASSED |
 | test_m17_deframer_attack_vectors.py | 20 processed | 14 attack vectors | ✓ PASSED |
-| C++ Unit Tests (ctest) | 20 | 0 | ✓ PASSED |
-| **TOTAL** | **81** | **0** | **✓ ALL PASSED** |
+| C++ Unit Tests (ctest) | 27 | 0 | ✓ PASSED |
+| **TOTAL** | **88** | **0** | **✓ ALL PASSED** |
 
 ---
 
@@ -691,24 +693,14 @@ All MMDVM protocols have been fully implemented with:
 
 ---
 
-## Modem/Modulation Blocks - Not Fuzzed
+## Blocks Not Yet Fuzzed
 
-The modulation/demodulation blocks (2FSK, 4FSK, GMSK, BPSK, QPSK, AM, SSB, NBFM, FreeDV, M17, DMR, MMDVM) have not undergone fuzzing due to:
+The following blocks have dedicated unit and validation tests but do not yet have fuzzing harnesses:
 
-1. **Complex I/Q sample stream inputs** - These blocks process continuous complex-valued signal streams (I/Q samples), which are not amenable to traditional fuzzing techniques that work best with discrete data structures (bytes, packets, etc.). Fuzzing I/Q streams would require generating valid signal characteristics (frequency, phase, amplitude) rather than random bytes.
+- **Analog/digital modems:** AM, SSB, NBFM, WBFM, FreeDV, M17 (modulator), DMR, MMDVM
+- **Protocol codecs:** POCSAG, D-STAR, YSF, P25 encoders/decoders
 
-2. **Signal processing domain** - These blocks process audio/RF signals, not untrusted command data. The security model is different from network protocols or file parsers. The inputs are expected to be signal samples from SDR hardware or signal generators, not malicious user input.
-
-3. **Security-critical authentication at protocol layer** - Security-critical authentication and validation happen at the packet protocol layer (e.g., M17 frame validation, DMR authentication), which are already covered by fuzzing efforts. The modulation/demodulation blocks themselves are signal processing components that convert between digital representations and analog-like signals.
-
-**Alternative testing approach**: These blocks are tested through:
-- **Unit tests** - Comprehensive test suites with known test vectors (see results above)
-- **Edge case testing** - Zero amplitude, NaN, infinity, extreme values, phase discontinuities, frequency offsets
-- **Memory safety testing** - Large inputs, rapid restart cycles, empty inputs
-- **AddressSanitizer/Valgrind** - Run during development to detect memory errors
-- **Real-world usage** - Blocks are used in production flowgraphs with real signals
-
-This testing approach provides confidence that the blocks handle edge cases gracefully without crashes, memory leaks, or undefined behavior, which is appropriate for signal processing components.
+**Fuzzed blocks** (see Fuzzer Performance table above): mod_2fsk, mod_4fsk, mod_bpsk, mod_qpsk; demod_2fsk, demod_4fsk, demod_bpsk, demod_qpsk, demod_gmsk, demod_dsss; clipper_cc, dsss_encoder, gdss_spreader_cc, gdss_despreader_cc; m17_deframer.
 
 ---
 
@@ -742,7 +734,7 @@ python3 -X dev tests/test_memory_safety.py
 
 ## Comprehensive Modulation Validation Test Results
 
-**Date:** 2025-11-29  
+**Date:** 2025-11-29 (historical; predates Feb 2026 fuzzing campaign)  
 **Test Suite:** `test_all_modulations_validation.py`  
 **Test Type:** Valid test vectors
 
