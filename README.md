@@ -4,9 +4,27 @@
 
 This code has not been reviewed by professional coders, it is a large task. There are tests available in the codebase, please review those and their code.
 
+### GNU Radio 4 experimental port
+
+On branch **`gnuradio4`**, the header-centric GNU Radio **4.x** port lives under **`gr4/`** with CMake **`cmake_gr4/`** as `-S` (see **[README_gr4.md](README_gr4.md)**). That flow builds against an upstream **GNU Radio 4 source tree** (`GR4_SOURCE_DIR`), links **`gnuradio4::gnuradio-core`**, and runs Boost.Test executables under **`gr4/tests`**. **Recorded results** (compiler, GR4 revision, CTest counts for GR4 and GR3) are in README_gr4.md under *Test results*.
+
 ---
 
 GNU Radio out-of-tree (OOT) module for QRadioLink blocks.
+
+## Publication
+
+This project is documented in the following preprint:
+
+> Cryptographically Keyed Gaussian-Distributed Spread-Spectrum
+> for Enhanced Covert Communications: Design, Implementation,
+> and Simulated Performance in ITU Channel Models  
+> IACR Cryptology ePrint Archive, Paper 2025/108456  
+> https://eprint.iacr.org/2025/108456
+
+Archive record timestamp: **21 March 2026**.
+
+---
 
 ## Overview
 

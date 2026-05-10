@@ -16,12 +16,12 @@ namespace gr::qradiolink {
 
 template<typename T>
 struct Mod2FSK : gr::Block<Mod2FSK<T>> {
-    using Description = gr::Doc<R""(
+    using Description = gr::Doc<R"(
 @brief Binary FSK modulator (complex baseband).
 
 One unpacked bit per input byte (LSB). Emits samples_per_symbol complex outputs per bit at the given sample_rate.
 deviation_hz is the peak frequency offset used for the mark tone; space uses the opposite offset.
-)"";
+)">;
 
     gr::PortIn<std::uint8_t>         in{};
     gr::PortOut<std::complex<T>>     out{};
