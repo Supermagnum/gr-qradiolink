@@ -12,6 +12,18 @@ On branch **`gnuradio4`**, the header-centric GNU Radio **4.x** port lives under
 
 GNU Radio out-of-tree (OOT) module for QRadioLink blocks.
 
+## Modulation validation
+
+Reference IQ for modulator blocks was checked with
+[radio-modulation-validator](https://github.com/Supermagnum/radio-modulation-validator)
+(2026-05-31). Summary: **SOFT FAIL** — 6/19 blocks passed, 13 soft fail, **0 hard fail**, 3 skipped.
+
+All tested modes were identified at the correct modulation **family** (FSK, PSK, AM, FM). Order-level
+soft fails (for example FSK predicted as CPFSK instead of 4FSK or GMSK) reflect limits of the
+validator’s order classifier, not evidence that these modulators produce the wrong waveform family.
+
+Full per-block results: **[VALIDATION_REPORT.md](VALIDATION_REPORT.md)**
+
 ## Publication
 
 This project is documented in the following preprint:
