@@ -14,6 +14,10 @@ GNU Radio out-of-tree (OOT) module for QRadioLink blocks.
 
 ## Modulation validation
 
+**Branch `gnuradio4`:** GNU Radio **4.x** port (`gr4/`, see [README_gr4.md](README_gr4.md)). The
+**GNU Radio 3.10** OOT on branch **`main`** has the same mode list and
+[VALIDATION_REPORT.md](VALIDATION_REPORT.md) there.
+
 Reference IQ for modulator blocks was checked with
 [radio-modulation-validator](https://github.com/Supermagnum/radio-modulation-validator)
 (2026-05-31). Summary: **SOFT FAIL** — 6/19 blocks passed, 13 soft fail, **0 hard fail**, 3 skipped.
