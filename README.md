@@ -8,6 +8,38 @@ This code has not been reviewed by professional coders, it is a large task. Ther
 
 GNU Radio out-of-tree (OOT) module for QRadioLink blocks.
 
+**Branch `main`:** GNU Radio **3.10** OOT (CMake `find_package(gnuradio)`). The experimental
+**GNU Radio 4** port is on branch **`gnuradio4`** ([README_gr4.md](README_gr4.md) on that branch).
+
+## Modulation validation
+
+Reference IQ for modulator blocks was checked with
+[radio-modulation-validator](https://github.com/Supermagnum/radio-modulation-validator)
+(2026-05-31). Summary: **SOFT FAIL** — 6/19 blocks passed, 13 soft fail, **0 hard fail**, 3 skipped.
+
+All tested modes were identified at the correct modulation **family** (FSK, PSK, AM, FM). Order-level
+soft fails (for example FSK predicted as CPFSK instead of 4FSK or GMSK) reflect limits of the
+validator's order classifier, not evidence that these modulators produce the wrong waveform family.
+
+The scan uses built-in reference IQ (not built OOT blocks); results apply to modes listed in this
+README on **main** and are mirrored on **`gnuradio4`**.
+
+Full per-block results: **[VALIDATION_REPORT.md](VALIDATION_REPORT.md)**
+
+## Publication
+
+This project is documented in the following preprint:
+
+> Cryptographically Keyed Gaussian-Distributed Spread-Spectrum
+> for Enhanced Covert Communications: Design, Implementation,
+> and Simulated Performance in ITU Channel Models  
+> IACR Cryptology ePrint Archive, Paper 2025/108456  
+> https://eprint.iacr.org/2025/108456
+
+Archive record timestamp: **21 March 2026**.
+
+---
+
 ## Overview
 
 This module provides GNU Radio blocks for various digital and analog modulation schemes, specialized for amateur radio and digital voice communications.
