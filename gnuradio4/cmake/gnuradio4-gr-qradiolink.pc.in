@@ -1,0 +1,10 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+exec_prefix=${prefix}
+includedir=${prefix}/@CMAKE_INSTALL_INCLUDEDIR@
+libdir=${prefix}/@CMAKE_INSTALL_LIBDIR@
+
+Name: gnuradio4-gr-qradiolink
+Description: GNU Radio 4.0 gr-qradiolink-derived blocks (header-only)
+Version: @PROJECT_VERSION@
+Requires: gnuradio4
+Cflags: -I${includedir}

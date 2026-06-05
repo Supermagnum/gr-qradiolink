@@ -31,14 +31,11 @@ if(PKG_CONFIG_FOUND)
     pkg_check_modules(ZMQ IMPORTED_TARGET libzmq)
 endif()
 
-add_subdirectory("${GR_QRL_ROOT}/gr4" gr_qr4)
+add_subdirectory("${GR_QRL_ROOT}/gnuradio4" gr_qr4)
 
 include(GNUInstallDirs)
-install(DIRECTORY "${GR_QRL_ROOT}/gr4/include/gnuradio-4.0/qradiolink"
-        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/gnuradio-4.0")
 
 option(GR_QRADIOLINK_GR4_ENABLE_TESTING "Build GR4 unit tests" ON)
 if(GR_QRADIOLINK_GR4_ENABLE_TESTING)
     enable_testing()
-    add_subdirectory("${GR_QRL_ROOT}/gr4/tests" gr_qr4_tests)
 endif()
