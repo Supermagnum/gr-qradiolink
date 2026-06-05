@@ -78,13 +78,24 @@ Package names:
 
 ### ZeroMQ (ZMQ)
 
-Required for MMDVM source/sink blocks (`mmdvm_source`, `mmdvm_sink`).
+Used for:
+
+- **MMDVM** source/sink blocks (`mmdvm_source`, `mmdvm_sink`) -- IPC to MMDVMHost
+- **gr-ident preamble SUB** (`grident_preamble_sub`) -- SUB to gr-ident `PreambleResultZmqPub` (default `tcp://127.0.0.1:5560`)
+
+`grident_mode_control` builds without ZMQ; only the ZMQ subscriber block requires libzmq.
 
 Package names:
 - Debian/Ubuntu: `libzmq3-dev` (development headers), `libzmq5` (runtime)
 - Fedora: `zeromq-devel`
 
-The build system will detect ZMQ automatically. If not found, MMDVM blocks will not be compiled.
+The build system will detect ZMQ automatically. If not found:
+
+- MMDVM ZMQ IPC is not linked into those blocks
+- `grident_preamble_sub` is not built (Python binding for it is omitted)
+- You can still feed preamble JSON into `grident_mode_control` via message ports
+
+See [docs/GRIDENT_ZMQ.md](docs/GRIDENT_ZMQ.md) and [docs/CODE_MAP.md](docs/CODE_MAP.md).
 
 ## Python Bindings Dependencies
 

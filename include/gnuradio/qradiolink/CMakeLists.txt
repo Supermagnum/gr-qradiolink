@@ -74,6 +74,10 @@ install(
           m17_deframer.h
           clipper_cc.h
           stretcher_cc.h
+          grident_zmq_protocol.h
+          grident_mode_map.h
+          grident_mode_control.h
+          grident_preamble_sub.h
     DESTINATION ${GR_INCLUDE_DIR}/gnuradio/qradiolink)
 
 # Note: Additional header files will be added here as blocks are migrated

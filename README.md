@@ -11,6 +11,8 @@ GNU Radio out-of-tree (OOT) module for QRadioLink blocks.
 **Branch `main`:** GNU Radio **3.10** OOT (CMake `find_package(gnuradio)`). The experimental
 **GNU Radio 4** port is on branch **`gnuradio4`** ([README_gr4.md](README_gr4.md) on that branch).
 
+**Code navigation:** [docs/CODE_MAP.md](docs/CODE_MAP.md) (files, functions, block index). **gr-ident ZMQ mode routing:** [docs/GRIDENT_ZMQ.md](docs/GRIDENT_ZMQ.md) ([gr-ident](https://github.com/Supermagnum/gr-ident) preamble on `:5560`).
+
 ## Modulation validation
 
 Reference IQ for modulator blocks was checked with
@@ -71,6 +73,7 @@ This module was converted from the [QRadioLink](https://qradiolink.org/) applica
 | P25 | Implemented for this module | No gr_* in QRadioLink. From P25 Phase 1 TIA-102; compatible with MMDVMHost. |
 | DSSS (base) | QRadioLink | Validated against QRadioLink gr_demod_dsss/gr_mod_dsss. |
 | DSSS (enhancements), GDSS | This module | DSSS: enhancements on top of QRadioLink base. GDSS: from Shakeel et al., Sensors 2023. |
+| gr-ident ZMQ routing | This module | Interop with [gr-ident](https://github.com/Supermagnum/gr-ident) preamble PUB; not from QRadioLink. |
 
 The code has been fuzzed extensively using libFuzzer with over 104 million executions across multiple blocks, and no crashes or memory leaks were discovered. See [fuzzing-results/results.md](fuzzing-results/results.md) for coverage details.
 
@@ -106,6 +109,9 @@ The code has been fuzzed extensively using libFuzzer with over 104 million execu
     - **D-STAR**: Digital Smart Technologies for Amateur Radio with Golay(24,12) FEC (see [GRC Blocks](grc/qradiolink_dstar_encoder.block.yml), [Examples](examples/README.md))
     - **YSF**: C4FM protocol with Golay(20,8) and Golay(23,12) FEC (see [GRC Blocks](grc/qradiolink_ysf_encoder.block.yml), [Examples](examples/README.md))
     - **P25**: Project 25 Phase 1 C4FM with BCH(63,16) and Trellis encoding (see [GRC Blocks](grc/qradiolink_p25_encoder.block.yml), [Examples](examples/README.md))
+- **gr-ident mode routing** (optional, requires [gr-ident](https://github.com/Supermagnum/gr-ident) or compatible preamble PUB): subscribe to decoded `mode_id` on `tcp://127.0.0.1:5560` and select the matching demod/mod block family (see [GRIDENT_ZMQ.md](docs/GRIDENT_ZMQ.md), [CODE_MAP.md](docs/CODE_MAP.md#gr-ident-zmq-mode-routing-gnu-radio-310))
+  - **grident_preamble_sub**: ZMQ SUB to gr-ident preamble PUB (needs `libzmq`)
+  - **grident_mode_control**: parse JSON, publish `demod_block` / `mod_block` on message port `route_out`
 - **Supporting Blocks**: Audio source/sink, RSSI, FFT, deframer, CESSB, M17 deframer, MMDVM source/sink, clipper, stretcher, zero idle bursts (see [GRC Block](grc/qradiolink_m17_deframer.block.yml))
 - **FEC Blocks**: Forward Error Correction with soft-decision LDPC encoder/decoder and block interleaver
   - **LDPC Encoder/Decoder**: Supports regular and irregular LDPC codes
@@ -178,6 +184,8 @@ gr-qradiolink/
 ├── grc/                    # GNU Radio Companion block definitions
 ├── docs/                   # Documentation
 │   ├── doxygen/
+│   ├── CODE_MAP.md         # Code and function map (all modules)
+│   ├── GRIDENT_ZMQ.md      # gr-ident ZMQ mode routing guide
 │   ├── DSSS_BLOCKS.md      # DSSS spreader/despreader guide
 │   ├── GDSS_BLOCKS.md      # GDSS spreader/despreader guide
 │   └── PTT_CONTROL.md      # PTT control with gr-osmosdr
@@ -197,7 +205,7 @@ See [DEPENDENCIES.md](DEPENDENCIES.md) for a complete list of required and optio
 - CMake >= 3.16
 - Boost libraries
 - Volk (Vector-Optimized Library of Kernels)
-- ZeroMQ (optional, for MMDVM blocks)
+- ZeroMQ (optional, for MMDVM blocks and gr-ident preamble SUB)
 - Python 3.x with NumPy (for Python bindings)
 - fmt library (for tests)
 
@@ -220,6 +228,7 @@ Test Breakdown:
   test_dsss_cdma_receiver_cc
 - Boost.Test tests: mod_ssb, mod_qpsk, mod_nbfm, mod_wbfm, mod_dsss, all
   demodulators, rssi_tag_block (8 tests), interleaver_bb (13 tests with edge cases)
+- gr-ident: test_grident_zmq (JSON parse and mode_id to demod mapping)
 
 Test Coverage:
 - Modulators: 2FSK, 4FSK, 8FSK, AM, GMSK, BPSK, SSB, QPSK, NBFM, WBFM, DSSS, M17, DMR, dPMR, NXDN
@@ -275,6 +284,8 @@ The module includes Python-based validation tests for all modulation types. See 
 
 ### Block Documentation
 
+- **[Code and Function Map](docs/CODE_MAP.md)**: Index of source files, public APIs, gr-ident function tables, and links to mod/demod/DSSS modules.
+- **[gr-ident ZMQ Integration](docs/GRIDENT_ZMQ.md)**: Wire format, endpoints, GRC wiring, and switching demod/mod banks from gr-ident `mode_id`.
 - **[PTT Control Guide](docs/PTT_CONTROL.md)**: Comprehensive guide on controlling PTT (Push-To-Talk) with gr-osmosdr and similar SDR hardware when using gr-qradiolink blocks.
 - **[DSSS Blocks Guide](docs/DSSS_BLOCKS.md)**: DSSS spreader and despreader blocks: PN sequence generation, timing recovery, soft-decision metrics, AFC, adaptive correlation threshold, coarse-to-fine acquisition, and integration examples.
 - **[GDSS Blocks Guide](docs/GDSS_BLOCKS.md)**: GDSS spreader and despreader blocks: sequence generation, timing recovery, soft-decision metrics, AFC, adaptive threshold, coarse-to-fine acquisition, and advantages over binary PN sequences.
@@ -314,6 +325,9 @@ All blocks have GRC (GNU Radio Companion) block definitions in the `grc/` direct
 - [D-STAR Encoder](grc/qradiolink_dstar_encoder.block.yml) / [D-STAR Decoder](grc/qradiolink_dstar_decoder.block.yml)
 - [YSF Encoder](grc/qradiolink_ysf_encoder.block.yml) / [YSF Decoder](grc/qradiolink_ysf_decoder.block.yml)
 - [P25 Encoder](grc/qradiolink_p25_encoder.block.yml) / [P25 Decoder](grc/qradiolink_p25_decoder.block.yml)
+
+**gr-ident (optional, libzmq):**
+- [gr-ident Preamble SUB](grc/qradiolink_grident_preamble_sub.block.yml) / [gr-ident Mode Control](grc/qradiolink_grident_mode_control.block.yml)
 
 **FEC:**
 - [LDPC Encoder](grc/qradiolink_ldpc_encoder.block.yml) / [LDPC Decoder (Soft-Decision)](grc/qradiolink_ldpc_decoder.block.yml)

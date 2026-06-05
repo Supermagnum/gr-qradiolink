@@ -71,9 +71,18 @@ list(
     rssi_tag_block_python.cc
     m17_deframer_python.cc
     interleaver_bb_python.cc
+    grident_mode_control_python.cc
     python_bindings.cc)
 
+if(ZMQ_FOUND)
+    list(APPEND qradiolink_python_files grident_preamble_sub_python.cc)
+endif()
+
 pybind11_add_module(qradiolink_python ${qradiolink_python_files})
+
+if(ZMQ_FOUND)
+    target_compile_definitions(qradiolink_python PRIVATE GR_QRADIOLINK_HAVE_ZMQ)
+endif()
 
 # Disable LTO for this target so the shared library is produced in-place;
 # with LTO the linker may write to a temp path and strip then fails with "No such file"

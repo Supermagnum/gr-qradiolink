@@ -72,6 +72,8 @@ set(gr_qradiolink_sources
     dstar_decoder_impl.cc
     ysf_decoder_impl.cc
     p25_decoder_impl.cc
+    # gr-ident ZMQ mode routing
+    grident_mode_control_impl.cc
     # Supporting blocks
     interleaver_bb_impl.cc
     gr_4fsk_discriminator_impl.cc
@@ -128,8 +130,10 @@ target_link_libraries(
     Boost::boost
 )
 
-# Add ZMQ if available (for mmdvm_source)
+# Add ZMQ if available (mmdvm_source, grident_preamble_sub)
 if(ZMQ_FOUND)
+    target_sources(gnuradio-qradiolink PRIVATE grident_preamble_sub_impl.cc)
+    target_compile_definitions(gnuradio-qradiolink PUBLIC GR_QRADIOLINK_HAVE_ZMQ)
     target_link_libraries(
         gnuradio-qradiolink PUBLIC
         ${ZMQ_LIBRARIES}

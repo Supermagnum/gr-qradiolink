@@ -32,6 +32,13 @@ target_link_libraries(test_mod_2fsk gnuradio-qradiolink
 add_test(NAME test_mod_2fsk COMMAND test_mod_2fsk)
 
 ########################################################################
+# Test gr-ident ZMQ protocol / mode map (header-only helpers)
+########################################################################
+add_executable(test_grident_zmq test_grident_zmq.cc)
+target_link_libraries(test_grident_zmq gnuradio-qradiolink)
+add_test(NAME test_grident_zmq COMMAND test_grident_zmq)
+
+########################################################################
 # Test mod_4fsk
 ########################################################################
 add_executable(test_mod_4fsk test_mod_4fsk.cc)

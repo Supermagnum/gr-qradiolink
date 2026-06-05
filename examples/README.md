@@ -148,6 +148,16 @@ These blocks can be used in GNU Radio Companion flowgraphs. See the GRC block de
 4. Configure parameters (baud rate, address, etc.) as needed
 5. Connect to appropriate sources/sinks (file, SDR, etc.)
 
+## gr-ident mode routing (ZMQ)
+
+To switch demodulators from [gr-ident](https://github.com/Supermagnum/gr-ident) preamble results:
+
+1. Run a gr-ident receive flowgraph that publishes on `tcp://127.0.0.1:5560`.
+2. In your flowgraph, add `qradiolink_grident_preamble_sub` and `qradiolink_grident_mode_control`.
+3. Connect `preamble_out` to `preamble_in`; handle `route_out` to select the `demod_block` name (for example `demod_nbfm`, `demod_dmr`).
+
+See [docs/GRIDENT_ZMQ.md](../docs/GRIDENT_ZMQ.md) for wire format and Python snippets, and [docs/CODE_MAP.md](../docs/CODE_MAP.md) for function references.
+
 ## Notes
 
 - Some blocks (mod_m17, mod_freedv, demod_freedv) don't have GRC block definitions yet, so Python examples are provided for these.

@@ -1,0 +1,35 @@
+id: qradiolink_grident_preamble_sub
+label: gr-ident Preamble SUB
+category: '[QRadioLink]'
+flags: [ python ]
+
+parameters:
+-   id: endpoint
+    label: ZMQ endpoint
+    dtype: string
+    default: 'tcp://127.0.0.1:5560'
+-   id: topic_filter
+    label: Topic filter
+    dtype: string
+    default: grident
+-   id: bind_socket
+    label: Bind (else connect)
+    dtype: bool
+    default: 'False'
+
+inputs: []
+
+outputs:
+-   domain: message
+    id: preamble_out
+    dtype: message
+
+templates:
+    imports: from gnuradio import qradiolink
+    make: qradiolink.grident_preamble_sub(endpoint=${endpoint}, topic_filter=${topic_filter}, bind_socket=${bind_socket})
+
+documentation: |-
+    SUBscribes to gr-ident PreambleResultZmqPub (multipart topic + JSON). Requires
+    libzmq at build time. Connect preamble_out to grident_mode_control:preamble_in.
+
+file_format: 1

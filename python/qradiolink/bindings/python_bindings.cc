@@ -72,6 +72,10 @@ void bind_p25_decoder(py::module&);
 void bind_rssi_tag_block(py::module&);
 void bind_m17_deframer(py::module&);
 void bind_interleaver_bb(py::module&);
+void bind_grident_mode_control(py::module&);
+#ifdef GR_QRADIOLINK_HAVE_ZMQ
+void bind_grident_preamble_sub(py::module&);
+#endif
 
 // We need this hack because import_array() returns NULL
 // for newer Python versions.
@@ -159,5 +163,9 @@ PYBIND11_MODULE(qradiolink_python, m)
     bind_rssi_tag_block(m);
     bind_m17_deframer(m);
     bind_interleaver_bb(m);
+    bind_grident_mode_control(m);
+#ifdef GR_QRADIOLINK_HAVE_ZMQ
+    bind_grident_preamble_sub(m);
+#endif
 }
 

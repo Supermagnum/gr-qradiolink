@@ -1,0 +1,29 @@
+id: qradiolink_grident_mode_control
+label: gr-ident Mode Control
+category: '[QRadioLink]'
+flags: [ python ]
+
+parameters: []
+
+inputs:
+-   domain: message
+    id: preamble_in
+    dtype: message
+    optional: true
+
+outputs:
+-   domain: message
+    id: route_out
+    dtype: message
+    optional: true
+
+templates:
+    imports: from gnuradio import qradiolink
+    make: qradiolink.grident_mode_control()
+
+documentation: |-
+    Parses gr-ident preamble JSON (ZMQ :5560 wire format) and publishes a route
+    dict on route_out with demod_block/mod_block names for qradiolink demods/mods.
+    Connect grident_preamble_sub:preamble_out to preamble_in, or feed JSON manually.
+
+file_format: 1
